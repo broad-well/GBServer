@@ -1,0 +1,59 @@
+main: com.Gbserver.Main
+version: 1.15
+name: Broadwell Server Plugin
+
+commands:
+  spawn:
+    description: This command gets you back to the original spawn point.
+  tell:
+    description: Tells a secret message.
+    usage: /tell <player> <message>
+    aliases: [/t, /msg, /m]
+  t:
+    description: See /tell.
+  msg:
+    description: See /tell.
+  m:
+    description: See /tell.
+  runner:
+    description: Runner Minigame commands.
+    usage: addPlayer, removePlayer, begin, stop, reset.
+  protection:
+    description: World Protection commands.
+    usage: set, exclude.
+  afk:
+    description: Toggles AFK tag.
+  isafk:
+    description: Queries for if a player is AFK.
+    usage: /isafk <query target player>
+  broadcast:
+    description: Broadcasts a message boldly.
+    usage: /broadcast <message>
+  back:
+    description: Takes the player back to his/her original death location after a respawn.
+  nick:
+    description: Names a specified entity.
+    usage: /nick <name/uname> <nickname> (nickname only required when using name)
+  ride:
+    description: Rides a specified entity.
+  rideme:
+    description: Makes a specified entity ride you.
+  save:
+    description: Saves a person's inventory, location, and potion effects.
+    usage: /save <player>
+  rest:
+    description: Restores a person's inventory, location, and potion effects.
+    usage: /restore <player>
+  gm:
+    description: Changes a person's gamemode.
+    usage: /gm c/s/p (c=Creative,s=Survival,p=Spectator)
+  bl:
+    description: Bomb Lobbers commands.
+    usage: /bl <addPlayer/start/reset> [player]
+  heal:
+    description: Heals a specified Living Entity.
+  tf:
+    description: Opens the Turf Wars menu.
+  menu:
+    description: Opens the command menu.
+    
