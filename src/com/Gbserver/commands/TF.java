@@ -241,19 +241,23 @@ public class TF implements CommandExecutor {
 
 		// x: specified
 		// y: 100
+		boolean ahead = true;
 		if(x == COOR[0][0] || x == COOR[2][0]){
+			if(x == COOR[0][0]){
+				broadcastToPlayers(ChatColor.BLUE + "BLUE WINS!");
+			}else{
+				broadcastToPlayers(ChatColor.RED + "RED WINS!");
+			}
 			isRunning = false;
 			isBuildtime = false;
 			redPlayers.clear();
 			bluePlayers.clear();
 			resetMap();
 			s.interrupt();
-			if(x == COOR[0][0]){
-				broadcastToPlayers(ChatColor.BLUE + "BLUE WINS!");
-			}else{
-				broadcastToPlayers(ChatColor.RED + "RED WINS!");
-			}
+			ahead = false;
+			
 		}
+		if(ahead){
 			for (int z = COOR[1][2]; z <= COOR[0][2]; z++) {
 				Location l = new Location(Bukkit.getWorld("Turf_Wars1"), x, 100, z);
 				l.getBlock().setType(Material.STAINED_CLAY);
@@ -271,6 +275,7 @@ public class TF implements CommandExecutor {
 					}
 				}
 			}
+		}
 	}
 
 	public static void advanceBlocks(boolean isRed) {
