@@ -241,23 +241,36 @@ public class TF implements CommandExecutor {
 
 		// x: specified
 		// y: 100
-		for (int z = COOR[1][2]; z <= COOR[0][2]; z++) {
-			Location l = new Location(Bukkit.getWorld("Turf_Wars1"), x, 100, z);
-			l.getBlock().setType(Material.STAINED_CLAY);
-			l.getBlock().setData(color);
-		}
-
-		// 2nd for: Y & Z
-		// x: specified
-		// y: 100~110
-		for (int y = 101; y <= 110; y++) {
-			for (int z = COOR[1][2]; z <= COOR[0][2]; z++) {
-				Location l = new Location(Bukkit.getWorld("Turf_Wars1"), x, y, z);
-				if (l.getBlock().getType().equals(Material.STAINED_CLAY)) {
-					l.getBlock().setType(Material.AIR);
-				}
+		if(x == COOR[0][0] || x == COOR[2][0]){
+			isRunning = false;
+			isBuildtime = false;
+			redPlayers.clear();
+			bluePlayers.clear();
+			resetMap();
+			s.interrupt();
+			if(x == COOR[0][0]){
+				broadcastToPlayers(ChatColor.BLUE + "BLUE WINS!");
+			}else{
+				broadcastToPlayers(ChatColor.RED + "RED WINS!");
 			}
 		}
+			for (int z = COOR[1][2]; z <= COOR[0][2]; z++) {
+				Location l = new Location(Bukkit.getWorld("Turf_Wars1"), x, 100, z);
+				l.getBlock().setType(Material.STAINED_CLAY);
+				l.getBlock().setData(color);
+			}
+	
+			// 2nd for: Y & Z
+			// x: specified
+			// y: 100~110
+			for (int y = 101; y <= 110; y++) {
+				for (int z = COOR[1][2]; z <= COOR[0][2]; z++) {
+					Location l = new Location(Bukkit.getWorld("Turf_Wars1"), x, y, z);
+					if (l.getBlock().getType().equals(Material.STAINED_CLAY)) {
+						l.getBlock().setType(Material.AIR);
+					}
+				}
+			}
 	}
 
 	public static void advanceBlocks(boolean isRed) {
