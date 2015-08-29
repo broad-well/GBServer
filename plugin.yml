@@ -1,6 +1,7 @@
 main: com.Gbserver.Main
 version: 1.15
 name: Broadwell Server Plugin
+depend: [LibsDisguises, ProtocolLib]
 
 commands:
   spawn:
@@ -8,7 +9,7 @@ commands:
   tell:
     description: Tells a secret message.
     usage: /tell <player> <message>
-    aliases: [/t, /msg, /m]
+    aliases: [t, msg, m]
   t:
     description: See /tell.
   msg:
@@ -56,4 +57,6 @@ commands:
     description: Opens the Turf Wars menu.
   menu:
     description: Opens the command menu.
+  sit:
+    description: Sits on a block.
     

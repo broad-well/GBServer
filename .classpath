@@ -8,5 +8,7 @@
 			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/ProtocolLib.jar" sourcepath="D:/Downloads/ProtocolLib.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/LibsDisguises.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -69,7 +69,13 @@ public class ExplosionListener implements Listener {
 			for (Object e : list.toArray()) {
 				if (e instanceof LivingEntity) {
 					LivingEntity en = (LivingEntity) e;
-					Vector v = en.getLocation().toVector().subtract(origin.toVector()).multiply(0.1);
+					double num;
+					if(BL.isRunning){
+						num = 0;
+					}else{
+						num = 0.1;
+					}
+					Vector v = en.getLocation().toVector().subtract(origin.toVector()).multiply(num);
 						v.setY(getRandom(1, 5));
 					en.setVelocity(v);
 				}

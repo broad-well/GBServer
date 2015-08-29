@@ -12,7 +12,7 @@ public class ChatFormatter implements Listener{
 	public final static int GHOST = 4;
 	
 	public final static Object[][] RANKDATA = {
-			{ "GoBroadwell" , OWNER },
+			{ "_Broadwell" , OWNER },
 			{ "MarkNutt" , BANANA },
 			{ "Ehcto" , GHOST},
 			//{ "Deliry" },

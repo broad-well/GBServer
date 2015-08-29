@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -14,37 +15,24 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
-import com.Gbserver.commands.Afk;
-import com.Gbserver.commands.Attentions;
-import com.Gbserver.commands.BL;
-import com.Gbserver.commands.Back;
-import com.Gbserver.commands.Gamemode;
-import com.Gbserver.commands.Heal;
-import com.Gbserver.commands.Menu;
-import com.Gbserver.commands.Nick;
-import com.Gbserver.commands.Protection;
-import com.Gbserver.commands.Ride;
-import com.Gbserver.commands.Runner;
-import com.Gbserver.commands.SaveMoment;
-import com.Gbserver.commands.Spawn;
-import com.Gbserver.commands.TF;
-import com.Gbserver.commands.Tell;
-import com.Gbserver.commands.runnerListenerDepricated;
-import com.Gbserver.listener.AfkListener;
-import com.Gbserver.listener.BLListener;
-import com.Gbserver.listener.BackListeners;
-import com.Gbserver.listener.ChatFormatter;
-import com.Gbserver.listener.ExplosionListener;
-import com.Gbserver.listener.HealListener;
-import com.Gbserver.listener.LoginTagListener;
-import com.Gbserver.listener.MenuListener;
-import com.Gbserver.listener.NickListener;
-import com.Gbserver.listener.ProtectionListener;
-import com.Gbserver.listener.RideListener;
-import com.Gbserver.listener.TFListeners;
+import com.Gbserver.commands.*;
+import com.Gbserver.listener.*;
+import com.Gbserver.variables.Chair;
+import com.Gbserver.variables.Chairs;
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.ListeningWhitelist;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.events.PacketListener;
 
 public class Main extends JavaPlugin {
 	Vector vector;
@@ -55,6 +43,7 @@ public class Main extends JavaPlugin {
 	public static Sheep[] snake = new Sheep[50];
 	static int i;
 	int TFCount = 0;
+	ProtocolManager pm;
 
 	public void onEnable() {
 
@@ -84,6 +73,9 @@ public class Main extends JavaPlugin {
 		getCommand("heal").setExecutor(new Heal());
 		getCommand("tf").setExecutor(new TF());
 		getCommand("menu").setExecutor(new Menu());
+		getCommand("sit").setExecutor(new Sit());
+		getServer().getPluginManager().registerEvents(new SitListener(), this);
+		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new MenuListener(), this);
 		getServer().getPluginManager().registerEvents(new TFListeners(), this);
 		getServer().getPluginManager().registerEvents(new HealListener(), this);
@@ -97,6 +89,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
+		Announce.registerEvents();
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -249,8 +242,35 @@ public class Main extends JavaPlugin {
 				}
 			}, 0L, 3L);
 		}
+		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
-		/*
+			public void run() {
+				for(Chair c : Chairs.chairs){
+					c.getBat().teleport(c.getLocation());
+				}
+				
+			}
+			
+		}, 0L, 5L);
+		
+		pm = ProtocolLibrary.getProtocolManager();
+		/*pm.addPacketListener(
+				  new PacketAdapter(this, ListenerPriority.NORMAL, 
+				          PacketType.Play.Server.ENTITY_TELEPORT) {
+				    @Override
+				    public void onPacketSending(PacketEvent event) {
+				        // Item packets (id: 0x29)
+				    	// bat's packet id is 42.
+				        if (event.getPacketType() == 
+				                PacketType.Play.Server.ENTITY_TELEPORT) {
+				            if(event.getPacket().getIntegers().read(0) == 42){
+				            this.getPlugin().getLogger().info("Just found a minecart packet");
+				            event.setCancelled(true);
+				            }
+				        }
+				    }
+				});
+	    /*
 		 * scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 		 * 
 		 * public void run() { if(TF.isRunning){ try{ TF.isBuildtime = true;
