@@ -10,9 +10,17 @@ public class Announce {
 	public static void registerEvents() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 			public void run() {
-				Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Announcement> " + ChatColor.GRAY + "The server's site is at http://mwms.mooo.com/mc/ in bootiful Materialize API.");
+				Bukkit.broadcastMessage(ChatColor.DARK_BLUE + "Announcement> " + ChatColor.WHITE + "Check out my GitHub page containing the source code of my plugin! https://github.com/michaelpeng2002/GBServer/");
 			}
-		}, 100L, toTicks(5));
+		}, 0L, toTicks(10));
+
+	
+
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+			public void run() {
+				Bukkit.broadcastMessage(ChatColor.DARK_BLUE + "Announcement> " + ChatColor.WHITE + "You can submit bugged/wanted features of my plugin on the GitHub page. https://github.com/michaelpeng2002/GBServer/issues/3");
+			}
+		}, toTicks(10), toTicks(10));
 	}
 	
 	private static long toTicks(int minutes){
