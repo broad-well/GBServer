@@ -20,7 +20,7 @@ public class Announce {
 			public void run() {
 				Bukkit.broadcastMessage(ChatColor.DARK_BLUE + "Announcement> " + ChatColor.WHITE + "You can submit bugged/wanted features of my plugin on the GitHub page. https://github.com/michaelpeng2002/GBServer/issues/3");
 			}
-		}, toTicks(10), toTicks(10));
+		}, toTicks(5), toTicks(10));
 	}
 	
 	private static long toTicks(int minutes){
