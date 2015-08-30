@@ -34,6 +34,7 @@ public class Attentions implements CommandExecutor {
 				arg0.sendMessage("Added announcement: "+m);
 				Tasks.reload();
 			}
+			return true;
 		}
 		return false;
 	}
