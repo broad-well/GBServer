@@ -10,12 +10,6 @@ commands:
     description: Tells a secret message.
     usage: /tell <player> <message>
     aliases: [t, msg, m]
-  t:
-    description: See /tell.
-  msg:
-    description: See /tell.
-  m:
-    description: See /tell.
   runner:
     description: Runner Minigame commands.
     usage: addPlayer, removePlayer, begin, stop, reset.
@@ -62,4 +56,7 @@ commands:
   announce:
     description: Adds a broadcast message to the broadcast system.
     usage: /announce add <broadcast message>
+  friend:
+    description: It's a secret.
+    aliases: [f]
     
