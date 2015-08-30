@@ -74,6 +74,7 @@ public class Main extends JavaPlugin {
 		getCommand("tf").setExecutor(new TF());
 		getCommand("menu").setExecutor(new Menu());
 		getCommand("sit").setExecutor(new Sit());
+		getCommand("announce").setExecutor(new Attentions());
 		getServer().getPluginManager().registerEvents(new SitListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new MenuListener(), this);

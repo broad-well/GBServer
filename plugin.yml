@@ -59,4 +59,7 @@ commands:
     description: Opens the command menu.
   sit:
     description: Sits on a block.
+  announce:
+    description: Adds a broadcast message to the broadcast system.
+    usage: /announce add <broadcast message>
     
