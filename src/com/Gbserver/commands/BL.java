@@ -40,7 +40,6 @@ public class BL implements CommandExecutor {
 				isRunning = true;
 				for(Object p : players.toArray()){
 					Player pl = Bukkit.getServer().getPlayer((String) p);
-					pl.setAllowFlight(true);
 				}
 				sender.sendMessage("Successfully started the game.");
 				return true;

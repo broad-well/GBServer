@@ -59,7 +59,7 @@ public class ExplosionListener implements Listener {
 									fb.setVelocity(thisVector.multiply(0.17));
 								}
 							}
-							
+
 						}
 					}
 				}
@@ -69,15 +69,12 @@ public class ExplosionListener implements Listener {
 			for (Object e : list.toArray()) {
 				if (e instanceof LivingEntity) {
 					LivingEntity en = (LivingEntity) e;
-					double num;
-					if(BL.isRunning){
-						num = 0;
-					}else{
-						num = 0.1;
+
+					Vector v = en.getLocation().toVector().subtract(origin.toVector()).multiply(0.1);
+					v.setY(getRandom(1, 5));
+					if (!(BL.isRunning) || !(en.getWorld().getName().equals("Bomb_Lobbers1"))) {
+						en.setVelocity(v);
 					}
-					Vector v = en.getLocation().toVector().subtract(origin.toVector()).multiply(num);
-						v.setY(getRandom(1, 5));
-					en.setVelocity(v);
 				}
 
 			}
@@ -113,21 +110,20 @@ public class ExplosionListener implements Listener {
 
 			}
 		}
-		el.getLocation().getWorld().playEffect(el.getLocation(), Effect.EXPLOSION_LARGE,1);
+		el.getLocation().getWorld().playEffect(el.getLocation(), Effect.EXPLOSION_LARGE, 1);
 		el.setCancelled(true);
 
 	}
 
 	@EventHandler
 	public void onBlockChange(final EntityChangeBlockEvent ecbe) {
-		//if (ecbe.getBlock().getWorld().equals(Bukkit.getWorld("Bomb_Lobbers1")) || BL.isRunning) {
+		// if
+		// (ecbe.getBlock().getWorld().equals(Bukkit.getWorld("Bomb_Lobbers1"))
+		// || BL.isRunning) {
 
-		//}
-		ecbe.getBlock().getWorld().playEffect(ecbe.getBlock().getLocation(), Effect.STEP_SOUND,1);
+		// }
+		ecbe.getBlock().getWorld().playEffect(ecbe.getBlock().getLocation(), Effect.STEP_SOUND, 1);
 		ecbe.setCancelled(true);
-
-		
-		
 
 	}
 

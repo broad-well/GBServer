@@ -17,7 +17,7 @@ public class Announce {
 	public static void registerEvents() {
 
 			for(int i = 0; i < announcements.size(); i++){
-				Tasks.getTask(i);
+				new AnnounceTask(i);
 			}
 
 	}
