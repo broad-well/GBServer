@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import com.Gbserver.commands.Nick;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
@@ -23,11 +25,11 @@ public class NickListener implements Listener {
 				if (edbee.getRightClicked() instanceof Player) {
 					DisguiseAPI.undisguiseToAll(Nick.target);
 					DisguiseAPI.setViewDisguiseToggled(Nick.target, true);
-					Nick.sender.sendMessage("Sucessfully unnamed this Player.");
+					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Sucessfully unnamed this Player."));
 				} else {
 					Nick.target.setCustomNameVisible(false);
 					Nick.target.setCustomName("");
-					Nick.sender.sendMessage("Successfully unnamed this entity.");
+					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully unnamed this entity."));
 				}
 			} else {
 				if (edbee.getRightClicked() instanceof Player) {
@@ -35,11 +37,11 @@ public class NickListener implements Listener {
 					
 					DisguiseAPI.disguiseEntity(Nick.target, pd);
 					DisguiseAPI.setViewDisguiseToggled(Nick.target, false);
-					Nick.sender.sendMessage("Sucessfully named this Player as " + Nick.arg);
+					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Sucessfully named this Player as " + Nick.arg));
 				} else {
 					Nick.target.setCustomName(Nick.arg);
 					Nick.target.setCustomNameVisible(true);
-					Nick.sender.sendMessage("Successfully named this entity as " + Nick.arg);
+					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully named this entity as " + Nick.arg));
 				}
 			}
 		}

@@ -14,6 +14,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
+
 public class BL implements CommandExecutor {
 	public static Collection<String> players = new LinkedList<String>();
 	public static boolean isRunning = false;
@@ -21,19 +24,19 @@ public class BL implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("bl")) {
 			if (args.length < 1) {
-				sender.sendMessage("Missing Operand. /bl addPlayer/start/reset.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 				return false;
 			}
 			switch (args[0]) {
 			case "addPlayer":
 				if (args.length < 2) {
-					sender.sendMessage("Missing Operand. /bl addPlayer <name1> <name2> etc.");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 					return false;
 				}
 				for (int i = 1; i < args.length; i++) {
 					Player p = Bukkit.getServer().getPlayer(args[i]);
 					players.add(p.getName());
-					sender.sendMessage("Successfully added " + p.getName() + " to BL players list.");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully added " + p.getName() + " to BL players list."));
 				}
 				return true;
 			case "start":
@@ -41,12 +44,12 @@ public class BL implements CommandExecutor {
 				for(Object p : players.toArray()){
 					Player pl = Bukkit.getServer().getPlayer((String) p);
 				}
-				sender.sendMessage("Successfully started the game.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully started the game."));
 				return true;
 			case "reset":
 				isRunning = false;
 				players.clear();
-				sender.sendMessage("Successfully reset the game.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully reset the game."));
 				return true;
 			}
 		}

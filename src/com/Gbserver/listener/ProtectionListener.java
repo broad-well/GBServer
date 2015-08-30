@@ -10,6 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
+
 public class ProtectionListener implements Listener {
 	final int[][][] DATA = { 
 			{
@@ -57,12 +60,12 @@ public class ProtectionListener implements Listener {
 				if(i == 0 && bbe.getBlock().getType() == Material.SNOW_BLOCK){
 					
 				}else{
-					bbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
+					bbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
 					bbe.setCancelled(true);
 				}
 			}
 			if(bbe.getBlock().getWorld().equals(Bukkit.getServer().getWorld("Bomb_Lobbers1")) && bbe.getBlock().getType() == Material.BEDROCK){
-				bbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
+				bbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
 				bbe.setCancelled(true);
 			}
 		}

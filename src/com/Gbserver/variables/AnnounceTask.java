@@ -41,7 +41,7 @@ public class AnnounceTask {
 			public void run() {
 					try {
 						Bukkit.broadcastMessage(ChatColor.BLUE + "Announcement> " + ChatColor.YELLOW
-								+ Announce.announcements.toArray()[announceNumber]);
+								+ Announce.announcements[0]);
 
 					} catch (Exception e) {
 						Bukkit.broadcastMessage(
@@ -49,7 +49,7 @@ public class AnnounceTask {
 					}
 			
 			}
-		}, Announce.toTicks(announceNumber * 5), Announce.toTicks(5 * Announce.announcements.size()));
+		}, Announce.toTicks(announceNumber * 5), Announce.toTicks(5 * Announce.announcements.length));
 		Tasks.tasks.add(this);
 	}
 

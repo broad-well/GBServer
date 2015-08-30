@@ -7,6 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
+
 public class Nick implements CommandExecutor {
 
 	public static boolean clickPending = false;
@@ -19,34 +22,34 @@ public class Nick implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("nick")) {
 			if (!(sender instanceof Player)) {
-				sender.sendMessage("Must be a player.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
 				return false;
 			}
 			if (args.length < 1) {
-				sender.sendMessage("Invalid Syntax. /nick <name/uname> <nickname>");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 				return false;
 			}
 			switch(args[0]){
 			case "name":
 				if (args.length < 2) {
-					sender.sendMessage("Invalid Syntax. /nick <name> <nickname>");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 					return false;
 				}
 				Nick.isNaming = true;
 				Nick.arg = args[1];
 				Nick.sender = (Player) sender;
-				sender.sendMessage(ChatColor.ITALIC + "Please right click an entity to be named.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to be named."));
 				clickPending = true;
 				return true;
 			case "uname":
 				Nick.isNaming = false;
 				Nick.arg = "";
 				Nick.sender = (Player) sender;
-				sender.sendMessage(ChatColor.ITALIC + "Please right click an entity to be un-named.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to be un-named."));
 				clickPending = true;
 				return true;
 			default:
-				sender.sendMessage("Invalid Syntax. /nick <name/uname> <nickname>");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 				return false;
 			}
 		}

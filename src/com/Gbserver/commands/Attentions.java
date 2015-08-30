@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 
 import com.Gbserver.listener.Announce;
 import com.Gbserver.variables.AnnounceTask.Tasks;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 public class Attentions implements CommandExecutor {
 
@@ -19,23 +21,10 @@ public class Attentions implements CommandExecutor {
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		// TODO Auto-generated method stub
 		if (arg2.equalsIgnoreCase("broadcast")) {
-			Bukkit.broadcastMessage(ChatColor.BLUE + "Announcement> " + ChatColor.YELLOW + concat(arg3));
+			ChatWriter.write(ChatWriterType.ANNOUNCEMENT, concat(arg3));
 			return true;
 		}
-		if (arg2.equalsIgnoreCase("announce")) {
-			if(arg3.length < 2){
-				arg0.sendMessage("Bad Syntax.");
-				return false;
-			}
-			switch(arg3[0]){
-			case "add":
-				String m = concat(Arrays.copyOfRange(arg3, 1, arg3.length));
-				Announce.announcements.add(m);
-				arg0.sendMessage("Added announcement: "+m);
-				Tasks.reload();
-			}
-			return true;
-		}
+		
 		return false;
 	}
 

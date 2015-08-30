@@ -10,6 +10,8 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 
 import com.Gbserver.Main;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 public class Runner implements CommandExecutor {
 	/*
@@ -33,17 +35,17 @@ public class Runner implements CommandExecutor {
 			switch (args[0]) {
 			case "addPlayer":
 				if (args.length < 2) {
-					sender.sendMessage("Invalid Syntax. /runner addPlayer <players to add>");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 					return false;
 				}
 				for (int i = 1; i < args.length; i++) {
 					players[i - 1] = Bukkit.getPlayer(args[i]);
-					sender.sendMessage("Added " + args[i] + " to the Runner players list.");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Added " + args[i] + " to the Runner players list."));
 				}
 				return true;
 			case "removePlayer":
 				if (args.length != 2) {
-					sender.sendMessage("Invalid Syntax. /runner removePlayer <player to remove>");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
 					return false;
 				}
 				for (int i = 1; i < players.length; i++) {

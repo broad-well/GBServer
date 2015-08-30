@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import com.Gbserver.Main;
 import com.Gbserver.listener.Announce;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 public class Protection implements CommandExecutor {
 	public static Main instance;
@@ -19,7 +21,7 @@ public class Protection implements CommandExecutor {
 		// TODO Auto-generated method stub
 		if (label.equalsIgnoreCase("protection")) {
 			if (!(sender instanceof Player)) {
-				sender.sendMessage("Needs to be a player.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
 				return false;
 			}
 			Announce.registerEvents();

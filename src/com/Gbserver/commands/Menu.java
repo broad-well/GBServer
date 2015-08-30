@@ -10,6 +10,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
+
 public class Menu implements CommandExecutor{
 	
 	private static final Object[] invDisplay = {
@@ -44,7 +47,7 @@ public class Menu implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("menu")) {
 			if (!(sender instanceof Player)) {
-				sender.sendMessage("Must be a player.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
 				return false;
 			}
 			Player p = (Player) sender;

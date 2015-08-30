@@ -20,6 +20,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import com.Gbserver.Main;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 /*
  * On begin:
@@ -67,7 +69,7 @@ public class TF implements CommandExecutor {
 					bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 						public void run() {
 
-							broadcastToPlayers("Combat time");
+							broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME, "Combat time"));
 							isBuildtime = false;
 						}
 					}, 30 * 20L);
@@ -81,7 +83,7 @@ public class TF implements CommandExecutor {
 				if (isValid) {
 					bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 						public void run() {
-							broadcastToPlayers("Build time");
+							broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME, "Build time"));
 							isBuildtime = true;
 						}
 					}, 180 * 20L);
@@ -148,7 +150,7 @@ public class TF implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("tf")) {
 			if (!(sender instanceof Player)) {
-				sender.sendMessage("You need to be a player to execute this command.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
 				return false;
 			}
 			Player p = (Player) sender;
@@ -169,7 +171,7 @@ public class TF implements CommandExecutor {
 					fillInventory(false);
 					fillInventory(true);
 					s.start();
-					sender.sendMessage("Game Started.");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Game Started."));
 				}
 				if (args[0].equalsIgnoreCase("toggle")) {
 					if (isBuildtime) {
@@ -186,7 +188,7 @@ public class TF implements CommandExecutor {
 					bluePlayers.clear();
 					resetMap();
 					s.interrupt();
-					sender.sendMessage("Game Stopped.");
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Game Stopped."));
 				}
 			} else {
 				setupInventory();
@@ -219,11 +221,11 @@ public class TF implements CommandExecutor {
 						data = (byte) 11;
 					}
 					p.getInventory().addItem(new ItemStack(Material.STAINED_CLAY, 64, (short) 0, data));
-					p.sendMessage("Filled your inventory.");
+					p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME,"Filled your inventory."));
 				} else {
 					p.getInventory().addItem(new ItemStack(Material.BOW, 2));
 					p.getInventory().addItem(new ItemStack(Material.ARROW, 64));
-					p.sendMessage("Filled your inventory.");
+					p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME,"Filled your inventory."));
 
 				}
 			}
@@ -244,9 +246,9 @@ public class TF implements CommandExecutor {
 		boolean ahead = true;
 		if(x == COOR[0][0] || x == COOR[2][0]){
 			if(x == COOR[0][0]){
-				broadcastToPlayers(ChatColor.BLUE + "BLUE WINS!");
+				broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME,ChatColor.BLUE + "BLUE WINS!"));
 			}else{
-				broadcastToPlayers(ChatColor.RED + "RED WINS!");
+				broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME,ChatColor.RED + "RED WINS!"));
 			}
 			isRunning = false;
 			isBuildtime = false;

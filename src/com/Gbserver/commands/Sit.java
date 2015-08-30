@@ -13,6 +13,8 @@ import org.bukkit.entity.Player;
 
 import com.Gbserver.variables.Chair;
 import com.Gbserver.variables.Chairs;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 public class Sit implements CommandExecutor {
 	public static Block target;
@@ -21,7 +23,7 @@ public class Sit implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("sit")) {
 			if (!(sender instanceof Player)) {
-				sender.sendMessage("Only players allowed.");
+				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
 				return false;
 			}
 			Player p = (Player) sender;

@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import com.Gbserver.commands.Heal;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 public class HealListener implements Listener{
 	
@@ -15,7 +17,7 @@ public class HealListener implements Listener{
 			if(piee.getRightClicked() instanceof LivingEntity){
 				LivingEntity le = (LivingEntity) piee.getRightClicked();
 				le.setHealth(le.getMaxHealth());
-				Heal.sender.sendMessage("Successfully healed this Living Entity.");
+				Heal.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND,"Successfully healed this Living Entity."));
 				Heal.pending = false;
 			}
 		}

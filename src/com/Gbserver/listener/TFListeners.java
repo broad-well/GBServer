@@ -23,6 +23,8 @@ import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
 import com.Gbserver.commands.TF;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 
 public class TFListeners implements Listener {
 	@EventHandler
@@ -40,10 +42,10 @@ public class TFListeners implements Listener {
 					if (!(TF.redPlayers.contains(p))) {
 						TF.redPlayers.add(p);
 						p.closeInventory();
-						p.sendMessage("Successfully added you to " + ChatColor.RED + "Red Team");
+						p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Successfully added you to " + ChatColor.RED + "Red Team"));
 					} else {
 						p.closeInventory();
-						p.sendMessage("You are already on Team Red!");
+						p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are already on Team Red!"));
 					}
 				}
 				break;
@@ -57,10 +59,10 @@ public class TFListeners implements Listener {
 					if (!(TF.bluePlayers.contains(p))) {
 						TF.bluePlayers.add(p);
 						p.closeInventory();
-						p.sendMessage("Successfully added you to " + ChatColor.BLUE + "Blue Team");
+						p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Successfully added you to " + ChatColor.BLUE + "Blue Team"));
 					} else {
 						p.closeInventory();
-						p.sendMessage("You are already on Team Blue!");
+						p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are already on Team Blue!"));
 					}
 				}
 				break;
@@ -76,7 +78,7 @@ public class TFListeners implements Listener {
 					}
 
 					p.closeInventory();
-					p.sendMessage("Successfully removed you from the game.");
+					p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Successfully removed you from the game."));
 				}
 				break;
 			case 8:
@@ -97,19 +99,19 @@ public class TFListeners implements Listener {
 
 				if (!isValid(bpe.getBlockPlaced().getLocation(), true)) {
 					bpe.setCancelled(true);
-					bpe.getPlayer().sendMessage("You are only allowed to build on red clay.");
+					bpe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are only allowed to build on red clay."));
 				}
 			} else {
 				// Blue
 
 				if (!isValid(bpe.getBlockPlaced().getLocation(), false)) {
 					bpe.setCancelled(true);
-					bpe.getPlayer().sendMessage("You are only allowed to build on blue clay.");
+					bpe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are only allowed to build on blue clay."));
 				}
 			}
 			if(bpe.getBlockPlaced().getY() > 110){
 				bpe.setCancelled(true);
-				bpe.getPlayer().sendMessage("Max build height is 10 blocks.");
+				bpe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, ChatColor.BOLD + "Max build height is 10 blocks."));
 			}
 		}
 	}
@@ -127,11 +129,11 @@ public class TFListeners implements Listener {
 				Vector v = new Vector(-10, 5, 0);
 				if(isRed){
 					pme.getPlayer().setVelocity(v.multiply(0.2));
-					pme.getPlayer().sendMessage("You are only allowed on red clay.");
+					pme.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are only allowed on red clay."));
 				}else{
 					Vector blue = new Vector(10, 5, 0);
 					pme.getPlayer().setVelocity(blue.multiply(0.2));
-					pme.getPlayer().sendMessage("You are only allowed on blue clay.");
+					pme.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are only allowed on blue clay."));
 				}
 				
 				
@@ -239,7 +241,7 @@ public class TFListeners implements Listener {
 		if(TF.isRunning && TF.isBuildtime && TF.getAllPlayers().contains(p)){
 			ple.setCancelled(true);
 			
-			p.sendMessage("You are not allowed to launch arrows during Build Time!");
+			p.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are not allowed to launch arrows during Build Time!"));
 		}
 	}
 	
