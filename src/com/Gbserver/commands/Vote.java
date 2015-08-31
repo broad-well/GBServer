@@ -100,10 +100,8 @@ public class Vote implements CommandExecutor {
 
 	public static void clear() {
 		options = new LinkedList<>();
-		for (int i : votes) {
-			i = 0;
-		}
 		voted = new LinkedList<>();
+		votes = new int[4];
 		
 	}
 
