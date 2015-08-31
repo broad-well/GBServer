@@ -77,6 +77,7 @@ public class Main extends JavaPlugin {
 		getCommand("announce").setExecutor(new Attentions());
 		getCommand("f").setExecutor(new F());
 		getCommand("friend").setExecutor(new F());
+		getCommand("vote").setExecutor(new Vote());
 		getServer().getPluginManager().registerEvents(new SitListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new MenuListener(), this);

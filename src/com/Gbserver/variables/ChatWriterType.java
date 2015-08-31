@@ -7,5 +7,6 @@ public enum ChatWriterType {
 	CONDITION,
 	CHAT,
 	COMMAND,
-	SERVER
+	SERVER,
+	VOTE
 }

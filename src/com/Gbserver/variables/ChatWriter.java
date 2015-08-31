@@ -35,6 +35,9 @@ public class ChatWriter {
 		case SERVER:
 			output += "Server> " + ChatColor.YELLOW;
 			break;
+		case VOTE:
+			output += "Vote> " + ChatColor.GRAY;
+			break;
 		}
 		output += message;
 		return output;

@@ -59,4 +59,7 @@ commands:
   friend:
     description: It's a secret.
     aliases: [f]
+  vote:
+    description: Vote commands.
+    usage: It's complicated.
     
