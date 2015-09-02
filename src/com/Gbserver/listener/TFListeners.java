@@ -29,7 +29,7 @@ import com.Gbserver.variables.ChatWriterType;
 public class TFListeners implements Listener {
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent ice) {
-		if (TF.clickInventory) {
+		if (TF.clickInventory.contains(ice.getWhoClicked())) {
 			ice.setCancelled(true);
 			switch (ice.getSlot()) {
 			case 0:
@@ -87,7 +87,7 @@ public class TFListeners implements Listener {
 				}
 				break;
 			}
-			TF.clickInventory = false;
+			TF.clickInventory.remove(ice.getWhoClicked());
 		}
 	}
 

@@ -1,5 +1,8 @@
 package com.Gbserver.commands;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,9 +15,10 @@ import com.Gbserver.variables.ChatWriterType;
 
 public class Nick implements CommandExecutor {
 
-	public static boolean clickPending = false;
-	public static Entity target = null;
-	public static boolean clicked = false;
+	//public static boolean clickPending = false;
+	//public static Entity target = null;
+	//public static boolean clicked = false;
+	public static List<Player> list = new LinkedList<Player>();
 	public static Player sender;
 	public static String arg;
 	public static boolean isNaming;
@@ -39,14 +43,14 @@ public class Nick implements CommandExecutor {
 				Nick.arg = args[1];
 				Nick.sender = (Player) sender;
 				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to be named."));
-				clickPending = true;
+				list.add((Player) sender);
 				return true;
 			case "uname":
 				Nick.isNaming = false;
 				Nick.arg = "";
 				Nick.sender = (Player) sender;
 				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to be un-named."));
-				clickPending = true;
+				list.add((Player) sender);
 				return true;
 			default:
 				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));

@@ -78,6 +78,13 @@ public class Main extends JavaPlugin {
 		getCommand("f").setExecutor(new F());
 		getCommand("friend").setExecutor(new F());
 		getCommand("vote").setExecutor(new Vote());
+		getCommand("tellraw").setExecutor(new Vote());
+		getCommand("ban").setExecutor(new Vote());
+		getCommand("banip").setExecutor(new Vote());
+		getCommand("stop").setExecutor(new Vote());
+		getCommand("restart").setExecutor(new Vote());
+		getCommand("mute").setExecutor(new Mute());
+		getServer().getPluginManager().registerEvents(new MuteListener(), this);
 		getServer().getPluginManager().registerEvents(new SitListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		getServer().getPluginManager().registerEvents(new MenuListener(), this);
@@ -94,7 +101,6 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
 		Announce.registerEvents();
-		Countdown.getScoreboard();
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

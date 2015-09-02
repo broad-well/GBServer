@@ -8,15 +8,15 @@ import com.Gbserver.commands.Ride;
 public class RideListener implements Listener{
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent pie){
-		if(Ride.pending){
+		if(Ride.list.contains(pie.getPlayer())){
 			if(Ride.ridingOthers){
-				pie.getRightClicked().setPassenger(Ride.p);
+				pie.getRightClicked().setPassenger(pie.getPlayer());
 			}else{
-				Ride.p.setPassenger(pie.getRightClicked());
+				pie.getPlayer().setPassenger(pie.getRightClicked());
 				Ride.hasPassenger = true;
 			}
 			
-			Ride.pending = false;
+			Ride.list.remove(pie.getPlayer());
 		}
 	}
 }

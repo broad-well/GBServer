@@ -13,12 +13,12 @@ public class HealListener implements Listener{
 	
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent piee){
-		if(Heal.pending && piee.getPlayer() == Heal.sender){
+		if(Heal.players.contains(piee.getPlayer())){
 			if(piee.getRightClicked() instanceof LivingEntity){
 				LivingEntity le = (LivingEntity) piee.getRightClicked();
 				le.setHealth(le.getMaxHealth());
-				Heal.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND,"Successfully healed this Living Entity."));
-				Heal.pending = false;
+				piee.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND,"Successfully healed this Living Entity."));
+				Heal.players.remove(piee.getPlayer());
 			}
 		}
 	}

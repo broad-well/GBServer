@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,32 +16,32 @@ import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 public class NickListener implements Listener {
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent edbee) {
-		if (Nick.clickPending) {
-			Nick.target = edbee.getRightClicked();
-			Nick.clicked = true;
-			Nick.clickPending = false;
+		if (Nick.list.contains(edbee.getPlayer())) {
+			Entity target = edbee.getRightClicked();
+			//Nick.clicked = true;
+			//Nick.clickPending = false;
 			edbee.setCancelled(true);
 
 			if (!Nick.isNaming) {
 				if (edbee.getRightClicked() instanceof Player) {
-					DisguiseAPI.undisguiseToAll(Nick.target);
-					DisguiseAPI.setViewDisguiseToggled(Nick.target, true);
+					DisguiseAPI.undisguiseToAll(target);
+					DisguiseAPI.setViewDisguiseToggled(target, true);
 					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Sucessfully unnamed this Player."));
 				} else {
-					Nick.target.setCustomNameVisible(false);
-					Nick.target.setCustomName("");
+					target.setCustomNameVisible(false);
+					target.setCustomName("");
 					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully unnamed this entity."));
 				}
 			} else {
 				if (edbee.getRightClicked() instanceof Player) {
 					PlayerDisguise pd = new PlayerDisguise(Nick.arg, ((Player) edbee.getRightClicked()).getName());
 					
-					DisguiseAPI.disguiseEntity(Nick.target, pd);
-					DisguiseAPI.setViewDisguiseToggled(Nick.target, false);
+					DisguiseAPI.disguiseEntity(target, pd);
+					DisguiseAPI.setViewDisguiseToggled(target, false);
 					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Sucessfully named this Player as " + Nick.arg));
 				} else {
-					Nick.target.setCustomName(Nick.arg);
-					Nick.target.setCustomNameVisible(true);
+					target.setCustomName(Nick.arg);
+					target.setCustomNameVisible(true);
 					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully named this entity as " + Nick.arg));
 				}
 			}

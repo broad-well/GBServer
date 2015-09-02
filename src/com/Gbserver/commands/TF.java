@@ -52,7 +52,7 @@ public class TF implements CommandExecutor {
 			{ 29, 100, 25 }, { -10, 100, -24 } // ^ BLUE selection
 
 	};
-	public static boolean clickInventory = false;
+	public static List<Player> clickInventory = new LinkedList<>();
 	public static boolean isRunning = false;
 	public static boolean isBuildtime = false;
 	public static final int[] RedSpawn = { -53, 102, 0 };
@@ -66,34 +66,43 @@ public class TF implements CommandExecutor {
 			while (isRunning && isValid) {
 				BukkitScheduler bs = Bukkit.getServer().getScheduler();
 				if (isValid) {
-					bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
-						public void run() {
-
-							broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME, "Combat time"));
-							isBuildtime = false;
-						}
-					}, 30 * 20L);
+//					bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+//						public void run() {
+//
+//							broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME, "Combat time"));
+//							isBuildtime = false;
+//						}
+//					}, 30 * 20L);
+					ChatWriter.write(ChatWriterType.GAME, "Trying to set scoreboard");
+					Countdown.reset();
+					Countdown.getScoreboard("TURF WARS");
+					Countdown.addScore("Build time", 30);
 				}
-				while (isBuildtime) {
+				while (!(Countdown.isFinished)) {
 					if (Thread.currentThread().isInterrupted()) {
 						isValid = false;
 						break;
 					}
 				}
+				isBuildtime = false;
 				if (isValid) {
-					bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+					/*bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 						public void run() {
 							broadcastToPlayers(ChatWriter.getMessage(ChatWriterType.GAME, "Build time"));
 							isBuildtime = true;
 						}
-					}, 180 * 20L);
+					}, 180 * 20L);*/
+					Countdown.reset();
+					Countdown.getScoreboard("TURF WARS");
+					Countdown.addScore("Combat time", 180);
 				}
-				while (!isBuildtime) {
+				while (!(Countdown.isFinished)) {
 					if (Thread.currentThread().isInterrupted()) {
 						isValid = false;
 						break;
 					}
 				}
+				isBuildtime = true;
 			}
 		}
 	};
@@ -193,7 +202,7 @@ public class TF implements CommandExecutor {
 			} else {
 				setupInventory();
 				p.openInventory(menu);
-				clickInventory = true;
+				clickInventory.add(p);
 			}
 			return true;
 

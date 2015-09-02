@@ -1,5 +1,8 @@
 package com.Gbserver.commands;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,8 +13,7 @@ import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 
 public class Ride implements CommandExecutor {
-	public static boolean pending = false;
-	public static Player p;
+	public static List<Player> list = new LinkedList<Player>();
 	public static boolean ridingOthers = false;
 	public static boolean hasPassenger = false;
 
@@ -22,8 +24,7 @@ public class Ride implements CommandExecutor {
 				return false;
 			}
 			ridingOthers = true;
-			pending = true;
-			p = (Player) sender;
+			list.add((Player) sender);
 			sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to ride on it."));
 			return true;
 		}
@@ -34,14 +35,14 @@ public class Ride implements CommandExecutor {
 			}
 			
 
-			p = (Player) sender;
+
 			if (hasPassenger) {
-				p.eject();
+				((Player) sender).eject();
 				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Successfully dismounted your passenger."));
 				hasPassenger = false;
 			} else {
 				ridingOthers = false;
-				pending = true;
+				list.add((Player) sender);
 				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to make it ride on you."));
 			}
 			return true;
