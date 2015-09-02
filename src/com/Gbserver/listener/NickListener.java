@@ -45,6 +45,7 @@ public class NickListener implements Listener {
 					Nick.sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully named this entity as " + Nick.arg));
 				}
 			}
+			Nick.list.remove(edbee.getPlayer());
 		}
 	}
 }
