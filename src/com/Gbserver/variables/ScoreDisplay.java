@@ -10,13 +10,14 @@ import org.bukkit.scoreboard.Scoreboard;
 public class ScoreDisplay {
 	private Scoreboard sb;
 	private Objective obj;
-	private String[] displays = {"","","","","","","","","","","","","","","",""};
+	private String[] displays = {" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "};
+	private String name;
 	
 	public ScoreDisplay(String d) {
 		sb = Bukkit.getScoreboardManager().getNewScoreboard();
-		obj = sb.registerNewObjective("display", "dummy");
+		obj = sb.registerNewObjective(d, "dummy");
+		name = d;
 		display();
-		obj.setDisplayName(d);
 	}
 	
 	public Scoreboard getScoreboard() {
@@ -35,7 +36,8 @@ public class ScoreDisplay {
 	
 	void reset() {
 		obj.unregister();
-		obj = sb.registerNewObjective("display", "dummy");
+		obj = sb.registerNewObjective(name, "dummy");
+		
 	}
 	
 	void display() {
