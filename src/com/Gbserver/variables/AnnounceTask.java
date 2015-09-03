@@ -11,13 +11,13 @@ import com.Gbserver.Main;
 import com.Gbserver.listener.Announce;
 
 public class AnnounceTask {
-	public static int announceNumber;
-	private static int taskID;
+	public int announceNumber;
+	private int taskID;
 
-	public static class Tasks {
+	public static  class Tasks {
 		public static List<AnnounceTask> tasks = new LinkedList<>();
 
-		public static AnnounceTask getTask(int arg) {
+		public AnnounceTask getTask(int arg) {
 			for (AnnounceTask at : tasks) {
 				if (at.announceNumber == arg) {
 					return at;
@@ -26,7 +26,7 @@ public class AnnounceTask {
 			return new AnnounceTask(arg);
 		}
 		
-		public static void reload() {
+		public void reload() {
 			for (AnnounceTask at : tasks){
 				at.setDisabled();
 				int am = at.announceNumber;
@@ -53,7 +53,7 @@ public class AnnounceTask {
 		Tasks.tasks.add(this);
 	}
 
-	public static void setDisabled() {
+	public void setDisabled() {
 		Bukkit.getScheduler().cancelTask(taskID);
 		
 	}
