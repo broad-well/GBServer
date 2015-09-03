@@ -22,6 +22,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import com.Gbserver.Main;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.ScoreDisplay;
 
 /*
  * On begin:
@@ -60,11 +61,16 @@ public class TF implements CommandExecutor {
 	public static Inventory menu = Bukkit.createInventory(null, 9, "Turf Wars Menu");
 	public static List<Player> redPlayers = new LinkedList<Player>();
 	public static List<Player> bluePlayers = new LinkedList<Player>();
+	static ScoreDisplay sd;
+	static int countdown;
+	static boolean isDone = false;
+	static int task1;
+	static int task2;
 	private static Thread s = new Thread() {
 		public void run() {
 			boolean isValid = true;
 			while (isRunning && isValid) {
-				BukkitScheduler bs = Bukkit.getServer().getScheduler();
+				final BukkitScheduler bs = Bukkit.getServer().getScheduler();
 				if (isValid) {
 //					bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 //						public void run() {
@@ -74,17 +80,31 @@ public class TF implements CommandExecutor {
 //						}
 //					}, 30 * 20L);
 					ChatWriter.write(ChatWriterType.GAME, "Trying to set scoreboard");
-					Countdown.reset();
-					Countdown.getScoreboard("TURF WARS");
-					Countdown.addScore("Build time", 30);
+					countdown = 30;
+					task1 = bs.scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+
+						@Override
+						public void run() {
+							sd.setLine("Combat in: "+countdown, 3);
+							sd.setLine(ChatColor.BLUE + "" + ChatColor.BOLD + "   -BUILD TIME-   ", 4);
+							if(countdown == 0){
+								isDone = true;
+								bs.cancelTask(task1);
+							}else{
+							countdown--;
+							}
+						}
+						
+					}, 0L, 20L);
 				}
-				while (!(Countdown.isFinished)) {
+				while (!isDone) {
 					if (Thread.currentThread().isInterrupted()) {
 						isValid = false;
 						break;
 					}
 				}
 				isBuildtime = false;
+				isDone = false;
 				if (isValid) {
 					/*bs.scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 						public void run() {
@@ -92,17 +112,33 @@ public class TF implements CommandExecutor {
 							isBuildtime = true;
 						}
 					}, 180 * 20L);*/
-					Countdown.reset();
-					Countdown.getScoreboard("TURF WARS");
-					Countdown.addScore("Combat time", 180);
+					ChatWriter.write(ChatWriterType.GAME, "Trying to set scoreboard");
+					countdown = 150;
+					isDone = false;
+					task2 = bs.scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+
+						@Override
+						public void run() {
+							sd.setLine("Build in: "+countdown, 3);
+							sd.setLine(ChatColor.RED + "" + ChatColor.BOLD + "   -COMBAT TIME-   ", 4);
+							if(countdown == 0){
+								isDone = true;
+								bs.cancelTask(task2);
+							}else{
+							countdown--;
+							}
+						}
+						
+					}, 0L, 20L);
 				}
-				while (!(Countdown.isFinished)) {
+				while (!isDone) {
 					if (Thread.currentThread().isInterrupted()) {
 						isValid = false;
 						break;
 					}
 				}
 				isBuildtime = true;
+				isDone = false;
 			}
 		}
 	};
@@ -154,7 +190,11 @@ public class TF implements CommandExecutor {
 		is.setItemMeta(m);
 		return is;
 	}
-
+	
+	private void setupScoreboard() {
+		sd = new ScoreDisplay("Turf Wars");
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("tf")) {
@@ -166,6 +206,7 @@ public class TF implements CommandExecutor {
 
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("begin")) {
+					setupScoreboard();
 					isRunning = true;
 					isBuildtime = true;
 					for (Object o : redPlayers) {
