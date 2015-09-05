@@ -68,6 +68,10 @@ public class BLListener implements Listener {
 			p.setGameMode(GameMode.SPECTATOR);
 			BL.players.remove(p.getName());
 			p.sendMessage(ChatColor.RED + "Good Game, Losers! :D");
+			if(BL.players.size() == 1){
+				BL.isRunning = false;
+				BL.players.clear();
+			}
 		}
 	}
 	

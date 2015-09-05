@@ -6,8 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,6 +24,12 @@ public class BL implements CommandExecutor {
 	public static Collection<String> players = new LinkedList<String>();
 	public static boolean isRunning = false;
 	public static World world = Bukkit.getWorld("Bomb_Lobbers1");
+	public static int[][] Beach = {
+			{ 517 , 98 , 557 },
+			{ 474 , 125, 485 },
+			{  43 , 95 ,  -1 },
+			{  -2 , 123,  73 }
+	};
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("bl")) {
@@ -56,5 +64,48 @@ public class BL implements CommandExecutor {
 			}
 		}
 		return false;
+	}
+	
+	public static void removePreviousMap() {
+		for(int x = Beach[2][0]; x > Beach[3][0]; x--){
+			for(int y = Beach[2][1]; y < Beach[3][1]; y++){
+				for(int z = Beach[2][2]; z < Beach[3][2]; z++){
+					world.getBlockAt(x,y,z).setType(Material.AIR);
+				}
+			}
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static void getMap(int type){
+		/*
+		 * 1: Beach
+		 * 2: Forest
+		 * 3: Motherboard
+		 */
+		
+		int[] sample = {0,150,0};
+		
+		if(type == 1){
+			//Tri-for
+			for(int x = Beach[0][0]; x > Beach[1][0]; x--){
+				for(int y = Beach[0][1]; y < Beach[1][1]; y++){
+					for(int z = Beach[0][2]; z > Beach[1][2]; z--){
+						Block b = world.getBlockAt(new Location(world, x, y, z));
+						int x1 = Beach[0][0] - x;
+						int y1 = y;
+						int z1 = Beach[0][2] - z;
+						world.getBlockAt(new Location(world,x1,y1,z1)).setType(b.getType());
+						world.getBlockAt(new Location(world,x1,y1,z1)).setData(b.getData());
+					}
+				}
+			}
+		}
+		if(type == 2){
+			
+		}
+		if(type == 3){
+			
+		}
 	}
 }

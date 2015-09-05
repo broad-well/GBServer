@@ -107,7 +107,9 @@ public class Main extends JavaPlugin {
 		Announce.registerEvents();
 		try {
 			Lobby l = new Lobby(LT.TF);
+			Lobby l2 = new Lobby(LT.BL);
 			Lobby.setSheeps(LT.TF);
+			Lobby.setSheeps(LT.BL);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

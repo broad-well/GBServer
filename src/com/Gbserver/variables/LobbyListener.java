@@ -39,6 +39,39 @@ public class LobbyListener implements Listener{
 				piee.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Added you to "+ChatColor.RED+
 						"Red Team"));
 			}
+			return;
+		}
+		if(piee.getRightClicked().equals(Lobby.getLobby(LT.BL).getBlueJoin())){
+			//Do join blue.
+			Lobby l = Lobby.getLobby(LT.BL);
+			
+			if(l.blue.contains(piee.getPlayer())){
+				piee.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are already on "+ChatColor.BLUE + "Team Blue"));
+			}else{
+				if(l.red.contains(piee.getPlayer())){
+					l.removePlayer(piee.getPlayer(), false);
+				}
+				l.addPlayer(piee.getPlayer(), false);
+				piee.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Added you to "+ChatColor.BLUE+
+						"Blue Team"));
+				
+			}
+			return;
+		}
+		if(piee.getRightClicked().equals(Lobby.getLobby(LT.BL).getRedJoin())){
+			//Do join red.
+			Lobby l = Lobby.getLobby(LT.BL);
+			if(l.red.contains(piee.getPlayer())){
+				piee.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "You are already on "+ChatColor.RED + "Team Red"));
+			}else{
+				if(l.blue.contains(piee.getPlayer())){
+					l.removePlayer(piee.getPlayer(), false);
+				}
+				l.addPlayer(piee.getPlayer(), true);
+				piee.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Added you to "+ChatColor.RED+
+						"Red Team"));
+			}
+			return;
 		}
 		
 	}

@@ -193,6 +193,7 @@ public class Lobby implements Listener {
 
 	private void startGame() {
 		if(type == LT.TF){
+			countdown = 30;
 		task = Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 			@Override
@@ -211,7 +212,9 @@ public class Lobby implements Listener {
 
 		}, 0L, 20L);
 		} else{
+			
 			sd.setLine("Lag is normal.", 8);
+			countdown = 30;
 			task = Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 				@Override
@@ -221,20 +224,31 @@ public class Lobby implements Listener {
 					if (countdown != 1) {
 						countdown--;
 					} else {
+						
 						List<String> blueNames = new LinkedList<>();
 						List<String> redNames = new LinkedList<>();
 						for(Player p : red){
 							redNames.add(p.getName());
+							p.teleport(new Location(BL.world,23.5,102.67,58.1));
 						}
 						for(Player p : blue){
 							blueNames.add(p.getName());
+							p.teleport(new Location(BL.world,21.8,103,14.61));
 						}
-						BL.players.addAll(temp);
+						
+						BL.players.addAll(redNames);
+						BL.players.addAll(blueNames);
+						sd.reset();
+						BL.isRunning = true;
+						red.clear();
+						blue.clear();
 						Bukkit.getScheduler().cancelTask(task);
 					}
 				}
 
 			}, 0L, 20L);
+			BL.removePreviousMap();
+			BL.getMap(1);
 		}
 	}
 }
