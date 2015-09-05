@@ -42,6 +42,7 @@ public class TF implements CommandExecutor {
 
 	public static final byte RED_CLAY = (byte) 14;
 	public static final byte BLUE_CLAY = (byte) 11;
+	public static World World = Bukkit.getWorld("Turf_Wars1");
 	// public static int shiftRelation = 0;
 	// Red: Increase
 	// Blue: Decrease
@@ -191,7 +192,7 @@ public class TF implements CommandExecutor {
 		return is;
 	}
 	
-	private void setupScoreboard() {
+	private static void setupScoreboard() {
 		sd = new ScoreDisplay("Turf Wars");
 	}
 	
@@ -396,7 +397,21 @@ public class TF implements CommandExecutor {
 		}
 	}
 
-	private static void startTasks() {
+	public static void startGame() {
+		setupScoreboard();
+		isRunning = true;
+		isBuildtime = true;
+		for (Object o : redPlayers) {
+			Player pl = (Player) o;
+			pl.teleport(new Location(Bukkit.getWorld("Turf_Wars1"), RedSpawn[0], RedSpawn[1], RedSpawn[2]));
+		}
+		for (Object o : bluePlayers) {
+			Player pl = (Player) o;
+			pl.teleport(
+					new Location(Bukkit.getWorld("Turf_Wars1"), BlueSpawn[0], BlueSpawn[1], BlueSpawn[2]));
+		}
+		fillInventory(true);
+		s.start();
 
 	}
 }

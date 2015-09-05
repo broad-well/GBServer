@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,6 +21,7 @@ import com.Gbserver.variables.ChatWriterType;
 public class BL implements CommandExecutor {
 	public static Collection<String> players = new LinkedList<String>();
 	public static boolean isRunning = false;
+	public static World world = Bukkit.getWorld("Bomb_Lobbers1");
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("bl")) {

@@ -25,6 +25,9 @@ import com.Gbserver.commands.*;
 import com.Gbserver.listener.*;
 import com.Gbserver.variables.Chair;
 import com.Gbserver.variables.Chairs;
+import com.Gbserver.variables.LT;
+import com.Gbserver.variables.Lobby;
+import com.Gbserver.variables.LobbyListener;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
@@ -84,6 +87,7 @@ public class Main extends JavaPlugin {
 		getCommand("stop").setExecutor(new Vote());
 		getCommand("restart").setExecutor(new Vote());
 		getCommand("mute").setExecutor(new Mute());
+		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
 		getServer().getPluginManager().registerEvents(new SitListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
@@ -101,6 +105,13 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
 		Announce.registerEvents();
+		try {
+			Lobby l = new Lobby(LT.TF);
+			Lobby.setSheeps(LT.TF);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

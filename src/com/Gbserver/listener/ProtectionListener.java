@@ -5,10 +5,12 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
@@ -35,7 +37,7 @@ public class ProtectionListener implements Listener {
 	
 	final String[][] TRUSTED_PLAYERS = {
 			{"GoBroadwell"},
-			{"GoBroadwell","Yin_of_the_Yang","Latios_"},
+			{"_Broadwell","Yin_of_the_Yang","Latios_"},
 			{""},
 			{"GoBroadwell"}
 	};
@@ -69,6 +71,7 @@ public class ProtectionListener implements Listener {
 				bbe.setCancelled(true);
 			}
 		}
+		
 		
 	}
 
