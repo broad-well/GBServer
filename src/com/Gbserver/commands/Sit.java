@@ -35,7 +35,7 @@ public class Sit implements CommandExecutor {
 				Chairs.delChair(Chairs.getChair(p));
 				p.sendMessage("*You eject painfully*");
 			}
-
+			return true;
 		}
 		return false;
 	}
