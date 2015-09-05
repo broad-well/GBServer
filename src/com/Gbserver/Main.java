@@ -87,6 +87,8 @@ public class Main extends JavaPlugin {
 		getCommand("stop").setExecutor(new Vote());
 		getCommand("restart").setExecutor(new Vote());
 		getCommand("mute").setExecutor(new Mute());
+		getCommand("protect").setExecutor(new Invince());
+		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
 		getServer().getPluginManager().registerEvents(new SitListener(), this);

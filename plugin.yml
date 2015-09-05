@@ -1,5 +1,5 @@
 main: com.Gbserver.Main
-version: 1.15
+version: 2.42
 name: Broadwell Server Plugin
 depend: [LibsDisguises, ProtocolLib]
 
@@ -67,4 +67,6 @@ commands:
     aliases: [restart, tellraw, ban, banip]
   mute:
     description: Mute a player.
+  protect:
+    description: Make a LivingEntity invincible.
     
