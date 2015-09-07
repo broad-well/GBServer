@@ -38,6 +38,12 @@ public class ChatWriter {
 		case VOTE:
 			output += "Vote> " + ChatColor.GRAY;
 			break;
+		case JOIN:
+			output += ChatColor.DARK_AQUA + "Join> " + ChatColor.GRAY;
+			break;
+		case QUIT:
+			output += ChatColor.DARK_AQUA + "Quit> " + ChatColor.GRAY;
+			break;
 		}
 		output += message;
 		return output;

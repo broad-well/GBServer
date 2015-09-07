@@ -8,5 +8,7 @@ public enum ChatWriterType {
 	CHAT,
 	COMMAND,
 	SERVER,
-	VOTE
+	VOTE,
+	JOIN,
+	QUIT
 }

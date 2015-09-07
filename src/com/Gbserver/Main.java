@@ -19,8 +19,10 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
-
 import com.Gbserver.commands.*;
 import com.Gbserver.listener.*;
 import com.Gbserver.variables.Chair;
@@ -106,6 +108,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
+
 		Announce.registerEvents();
 		try {
 			Lobby l = new Lobby(LT.TF);
@@ -328,4 +331,6 @@ public class Main extends JavaPlugin {
 		 */
 
 	}
+	
+	
 }

@@ -117,10 +117,10 @@ public class ExplosionListener implements Listener {
 
 	@EventHandler
 	public void onBlockChange(final EntityChangeBlockEvent ecbe) {
-		if (ecbe.getBlock().getWorld().equals(Bukkit.getWorld("Bomb_Lobbers1")) || BL.isRunning) {
+		//if (ecbe.getBlock().getWorld().equals(Bukkit.getWorld("Bomb_Lobbers1")) || BL.isRunning) {
 			ecbe.getBlock().getWorld().playEffect(ecbe.getBlock().getLocation(), Effect.STEP_SOUND, 1);
 			ecbe.setCancelled(true);
-		}
+		//}
 
 	}
 

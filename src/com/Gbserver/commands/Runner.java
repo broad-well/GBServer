@@ -1,6 +1,7 @@
 package com.Gbserver.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Gbserver.Main;
 import com.Gbserver.variables.ChatWriter;
@@ -29,6 +31,7 @@ public class Runner implements CommandExecutor {
 	public static Sheep snake;
 	public static Player pl;
 	public static String playerName;
+	public static Sheep[] snakeTail = new Sheep[10];
 	@EventHandler
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("runner")) {
@@ -94,6 +97,7 @@ public class Runner implements CommandExecutor {
 				pl = (Player) sender;
 				snake = (Sheep) Bukkit.getWorld("world").spawnEntity(pl.getLocation(),EntityType.SHEEP);
     			snake.setPassenger(pl);
+    			setupSnakeSheeps(pl.getLocation());
 				sender.sendMessage("Snake added and started.");
 				break;
 			case "getpitch":
@@ -120,6 +124,30 @@ public class Runner implements CommandExecutor {
 		}
 		return false;
 	}
+	
+	
+	public static void setupSnakeSheeps(Location startingLocation){
+		for(int i = 0; i < snakeTail.length; i++){
+			snakeTail[i] = (Sheep) startingLocation.getWorld().spawnEntity(startingLocation.subtract(i+1,0,0), EntityType.SHEEP);
+		}
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
+			@Override
+			public void run() {
+				for(int i = 0; i < snakeTail.length; i++){
+					if(i == 0){
+						
+						snakeTail[i].setVelocity(snake.getLocation().toVector().subtract(snakeTail[i].getLocation().toVector()).multiply(0.5));
+					}else{
+						snakeTail[i].setVelocity(snakeTail[i-1].getLocation().toVector().subtract(snakeTail[i].getLocation().toVector().multiply(0.5)));
+					}
+					
+					
+				}
+			}
+			
+		}, 0L, 1L);
+	}
 	
 }
