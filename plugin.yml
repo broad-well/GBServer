@@ -69,4 +69,6 @@ commands:
     description: Mute a player.
   protect:
     description: Make a LivingEntity invincible.
-    
+  quit:
+    description: Custom quit messages.
+    usage: /quit [ragequit/afk/die]

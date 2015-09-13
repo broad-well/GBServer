@@ -149,7 +149,8 @@ public class Lobby implements Listener {
 			s2.setColor(DyeColor.RED);
 			s2.teleport(TFRed);
 			getLobby(type).setRedJoin(s2);
-
+			
+			
 			Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 				@Override

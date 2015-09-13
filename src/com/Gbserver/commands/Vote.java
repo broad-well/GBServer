@@ -77,7 +77,7 @@ public class Vote implements CommandExecutor {
 						}
 						
 						//Broadcast.
-						ChatWriter.write(ChatWriterType.VOTE, "You have invited into a vote.");
+						ChatWriter.write(ChatWriterType.VOTE, "You have been invited into a vote.");
 						for (int i = 0; i < options.size(); i++) {
 							ChatWriter.write(ChatWriterType.VOTE, (i+1) + ": " + options.get(i));
 						}
