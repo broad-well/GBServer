@@ -10,33 +10,30 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Gbserver.Main;
-import com.Gbserver.variables.AnnounceTask;
 import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.AnnounceTask.Tasks;
 import com.Gbserver.variables.ChatWriter;
 
 public class Announce {
 	public static int schedulerCount = 0;
-	public static String[] announcements = {
-			"Contact me about bugs, features, and ranks here: " + ChatColor.BOLD + "http://broaderator.com/mc/contact.html NEW!" + ChatColor.RESET + "" + ChatColor.YELLOW + "(Click on it)",
-			"Explore the GitHub page of this plugin: https://github.com/michaelpeng2002/GBServer. (Click on it)", 
-			"Contact me if you are interested in having a mail address like boon@broaderator.com!"};
-
+	public static List<String> announcement = new LinkedList<>();
+	
 	public static void registerEvents() {
+		announcement.add("Contact me about bugs, features, and ranks here: " + ChatColor.BOLD + "http://broaderator.com/mc/contact.html NEW!" + ChatColor.RESET + "" + ChatColor.YELLOW + " (Click on it)");
+		announcement.add("NEW: The server now has a Twitter! Stay up to date with scheduled downtime, upcoming features and more! "+ChatColor.UNDERLINE+"http://twitter.com/broadwellServer");
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 			@Override
 			public void run() {
-				if(schedulerCount == announcements.length){
+				if(schedulerCount == announcement.size()){
 					//Out of bounds..
 					//Reset.
 					schedulerCount = 0;
 				}
-					ChatWriter.write(ChatWriterType.ANNOUNCEMENT, announcements[schedulerCount]);
+					ChatWriter.write(ChatWriterType.ANNOUNCEMENT, announcement.get(schedulerCount));
 					schedulerCount++;
 			}
 
-		}, 0L, toTicks(5));
+		}, 0L, toTicks(10));
 
 	}
 

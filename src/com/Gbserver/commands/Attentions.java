@@ -1,17 +1,10 @@
 package com.Gbserver.commands;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.Gbserver.listener.Announce;
-import com.Gbserver.variables.AnnounceTask.Tasks;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 
@@ -25,6 +18,10 @@ public class Attentions implements CommandExecutor {
 			return true;
 		}
 		
+		if (arg2.equalsIgnoreCase("announce")) {
+			Announce.announcement.add(concat(arg3));
+			
+		}
 		return false;
 	}
 
