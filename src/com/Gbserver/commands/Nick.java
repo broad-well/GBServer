@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 
 public class Nick implements CommandExecutor {
 
@@ -22,6 +23,8 @@ public class Nick implements CommandExecutor {
 	public static Player sender;
 	public static String arg;
 	public static boolean isNaming;
+	
+	private HelpTable ht = new HelpTable("/nick <name/uname> <to name (not required with uname)>", "/nick is used to create a nickname (nametag) for an entity.", "", "nick");
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("nick")) {
@@ -30,14 +33,14 @@ public class Nick implements CommandExecutor {
 				return false;
 			}
 			if (args.length < 1) {
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			}
 			switch(args[0]){
 			case "name":
 				if (args.length < 2) {
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-					return false;
+					ht.show(sender);
+					return true;
 				}
 				Nick.isNaming = true;
 				Nick.arg = args[1];
@@ -53,8 +56,8 @@ public class Nick implements CommandExecutor {
 				list.add((Player) sender);
 				return true;
 			default:
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			}
 		}
 		return false;

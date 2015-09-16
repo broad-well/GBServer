@@ -9,8 +9,12 @@ import org.bukkit.entity.Player;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 
 public class Gamemode implements CommandExecutor{
+	
+	private HelpTable ht = new HelpTable("/gm <c/s/p> (c=creative, s=survival, p=spectator)", "/gm is used to change a player's gamemode.", "", "gm");
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("gm")) {
 			if (!(sender instanceof Player)) {
@@ -19,8 +23,8 @@ public class Gamemode implements CommandExecutor{
 			}
 			Player p = (Player) sender;
 			if(args.length < 1){
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			}
 			boolean isInGame = (Runner.isRunner(p)) || (BL.players.contains(p.getName())) || TF.getAllPlayers().contains(p);
 			switch(args[0]){

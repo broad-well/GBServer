@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 import com.Gbserver.variables.Vaults;
 
 public class Quit implements CommandExecutor{
@@ -19,13 +20,15 @@ public class Quit implements CommandExecutor{
 	public static List<Player> ragequitters = new LinkedList<>();
 	public static List<Player> afkers = new LinkedList<>();
 	public static List<Player> diers = new LinkedList<>();
+	
+	private HelpTable ht = new HelpTable("/quit <ragequit/afk/die>", "/quit is used for custom quit messages.", "", "quit");
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(label.equalsIgnoreCase("quit")){
 			if(Utilities.validateSender(sender)){
 				if(args.length == 0){
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-					return false;
+					ht.show(sender);
+					return true;
 				}
 				Player p = (Player) sender;
 				switch(args[0]){
@@ -42,8 +45,8 @@ public class Quit implements CommandExecutor{
 					p.kickPlayer("You have died.");
 					break;
 				default:
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-					return false;
+					ht.show(sender);
+					return true;
 				}
 				return true;
 			}else{

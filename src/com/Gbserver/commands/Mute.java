@@ -11,9 +11,11 @@ import org.bukkit.entity.Player;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 
 public class Mute implements CommandExecutor{
 	public static List<Player> list = new LinkedList<>();
+	private HelpTable ht = new HelpTable("/mute <player to mute>", "/mute is used for general muting funtionality.", "", "mute");
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(label.equalsIgnoreCase("mute")){
 			if(sender instanceof Player && !(((Player) sender).getName().equals("_Broadwell"))){
@@ -21,8 +23,8 @@ public class Mute implements CommandExecutor{
 				return true;
 			}
 			if(args.length == 0){
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			}
 			if(list.contains(Bukkit.getPlayer(args[0]))){
 				list.remove(Bukkit.getPlayer(args[0]));

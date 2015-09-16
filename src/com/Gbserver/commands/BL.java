@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 
 public class BL implements CommandExecutor {
 	public static Collection<String> players = new LinkedList<String>();
@@ -31,17 +32,20 @@ public class BL implements CommandExecutor {
 			{  -2 , 123,  73 }
 	};
 	
+	private HelpTable ht = new HelpTable("/bl <addPlayer/start/reset> <player (only required for addPlayer)>", "This command is used to control the Bomb Lobbers minigame.", "", "bl");
+	
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("bl")) {
 			if (args.length < 1) {
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			}
 			switch (args[0]) {
 			case "addPlayer":
 				if (args.length < 2) {
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-					return false;
+					ht.show(sender);
+					return true;
 				}
 				for (int i = 1; i < args.length; i++) {
 					Player p = Bukkit.getServer().getPlayer(args[i]);
