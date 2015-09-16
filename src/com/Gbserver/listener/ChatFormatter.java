@@ -48,7 +48,6 @@ public class ChatFormatter implements Listener{
 	public static String generateTag(Player player, boolean isChat) {
 		String format = "";
 		for (int i = 0; i < RANKDATA.length; i++) {
-
 			if (player.getName().equals(RANKDATA[i][0])) {
 
 				// if(RANKDATA[i][1].equals("OWNER")){
