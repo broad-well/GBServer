@@ -4,9 +4,12 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -32,7 +35,8 @@ public class Main extends JavaPlugin {
 	public static Sheep[] snake = new Sheep[50];
 	static int i;
 	int TFCount = 0;
-
+	public static byte paintColor = (byte) 15;
+	
 	public void onEnable() {
 
 		PluginDescriptionFile desc = getDescription();
@@ -69,6 +73,7 @@ public class Main extends JavaPlugin {
 		getCommand("mute").setExecutor(new Mute());
 		getCommand("protect").setExecutor(new Invince());
 		getCommand("quit").setExecutor(new Quit());
+		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
 		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
@@ -262,6 +267,7 @@ public class Main extends JavaPlugin {
 		}, 0L, 5L);
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				for(Player p : Bukkit.getOnlinePlayers()){
@@ -269,16 +275,17 @@ public class Main extends JavaPlugin {
 					if (p.getItemInHand().getType().equals(Material.WOOD_SWORD)
 							&& p.getItemInHand().getItemMeta().getDisplayName().equals("Thin Brush")
 							&& p.getWorld().equals(Bukkit.getWorld("Drawing"))
-							&& (b = p.getTargetBlock((Set<Material>) null, 100)).getType().equals(Material.WOOL)
 							&& p.isBlocking()) {
 						//Do draw.
-						b.setData(DyeColor.BLACK.getData());
-						Bukkit.broadcastMessage("Drawn");
+						if((b = p.getTargetBlock((Set<Material>) null, 100)).getType().equals(Material.WOOL)){
+							b.setData(paintColor);
+						}
+						
 						
 					}
 				}
 			}
-		}, 0L, 2L);
+		}, 0L, 1L);
 		/*pm.addPacketListener(
 				  new PacketAdapter(this, ListenerPriority.NORMAL, 
 				          PacketType.Play.Server.ENTITY_TELEPORT) {
