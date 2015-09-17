@@ -1,17 +1,21 @@
 package com.Gbserver;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
@@ -65,7 +69,6 @@ public class Main extends JavaPlugin {
 		getCommand("mute").setExecutor(new Mute());
 		getCommand("protect").setExecutor(new Invince());
 		getCommand("quit").setExecutor(new Quit());
-		getServer().getPluginManager().registerEvents(new DrawingListener(), this);
 		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
@@ -257,7 +260,25 @@ public class Main extends JavaPlugin {
 			}
 			
 		}, 0L, 5L);
-		
+		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+			
+			@Override
+			public void run() {
+				for(Player p : Bukkit.getOnlinePlayers()){
+					Block b;
+					if (p.getItemInHand().getType().equals(Material.WOOD_SWORD)
+							&& p.getItemInHand().getItemMeta().getDisplayName().equals("Thin Brush")
+							&& p.getWorld().equals(Bukkit.getWorld("Drawing"))
+							&& (b = p.getTargetBlock((Set<Material>) null, 100)).getType().equals(Material.WOOL)
+							&& p.isBlocking()) {
+						//Do draw.
+						b.setData(DyeColor.BLACK.getData());
+						Bukkit.broadcastMessage("Drawn");
+						
+					}
+				}
+			}
+		}, 0L, 2L);
 		/*pm.addPacketListener(
 				  new PacketAdapter(this, ListenerPriority.NORMAL, 
 				          PacketType.Play.Server.ENTITY_TELEPORT) {
