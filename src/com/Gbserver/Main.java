@@ -6,38 +6,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
+
 import com.Gbserver.commands.*;
 import com.Gbserver.listener.*;
-import com.Gbserver.variables.Chair;
-import com.Gbserver.variables.Chairs;
-import com.Gbserver.variables.LT;
-import com.Gbserver.variables.Lobby;
-import com.Gbserver.variables.LobbyListener;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.ListenerPriority;
-import com.comphenix.protocol.events.ListeningWhitelist;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.events.PacketListener;
+import com.Gbserver.variables.*;
 
 public class Main extends JavaPlugin {
 	Vector vector;
@@ -48,7 +28,6 @@ public class Main extends JavaPlugin {
 	public static Sheep[] snake = new Sheep[50];
 	static int i;
 	int TFCount = 0;
-	ProtocolManager pm;
 
 	public void onEnable() {
 
@@ -86,6 +65,7 @@ public class Main extends JavaPlugin {
 		getCommand("mute").setExecutor(new Mute());
 		getCommand("protect").setExecutor(new Invince());
 		getCommand("quit").setExecutor(new Quit());
+		getServer().getPluginManager().registerEvents(new DrawingListener(), this);
 		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
@@ -278,7 +258,6 @@ public class Main extends JavaPlugin {
 			
 		}, 0L, 5L);
 		
-		pm = ProtocolLibrary.getProtocolManager();
 		/*pm.addPacketListener(
 				  new PacketAdapter(this, ListenerPriority.NORMAL, 
 				          PacketType.Play.Server.ENTITY_TELEPORT) {
