@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 import com.Gbserver.variables.Vaults;
 
 public class Vote implements CommandExecutor {
@@ -28,6 +29,8 @@ public class Vote implements CommandExecutor {
 	public static int[] votes = new int[9];
 	public static List<Player> voted = new LinkedList<>();
 	public static List<Player> players = new LinkedList<>();
+	
+	private HelpTable ht = new HelpTable("/vote <create/results/close/(your vote selection)> <option> <option> (options required with \"create\")", "/vote is used for voting functionalities.", "", "vote");
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (label.equalsIgnoreCase("vote")) {
@@ -37,7 +40,8 @@ public class Vote implements CommandExecutor {
 			// /vote results
 			if (Utilities.validateSender(sender)) {
 				if (args.length == 0) {
-					//Help coming.
+					ht.show(sender);
+					return true;
 				} else {
 					if (args[0].equalsIgnoreCase("results")){
 						for(int i = 0; i < options.size(); i++){
@@ -66,6 +70,7 @@ public class Vote implements CommandExecutor {
 								}
 							}else{
 								players.add(Bukkit.getPlayer(args[i]));
+								players = noNull(players);
 							}
 							
 							//sender.sendMessage(ChatWriter.getMessage(ChatWriterType.VOTE, args[i]));
@@ -164,5 +169,13 @@ public class Vote implements CommandExecutor {
 	public static void voteFor(int number) {
 		votes[number - 1]++;
 	}
-
+	
+	public static List<Player> noNull(List<Player> source){
+		for(Player s : source){
+			if(s == null){
+				source.remove(s);
+			}
+		}
+		return source;
+	}
 }

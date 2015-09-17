@@ -13,10 +13,13 @@ import org.bukkit.event.EventHandler;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 
 public class Tell implements CommandExecutor {
 	String[] global;
 	String globalOutput;
+	
+	private HelpTable ht = new HelpTable("/tell <target player> <message>", "/tell is a generic command for whispers.", "msg, t, m", "tell");
 	@EventHandler
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("tell") || label.equalsIgnoreCase("t") || label.equalsIgnoreCase("msg")
@@ -27,8 +30,8 @@ public class Tell implements CommandExecutor {
 			}
 			Player player = (Player) sender;
 			if (args.length < 2) {
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			} else {
 				global = args;
 				globalOutput = "";

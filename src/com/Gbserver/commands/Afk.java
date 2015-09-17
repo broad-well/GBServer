@@ -12,8 +12,14 @@ import org.bukkit.entity.Player;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.HelpTable;
 
 public class Afk implements CommandExecutor{
+	
+	// isAFK Help Topic.
+	
+	private HelpTable ht = new HelpTable("/isafk <Player to query>", "isAFK is used to query if a player has flagged AFK.","","isafk");
+
 	public static List<Player> afkList = new ArrayList<Player>();
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(label.equalsIgnoreCase("afk")){
@@ -27,8 +33,8 @@ public class Afk implements CommandExecutor{
 		}
 		if(label.equalsIgnoreCase("isafk")){
 			if(args.length != 1){
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-				return false;
+				ht.show(sender);
+				return true;
 			}
 			Player target = Bukkit.getServer().getPlayer(args[0]);
 			if(afkList.contains(target)){

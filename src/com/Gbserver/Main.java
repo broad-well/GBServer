@@ -83,11 +83,6 @@ public class Main extends JavaPlugin {
 		getCommand("f").setExecutor(new F());
 		getCommand("friend").setExecutor(new F());
 		getCommand("vote").setExecutor(new Vote());
-		getCommand("tellraw").setExecutor(new Vote());
-		getCommand("ban").setExecutor(new Vote());
-		getCommand("banip").setExecutor(new Vote());
-		getCommand("stop").setExecutor(new Vote());
-		getCommand("restart").setExecutor(new Vote());
 		getCommand("mute").setExecutor(new Mute());
 		getCommand("protect").setExecutor(new Invince());
 		getCommand("quit").setExecutor(new Quit());
