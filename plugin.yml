@@ -70,5 +70,14 @@ commands:
     description: Custom quit messages.
     usage: /quit [ragequit/afk/die]
   nofall:
-    description: 
+    description: Toggles fall damage.
+    usage: 
+  tpa:
+    description: Teleportation Requests.
+    usage:
+  tpaccept:
+    description: Accepts a teleportation request.
+    usage:
+  tpdeny:
+    description: Denys a teleportation request.
     usage: 

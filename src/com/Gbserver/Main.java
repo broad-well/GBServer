@@ -74,6 +74,9 @@ public class Main extends JavaPlugin {
 		getCommand("protect").setExecutor(new Invince());
 		getCommand("quit").setExecutor(new Quit());
 		getCommand("nofall").setExecutor(new NoFall());
+		getCommand("tpa").setExecutor(new Tpa());
+		getCommand("tpaccept").setExecutor(new Tpa());
+		getCommand("tpdeny").setExecutor(new Tpa());
 		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
 		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);

@@ -11,5 +11,6 @@ public enum ChatWriterType {
 	VOTE,
 	JOIN,
 	QUIT,
-	HELP
+	HELP,
+	TPA
 }
