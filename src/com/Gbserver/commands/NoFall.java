@@ -13,7 +13,7 @@ public class NoFall implements CommandExecutor{
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if(arg2.equalsIgnoreCase("nofall")){
 			noFall = !noFall;
-			arg0.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You have toggled No falling damage."));
+			arg0.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You have toggled No falling damage: Now "+noFall));
 			return true;
 		}
 		return false;

@@ -62,9 +62,6 @@ commands:
   vote:
     description: Vote commands.
     usage: It's complicated.
-  stop:
-    description: Stop.
-    aliases: [restart, tellraw, ban, banip]
   mute:
     description: Mute a player.
   protect:
