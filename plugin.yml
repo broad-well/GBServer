@@ -72,3 +72,6 @@ commands:
   quit:
     description: Custom quit messages.
     usage: /quit [ragequit/afk/die]
+  nofall:
+    description: 
+    usage: 

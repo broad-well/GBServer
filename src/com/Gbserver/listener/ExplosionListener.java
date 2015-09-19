@@ -26,7 +26,7 @@ import com.Gbserver.commands.BL;
 
 public class ExplosionListener implements Listener {
 	public final int RADIUS_T = 6;
-	public final int RADIUS_C = 4;
+	public final int RADIUS_C = 5;
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
@@ -72,14 +72,16 @@ public class ExplosionListener implements Listener {
 
 					Vector v = en.getLocation().toVector().subtract(origin.toVector()).multiply(0.1);
 					v.setY(getRandom(1, 5));
-					if (!(BL.isRunning) || !(en.getWorld().getName().equals("Bomb_Lobbers1"))) {
+					if (!(BL.isRunning) && en.getWorld().getName().equals("world")) {
 						en.setVelocity(v);
+					}else{
+						en.setVelocity(v.multiply(0.05));
 					}
 				}
 
 			}
 		}
-		if (el.getEntityType().equals(EntityType.CREEPER)) {
+		if (el.getEntityType().equals(EntityType.CREEPER) || el.getEntityType().equals(EntityType.ENDER_DRAGON)) {
 			if (el.getLocation().getBlock().getType() != Material.WATER
 					&& el.getLocation().getBlock().getType() != Material.STATIONARY_WATER) {
 				for (int x = 0 - (RADIUS_C / 2); x < RADIUS_C / 2; x++) {
@@ -110,7 +112,7 @@ public class ExplosionListener implements Listener {
 
 			}
 		}
-		el.getLocation().getWorld().playEffect(el.getLocation(), Effect.EXPLOSION_LARGE, 1);
+		
 		el.setCancelled(true);
 
 	}
@@ -119,7 +121,10 @@ public class ExplosionListener implements Listener {
 	public void onBlockChange(final EntityChangeBlockEvent ecbe) {
 		//if (ecbe.getBlock().getWorld().equals(Bukkit.getWorld("Bomb_Lobbers1")) || BL.isRunning) {
 			ecbe.getBlock().getWorld().playEffect(ecbe.getBlock().getLocation(), Effect.STEP_SOUND, 1);
-			ecbe.setCancelled(true);
+			if (!(ecbe.getEntity().getWorld().getName().equals("world"))){
+				ecbe.setCancelled(true);
+			}
+			
 		//}
 
 	}
