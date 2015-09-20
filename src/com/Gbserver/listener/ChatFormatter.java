@@ -1,4 +1,5 @@
 package com.Gbserver.listener;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,7 +41,12 @@ public class ChatFormatter implements Listener{
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent pce) {
-		
+		if(pce.getPlayer().getName().equalsIgnoreCase("jrmann100")){
+			pce.setCancelled(true);
+			String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.WHITE;
+			Bukkit.broadcastMessage(output + " " + pce.getMessage());
+			return;
+		}
 		pce.setFormat(generateTag(pce.getPlayer(),true) + ChatColor.GRAY + "%s " + ChatColor.RESET + "%s");
 		//pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
 	}
