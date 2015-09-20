@@ -26,7 +26,7 @@ import com.Gbserver.commands.BL;
 
 public class ExplosionListener implements Listener {
 	public final int RADIUS_T = 6;
-	public final int RADIUS_C = 3;
+	public final int RADIUS_C = 5;
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
