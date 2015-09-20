@@ -81,3 +81,6 @@ commands:
   tpdeny:
     description: Denys a teleportation request.
     usage: 
+  tphere:
+    description: Teleportation requests to yourself.
+    usage: 

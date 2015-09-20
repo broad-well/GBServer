@@ -75,6 +75,7 @@ public class Main extends JavaPlugin {
 		getCommand("quit").setExecutor(new Quit());
 		getCommand("nofall").setExecutor(new NoFall());
 		getCommand("tpa").setExecutor(new Tpa());
+		getCommand("tphere").setExecutor(new Tpa());
 		getCommand("tpaccept").setExecutor(new Tpa());
 		getCommand("tpdeny").setExecutor(new Tpa());
 		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
