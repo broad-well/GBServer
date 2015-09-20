@@ -1,4 +1,5 @@
 package com.Gbserver.listener;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,18 +30,23 @@ public class ChatFormatter implements Listener{
 	
 	
 	
-	public final static String fOWNER = ChatColor.RED + "" + ChatColor.BOLD + "OWNER ";
-	public final static String fGHOST = ChatColor.GRAY + "" + ChatColor.BOLD + "GHOST ";
-	public final static String fBANANA = ChatColor.YELLOW + "" + ChatColor.BOLD + "BANANA ";
-	public final static String fCAT = ChatColor.BLACK + "" + ChatColor.BOLD + "CAT ";
-	public final static String fPOTATO = ChatColor.GOLD + "" + ChatColor.BOLD + "POTATO ";
-	public final static String fGATOR = ChatColor.GREEN + "" + ChatColor.BOLD + "GATOR ";
-	public final static String fBIRD = ChatColor.BLUE + "" + ChatColor.BOLD + "BIRD ";
-	public final static String fDUCK = ChatColor.WHITE + "" + ChatColor.BOLD + "DUCK ";
+	public final static String fOWNER = ChatColor.RED + "" + ChatColor.BOLD + "Owner ";
+	public final static String fGHOST = ChatColor.GRAY + "" + ChatColor.BOLD + "Ghost ";
+	public final static String fBANANA = ChatColor.YELLOW + "" + ChatColor.BOLD + "Banana ";
+	public final static String fCAT = ChatColor.BLACK + "" + ChatColor.BOLD + "Cat ";
+	public final static String fPOTATO = ChatColor.GOLD + "" + ChatColor.BOLD + "Potato ";
+	public final static String fGATOR = ChatColor.GREEN + "" + ChatColor.BOLD + "Gator ";
+	public final static String fBIRD = ChatColor.BLUE + "" + ChatColor.BOLD + "Bird ";
+	public final static String fDUCK = ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ";
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent pce) {
-		
+		if(pce.getPlayer().getName().equalsIgnoreCase("jrmann100")){
+			pce.setCancelled(true);
+			String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.WHITE;
+			Bukkit.broadcastMessage(output + " " + pce.getMessage());
+			return;
+		}
 		pce.setFormat(generateTag(pce.getPlayer(),true) + ChatColor.GRAY + "%s " + ChatColor.RESET + "%s");
 		//pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
 	}
