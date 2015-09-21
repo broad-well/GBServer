@@ -1,43 +1,31 @@
 package com.Gbserver;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.entity.Bat;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
+
 import com.Gbserver.commands.*;
+import com.Gbserver.commands.Lobby.LUtils;
 import com.Gbserver.listener.*;
-import com.Gbserver.variables.Chair;
-import com.Gbserver.variables.Chairs;
-import com.Gbserver.variables.LT;
-import com.Gbserver.variables.Lobby;
-import com.Gbserver.variables.LobbyListener;
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.ListenerPriority;
-import com.comphenix.protocol.events.ListeningWhitelist;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.events.PacketListener;
+import com.Gbserver.variables.*;
 
 public class Main extends JavaPlugin {
 	Vector vector;
@@ -48,8 +36,8 @@ public class Main extends JavaPlugin {
 	public static Sheep[] snake = new Sheep[50];
 	static int i;
 	int TFCount = 0;
-	ProtocolManager pm;
-
+	public static byte paintColor = (byte) 15;
+	
 	public void onEnable() {
 
 		PluginDescriptionFile desc = getDescription();
@@ -86,8 +74,15 @@ public class Main extends JavaPlugin {
 		getCommand("mute").setExecutor(new Mute());
 		getCommand("protect").setExecutor(new Invince());
 		getCommand("quit").setExecutor(new Quit());
-		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
+		getCommand("nofall").setExecutor(new NoFall());
+		getCommand("tpa").setExecutor(new Tpa());
+		getCommand("tphere").setExecutor(new Tpa());
+		getCommand("tpaccept").setExecutor(new Tpa());
+		getCommand("tpdeny").setExecutor(new Tpa());
+		getCommand("lobby").setExecutor(new Lobby());
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
+		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
+		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
 		getServer().getPluginManager().registerEvents(new SitListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
@@ -104,17 +99,9 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
-
+		LUtils.initTF();
+		LUtils.initBL();
 		Announce.registerEvents();
-		try {
-			Lobby l = new Lobby(LT.TF);
-			Lobby l2 = new Lobby(LT.BL);
-			Lobby.setSheeps(LT.TF);
-			Lobby.setSheeps(LT.BL);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -277,8 +264,27 @@ public class Main extends JavaPlugin {
 			}
 			
 		}, 0L, 5L);
-		
-		pm = ProtocolLibrary.getProtocolManager();
+		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+			
+			@SuppressWarnings("deprecation")
+			@Override
+			public void run() {
+				for(Player p : Bukkit.getOnlinePlayers()){
+					Block b;
+					if (p.getItemInHand().getType().equals(Material.WOOD_SWORD)
+							&& p.getItemInHand().getItemMeta().getDisplayName().equals("Thin Brush")
+							&& p.getWorld().equals(Bukkit.getWorld("Drawing"))
+							&& p.isBlocking()) {
+						//Do draw.
+						if((b = p.getTargetBlock((Set<Material>) null, 100)).getType().equals(Material.WOOL)){
+							b.setData(paintColor);
+						}
+						
+						
+					}
+				}
+			}
+		}, 0L, 1L);
 		/*pm.addPacketListener(
 				  new PacketAdapter(this, ListenerPriority.NORMAL, 
 				          PacketType.Play.Server.ENTITY_TELEPORT) {

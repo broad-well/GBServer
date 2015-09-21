@@ -47,6 +47,8 @@ public class ChatWriter {
 		case HELP:
 			output += ChatColor.LIGHT_PURPLE + "Help> " + ChatColor.WHITE;
 			break;
+		case TPA:
+			output += ChatColor.GOLD + "TPA> " + ChatColor.AQUA;
 		}
 		output += message;
 		return output;

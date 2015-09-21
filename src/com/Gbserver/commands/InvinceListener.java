@@ -4,6 +4,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import com.Gbserver.variables.ChatWriter;
@@ -29,7 +30,7 @@ public class InvinceListener implements Listener{
 	
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent ede){
-		if(Invince.saved.contains(ede.getEntity())){
+		if(Invince.saved.contains(ede.getEntity()) || (ede.getCause() == DamageCause.FALL && NoFall.noFall)){
 			ede.setCancelled(true);
 		}
 	}
