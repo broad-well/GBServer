@@ -23,6 +23,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
 import com.Gbserver.commands.*;
+import com.Gbserver.commands.Lobby.LUtils;
 import com.Gbserver.listener.*;
 import com.Gbserver.variables.*;
 
@@ -78,9 +79,10 @@ public class Main extends JavaPlugin {
 		getCommand("tphere").setExecutor(new Tpa());
 		getCommand("tpaccept").setExecutor(new Tpa());
 		getCommand("tpdeny").setExecutor(new Tpa());
+		getCommand("lobby").setExecutor(new Lobby());
+		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
 		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
-		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new MuteListener(), this);
 		getServer().getPluginManager().registerEvents(new SitListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinListener(), this);
@@ -97,17 +99,9 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
-
+		LUtils.initTF();
+		LUtils.initBL();
 		Announce.registerEvents();
-		try {
-			Lobby l = new Lobby(LT.TF);
-			Lobby l2 = new Lobby(LT.BL);
-			Lobby.setSheeps(LT.TF);
-			Lobby.setSheeps(LT.BL);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

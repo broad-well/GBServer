@@ -83,4 +83,7 @@ commands:
     usage: 
   tphere:
     description: Teleportation requests to yourself.
+    usage:
+  lobby:
+    description: Lobby Join/Leave.
     usage: 

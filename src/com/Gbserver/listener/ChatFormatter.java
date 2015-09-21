@@ -15,6 +15,7 @@ public class ChatFormatter implements Listener{
 	public final static int GATOR = 6;
 	public final static int BIRD = 7;
 	public final static int DUCK = 8;
+	public final static int DOG = 9;
 	
 	public final static Object[][] RANKDATA = {
 			{ "_Broadwell" , OWNER },
@@ -25,7 +26,8 @@ public class ChatFormatter implements Listener{
 			{ "Zenithian4" , POTATO},
 			{ "SallyGreen" , GATOR},
 			{ "Elenwen" , BIRD},
-			{ "GlitterZ" , DUCK}
+			{ "GlitterZ" , DUCK},
+			{ "AcidWolf" , DOG}
 	};
 	
 	
@@ -38,6 +40,7 @@ public class ChatFormatter implements Listener{
 	public final static String fGATOR = ChatColor.GREEN + "" + ChatColor.BOLD + "Gator ";
 	public final static String fBIRD = ChatColor.BLUE + "" + ChatColor.BOLD + "Bird ";
 	public final static String fDUCK = ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ";
+	public final static String fDOG = ChatColor.AQUA + "" + ChatColor.BOLD + "Dog ";
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent pce) {
@@ -86,6 +89,10 @@ public class ChatFormatter implements Listener{
 					break;
 				case DUCK:
 					format = format + fDUCK;
+					break;
+				case DOG:
+					format = format + fDOG;
+					break;
 				}
 
 			}
