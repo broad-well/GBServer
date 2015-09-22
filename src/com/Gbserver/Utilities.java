@@ -1,5 +1,7 @@
 package com.Gbserver;
 
+import java.util.Random;
+
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -52,5 +54,12 @@ public class Utilities {
 			}
 		}
 		return output;
+	}
+	
+	public static int getRandom(int min, int max) {
+		Random rand = new Random();
+
+		return rand.nextInt(max) + min;
+		// 50 is the maximum and the 1 is our minimum
 	}
 }

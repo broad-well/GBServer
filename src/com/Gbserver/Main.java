@@ -1,15 +1,13 @@
 package com.Gbserver;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -18,14 +16,57 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
-import com.Gbserver.commands.*;
-import com.Gbserver.commands.Lobby.LUtils;
-import com.Gbserver.listener.*;
-import com.Gbserver.variables.*;
+import com.Gbserver.commands.Afk;
+import com.Gbserver.commands.Attentions;
+import com.Gbserver.commands.BL;
+import com.Gbserver.commands.Back;
+import com.Gbserver.commands.F;
+import com.Gbserver.commands.Gamemode;
+import com.Gbserver.commands.Heal;
+import com.Gbserver.commands.Invince;
+import com.Gbserver.commands.InvinceListener;
+import com.Gbserver.commands.Lobby;
+import com.Gbserver.commands.Lobby2.LVariables;
+import com.Gbserver.commands.Menu;
+import com.Gbserver.commands.Mute;
+import com.Gbserver.commands.MuteListener;
+import com.Gbserver.commands.Nick;
+import com.Gbserver.commands.NoFall;
+import com.Gbserver.commands.Protection;
+import com.Gbserver.commands.Quit;
+import com.Gbserver.commands.Ride;
+import com.Gbserver.commands.Runner;
+import com.Gbserver.commands.SaveMoment;
+import com.Gbserver.commands.Sit;
+import com.Gbserver.commands.Spawn;
+import com.Gbserver.commands.TF;
+import com.Gbserver.commands.Tell;
+import com.Gbserver.commands.Tpa;
+import com.Gbserver.commands.Vote;
+import com.Gbserver.listener.AfkListener;
+import com.Gbserver.listener.Announce;
+import com.Gbserver.listener.BLListener;
+import com.Gbserver.listener.BackListeners;
+import com.Gbserver.listener.ChatFormatter;
+import com.Gbserver.listener.DrawColorListener;
+import com.Gbserver.listener.ExplosionListener;
+import com.Gbserver.listener.HealListener;
+import com.Gbserver.listener.JoinListener;
+import com.Gbserver.listener.LobbyListener;
+import com.Gbserver.listener.LoginTagListener;
+import com.Gbserver.listener.MenuListener;
+import com.Gbserver.listener.NickListener;
+import com.Gbserver.listener.ProtectionListener;
+import com.Gbserver.listener.RideListener;
+import com.Gbserver.listener.SitListener;
+import com.Gbserver.listener.TFListeners;
+import com.Gbserver.variables.Chair;
+import com.Gbserver.variables.Chairs;
+import com.Gbserver.variables.GameType;
+import com.Gbserver.variables.LT;
 
 public class Main extends JavaPlugin {
 	Vector vector;
@@ -99,8 +140,39 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
-		LUtils.initTF();
-		LUtils.initBL();
+		GameType.TF = new GameType(new Runnable() {
+						public void run() {
+							TF.bluePlayers.addAll(GameType.TF.blue);
+							TF.redPlayers.addAll(GameType.TF.red);
+							TF.startGame();
+						}
+					}, LT.TF);
+		GameType.BL = new GameType(new Runnable() {
+			public void run() {
+				List<String> pls = new LinkedList<>();
+				for(Player pa : GameType.BL.red){
+					pls.add(pa.getName());
+					pa.teleport(new Location(BL.world,23.5,102.67,58.1));
+				}
+				for(Player pal : GameType.BL.blue){
+					pls.add(pal.getName());
+					pal.teleport(new Location(BL.world,21.8,103,14.61));
+				}
+				BL.players.addAll(pls);
+			}
+		}, LT.BL);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+
+			@Override
+			public void run() {
+				Vector nullv = new Vector(0,0,0);
+				GameType.TF.getBlue().setVelocity(nullv);
+				GameType.TF.getRed().setVelocity(nullv);
+				GameType.BL.getBlue().setVelocity(nullv);
+				GameType.BL.getRed().setVelocity(nullv);
+			}
+			
+		}, 0L, 1L);
 		Announce.registerEvents();
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
@@ -334,5 +406,14 @@ public class Main extends JavaPlugin {
 
 	}
 	
-	
+	public void onDisable() {
+		try {
+			GameType.TF.close();
+			GameType.BL.close();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

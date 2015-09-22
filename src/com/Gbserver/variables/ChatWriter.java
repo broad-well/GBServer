@@ -2,6 +2,7 @@ package com.Gbserver.variables;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class ChatWriter {
 
@@ -52,5 +53,9 @@ public class ChatWriter {
 		}
 		output += message;
 		return output;
+	}
+	
+	public static void writeTo(CommandSender sender, ChatWriterType cwt, String message){
+		sender.sendMessage(getMessage(cwt,message));
 	}
 }
