@@ -3,6 +3,7 @@ package com.Gbserver;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -61,5 +62,27 @@ public class Utilities {
 
 		return rand.nextInt(max) + min;
 		// 50 is the maximum and the 1 is our minimum
+	}
+	
+	public static void copy(Location originBottom, Location originTop, Location targetBottom){
+		//Say originBottom is 10, 50, 40;
+		//    originTop is -20, 70, 70.
+		int xrelation = originBottom.getBlockX()-targetBottom.getBlockX();
+		int zrelation = originBottom.getBlockZ()-targetBottom.getBlockZ();
+		for(int x = originBottom.getBlockX(); x - originTop.getBlockX() != 0; 
+				x += (originTop.getBlockX() - originBottom.getBlockX())/Math.abs(originTop.getBlockX() - originBottom.getBlockX())){
+			for(int y = originBottom.getBlockY(); y < originTop.getBlockY(); y++){
+				for(int z = originBottom.getBlockZ(); z - originTop.getBlockZ() != 0;
+						z += (originTop.getBlockZ() - originBottom.getBlockZ())/Math.abs(originTop.getBlockZ() - originBottom.getBlockZ())){
+					
+					Block origin = originBottom.getWorld().getBlockAt(x,y,z);
+					int x1 = x-xrelation;
+					int z1 = z-zrelation;
+					Block target = originBottom.getWorld().getBlockAt(x1, y, z1);
+					target.setType(origin.getType());
+					target.setData(origin.getData());
+				}
+			}
+		}
 	}
 }

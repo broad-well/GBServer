@@ -34,6 +34,12 @@ public class GameType {
 				target = t;
 				targetColor = tColor;
 				this.type = type;
+				for(SwapPacket sp : packets){
+					if(sp.origin == this.origin || sp.target == this.target){
+						//Repeating packets.
+						return;
+					}
+				}
 				packets.add(this);
 			}
 			
@@ -44,7 +50,7 @@ public class GameType {
 			
 			public void targetNotify() {
 				target.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, ChatColor.YELLOW + origin.getName() + " " + ChatColor.DARK_GRAY + "would like to swap teams with you."));
-				target.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, ChatColor.BOLD + "Type \"/lobby swap accept\" to accept, type \"/lobby swap\" deny to deny."));
+				target.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, ChatColor.BOLD + "Type \"/lobby swap accept\" to accept, type \"/lobby swap deny\" to deny."));
 			}
 		}
 		
@@ -62,6 +68,14 @@ public class GameType {
 		private static final Location blRedJoin = new Location(blWorld, -988.5, 130.5, 976.5);
 		public static GameType BL;
 		public static GameType TF;
+		public static GameType DR;
+		//-----------------------------DR
+		private static final World drWorld = Bukkit.getWorld("Dragons");
+		private static final Location drMapBottom = new Location(drWorld, 1013, 144, -1008);
+		private static final Location drMapTop = new Location(drWorld, 945, 163, -967);
+		private static final Location drSpawn = new Location(drWorld, -985.5, 164, 987.5);
+		private static final Location drBlueJoin = new Location(drWorld, -987.5, 164.5, 978.5);
+		private static final Location drRedJoin = new Location(drWorld, -983.5, 164.5, 978.5);
 		//STATIC ENDS
 		
 		private Runnable onStart;
@@ -106,6 +120,19 @@ public class GameType {
 				sd.setLine("MAP: ", 6);
 				sd.display();
 				break;
+			case DR:
+				blues = (Sheep) drWorld.spawnEntity(drBlueJoin, EntityType.SHEEP);
+				blues.setColor(DyeColor.BLUE);
+				reds = (Sheep) drWorld.spawnEntity(drRedJoin, EntityType.SHEEP);
+				reds.setColor(DyeColor.RED);
+				sd = new ScoreDisplay("Dragons");
+				sd.setLine(ChatColor.BOLD + "PLAYERS", 1);
+				sd.setLine("Joined: 0", 2);
+				sd.setLine(ChatColor.BLUE + "Blue: 0", 3);
+				sd.setLine(ChatColor.RED + "Red: 0", 4);
+				sd.setLine(ChatColor.YELLOW + "Teaming does not count", 6);
+				sd.display();
+				break;
 			}
 			
 		}
@@ -147,10 +174,11 @@ public class GameType {
 						uScore();
 						return;
 					}
-					int luckyPlayerIndex = Utilities.getRandom(0, red.size()-1);
-					Player luckyPlayer = red.get(luckyPlayerIndex);
+					int luckyPlayerIndex = Utilities.getRandom(0, blue.size());
+					Player luckyPlayer = blue.get(luckyPlayerIndex);
 					SwapPacket sp = new SwapPacket(subject, Color.BLUE, luckyPlayer, this.type);
 					sp.targetNotify();
+					ChatWriter.writeTo(subject, ChatWriterType.GAME, "Sent a swap request to "+ChatColor.YELLOW+luckyPlayer.getName());
 					uScore();
 					return;
 				}
@@ -183,8 +211,8 @@ public class GameType {
 						uScore();
 						return;
 					}
-					int luckyPlayerIndex = Utilities.getRandom(0, blue.size()-1);
-					Player luckyPlayer = blue.get(luckyPlayerIndex);
+					int luckyPlayerIndex = Utilities.getRandom(0, red.size());
+					Player luckyPlayer = red.get(luckyPlayerIndex);
 					SwapPacket sp = new SwapPacket(subject, Color.RED, luckyPlayer, this.type);
 					sp.targetNotify();
 					uScore();
@@ -209,10 +237,12 @@ public class GameType {
 		public void rawJoin(Color c, Player p){
 			if(c == Color.BLUE){
 				red.remove(p);
+				blue.remove(p);
 				blue.add(p);
 				ChatWriter.writeTo(p, ChatWriterType.GAME, "Added you to "+ChatColor.BLUE+"BLUE");
 			}else{
 				blue.remove(p);
+				red.remove(p);
 				red.add(p);
 				ChatWriter.writeTo(p, ChatWriterType.GAME, "Added you to "+ChatColor.RED+"RED");
 			}
@@ -249,6 +279,9 @@ public class GameType {
 			if(type == LT.BL){
 				com.Gbserver.commands.BL.removePreviousMap();
 				com.Gbserver.commands.BL.getMap(1);
+			}
+			if(type == LT.DR){
+				getDragonsMap();
 			}
 		}
 		
@@ -290,5 +323,9 @@ public class GameType {
 			}else{
 				return Color.BLUE;
 			}
+		}
+		
+		public static void getDragonsMap() {
+			Utilities.copy(drMapBottom, drMapTop, new Location(drWorld, 0, 150, 0));
 		}
 }

@@ -38,12 +38,23 @@ public class LobbyListener implements Listener {
 			// Join Red Team.
 			GameType.BL.join(Color.RED, piee.getPlayer());
 		}
+		
+		if (piee.getRightClicked().equals(GameType.DR.getBlue())) {
+			// Join Blue Team.
+			GameType.DR.join(Color.BLUE, piee.getPlayer());
+		}
+		
+		if (piee.getRightClicked().equals(GameType.DR.getRed())) {
+			// Join Red Team.
+			GameType.DR.join(Color.RED, piee.getPlayer());
+		}
 	}
 	
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent ede) {
 		if (ede.getEntity().equals(GameType.TF.getBlue()) || ede.getEntity().equals(GameType.TF.getRed()) ||
-				ede.getEntity().equals(GameType.BL.getBlue()) || ede.getEntity().equals(GameType.BL.getRed())) {
+				ede.getEntity().equals(GameType.BL.getBlue()) || ede.getEntity().equals(GameType.BL.getRed()) ||
+				ede.getEntity().equals(GameType.DR.getBlue()) || ede.getEntity().equals(GameType.DR.getRed())) {
 			ede.setCancelled(true);
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,6 +15,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -159,8 +162,38 @@ public class Main extends JavaPlugin {
 					pal.teleport(new Location(BL.world,21.8,103,14.61));
 				}
 				BL.players.addAll(pls);
+				BL.isRunning = true;
 			}
 		}, LT.BL);
+		GameType.DR = new GameType(new Runnable() {
+			public void run() {
+				//Give everyone armor
+				//Also the leap axe, bows/arrows, and food.
+				for(Player p : GameType.DR.allPlayers()){
+					ItemStack[] armor = {
+							new ItemStack(Material.GOLD_BOOTS),
+							new ItemStack(Material.GOLD_CHESTPLATE),
+							new ItemStack(Material.GOLD_LEGGINGS),
+							new ItemStack(Material.GOLD_HELMET)
+					};
+					p.getInventory().setArmorContents(armor);
+					ItemStack axe = new ItemStack(Material.IRON_AXE);
+					ItemMeta im = axe.getItemMeta();
+					im.setDisplayName("Leap Axe");
+					axe.setItemMeta(im);
+					p.getInventory().addItem(axe);
+					p.getInventory().addItem(new ItemStack(Material.BOW));
+					p.getInventory().addItem(new ItemStack(Material.ARROW, 64));
+					p.getInventory().addItem(new ItemStack(Material.APPLE, 30));
+					p.setGameMode(GameMode.SURVIVAL);
+					p.teleport(new Location(Bukkit.getWorld("Dragons"), -0.5, 158, 20.5));
+				}
+				Bukkit.getWorld("Dragons").spawnEntity(new Location(Bukkit.getWorld("Dragons"), 8.5, 166, -23), EntityType.ENDER_DRAGON);
+				//Bukkit.getWorld("Dragons").spawnEntity(new Location(Bukkit.getWorld("Dragons"), 8.5, 166, -23), EntityType.ENDER_DRAGON);
+				//Bukkit.getWorld("Dragons").spawnEntity(new Location(Bukkit.getWorld("Dragons"), 8.5, 166, -23), EntityType.ENDER_DRAGON);
+				
+			}
+		}, LT.DR);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 			@Override
@@ -170,6 +203,8 @@ public class Main extends JavaPlugin {
 				GameType.TF.getRed().setVelocity(nullv);
 				GameType.BL.getBlue().setVelocity(nullv);
 				GameType.BL.getRed().setVelocity(nullv);
+				GameType.DR.getBlue().setVelocity(nullv);
+				GameType.DR.getRed().setVelocity(nullv);
 			}
 			
 		}, 0L, 1L);

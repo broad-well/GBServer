@@ -31,7 +31,7 @@ public class Lobby implements CommandExecutor {
 	private int beginTaskID;
 	private int countdown;
 
-	private HelpTable ht = new HelpTable("/lobby [bl/tf/swap] [leave/accept/deny]", "To quit a lobby or accept/deny a swap. To join, click on a sheep.", "", "lobby");
+	private HelpTable ht = new HelpTable("/lobby [bl/tf/dr/swap] [leave/accept/deny]", "To quit a lobby or accept/deny a swap. To join, click on a sheep.", "", "lobby");
 
 	public boolean onCommand(CommandSender sender, Command comm, String label, String[] args) {
 		if (label.equalsIgnoreCase("lobby") && Utilities.validateSender(sender)) {
@@ -70,6 +70,20 @@ public class Lobby implements CommandExecutor {
 					return true;
 				}
 				break;
+			case "dr":
+				switch (args[1]) {
+				case "leave":
+					// Leave DR.
+					GameType.DR.leave(p);
+					break;
+				case "start":
+					GameType.DR.start(20);
+					break;
+				default:
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Options."));
+					ht.show(sender);
+					return true;
+				}
 			case "swap":
 				switch (args[1]) {
 				case "accept":
@@ -90,6 +104,7 @@ public class Lobby implements CommandExecutor {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
+							
 							break;
 						}
 					}
