@@ -239,6 +239,7 @@ public class TF implements CommandExecutor {
 					bluePlayers.clear();
 					resetMap();
 					s.interrupt();
+					s.stop();
 					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Game Stopped."));
 				}
 			} else {
@@ -411,7 +412,9 @@ public class TF implements CommandExecutor {
 					new Location(Bukkit.getWorld("Turf_Wars1"), BlueSpawn[0], BlueSpawn[1], BlueSpawn[2]));
 		}
 		fillInventory(true);
-		s.start();
+		if(!s.isAlive()){
+			s.start();
+		}
 
 	}
 }

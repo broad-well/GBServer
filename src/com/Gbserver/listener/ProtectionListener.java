@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Gbserver.variables.ChatWriter;
@@ -115,6 +116,26 @@ public class ProtectionListener implements Listener {
 			return true;
 		}else{
 			return false;
+		}
+	}
+	
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent bbe){
+		int x = bbe.getBlock().getX();
+		int y = bbe.getBlock().getY();
+		int z = bbe.getBlock().getZ();
+		
+			//bbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
+			//bbe.setCancelled(true);
+		for(int i = 0; i < DATA.length; i++){
+			if(isInSelection(i, x, y, z) && !isTrusted(i, bbe.getPlayer())){
+				if(i == 0 && bbe.getBlock().getType() == Material.SNOW_BLOCK){
+					
+				}else{
+					bbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
+					bbe.setCancelled(true);
+				}
+			}
 		}
 	}
 }
