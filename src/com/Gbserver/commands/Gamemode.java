@@ -26,7 +26,7 @@ public class Gamemode implements CommandExecutor{
 				ht.show(sender);
 				return true;
 			}
-			boolean isInGame = (Runner.isRunner(p)) || (BL.players.contains(p.getName())) || TF.getAllPlayers().contains(p);
+			boolean isInGame = (BL.players.contains(p.getName())) || TF.getAllPlayers().contains(p);
 			switch(args[0]){
 			case "c":
 				if(!isInGame){

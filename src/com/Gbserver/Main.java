@@ -19,64 +19,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
-import com.Gbserver.commands.Afk;
-import com.Gbserver.commands.Attentions;
-import com.Gbserver.commands.BL;
-import com.Gbserver.commands.Back;
-import com.Gbserver.commands.F;
-import com.Gbserver.commands.Gamemode;
-import com.Gbserver.commands.Heal;
-import com.Gbserver.commands.Invince;
-import com.Gbserver.commands.InvinceListener;
-import com.Gbserver.commands.Lobby;
-import com.Gbserver.commands.Lobby2.LVariables;
-import com.Gbserver.commands.Menu;
-import com.Gbserver.commands.Mute;
-import com.Gbserver.commands.MuteListener;
-import com.Gbserver.commands.Nick;
-import com.Gbserver.commands.NoFall;
-import com.Gbserver.commands.Protection;
-import com.Gbserver.commands.Quit;
-import com.Gbserver.commands.Ride;
-import com.Gbserver.commands.Runner;
-import com.Gbserver.commands.SaveMoment;
-import com.Gbserver.commands.Sit;
-import com.Gbserver.commands.Spawn;
-import com.Gbserver.commands.TF;
-import com.Gbserver.commands.Tell;
-import com.Gbserver.commands.Tpa;
-import com.Gbserver.commands.Vote;
-import com.Gbserver.listener.AfkListener;
-import com.Gbserver.listener.Announce;
-import com.Gbserver.listener.BLListener;
-import com.Gbserver.listener.BackListeners;
-import com.Gbserver.listener.ChatFormatter;
-import com.Gbserver.listener.DrawColorListener;
-import com.Gbserver.listener.ExplosionListener;
-import com.Gbserver.listener.HealListener;
-import com.Gbserver.listener.JoinListener;
-import com.Gbserver.listener.LobbyListener;
-import com.Gbserver.listener.LoginTagListener;
-import com.Gbserver.listener.MenuListener;
-import com.Gbserver.listener.NickListener;
-import com.Gbserver.listener.ProtectionListener;
-import com.Gbserver.listener.RideListener;
-import com.Gbserver.listener.SitListener;
-import com.Gbserver.listener.TFListeners;
-import com.Gbserver.variables.Chair;
-import com.Gbserver.variables.Chairs;
-import com.Gbserver.variables.GameType;
-import com.Gbserver.variables.LT;
+import com.Gbserver.commands.*;
+import com.Gbserver.listener.*;
+import com.Gbserver.variables.*;
 
 public class Main extends JavaPlugin {
 	Vector vector;
 	Sheep sh = null;
 	int runCount = 0;
 	boolean isWait = false;
-	Player p = Runner.pl;
 	public static Sheep[] snake = new Sheep[50];
 	static int i;
 	int TFCount = 0;
@@ -124,6 +80,7 @@ public class Main extends JavaPlugin {
 		getCommand("tpaccept").setExecutor(new Tpa());
 		getCommand("tpdeny").setExecutor(new Tpa());
 		getCommand("lobby").setExecutor(new Lobby());
+		getServer().getPluginManager().registerEvents(new RunnerListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
 		getServer().getPluginManager().registerEvents(new InvinceListener(), this);
@@ -187,6 +144,7 @@ public class Main extends JavaPlugin {
 					p.getInventory().addItem(new ItemStack(Material.APPLE, 30));
 					p.setGameMode(GameMode.SURVIVAL);
 					p.teleport(new Location(Bukkit.getWorld("Dragons"), -0.5, 158, 20.5));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
 				}
 				Bukkit.getWorld("Dragons").spawnEntity(new Location(Bukkit.getWorld("Dragons"), 8.5, 166, -23), EntityType.ENDER_DRAGON);
 				//Bukkit.getWorld("Dragons").spawnEntity(new Location(Bukkit.getWorld("Dragons"), 8.5, 166, -23), EntityType.ENDER_DRAGON);
@@ -194,6 +152,7 @@ public class Main extends JavaPlugin {
 				
 			}
 		}, LT.DR);
+		Runner.getSheep();
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 			@Override
@@ -212,39 +171,7 @@ public class Main extends JavaPlugin {
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-			@Override
-			public void run() {
-				if (Runner.isSnakeRunning) {
-
-					double pitch = Math.PI / 1.5;
-					double yaw = ((getServer().getPlayer(Runner.playerName).getLocation().getYaw() + 90) * Math.PI)
-							/ 180;
-					double x = Math.sin(pitch) * Math.cos(yaw);
-					double y = Math.sin(pitch) * Math.sin(yaw);
-					double z = Math.cos(pitch);
-					vector = new Vector(x, z, y);
-					Runner.snake.getLocation().setYaw(getServer().getPlayer(Runner.playerName).getLocation().getYaw());
-					Runner.snake.setVelocity(vector);
-
-				}
-			}
-
-		}, 0L, 1L);
-		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-			public void run() {
-
-				if (Runner.isSnakeRunning) {
-
-					if (runCount < 50) {
-						snake[runCount] = (Sheep) getServer().getPlayer("GoBroadwell").getWorld()
-								.spawnEntity(getServer().getPlayer("GoBroadwell").getLocation(), EntityType.SHEEP);
-						runCount++;
-					}
-
-				}
-			}
-		}, 10L, 40L);
+		
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
 			@SuppressWarnings("deprecation")
@@ -306,61 +233,32 @@ public class Main extends JavaPlugin {
 			}
 
 		}, 0L, 10L);
-		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-			public void run() {
 
-				if (Runner.isSnakeRunning) {
 
-					for (int i = 0; i < snake.length; i++) {
-						Sheep sheep = snake[i];
-						if (i == 0) {
-							sheep.setVelocity(Runner.snake.getVelocity());
-							Location l = sheep.getLocation();
-							l.setYaw(getServer().getPlayer(Runner.playerName).getLocation().getYaw());
-							sheep.teleport(l);
-						} else {
-							sheep.setVelocity(snake[i - 1].getVelocity());
-							Location l = sheep.getLocation();
-							l.setYaw(snake[i - 1].getLocation().getYaw());
-							sheep.teleport(l);
-						}
-					}
-
-				}
-			}
-		}, 0L, 2L);
-		for (i = 0; i < 20; i++) {
 			scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
 				public void run() {
-					if (Runner.isRunning && Runner.players.length > i) {
-						Player player = Runner.players[i];
-						World world = player.getWorld();
-						if (Runner.isRunner(player) && Runner.isRunning) {
-							Location loc = player.getLocation();
-							int x = loc.getBlockX();
-							int y = loc.getBlockY();
-							int z = loc.getBlockZ();
-							y--;
-							Location newloc = new Location(world, x, y, z);
-							Material block;
-							byte data;
-							if (newloc.getBlock().getType() != Material.AIR) {
-								try {
-									Thread.sleep(130);
-									block = newloc.getBlock().getType();
-									data = newloc.getBlock().getData();
-									newloc.getBlock().setType(Material.AIR);
-									world.spawnFallingBlock(newloc, block, data);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
+					if (Runner.isRunning) {
+						// RED = 14
+						for (Player p : Runner.players){
+							Block b = p.getLocation().subtract(0,1,0).getBlock();
+							if(b.getData() != (byte) 14 && b.getType() == Material.STAINED_CLAY){
+								
+								b.setData((byte) 14);
+								final TaskStorage ts = new TaskStorage(b);
+								Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+									public void run() {
+										((Block) ts.getStorage()).setType(Material.AIR);
+										((Block) ts.getStorage()).getLocation().getWorld().spawnFallingBlock(((Block) ts.getStorage()).getLocation(), Material.STAINED_CLAY, (byte) 14); 
+									}
+								}, 20L);
 							}
+							p.setFoodLevel(20);
 						}
 					}
 				}
-			}, 0L, 3L);
-		}
+			}, 0L, 1L);
+
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
 			public void run() {
@@ -445,6 +343,8 @@ public class Main extends JavaPlugin {
 		try {
 			GameType.TF.close();
 			GameType.BL.close();
+			GameType.DR.close();
+			Runner.joinSheep.remove();
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

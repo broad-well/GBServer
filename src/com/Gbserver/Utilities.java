@@ -3,9 +3,12 @@ package com.Gbserver;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
@@ -84,5 +87,13 @@ public class Utilities {
 				}
 			}
 		}
+	}
+	
+	public static void giveLeap(Player target) {
+		ItemStack axe = new ItemStack(Material.IRON_AXE);
+		ItemMeta im = axe.getItemMeta();
+		im.setDisplayName("Leap Axe");
+		axe.setItemMeta(im);
+		target.getInventory().addItem(axe);
 	}
 }

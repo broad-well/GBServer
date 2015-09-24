@@ -1,7 +1,16 @@
 package com.Gbserver.commands;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,12 +19,33 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import com.Gbserver.Main;
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 
 public class Runner implements CommandExecutor {
+	
+	public static World world = Bukkit.getWorld("Runner1");
+	
+	public class TaskBlock {
+		public Block storage;
+		private int taskid;
+		public TaskBlock(Runnable r, Block s, long wait){
+			taskid = Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), r, wait);
+		}
+		
+		public void close() {
+			Bukkit.getScheduler().cancelTask(taskid);
+			storage = null;
+			
+		}
+	}
+	
 	/*
 	 * I haven't been getting multi-threaded Runner to work. Here is a logical
 	 * simulation:
@@ -23,86 +53,45 @@ public class Runner implements CommandExecutor {
 	 * Runner begins. A For loop creates dedicated threads for each player.
 	 * (MUST BE SYNCHRONOUS) All threads run. Runner stops. All threads stop.
 	 */
-	public static Player[] players = new Player[10];
-	public static int runnerPlayers;
-	Player currentPlayer;
+	
+	public static Location join = new Location(world, 1012.5, 102.5, -1023.5);
+	public static Sheep joinSheep;
 	public static boolean isRunning = false;
-	public static boolean isSnakeRunning = false;
-	public static Sheep snake;
-	public static Player pl;
-	public static String playerName;
-	public static Sheep[] snakeTail = new Sheep[10];
+	public static List<Player> players = new LinkedList<>();
 	@EventHandler
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("runner")) {
 			switch (args[0]) {
-			case "addPlayer":
-				if (args.length < 2) {
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-					return false;
+			case "leave":
+				if(!players.contains(sender)){
+					ChatWriter.writeTo(sender, ChatWriterType.GAME, "You are not in this game yet.");
+					return true;
 				}
-				for (int i = 1; i < args.length; i++) {
-					players[i - 1] = Bukkit.getPlayer(args[i]);
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.GAME, "Added " + args[i] + " to the Runner players list."));
-				}
-				return true;
-			case "removePlayer":
-				if (args.length != 2) {
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Syntax."));
-					return false;
-				}
-				for (int i = 1; i < players.length; i++) {
-					if (args[1] == players[i - 1].getName()) {
-						players[i - 1] = null;
-						for (int a = i - 1; a < players.length; a++) {
-							if (a != players.length - 1) {
-								players[a] = players[a + 1];
-							} else {
-								players[a] = null;
-							}
-							/*
-							 * 0: Hlo 1: HWr 2: etiohw 3: soieh 4: ser
-							 * 
-							 * removeL HWr
-							 */
+				players.remove(sender);
+				ChatWriter.writeTo(sender, ChatWriterType.GAME, "Removed you from the game.");
+			case "start":
+				com.Gbserver.variables.Countdown a = new com.Gbserver.variables.Countdown(20, new Runnable() {
+					public void run() {
+						isRunning = true;
+						for(Player p : players){
+							Utilities.giveLeap(p);
+							p.setGameMode(GameMode.SURVIVAL);
+							p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2));
+							p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
 						}
 					}
+				});
+				for(Player p : players){
+					p.teleport(new Location(world,0,202,0));
 				}
-				return true;
-			case "begin":
-				isRunning = true;
-				sender.sendMessage("Runner Started!");
-				return true;
-			case "stop":
-				isRunning = false;
-				sender.sendMessage("Runner Stopped!");
+				ChatWriter.writeTo(sender, ChatWriterType.GAME, "Countdown executed.");
 				return true;
 			case "reset":
 				isRunning = false;
-				for (int i = 0; i < players.length; i++) {
-					players[i] = null;
-				}
-				currentPlayer = null;
+				players.clear();
+				getMap();
 				sender.sendMessage("Runner reset done!");
 				return true;
-			case "snake":
-				if(!isSnakeRunning){
-				isSnakeRunning = true;
-				playerName = ((Player) sender).getName();
-				}else{
-					isSnakeRunning = false;
-					playerName = null;
-					Main.snake = new Sheep[50];
-				}
-				pl = (Player) sender;
-				snake = (Sheep) Bukkit.getWorld("world").spawnEntity(pl.getLocation(),EntityType.SHEEP);
-    			snake.setPassenger(pl);
-    			setupSnakeSheeps(pl.getLocation());
-				sender.sendMessage("Snake added and started.");
-				break;
-			case "getpitch":
-				double pitch = ((((Player) sender).getLocation().getPitch() + 90) * Math.PI) / 180;
-				sender.sendMessage(String.valueOf(pitch));
 			default:
 				sender.sendMessage("Invalid Syntax.");
 				return false;
@@ -110,44 +99,53 @@ public class Runner implements CommandExecutor {
 		}
 		return false;
 	}
-
-	public static boolean isRunner(Player p) {
-		String name = p.getName();
-		for (int i = 0; i < players.length; i++) {
-			try {
-				if (players[i].getName() == name) {
-					return true;
-				}
-			} catch (Exception e) {
-
+	
+	public static void getMap() {
+		//1st level
+		for(int x = -30; x <= 21; x++){
+			for(int z = 18; z >= -20; z--){
+				Block b = world.getBlockAt(x, 200, z);
+				b.setType(Material.STAINED_CLAY);
+				b.setData(DyeColor.LIGHT_BLUE.getWoolData());
 			}
-		}
-		return false;
-	}
-	
-	
-	public static void setupSnakeSheeps(Location startingLocation){
-		for(int i = 0; i < snakeTail.length; i++){
-			snakeTail[i] = (Sheep) startingLocation.getWorld().spawnEntity(startingLocation.subtract(i+1,0,0), EntityType.SHEEP);
 		}
 		
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
-
-			@Override
-			public void run() {
-				for(int i = 0; i < snakeTail.length; i++){
-					if(i == 0){
-						
-						snakeTail[i].setVelocity(snake.getLocation().toVector().subtract(snakeTail[i].getLocation().toVector()).multiply(0.5));
-					}else{
-						snakeTail[i].setVelocity(snakeTail[i-1].getLocation().toVector().subtract(snakeTail[i].getLocation().toVector().multiply(0.5)));
-					}
-					
-					
-				}
+		//2nd level
+		for(int x = -26; x <= 17; x++){
+			for(int z = 14; z >= -16; z--){
+				Block b = world.getBlockAt(x, 193, z);
+				b.setType(Material.STAINED_CLAY);
+				b.setData(DyeColor.BLUE.getWoolData());
 			}
-			
-		}, 0L, 1L);
+		}
+		
+		//3rd level
+		for(int x = -22; x <= 13; x++){
+			for(int z = 10; z >= -12; z--){
+				Block b = world.getBlockAt(x, 186, z);
+				b.setType(Material.STAINED_CLAY);
+				b.setData(DyeColor.YELLOW.getWoolData());
+			}
+		}
+		
+		//4th level
+		for(int x = -18; x <= 9; x++){
+			for(int z = 6; z >= -8; z--){
+				Block b = world.getBlockAt(x, 179, z);
+				b.setType(Material.STAINED_CLAY);
+				b.setData(DyeColor.ORANGE.getWoolData());
+			}
+		}
 	}
 	
+	public static void getSheep() {
+		joinSheep = (Sheep) world.spawnEntity(join, EntityType.SHEEP);
+		joinSheep.setColor(DyeColor.PURPLE);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+			public void run() {
+				joinSheep.setVelocity(new Vector(0,0,0));
+			}
+		}, 0L, 1L);
+	}
+
 }
