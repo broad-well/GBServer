@@ -31,7 +31,7 @@ public class Lobby implements CommandExecutor {
 	private int beginTaskID;
 	private int countdown;
 
-	private HelpTable ht = new HelpTable("/lobby [bl/tf/dr/swap] [leave/accept/deny]", "To quit a lobby or accept/deny a swap. To join, click on a sheep.", "", "lobby");
+	private HelpTable ht = new HelpTable("/lobby [bl/tf/dr/swap] [leave/accept/deny/map]", "To quit a lobby or accept/deny a swap, or select a map for use. To join, click on a sheep.", "", "lobby");
 
 	public boolean onCommand(CommandSender sender, Command comm, String label, String[] args) {
 		if (label.equalsIgnoreCase("lobby") && Utilities.validateSender(sender)) {
@@ -49,6 +49,32 @@ public class Lobby implements CommandExecutor {
 					break;
 				case "start":
 					GameType.BL.start(20);
+					break;
+				case "map":
+					//Map selection.
+					//There are currently 3 maps in store.
+					// 1: beach; 2: forest; 3: motherboard.
+					int mapnumber = 1;
+					try{
+						if(args.length == 3){
+							mapnumber = Integer.parseInt(args[2]);
+						}else{
+							ht.show(sender);
+							return true;
+						}
+					}catch(Exception e){
+						ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "That was not a number. Try again.");
+						return true;
+					}
+					GameType.BL.setMap(mapnumber);
+					if(mapnumber == 1){
+						ChatWriter.writeTo(sender, ChatWriterType.GAME, "You have selected option 1, BEACH");
+					}else if(mapnumber == 2){
+						ChatWriter.writeTo(sender, ChatWriterType.GAME, "You have selected option 2, FOREST");
+					}else if(mapnumber == 3){
+						ChatWriter.writeTo(sender, ChatWriterType.GAME, "You have selected option 3, MOTHERBOARD");
+					}
+					return true;
 				default:
 					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Options."));
 					ht.show(sender);
@@ -79,6 +105,8 @@ public class Lobby implements CommandExecutor {
 				case "start":
 					GameType.DR.start(20);
 					break;
+				case "map":
+					
 				default:
 					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Options."));
 					ht.show(sender);

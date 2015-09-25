@@ -164,6 +164,8 @@ public class Main extends JavaPlugin {
 				GameType.BL.getRed().setVelocity(nullv);
 				GameType.DR.getBlue().setVelocity(nullv);
 				GameType.DR.getRed().setVelocity(nullv);
+				GameType.CTF.getBlue().setVelocity(nullv);
+				GameType.CTF.getRed().setVelocity(nullv);
 			}
 			
 		}, 0L, 1L);

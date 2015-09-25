@@ -4,5 +4,6 @@ public enum LT {
 	TF,
 	BL,
 	RUN,
-	DR
+	DR,
+	CTF
 }

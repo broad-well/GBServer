@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
@@ -32,8 +33,18 @@ public class BL implements CommandExecutor {
 			{  -2 , 123,  73 }
 	};
 	
+	public static Location forestBottom = new Location(world, 540, 100, 487);
+	public static Location forestTop = new Location(world, 574, 122, 557);
+	public static Location mbBottom = new Location(world, 595, 100, 487);
+	public static Location mbTop = new Location(world, 625, 111, 554);
+	
 	private HelpTable ht = new HelpTable("/bl <addPlayer/start/reset> <player (only required for addPlayer)>", "This command is used to control the Bomb Lobbers minigame.", "", "bl");
 	
+	public class blMap {
+		public static final int BEACH = 1;
+		public static final int FOREST = 2;
+		public static final int MOTHERBOARD = 3;
+	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("bl")) {
@@ -106,10 +117,10 @@ public class BL implements CommandExecutor {
 			}
 		}
 		if(type == 2){
-			
+			Utilities.copy(forestBottom, forestTop, new Location(world, 0, 100, 0));
 		}
 		if(type == 3){
-			
+			Utilities.copy(mbBottom, mbTop, new Location(world, 0, 100, 0));
 		}
 	}
 }

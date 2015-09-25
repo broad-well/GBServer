@@ -69,6 +69,7 @@ public class GameType {
 		public static GameType BL;
 		public static GameType TF;
 		public static GameType DR;
+		public static GameType CTF;
 		//-----------------------------DR
 		private static final World drWorld = Bukkit.getWorld("Dragons");
 		private static final Location drMapBottom = new Location(drWorld, 1013, 144, -1008);
@@ -76,6 +77,11 @@ public class GameType {
 		private static final Location drSpawn = new Location(drWorld, -985.5, 164, 987.5);
 		private static final Location drBlueJoin = new Location(drWorld, -987.5, 164.5, 978.5);
 		private static final Location drRedJoin = new Location(drWorld, -983.5, 164.5, 978.5);
+		//-----------------------------CTF
+		private static final World ctfWorld = Bukkit.getWorld("CTF");
+		private static final Location ctfSpawn = new Location(ctfWorld, -990.5, 160, 985.5);
+		private static final Location ctfBlueJoin = new Location(ctfWorld, -992.5, 160.5, 976.5);
+		private static final Location ctfRedJoin = new Location(ctfWorld, -988.5, 160.5, 976.5);
 		//STATIC ENDS
 		
 		private Runnable onStart;
@@ -87,7 +93,9 @@ public class GameType {
 		public List<Player> red;
 		
 		private int countdown;
-		
+		private boolean mapAlterable;
+		private boolean mapSelected = false;
+		private int mapType;
 		
 		public GameType(Runnable Start, LT type){
 			onStart = Start;
@@ -106,6 +114,7 @@ public class GameType {
 				sd.setLine("Joined: 0", 2);
 				sd.setLine(ChatColor.BLUE + "Blue: 0", 3);
 				sd.setLine(ChatColor.RED + "Red: ", 4);
+				mapAlterable = false;
 				break;
 			case BL:
 				blues = (Sheep) blWorld.spawnEntity(blBlueJoin, EntityType.SHEEP);
@@ -119,6 +128,7 @@ public class GameType {
 				sd.setLine(ChatColor.RED + "Red: 0", 4);
 				sd.setLine("MAP: ", 6);
 				sd.display();
+				mapAlterable = true;
 				break;
 			case DR:
 				blues = (Sheep) drWorld.spawnEntity(drBlueJoin, EntityType.SHEEP);
@@ -132,6 +142,20 @@ public class GameType {
 				sd.setLine(ChatColor.RED + "Red: 0", 4);
 				sd.setLine(ChatColor.YELLOW + "Teaming does not count", 6);
 				sd.display();
+				mapAlterable = true;
+				break;
+			case CTF:
+				blues = (Sheep) ctfWorld.spawnEntity(ctfBlueJoin, EntityType.SHEEP);
+				blues.setColor(DyeColor.BLUE);
+				reds = (Sheep) ctfWorld.spawnEntity(ctfRedJoin, EntityType.SHEEP);
+				reds.setColor(DyeColor.RED);
+				sd = new ScoreDisplay("Capture the flag");
+				sd.setLine(ChatColor.BOLD + "PLAYERS", 1);
+				sd.setLine("Joined: 0", 2);
+				sd.setLine(ChatColor.BLUE + "Blue: 0", 3);
+				sd.setLine(ChatColor.RED + "Red: 0", 4);
+				sd.display();
+				mapAlterable = false;
 				break;
 			}
 			
@@ -259,6 +283,10 @@ public class GameType {
 		
 		private int id = 0;
 		public void start(int ct) {
+			if(mapAlterable && !mapSelected){
+				ChatWriter.write(ChatWriterType.ERROR, "The game does not have a specified map.");
+				return;
+			}
 			countdown = ct;
 			id = Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
@@ -278,10 +306,11 @@ public class GameType {
 			}, 0L, 20L);
 			if(type == LT.BL){
 				com.Gbserver.commands.BL.removePreviousMap();
-				com.Gbserver.commands.BL.getMap(1);
+				com.Gbserver.commands.BL.getMap(mapType);
 			}
 			if(type == LT.DR){
 				getDragonsMap();
+				//To be implemented with multiple maps.
 			}
 		}
 		
@@ -292,11 +321,23 @@ public class GameType {
 		public Sheep getRed() {
 			return reds;
 		}
+		
+		public void setMap(int number){
+			if(!mapAlterable){
+				return;
+			}
+			mapType = number;
+			mapSelected = true;
+			uScore();
+		}
 		//PRIVATE
 		private void uScore() {
 			sd.setLine("Joined: "+allPlayers().size(), 2);
 			sd.setLine(ChatColor.BLUE + "Blue: "+blue.size(), 3);
 			sd.setLine(ChatColor.RED + "Red: "+red.size(), 4);
+			if(type == LT.BL && mapSelected){
+				sd.setLine("MAP: "+mapType, 6);
+			}
 		}
 		
 		private Color getColor(Player p){
