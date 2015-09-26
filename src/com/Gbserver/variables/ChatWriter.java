@@ -50,6 +50,9 @@ public class ChatWriter {
 			break;
 		case TPA:
 			output += ChatColor.GOLD + "TPA> " + ChatColor.AQUA;
+			break;
+		case HOME:
+			output += ChatColor.GREEN + "HOME> " + ChatColor.GOLD;
 		}
 		output += message;
 		return output;

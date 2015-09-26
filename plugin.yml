@@ -87,3 +87,8 @@ commands:
   lobby:
     description: Lobby Join/Leave.
     usage: 
+  ctf:
+    description: Capture the flag!
+    usage: 
+  home:
+    description: Save your home.

@@ -1,5 +1,7 @@
 package com.Gbserver;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -11,12 +13,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -42,7 +46,6 @@ public class Main extends JavaPlugin {
 
 		PluginDescriptionFile desc = getDescription();
 		Logger lg = Logger.getLogger("Minecraft");
-		this.saveDefaultConfig();
 		@SuppressWarnings("unused")
 		Protection proc = new Protection(this);
 		getCommand("spawn").setExecutor(new Spawn());
@@ -80,6 +83,9 @@ public class Main extends JavaPlugin {
 		getCommand("tpaccept").setExecutor(new Tpa());
 		getCommand("tpdeny").setExecutor(new Tpa());
 		getCommand("lobby").setExecutor(new Lobby());
+		getCommand("ctf").setExecutor(new CTF());
+		getCommand("home").setExecutor(new Home());
+		//getServer().getPluginManager().registerEvents(new CTFListener(), this);
 		getServer().getPluginManager().registerEvents(new RunnerListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
@@ -112,11 +118,13 @@ public class Main extends JavaPlugin {
 				List<String> pls = new LinkedList<>();
 				for(Player pa : GameType.BL.red){
 					pls.add(pa.getName());
-					pa.teleport(new Location(BL.world,23.5,102.67,58.1));
+					pa.teleport(BL.redTP);
+					pa.setGameMode(GameMode.SURVIVAL);
 				}
 				for(Player pal : GameType.BL.blue){
 					pls.add(pal.getName());
-					pal.teleport(new Location(BL.world,21.8,103,14.61));
+					pal.teleport(BL.blueTP);
+					pal.setGameMode(GameMode.SURVIVAL);
 				}
 				BL.players.addAll(pls);
 				BL.isRunning = true;
@@ -152,6 +160,15 @@ public class Main extends JavaPlugin {
 				
 			}
 		}, LT.DR);
+		GameType.CTF = new GameType(new Runnable() {
+
+			@Override
+			public void run() {
+				//on Start
+				//Way off course rn
+			}
+			
+		}, LT.CTF);
 		Runner.getSheep();
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
@@ -173,6 +190,19 @@ public class Main extends JavaPlugin {
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+
+			@Override
+			public void run() {
+				if(CTF.isRunning){
+					for(Player a : CTF.allPlayers()){
+						a.setFoodLevel(20);
+					}
+				}
+			}
+			
+		
+		}, 0L, 1L);
 		
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
@@ -352,5 +382,17 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static YamlConfiguration getYAML() {
+		File yaml = new File("brdata.yml");
+		if(!yaml.exists()){
+			try {
+				yaml.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return YamlConfiguration.loadConfiguration(yaml);
 	}
 }

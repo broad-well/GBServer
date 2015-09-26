@@ -18,6 +18,7 @@ import org.bukkit.util.Vector;
 import com.Gbserver.Main;
 import com.Gbserver.Utilities;
 import com.Gbserver.commands.BL;
+import com.Gbserver.commands.BL.blMap;
 
 public class GameType {
 	
@@ -171,6 +172,8 @@ public class GameType {
 		public void clear() {
 			blue.clear();
 			red.clear();
+			mapSelected = false;
+			mapType = 0;
 			uScore();
 		}
 		
@@ -336,7 +339,7 @@ public class GameType {
 			sd.setLine(ChatColor.BLUE + "Blue: "+blue.size(), 3);
 			sd.setLine(ChatColor.RED + "Red: "+red.size(), 4);
 			if(type == LT.BL && mapSelected){
-				sd.setLine("MAP: "+mapType, 6);
+				sd.setLine("MAP: "+blMap.toString(mapType), 8);
 			}
 		}
 		

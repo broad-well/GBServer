@@ -33,17 +33,31 @@ public class BL implements CommandExecutor {
 			{  -2 , 123,  73 }
 	};
 	
-	public static Location forestBottom = new Location(world, 540, 100, 487);
+	public static Location forestBottom = new Location(world, 540, 97, 487);
 	public static Location forestTop = new Location(world, 574, 122, 557);
-	public static Location mbBottom = new Location(world, 595, 100, 487);
+	public static Location mbBottom = new Location(world, 595, 97, 487);
 	public static Location mbTop = new Location(world, 625, 111, 554);
-	
+	public static Location blueTP = new Location(world, 9, 103, 13);
+	public static Location redTP = new Location(world, 10, 103, 53);
 	private HelpTable ht = new HelpTable("/bl <addPlayer/start/reset> <player (only required for addPlayer)>", "This command is used to control the Bomb Lobbers minigame.", "", "bl");
 	
-	public class blMap {
+	public static class blMap {
 		public static final int BEACH = 1;
 		public static final int FOREST = 2;
 		public static final int MOTHERBOARD = 3;
+		
+		public static String toString(int type){
+			switch(type){
+			case BEACH:
+				return "Beach";
+			case FOREST:
+				return "Forest";
+			case MOTHERBOARD:
+				return "Motherboard";
+			default:
+				return "";
+			}
+		}
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

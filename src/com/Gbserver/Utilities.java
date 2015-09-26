@@ -2,13 +2,17 @@ package com.Gbserver;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
@@ -95,5 +99,19 @@ public class Utilities {
 		im.setDisplayName("Leap Axe");
 		axe.setItemMeta(im);
 		target.getInventory().addItem(axe);
+	}
+	
+	public static int setFrozen(final Entity... t){
+		final Vector nul = new Vector(0,0,0);
+		return Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+
+			@Override
+			public void run() {
+				for(Entity a : t){
+					a.setVelocity(nul);
+				}
+			}
+			
+		}, 0L, 1L);
 	}
 }
