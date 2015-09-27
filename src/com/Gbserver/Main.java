@@ -85,7 +85,7 @@ public class Main extends JavaPlugin {
 		getCommand("lobby").setExecutor(new Lobby());
 		getCommand("ctf").setExecutor(new CTF());
 		getCommand("home").setExecutor(new Home());
-		//getServer().getPluginManager().registerEvents(new CTFListener(), this);
+		getServer().getPluginManager().registerEvents(new CTFListener(), this);
 		getServer().getPluginManager().registerEvents(new RunnerListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
 		getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
@@ -106,6 +106,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
+		CTF.getVariables();
 		GameType.TF = new GameType(new Runnable() {
 						public void run() {
 							TF.bluePlayers.addAll(GameType.TF.blue);

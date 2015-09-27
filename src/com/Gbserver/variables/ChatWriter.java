@@ -53,6 +53,9 @@ public class ChatWriter {
 			break;
 		case HOME:
 			output += ChatColor.GREEN + "HOME> " + ChatColor.GOLD;
+			break;
+		case DEATH:
+			output += ChatColor.RED + "Death> " + ChatColor.DARK_RED;
 		}
 		output += message;
 		return output;
