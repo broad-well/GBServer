@@ -237,7 +237,12 @@ public class TFListeners implements Listener {
 	
 	@EventHandler
 	public void onProjectileLaunch(ProjectileLaunchEvent ple){
-		Player p = (Player) ple.getEntity().getShooter();
+		Player p;
+		if(ple.getEntity().getShooter() instanceof Player){
+			p = (Player) ple.getEntity().getShooter();
+		}else{
+			return;
+		}
 		if(TF.isRunning && TF.isBuildtime && TF.getAllPlayers().contains(p)){
 			ple.setCancelled(true);
 			

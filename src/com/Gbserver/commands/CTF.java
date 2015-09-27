@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class CTF implements CommandExecutor{
 	public static Location blueFlagLocation = new Location(world, 0,0,0);
 	public static List<Player> red = new LinkedList<Player>();
 	public static List<Player> blue = new LinkedList<Player>();
+	public static Collection<Integer> tasks = new LinkedList<>();
 	//PRIVATE
 	private static int frozenid;
 	private static HelpTable ht = new HelpTable("/ctf [stop/stats]", "Capture-the-flag commands", "", "ctf");
@@ -48,6 +50,27 @@ public class CTF implements CommandExecutor{
 			case "stats":
 				//Statistics here.
 				//Collections of statistics...??
+				sender.sendMessage("A list of all tasks:");
+				for(Integer i : tasks){
+					sender.sendMessage(i+"");
+				}
+				sender.sendMessage("--------------------");
+				{
+					String output = "Red team players: ";
+					for(Player p : red){
+						output += p.getName() + ", ";
+					}
+					sender.sendMessage(output);
+				}
+				{
+					String output = "Blue team players: ";
+					for(Player p : blue){
+						output += p.getName() + ", ";
+					}
+					sender.sendMessage(output);
+				}
+				sender.sendMessage("--------------------");
+				sender.sendMessage("Is CTF Running? : "+isRunning);
 				break;
 			}
 			return true;
@@ -62,7 +85,28 @@ public class CTF implements CommandExecutor{
 		blueFlag.setPickupDelay(Integer.MAX_VALUE);
 		frozenid = Utilities.setFrozen(redFlag, blueFlag);
 		//flags are spawned.
-		
+	}
+	//subvoid
+	public static Team getLocationTeam(Player p){
+		Location l = p.getLocation();
+		//Negative: blue, positive: red
+		if(l.getZ() < 0){
+			return Team.BLUE;
+		}
+		if(l.getZ() > 0){
+			return Team.RED;
+		}
+		return Team.undefined;
+	}
+	
+	public static Team getOriginatedTeam(Player p){
+		if(red.contains(p) && !blue.contains(p)){
+			return Team.RED;
+		}
+		if(blue.contains(p) && !red.contains(p)){
+			return Team.BLUE;
+		}
+		return Team.undefined;
 	}
 	
 	public static List<Player> allPlayers() {
@@ -78,6 +122,9 @@ public class CTF implements CommandExecutor{
 		blueFlag.remove();
 		red.clear();
 		blue.clear();
+		for(Integer i : tasks){
+			Bukkit.getScheduler().cancelTask(i);
+		}
 		Bukkit.getScheduler().cancelTask(frozenid);
 	}
 }

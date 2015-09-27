@@ -114,4 +114,8 @@ public class Utilities {
 			
 		}, 0L, 1L);
 	}
+	
+	public static int scheduleRepeat(Runnable toRun, long interval){
+		return Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), toRun, 0L, interval);
+	}
 }

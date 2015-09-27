@@ -89,5 +89,6 @@ public class Home implements CommandExecutor {
 	
 	public Location toLocation(double[] l){
 		return new Location(Bukkit.getWorld("world"), l[0], l[1], l[2]);
+		
 	}
 }
