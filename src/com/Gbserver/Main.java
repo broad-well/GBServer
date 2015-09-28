@@ -106,7 +106,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
-		CTF.getVariables();
+		
 		GameType.TF = new GameType(new Runnable() {
 						public void run() {
 							TF.bluePlayers.addAll(GameType.TF.blue);
@@ -165,8 +165,18 @@ public class Main extends JavaPlugin {
 
 			@Override
 			public void run() {
-				//on Start
-				//Way off course rn
+				
+				CTF.blue.addAll(GameType.CTF.blue);
+				CTF.red.addAll(GameType.CTF.red);
+				for(Player a : CTF.blue){
+					a.teleport(CTF.getSpawn(Team.BLUE));
+				}
+				for(Player b : CTF.red){
+					b.teleport(CTF.getSpawn(Team.RED));
+				}
+				
+				CTF.startGame();
+				CTF.getVariables();
 			}
 			
 		}, LT.CTF);

@@ -150,6 +150,7 @@ public class GameType {
 				blues.setColor(DyeColor.BLUE);
 				reds = (Sheep) ctfWorld.spawnEntity(ctfRedJoin, EntityType.SHEEP);
 				reds.setColor(DyeColor.RED);
+				Utilities.setFrozen(blues, reds);
 				sd = new ScoreDisplay("Capture the flag");
 				sd.setLine(ChatColor.BOLD + "PLAYERS", 1);
 				sd.setLine("Joined: 0", 2);

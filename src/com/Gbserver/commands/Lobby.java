@@ -112,6 +112,21 @@ public class Lobby implements CommandExecutor {
 					ht.show(sender);
 					return true;
 				}
+				break;
+			case "ctf":
+				switch (args[1]) {
+				case "leave":
+					GameType.CTF.leave(p);
+					break;
+				case "start":
+					GameType.CTF.start(20);
+					break;
+				default:
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Invalid Options."));
+					ht.show(sender);
+					return true;
+				}
+				break;
 			case "swap":
 				switch (args[1]) {
 				case "accept":

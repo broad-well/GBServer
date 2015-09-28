@@ -37,7 +37,9 @@ public class CTF implements CommandExecutor{
 	public static List<Player> red = new LinkedList<Player>();
 	public static List<Player> blue = new LinkedList<Player>();
 	public static Collection<Integer> tasks = new LinkedList<>();
-	public static int frozenid;
+	public static int frozenblue;
+	public static int frozenred;
+	public static Location spectate = new Location(world, 0, 135, -3);
 	//PRIVATE
 	
 	private static HelpTable ht = new HelpTable("/ctf [stop/stats]", "Capture-the-flag commands", "", "ctf");
@@ -64,6 +66,10 @@ public class CTF implements CommandExecutor{
 			case "stats":
 				//Statistics here.
 				//Collections of statistics...??
+				sender.sendMessage("--------------------");
+				sender.sendMessage("Red flag freezer running: " + (Bukkit.getScheduler().isCurrentlyRunning(frozenred)));
+				sender.sendMessage("Blue flag freezer running: " + (Bukkit.getScheduler().isCurrentlyRunning(frozenblue)));
+				sender.sendMessage("--------------------");
 				sender.sendMessage("A list of all tasks:");
 				for(Integer i : tasks){
 					sender.sendMessage(i+"");
@@ -97,7 +103,8 @@ public class CTF implements CommandExecutor{
 		redFlag.setColor(DyeColor.RED);
 		blueFlag = (Sheep) world.spawnEntity(blueFlagLocation, EntityType.SHEEP);
 		blueFlag.setColor(DyeColor.BLUE);
-		frozenid = Utilities.setFrozen(redFlag, blueFlag);
+		frozenred = Utilities.setFrozen(redFlag);
+		frozenblue = Utilities.setFrozen(blueFlag);
 		//flags are spawned.
 	}
 	//subvoid
@@ -105,19 +112,23 @@ public class CTF implements CommandExecutor{
 		Location l = p.getLocation();
 		//Negative: blue, positive: red
 		if(l.getZ() < 0){
+			Bukkit.broadcastMessage("Location query returned BLUE");
 			return Team.BLUE;
 		}
 		if(l.getZ() > 0){
+			Bukkit.broadcastMessage("Location query returned RED");
 			return Team.RED;
 		}
 		return Team.undefined;
 	}
 	
 	public static Team getOriginatedTeam(Player p){
-		if(red.contains(p) && !blue.contains(p)){
+		if(red.contains(p)){
+			Bukkit.broadcastMessage("Origin query returned RED");
 			return Team.RED;
 		}
-		if(blue.contains(p) && !red.contains(p)){
+		if(blue.contains(p)){
+			Bukkit.broadcastMessage("Origin query returned BLUE");
 			return Team.BLUE;
 		}
 		return Team.undefined;
@@ -139,7 +150,8 @@ public class CTF implements CommandExecutor{
 		for(Integer i : tasks){
 			Bukkit.getScheduler().cancelTask(i);
 		}
-		Bukkit.getScheduler().cancelTask(frozenid);
+		Bukkit.getScheduler().cancelTask(frozenred);
+		Bukkit.getScheduler().cancelTask(frozenblue);
 	}
 	
 	public static void startGame() {
@@ -161,5 +173,17 @@ public class CTF implements CommandExecutor{
 			p.getInventory().clear();
 			p.getInventory().addItem(scissors, inksac);
 		}
+		CTF.getVariables();
+	}
+	
+	public static Location getSpawn(Team t){
+		if(t == Team.BLUE){
+			return new Location(world, -4.5, 110, -12);
+					
+		}
+		if(t == Team.RED){
+			return new Location(world, -4.5, 110, 12);
+		}
+		return null;
 	}
 }
