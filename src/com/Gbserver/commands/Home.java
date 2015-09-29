@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Gbserver.Main;
 import com.Gbserver.Utilities;
+import com.Gbserver.listener.Announce;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
@@ -67,7 +69,7 @@ public class Home implements CommandExecutor {
 	}
 
 	public void sync(boolean write) {
-		YamlConfiguration yc = Main.getYAML();
+		FileConfiguration yc = Announce.getPlugin().getConfig();
 		if(write){
 			yc.createSection("locations.homes", data);
 			return;

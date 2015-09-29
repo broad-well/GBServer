@@ -1,9 +1,12 @@
 package com.Gbserver.commands;
 
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import com.Gbserver.Main;
 import com.Gbserver.listener.Announce;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
@@ -19,6 +22,9 @@ public class Attentions implements CommandExecutor {
 		}
 		
 		if (arg2.equalsIgnoreCase("announce")) {
+			List<String> a = Announce.getPlugin().getConfig().getStringList("announcements");
+			a.add(concat(arg3));
+			Announce.getPlugin().getConfig().set("announcements", a);
 			Announce.announcement.add(concat(arg3));
 			
 		}

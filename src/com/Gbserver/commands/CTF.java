@@ -32,8 +32,8 @@ public class CTF implements CommandExecutor{
 	public static boolean isRunning = false;
 	public static Sheep redFlag;
 	public static Sheep blueFlag;
-	public static Location redFlagLocation = new Location(world,29.5,106,-88.5);
-	public static Location blueFlagLocation = new Location(world, 31.5,106,-88.5);
+	public static Location redFlagLocation = new Location(world,-29.5,106,88.5);
+	public static Location blueFlagLocation = new Location(world, 29.5,106,-88.5);
 	public static List<Player> red = new LinkedList<Player>();
 	public static List<Player> blue = new LinkedList<Player>();
 	public static Collection<Integer> tasks = new LinkedList<>();
@@ -99,8 +99,10 @@ public class CTF implements CommandExecutor{
 	}
 	
 	public static void getVariables() {
+		world.loadChunk(redFlagLocation.getChunk());
 		redFlag = (Sheep) world.spawnEntity(redFlagLocation, EntityType.SHEEP);
 		redFlag.setColor(DyeColor.RED);
+		world.loadChunk(blueFlagLocation.getChunk());
 		blueFlag = (Sheep) world.spawnEntity(blueFlagLocation, EntityType.SHEEP);
 		blueFlag.setColor(DyeColor.BLUE);
 		frozenred = Utilities.setFrozen(redFlag);

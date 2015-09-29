@@ -16,10 +16,13 @@ import com.Gbserver.variables.ChatWriter;
 public class Announce {
 	public static int schedulerCount = 0;
 	public static List<String> announcement = new LinkedList<>();
+	public static Main plugin;
 	
+	public Announce(Main m){
+		plugin = m;
+	}
 	public static void registerEvents() {
-		announcement.add("Contact me about bugs, features, and ranks here: " + ChatColor.BOLD + "http://broaderator.com/mc/contact.html NEW!" + ChatColor.RESET + "" + ChatColor.YELLOW + " (Click on it)");
-		announcement.add("NEW: The server now has a Twitter! Stay up to date with scheduled downtime, upcoming features and more! "+ChatColor.UNDERLINE+"http://twitter.com/broadwellServer");
+		announcement.addAll(plugin.getConfig().getStringList("announcements"));
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
 			@Override
@@ -39,5 +42,9 @@ public class Announce {
 
 	public static long toTicks(int minutes) {
 		return minutes * 60 * 20;
+	}
+	
+	public static Main getPlugin() {
+		return plugin;
 	}
 }

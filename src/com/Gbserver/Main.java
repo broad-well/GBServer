@@ -2,6 +2,7 @@ package com.Gbserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -42,10 +44,17 @@ public class Main extends JavaPlugin {
 	int TFCount = 0;
 	public static byte paintColor = (byte) 15;
 	
+	@SuppressWarnings("deprecation")
 	public void onEnable() {
 
 		PluginDescriptionFile desc = getDescription();
 		Logger lg = Logger.getLogger("Minecraft");
+		//final FileConfiguration fc = getConfig();
+		//fc.addDefault("announcements", "An announcement 1");
+		//fc.addDefault("announcements", "An announcemento 2");
+		//fc.options().copyDefaults(true);
+		setupConfig();
+		saveConfig();
 		@SuppressWarnings("unused")
 		Protection proc = new Protection(this);
 		getCommand("spawn").setExecutor(new Spawn());
@@ -85,6 +94,7 @@ public class Main extends JavaPlugin {
 		getCommand("lobby").setExecutor(new Lobby());
 		getCommand("ctf").setExecutor(new CTF());
 		getCommand("home").setExecutor(new Home());
+		getServer().getPluginManager().registerEvents(new Reaction(), this);
 		getServer().getPluginManager().registerEvents(new CTFListener(), this);
 		getServer().getPluginManager().registerEvents(new RunnerListener(), this);
 		getServer().getPluginManager().registerEvents(new LobbyListener(), this);
@@ -106,7 +116,8 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
-		
+		new Announce(this);
+		Reaction.getRepeatingEvent();
 		GameType.TF = new GameType(new Runnable() {
 						public void run() {
 							TF.bluePlayers.addAll(GameType.TF.blue);
@@ -379,7 +390,6 @@ public class Main extends JavaPlugin {
 		 * executed, // since the main threads ticks 20 times per second, 60
 		 * ticks is // 3 seconds.
 		 */
-
 	}
 	
 	public void onDisable() {
@@ -392,18 +402,16 @@ public class Main extends JavaPlugin {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		saveConfig();
+	
 	}
 	
-	public static YamlConfiguration getYAML() {
-		File yaml = new File("brdata.yml");
-		if(!yaml.exists()){
-			try {
-				yaml.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public void setupConfig() {
+		if(!getConfig().contains("announcements")){
+			List<String> value = Arrays.asList("Hello defaults", "Hello HELL");
+			getConfig().addDefault("announcements", value);
+			saveConfig();
 		}
-		return YamlConfiguration.loadConfiguration(yaml);
 	}
 }
+	
