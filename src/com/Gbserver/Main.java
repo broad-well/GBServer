@@ -94,6 +94,7 @@ public class Main extends JavaPlugin {
 		getCommand("lobby").setExecutor(new Lobby());
 		getCommand("ctf").setExecutor(new CTF());
 		getCommand("home").setExecutor(new Home());
+		getCommand("say").setExecutor(new Say());
 		getServer().getPluginManager().registerEvents(new Reaction(), this);
 		getServer().getPluginManager().registerEvents(new CTFListener(), this);
 		getServer().getPluginManager().registerEvents(new RunnerListener(), this);
