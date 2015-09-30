@@ -53,8 +53,7 @@ public class Main extends JavaPlugin {
 		//fc.addDefault("announcements", "An announcement 1");
 		//fc.addDefault("announcements", "An announcemento 2");
 		//fc.options().copyDefaults(true);
-		setupConfig();
-		saveConfig();
+
 		@SuppressWarnings("unused")
 		Protection proc = new Protection(this);
 		getCommand("spawn").setExecutor(new Spawn());
@@ -209,7 +208,6 @@ public class Main extends JavaPlugin {
 			}
 			
 		}, 0L, 1L);
-		Announce.registerEvents();
 		// getServer().getPluginManager().registerEvents(new
 		// runnerListenerDepricated(), this);
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

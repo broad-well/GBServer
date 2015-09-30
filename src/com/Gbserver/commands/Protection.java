@@ -24,7 +24,6 @@ public class Protection implements CommandExecutor {
 				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
 				return false;
 			}
-			Announce.registerEvents();
 		}
 		return false;
 	}

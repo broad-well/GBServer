@@ -92,3 +92,5 @@ commands:
     usage: 
   home:
     description: Save your home.
+  say:
+    description: Disabled command.

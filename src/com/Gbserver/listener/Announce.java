@@ -21,25 +21,6 @@ public class Announce {
 	public Announce(Main m){
 		plugin = m;
 	}
-	public static void registerEvents() {
-		announcement.addAll(plugin.getConfig().getStringList("announcements"));
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
-
-			@Override
-			public void run() {
-				if(schedulerCount == announcement.size()){
-					//Out of bounds..
-					//Reset.
-					schedulerCount = 0;
-				}
-					ChatWriter.write(ChatWriterType.ANNOUNCEMENT, announcement.get(schedulerCount));
-					schedulerCount++;
-			}
-
-		}, 0L, toTicks(10));
-
-	}
-
 	public static long toTicks(int minutes) {
 		return minutes * 60 * 20;
 	}
