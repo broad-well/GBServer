@@ -24,10 +24,10 @@ public class Reaction implements Listener{
 	
 	
 	//Settings
-	private static int firstMax = 9728;
-	private static int firstMin = 6914;
-	private static int secondMax = 7042;
-	private static int secondMin = 1214;
+	private static int firstMax = 5000;
+	private static int firstMin = -5000;
+	private static int secondMax = 10000;
+	private static int secondMin = -10000;
 	
 	public static void getRepeatingEvent() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
@@ -42,6 +42,9 @@ public class Reaction implements Listener{
 							if (pending) {
 								ChatWriter.write(ChatWriterType.CHAT,
 										ChatColor.YELLOW + "REACTION: Time's up! Nobody got the answer.");
+								ChatWriter.write(ChatWriterType.CHAT,
+										ChatColor.YELLOW + "The answer is: "+currentEquation.calculate());
+								currentEquation.close();
 								currentEquation = null;
 								pending = false;
 							}
@@ -57,16 +60,19 @@ public class Reaction implements Listener{
 	public static Equation getEquation(){
 		//+-x are easy
 		//On ÷, need to check if remainder is 0.
-		int op = Utilities.getRandom(Equation.PLUS, Equation.DIVIDE);
+		int op=Utilities.getRandom(Equation.PLUS, Equation.POWER);
 		int first = Utilities.getRandom(firstMin, firstMax);
 		int second = Utilities.getRandom(secondMin, secondMax);
 		while(op == Equation.DIVIDE && first%second != 0){
 			first = Utilities.getRandom(firstMin, firstMax);
 			second = Utilities.getRandom(secondMin, secondMax);
 		}
+		if(op == Equation.POWER){
+			second = Utilities.getRandom(3, 30);
+		}
 		Equation e = new Equation(first, op, second);
 		return e;
-		//int r = e.calculate();
+		//long r = e.calculate();
 		//e.close();
 		//return r;
 	}
@@ -77,9 +83,9 @@ public class Reaction implements Listener{
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent apce){
 		if(pending){
-			int ans = 0;
+			long ans = 0;
 			try{
-				ans = Integer.parseInt(apce.getMessage());
+				ans = Long.parseLong(apce.getMessage());
 			}catch(Exception e){
 				return;
 			}
@@ -88,9 +94,11 @@ public class Reaction implements Listener{
 				apce.setCancelled(true);
 				apce.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "Congratulations! You got it right!"));
 				ChatWriter.write(ChatWriterType.CHAT, ChatColor.YELLOW + "REACTION: " + apce.getPlayer().getName() + " got the answer! The answer is " + ans);
+				currentEquation.close();
 				currentEquation = null;
 				pending = false;
 				return;
+			
 			}else{
 				apce.setCancelled(true);
 				apce.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "I don't think that is the right answer. Try again!"));

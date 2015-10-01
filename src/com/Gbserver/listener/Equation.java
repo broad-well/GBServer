@@ -13,6 +13,7 @@ public class Equation {
 	public static final int MULTIPLY = 2;
 	public static final int MINUS = 3;
 	public static final int DIVIDE = 4;
+	public static final int POWER = 5;
 	//END STATIC
 	
 	public int left;
@@ -36,6 +37,8 @@ public class Equation {
 			return left-right;
 		case DIVIDE:
 			return left/right;
+		case POWER:
+			return Double.valueOf(Math.pow(left, right)).intValue();
 		}
 		return 0;
 	}
@@ -56,6 +59,9 @@ public class Equation {
 			break;
 		case DIVIDE:
 			op = "÷";
+			break;
+		case POWER:
+			op = "^";
 			break;
 		}
 		String s1 = ChatWriter.getMessage(ChatWriterType.CHAT,
