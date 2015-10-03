@@ -94,3 +94,5 @@ commands:
     description: Save your home.
   say:
     description: Disabled command.
+  ignore:
+    description: Ignoring chat messages.

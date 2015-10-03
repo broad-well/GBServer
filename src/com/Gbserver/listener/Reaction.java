@@ -52,6 +52,11 @@ public class Reaction implements Listener{
 					}, 1200L);
 				}else{
 					Bukkit.getLogger().log(Level.INFO, "Tried to get reaction, no players");
+					Equation e = getEquation();
+					Bukkit.getLogger().log(Level.INFO, "" + e.left + " " + e.operator + " " + e.right);
+					Bukkit.getLogger().log(Level.INFO, String.valueOf(e.calculate()));
+					e.close();
+					e = null;
 				}
 			}
 		}, 0L, 18000L);
@@ -68,7 +73,7 @@ public class Reaction implements Listener{
 			second = Utilities.getRandom(secondMin, secondMax);
 		}
 		if(op == Equation.POWER){
-			second = Utilities.getRandom(3, 30);
+			second = Utilities.getRandom(3, 10);
 		}
 		Equation e = new Equation(first, op, second);
 		return e;

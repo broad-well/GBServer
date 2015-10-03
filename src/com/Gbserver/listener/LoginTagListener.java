@@ -11,6 +11,7 @@ import com.Gbserver.commands.Nick;
 import com.Gbserver.commands.Quit;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.IgnoreList;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
@@ -22,6 +23,7 @@ public class LoginTagListener implements Listener{
 		pje.getPlayer().setCustomName(ChatFormatter.generateTag(pje.getPlayer(),false));
 		pje.getPlayer().setCustomNameVisible(true);
 		pje.getPlayer().setPlayerListName(ChatFormatter.generateTag(pje.getPlayer(),false));
+		new IgnoreList(pje.getPlayer());
 	}
 	
 	@EventHandler
@@ -44,5 +46,6 @@ public class LoginTagListener implements Listener{
 			return;
 		}
 		pqe.setQuitMessage(ChatWriter.getMessage(ChatWriterType.QUIT, pqe.getPlayer().getName() + " has left."));
+		IgnoreList.getIgnoreList(pqe.getPlayer()).close();
 	}
 }

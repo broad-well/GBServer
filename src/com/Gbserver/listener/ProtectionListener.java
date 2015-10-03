@@ -40,7 +40,7 @@ public class ProtectionListener implements Listener {
 			{"GoBroadwell"},
 			{"_Broadwell","Yin_of_the_Yang","Latios_"},
 			{""},
-			{"GoBroadwell"}
+			{"_Broadwell"}
 	};
 	
 	final int RIGHT_UP = 0;

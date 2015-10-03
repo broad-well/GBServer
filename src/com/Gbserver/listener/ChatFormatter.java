@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import com.Gbserver.variables.IgnoreList;
+
 public class ChatFormatter implements Listener{
 	public final static int OWNER = 1;
 	public final static int BANANA = 2;
@@ -44,14 +46,32 @@ public class ChatFormatter implements Listener{
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent pce) {
-		if(pce.getPlayer().getName().equalsIgnoreCase("jrmann100")){
+		try {
+			if(pce.getPlayer().getName().equalsIgnoreCase("jrmann100")){
+				pce.setCancelled(true);
+				String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.RESET + " " + pce.getMessage();
+				for(Player p : Bukkit.getOnlinePlayers()){
+					if(!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))){
+						p.sendMessage(output);
+					}
+				}
+				Bukkit.getConsoleSender().sendMessage(output);
+				return;
+			}
 			pce.setCancelled(true);
-			String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.WHITE;
-			Bukkit.broadcastMessage(output + " " + pce.getMessage());
-			return;
+			//pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
+			for(Player p : Bukkit.getOnlinePlayers()){
+				if(!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))){
+					p.sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+				}
+			}
+			Bukkit.getConsoleSender().sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			pce.getPlayer().sendMessage("An error occured.");
+			pce.getPlayer().sendMessage(e.getMessage());
 		}
-		pce.setFormat(generateTag(pce.getPlayer(),true) + ChatColor.GRAY + "%s " + ChatColor.RESET + "%s");
-		//pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
+		
 	}
 	
 	public static String generateTag(Player player, boolean isChat) {

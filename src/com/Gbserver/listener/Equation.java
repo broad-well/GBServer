@@ -27,7 +27,7 @@ public class Equation {
 		Reaction.equations.add(this);
 	}
 	
-	public int calculate() {
+	public long calculate() {
 		switch(operator){
 		case PLUS:
 			return left+right;
@@ -38,7 +38,7 @@ public class Equation {
 		case DIVIDE:
 			return left/right;
 		case POWER:
-			return Double.valueOf(Math.pow(left, right)).intValue();
+			return Double.valueOf(Math.pow(left, right)).longValue();
 		}
 		return 0;
 	}
