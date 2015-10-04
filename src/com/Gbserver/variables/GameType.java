@@ -88,7 +88,7 @@ public class GameType {
 		private Runnable onStart;
 		private Sheep blues;
 		private Sheep reds;
-		private LT type;
+		public LT type;
 		private ScoreDisplay sd;
 		public List<Player> blue;
 		public List<Player> red;
