@@ -102,11 +102,13 @@ public class Reaction implements Listener{
 				currentEquation.close();
 				currentEquation = null;
 				pending = false;
+				ChatFormatter.setCancelled.add(apce.getPlayer());
 				return;
 			
 			}else{
 				apce.setCancelled(true);
 				apce.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "I don't think that is the right answer. Try again!"));
+				ChatFormatter.setCancelled.add(apce.getPlayer());
 				return;
 			}
 		}

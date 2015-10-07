@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import com.Gbserver.variables.IgnoreList;
 import com.Gbserver.variables.LT;
 
 public class ChatFormatter implements Listener{
+    public static List<Player> setCancelled = new LinkedList<>();
+
 
 	public static Map<String, Rank> Rankdata = new HashMap<String, Rank>() {{
             put("_Broadwell", Rank.OWNER);
@@ -84,13 +87,17 @@ public class ChatFormatter implements Listener{
 				return;
 			}
 			pce.setCancelled(true);
-			//pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
-			for(Player p : Bukkit.getOnlinePlayers()){
-				if(!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))){
-					p.sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
-				}
-			}
-			Bukkit.getConsoleSender().sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+            if(!(setCancelled.contains(pce.getPlayer()))) {
+                //pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
+                        p.sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+                    }
+                }
+                Bukkit.getConsoleSender().sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+            }else{
+                setCancelled.remove(pce.getPlayer());
+            }
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

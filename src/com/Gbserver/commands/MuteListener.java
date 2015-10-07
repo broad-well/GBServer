@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.listener.ChatFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class MuteListener implements Listener{
 		if(Mute.list.contains(apce.getPlayer())){
 			apce.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You are muted."));
 			apce.setCancelled(true);
+			ChatFormatter.setCancelled.add(apce.getPlayer());
 		}
 	}
 }
