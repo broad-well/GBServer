@@ -114,11 +114,9 @@ public class CTF implements CommandExecutor{
 		Location l = p.getLocation();
 		//Negative: blue, positive: red
 		if(l.getZ() < 0){
-			Bukkit.broadcastMessage("Location query returned BLUE");
 			return Team.BLUE;
 		}
 		if(l.getZ() > 0){
-			Bukkit.broadcastMessage("Location query returned RED");
 			return Team.RED;
 		}
 		return Team.undefined;
@@ -126,11 +124,9 @@ public class CTF implements CommandExecutor{
 	
 	public static Team getOriginatedTeam(Player p){
 		if(red.contains(p)){
-			Bukkit.broadcastMessage("Origin query returned RED");
 			return Team.RED;
 		}
 		if(blue.contains(p)){
-			Bukkit.broadcastMessage("Origin query returned BLUE");
 			return Team.BLUE;
 		}
 		return Team.undefined;
@@ -187,5 +183,16 @@ public class CTF implements CommandExecutor{
 			return new Location(world, -4.5, 110, 12);
 		}
 		return null;
+	}
+	
+	public static Location getFlagByTeam(Team t){
+		switch(t){
+		case BLUE:
+			return blueFlagLocation;
+		case RED:
+			return redFlagLocation;
+		default:
+			return null;
+		}
 	}
 }

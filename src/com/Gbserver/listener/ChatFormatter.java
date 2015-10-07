@@ -90,10 +90,11 @@ public class ChatFormatter implements Listener{
 				}
 			}
 			Bukkit.getConsoleSender().sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			pce.getPlayer().sendMessage("An error occured.");
 			e.printStackTrace();
+			
 		}
 		
 	}

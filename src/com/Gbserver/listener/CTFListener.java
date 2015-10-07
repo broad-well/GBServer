@@ -1,5 +1,8 @@
 package com.Gbserver.listener;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -25,6 +28,8 @@ import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 
 public class CTFListener implements Listener {
+	public static List<Player> inSafety = new LinkedList<>();
+
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent pie) {
 
@@ -107,10 +112,13 @@ public class CTFListener implements Listener {
 		if (ede.getEntity() == CTF.blueFlag || ede.getEntity() == CTF.redFlag) {
 			ede.setCancelled(true);
 		}
+		if(CTF.isRunning && inSafety.contains(ede.getEntity())){
+			ede.setCancelled(true);
+		}
 	}
 
 	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent pme) {
+	public void onPlayerMove(final PlayerMoveEvent pme) {
 		if (CTF.allPlayers().contains(pme.getPlayer()) && CTF.isRunning) {
 			if (pme.getPlayer().getLocation().getY() < 0 && CTF.isRunning
 					&& CTF.allPlayers().contains(pme.getPlayer())) {
@@ -129,6 +137,27 @@ public class CTFListener implements Listener {
 				}
 
 			}
+			// 5 sec limit near flag.
+			if (pme.getPlayer().getLocation().distance(
+					CTF.getFlagByTeam(Team.opposite(CTF.getOriginatedTeam(pme.getPlayer())))) < 5) {
+				if (!inSafety.contains(pme.getPlayer())) {
+					inSafety.add(pme.getPlayer());
+					ChatWriter.writeTo(pme.getPlayer(), ChatWriterType.GAME, "You have entered the safety circle! "
+							+ ChatColor.YELLOW + "You will be killed if you don't leave the circle after 5 seconds!");
+					Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+						public void run() {
+							if(inSafety.contains(pme.getPlayer())){
+								pme.getPlayer().damage(pme.getPlayer().getHealth());
+								inSafety.remove(pme.getPlayer());
+							}
+						}
+					}, 100L);
+					
+				}
+				return;
+			}
+			inSafety.remove(pme.getPlayer());
 		}
 	}
+
 }

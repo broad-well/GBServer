@@ -17,4 +17,15 @@ public enum Team {
 		}
 		return "";
 	}
+	public static Team opposite(Team t){
+		switch(t){
+		case RED:
+			return BLUE;
+		case BLUE:
+			return RED;
+		case undefined:
+			return undefined;
+		}
+		return null;
+	}
 }

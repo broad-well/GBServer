@@ -16,7 +16,7 @@ public class IgnoreList {
 				return il;
 			}
 		}
-		return null;
+		return new IgnoreList(p);
 	}
 	//--------------------
 	
