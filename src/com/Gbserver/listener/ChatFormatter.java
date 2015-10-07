@@ -1,6 +1,9 @@
 package com.Gbserver.listener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.Conversation;
@@ -17,40 +20,38 @@ import com.Gbserver.variables.IgnoreList;
 import com.Gbserver.variables.LT;
 
 public class ChatFormatter implements Listener{
-	public final static int OWNER = 1;
-	public final static int BANANA = 2;
-	public final static int CAT = 3;
-	public final static int GHOST = 4;
-	public final static int POTATO = 5;
-	public final static int GATOR = 6;
-	public final static int BIRD = 7;
-	public final static int DUCK = 8;
-	public final static int DOG = 9;
-	
-	public final static Object[][] RANKDATA = {
-			{ "_Broadwell" , OWNER },
-			{ "MarkNutt" , BANANA },
-			{ "Ehcto" , GHOST},
-			//{ "Deliry" },
-			{ "Anairda" , CAT},
-			{ "Zenithian4" , POTATO},
-			{ "SallyGreen" , GATOR},
-			{ "Elenwen" , BIRD},
-			{ "Mystal" , DUCK},
-			{ "AcidWolf" , DOG}
-	};
-	
-	
-	
-	public final static String fOWNER = ChatColor.RED + "" + ChatColor.BOLD + "Owner ";
-	public final static String fGHOST = ChatColor.GRAY + "" + ChatColor.BOLD + "Ghost ";
-	public final static String fBANANA = ChatColor.YELLOW + "" + ChatColor.BOLD + "Banana ";
-	public final static String fCAT = ChatColor.BLACK + "" + ChatColor.BOLD + "Cat ";
-	public final static String fPOTATO = ChatColor.GOLD + "" + ChatColor.BOLD + "Potato ";
-	public final static String fGATOR = ChatColor.GREEN + "" + ChatColor.BOLD + "Gator ";
-	public final static String fBIRD = ChatColor.BLUE + "" + ChatColor.BOLD + "Bird ";
-	public final static String fDUCK = ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ";
-	public final static String fDOG = ChatColor.AQUA + "" + ChatColor.BOLD + "Dog ";
+
+	public static Map<String, Rank> Rankdata = new HashMap<String, Rank>() {{
+            put("_Broadwell", Rank.OWNER);
+            put("MarkNutt", Rank.BANANA);
+            put("Ehcto", Rank.GHOST);
+            put("Anairda", Rank.CAT);
+            put("Zenithian4", Rank.POTATO);
+            put("SallyGreen", Rank.GATOR);
+            put("Elenwen", Rank.BIRD);
+            put("Mystal", Rank.DUCK);
+            put("AcidWolf", Rank.DOG);
+            put("Flystal", Rank.DEEQ);
+    }};
+	enum Rank {
+		OWNER,BANANA,GHOST,CAT,POTATO,GATOR,BIRD,DUCK,DOG,DEEQ;
+        private static Map<Rank, String> format = new HashMap<Rank, String>() {{
+            put(OWNER, ChatColor.RED + "" + ChatColor.BOLD + "Owner ");
+            put(GHOST, ChatColor.GRAY + "" + ChatColor.BOLD + "Ghost ");
+            put(BANANA, ChatColor.YELLOW + "" + ChatColor.BOLD + "Banana ");
+            put(CAT, ChatColor.BLACK + "" + ChatColor.BOLD + "Cat ");
+            put(POTATO, ChatColor.GOLD + "" + ChatColor.BOLD + "Potato ");
+            put(GATOR, ChatColor.GREEN + "" + ChatColor.BOLD + "Gator ");
+            put(BIRD, ChatColor.BLUE + "" + ChatColor.BOLD + "Bird ");
+            put(DUCK, ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ");
+            put(DOG, ChatColor.AQUA + "" + ChatColor.BOLD + "Dog ");
+            put(DEEQ, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Deeq ");
+        }};
+
+        public static String getPrefix(Rank r){
+            return format.get(r);
+        }
+	}
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent pce) {
@@ -100,49 +101,7 @@ public class ChatFormatter implements Listener{
 	}
 	
 	public static String generateTag(Player player, boolean isChat) {
-		String format = "";
-		for (int i = 0; i < RANKDATA.length; i++) {
-			if (player.getName().equals(RANKDATA[i][0])) {
-
-				// if(RANKDATA[i][1].equals("OWNER")){
-				// pce.setFormat(OWNER + "%s" + ChatColor.RESET + " %s");
-				// }
-				// if(RANKDATA[i][1].equals("RESIDENT")){
-				// pce.setFormat(RESIDENT + "%s" + ChatColor.RESET + " %s");
-				// }
-				switch((int) RANKDATA[i][1]){
-				case OWNER:
-					format = format + fOWNER;
-					break;
-				case BANANA:
-					format = format + fBANANA;
-					break;
-				case CAT:
-					format = format + fCAT;
-					break;
-				case GHOST:
-					format = format + fGHOST;
-					break;
-				case POTATO:
-					format = format + fPOTATO;
-					break;
-				case GATOR:
-					format = format + fGATOR;
-					break;
-				case BIRD:
-					format = format + fBIRD;
-					break;
-				case DUCK:
-					format = format + fDUCK;
-					break;
-				case DOG:
-					format = format + fDOG;
-					break;
-				}
-
-			}
-			
-		}
+		String format = Rank.getPrefix(Rankdata.get(player.getName()));
 		if(isChat){
 			return format;
 		}else{
