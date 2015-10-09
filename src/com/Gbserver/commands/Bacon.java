@@ -32,7 +32,7 @@ public class Bacon implements CommandExecutor{
     public static List<String> log = new LinkedList<>();
 
     public static Pig entry;
-    public static HelpTable ht = new HelpTable("/bacon <stop/stats/log>", "This command is used for Bacon Brawl.", "", "bacon");
+    public static HelpTable ht = new HelpTable("/bacon <stop/start/leave/stats/log>", "This command is used for Bacon Brawl.", "", "bacon");
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
         if(args.length == 0) {ht.show(sender); return true;}
 
@@ -74,9 +74,14 @@ public class Bacon implements CommandExecutor{
                 }
                 return true;
             case "log":
-                sender.sendMessage(ChatColor.DARK_RED + "--Bacon Logs--");
-                for(String msg : log){
-                    sender.sendMessage(ChatColor.DARK_GRAY + msg);
+                if(args.length == 2){
+                    log.clear();
+                    sender.sendMessage("Cleared the log.");
+                }else {
+                    sender.sendMessage(ChatColor.DARK_RED + "--Bacon Logs--");
+                    for (String msg : log) {
+                        sender.sendMessage(ChatColor.DARK_GRAY + msg);
+                    }
                 }
                 return true;
             case "start":
@@ -98,6 +103,7 @@ public class Bacon implements CommandExecutor{
                     if(hasPlayer(p)){
                         players.remove(BaconPlayer.getByHandle(p));
                         ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Removed you from the Bacon Brawl game.");
+                        Bacon.log.add(ChatColor.BOLD + "[LEAVE] " + p.getName());
                     }else{
                         ChatWriter.writeTo(sender, ChatWriterType.ERROR, "You are not in the game.");
                     }
@@ -127,6 +133,7 @@ public class Bacon implements CommandExecutor{
             undisguise(p);
         }
         players.clear();
+        log.clear();
         isRunning = false;
     }
 

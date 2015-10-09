@@ -1,5 +1,7 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.commands.Bacon;
+import com.Gbserver.commands.BaconPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,5 +49,8 @@ public class LoginTagListener implements Listener{
 		}
 		pqe.setQuitMessage(ChatWriter.getMessage(ChatWriterType.QUIT, pqe.getPlayer().getName() + " has left."));
 		IgnoreList.getIgnoreList(pqe.getPlayer()).close();
+		if(Bacon.hasPlayer(pqe.getPlayer())){
+			Bacon.players.remove(BaconPlayer.getByHandle(pqe.getPlayer()));
+		}
 	}
 }

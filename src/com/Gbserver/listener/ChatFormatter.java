@@ -35,9 +35,10 @@ public class ChatFormatter implements Listener{
             put("Mystal", Rank.DUCK);
             put("AcidWolf", Rank.DOG);
             put("Flystal", Rank.DEEQ);
+			put("spacetrain31", Rank.DEV);
     }};
 	enum Rank {
-		OWNER,BANANA,GHOST,CAT,POTATO,GATOR,BIRD,DUCK,DOG,DEEQ;
+		OWNER,BANANA,GHOST,CAT,POTATO,GATOR,BIRD,DUCK,DOG,DEEQ,DEV;
         private static Map<Rank, String> format = new HashMap<Rank, String>() {{
             put(OWNER, ChatColor.RED + "" + ChatColor.BOLD + "Owner ");
             put(GHOST, ChatColor.GRAY + "" + ChatColor.BOLD + "Ghost ");
@@ -49,6 +50,7 @@ public class ChatFormatter implements Listener{
             put(DUCK, ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ");
             put(DOG, ChatColor.AQUA + "" + ChatColor.BOLD + "Dog ");
             put(DEEQ, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "deeq ");
+			put(DEV, ChatColor.RED + "" + ChatColor.BOLD + "Dev ");
         }};
 
         public static String getPrefix(Rank r){

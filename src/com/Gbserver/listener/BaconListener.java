@@ -23,6 +23,7 @@ public class BaconListener implements Listener{
             if(!Bacon.hasPlayer(piee.getPlayer())){
                 Bacon.addPlayer(piee.getPlayer());
                 ChatWriter.writeTo(piee.getPlayer(), ChatWriterType.GAME, "Added you to the Bacon Brawl game.");
+                Bacon.log.add(ChatColor.BOLD + "[JOIN] " + piee.getPlayer().getName());
             }else{
                 ChatWriter.writeTo(piee.getPlayer(), ChatWriterType.GAME, "You are already in the game.");
             }
