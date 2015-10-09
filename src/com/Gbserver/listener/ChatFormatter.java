@@ -48,7 +48,7 @@ public class ChatFormatter implements Listener{
             put(BIRD, ChatColor.BLUE + "" + ChatColor.BOLD + "Bird ");
             put(DUCK, ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ");
             put(DOG, ChatColor.AQUA + "" + ChatColor.BOLD + "Dog ");
-            put(DEEQ, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Deeq ");
+            put(DEEQ, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "deeq ");
         }};
 
         public static String getPrefix(Rank r){
@@ -109,6 +109,7 @@ public class ChatFormatter implements Listener{
 	
 	public static String generateTag(Player player, boolean isChat) {
 		String format = Rank.getPrefix(Rankdata.get(player.getName()));
+		if(format == null) format = "";
 		if(isChat){
 			return format;
 		}else{

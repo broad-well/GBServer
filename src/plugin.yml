@@ -96,3 +96,5 @@ commands:
     description: Disabled command.
   ignore:
     description: Ignoring chat messages.
+  bacon:
+    description: All about Bacon Brawl.
