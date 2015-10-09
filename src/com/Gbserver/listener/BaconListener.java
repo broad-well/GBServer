@@ -20,7 +20,7 @@ public class BaconListener implements Listener{
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent piee){
         if(piee.getRightClicked().equals(Bacon.entry)){
-            if(!Bacon.players.contains(piee.getPlayer())){
+            if(!Bacon.hasPlayer(piee.getPlayer())){
                 Bacon.addPlayer(piee.getPlayer());
                 ChatWriter.writeTo(piee.getPlayer(), ChatWriterType.GAME, "Added you to the Bacon Brawl game.");
             }else{
@@ -54,12 +54,12 @@ public class BaconListener implements Listener{
 
     }
 
-    public static Location spec = new Location(Bacon.world, 0,0,0); // -------Subject to change
+    public static Location spec = new Location(Bacon.world, 0,200,0); // -------Subject to change
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent pde){
         if(Bacon.isRunning && Bacon.hasPlayer(pde.getEntity())){
-            //spectate, log, setMessage.
+            //spectate, log, setMessage
             pde.setDeathMessage(ChatWriter.getMessage(ChatWriterType.DEATH, ChatColor.GREEN + pde.getEntity().getName()
                     + ChatColor.GRAY + " has been killed by " +
                     ChatColor.GREEN + BaconPlayer.getByHandle(pde.getEntity()).records.get(BaconPlayer.getByHandle(pde.getEntity()).records.size()-1).by.getHandle().getName()));

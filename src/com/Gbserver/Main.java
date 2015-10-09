@@ -95,6 +95,8 @@ public class Main extends JavaPlugin {
 		getCommand("home").setExecutor(new Home());
 		getCommand("say").setExecutor(new Say());
 		getCommand("ignore").setExecutor(new Ignore());
+		getCommand("bacon").setExecutor(new Bacon());
+		getServer().getPluginManager().registerEvents(new BaconListener(), this);
 		getServer().getPluginManager().registerEvents(new Reaction(), this);
 		getServer().getPluginManager().registerEvents(new CTFListener(), this);
 		getServer().getPluginManager().registerEvents(new RunnerListener(), this);
@@ -119,6 +121,7 @@ public class Main extends JavaPlugin {
 		lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
 		new Announce(this);
 		Reaction.getRepeatingEvent();
+		Bacon.getLobby();
 		GameType.TF = new GameType(new Runnable() {
 						public void run() {
 							TF.bluePlayers.addAll(GameType.TF.blue);
@@ -403,7 +406,7 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		saveConfig();
-	
+		Bacon.unload();
 	}
 	
 	public void setupConfig() {

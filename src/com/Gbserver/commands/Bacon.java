@@ -7,16 +7,16 @@ import com.Gbserver.variables.HelpTable;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -25,7 +25,8 @@ import java.util.logging.Level;
 
 public class Bacon implements CommandExecutor{
     public static World world = Bukkit.getWorld("BaconBrawl");
-    public static Location join = new Location(world, 0,0,0);  //SUBJECT TO CHANGE_________________
+    public static Location join = new Location(world, 709.5,109.5,-722.5);
+    public static Location play = new Location(world, 0,102,0);
     public static boolean isRunning = false;
     public static List<BaconPlayer> players = new LinkedList<>();
     public static List<String> log = new LinkedList<>();
@@ -78,7 +79,35 @@ public class Bacon implements CommandExecutor{
                     sender.sendMessage(ChatColor.DARK_GRAY + msg);
                 }
                 return true;
+            case "start":
+                for(BaconPlayer bp : players){
+                    disguiseToPig(bp);
+                    bp.getHandle().teleport(play);
+                    bp.getHandle().getInventory().clear();
+                    bp.getHandle().setGameMode(GameMode.SURVIVAL);
+                    bp.getHandle().getActivePotionEffects().clear();
+                    bp.getHandle().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+                    bp.getHandle().setItemInHand(new ItemStack(Material.IRON_AXE));
+                }
+                isRunning = true;
+                sender.sendMessage("Game started");
+                return true;
+            case "leave":
+                if(Utilities.validateSender(sender)){
+                    Player p = (Player) sender;
+                    if(hasPlayer(p)){
+                        players.remove(BaconPlayer.getByHandle(p));
+                        ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Removed you from the Bacon Brawl game.");
+                    }else{
+                        ChatWriter.writeTo(sender, ChatWriterType.ERROR, "You are not in the game.");
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
             default:
+                ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Unknown option: " + args[0]);
+                ht.show(sender);
                 return false;
         }
     }
