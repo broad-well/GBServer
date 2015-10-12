@@ -4,12 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,6 +19,7 @@ import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class CTF implements CommandExecutor{
 	//VARIABLES ARE LOCATED HERE
@@ -32,8 +28,8 @@ public class CTF implements CommandExecutor{
 	public static boolean isRunning = false;
 	public static Sheep redFlag;
 	public static Sheep blueFlag;
-	public static Location redFlagLocation = new Location(world,-29.5,106,88.5);
-	public static Location blueFlagLocation = new Location(world, 29.5,106,-88.5);
+	public static Location redFlagLocation = new Location(world,-36.5,105,89.5);
+	public static Location blueFlagLocation = new Location(world, 31.5,105,-88.5);
 	public static List<Player> red = new LinkedList<Player>();
 	public static List<Player> blue = new LinkedList<Player>();
 	public static Collection<Integer> tasks = new LinkedList<>();
@@ -166,6 +162,14 @@ public class CTF implements CommandExecutor{
 			(inkim = inksac.getItemMeta()).setDisplayName("Opponent Capturer");
 			inksac.setItemMeta(inkim);
 		}
+
+
+		for(Player p : blue){
+			p.getInventory().setArmorContents(getArmor(Color.BLUE));
+		}
+		for(Player p : red){
+			p.getInventory().setArmorContents(getArmor(Color.RED));
+		}
 		for(Player p : allPlayers()){
 			p.setGameMode(GameMode.SURVIVAL);
 			p.getInventory().clear();
@@ -195,4 +199,30 @@ public class CTF implements CommandExecutor{
 			return null;
 		}
 	}
+
+	public static ItemStack[] getArmor(Color c){
+		ItemStack blueboot = new ItemStack(Material.LEATHER_BOOTS);
+		LeatherArmorMeta lambboot = (LeatherArmorMeta) blueboot.getItemMeta();
+		lambboot.setColor(c);
+		blueboot.setItemMeta(lambboot);
+
+		ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+		LeatherArmorMeta chest = (LeatherArmorMeta) chestplate.getItemMeta();
+		chest.setColor(c);
+		chestplate.setItemMeta(chest);
+
+		ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
+		LeatherArmorMeta lam = (LeatherArmorMeta) leggings.getItemMeta();
+		lam.setColor(c);
+		leggings.setItemMeta(lam);
+
+		ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+		LeatherArmorMeta helmetm = (LeatherArmorMeta)  helmet.getItemMeta();
+		helmetm.setColor(c);
+		helmet.setItemMeta(helmetm);
+
+		ItemStack[] returning = {blueboot, chestplate, leggings, helmet};
+		return returning;
+	}
+
 }

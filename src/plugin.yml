@@ -98,3 +98,5 @@ commands:
     description: Ignoring chat messages.
   bacon:
     description: All about Bacon Brawl.
+  hat:
+    description: Enjoy hats!

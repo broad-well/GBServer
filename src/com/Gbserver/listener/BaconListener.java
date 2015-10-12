@@ -44,10 +44,7 @@ public class BaconListener implements Listener{
             Player butcher = (Player) edbee.getDamager();
             if(Bacon.isRunning && Bacon.hasPlayer((Player) edbee.getDamager())
                     && Bacon.hasPlayer(suffer)){
-                edbee.setCancelled(true);
 
-                suffer.damage(0.1);
-                suffer.setVelocity(suffer.getVelocity().subtract(butcher.getVelocity()).multiply(0.7));
                 new DamageRecord(BaconPlayer.getByHandle((Player) edbee.getDamager()),
                                  BaconPlayer.getByHandle(suffer));
             }
@@ -63,7 +60,7 @@ public class BaconListener implements Listener{
             //spectate, log, setMessage
             pde.setDeathMessage(ChatWriter.getMessage(ChatWriterType.DEATH, ChatColor.GREEN + pde.getEntity().getName()
                     + ChatColor.GRAY + " has been killed by " +
-                    ChatColor.GREEN + BaconPlayer.getByHandle(pde.getEntity()).records.get(BaconPlayer.getByHandle(pde.getEntity()).records.size()-1).by.getHandle().getName()));
+                    ChatColor.GREEN + BaconPlayer.getByHandle(pde.getEntity()).records.get(1).by.getHandle().getName()));
             pde.getEntity().setHealth(20);
             pde.getEntity().setGameMode(GameMode.SPECTATOR);
             pde.getEntity().teleport(spec);

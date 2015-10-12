@@ -20,7 +20,7 @@ import com.Gbserver.variables.ChatWriterType;
 public class SaveMoment implements CommandExecutor{
 	
 	//TYPE
-	public static Collection<PlayerData> saved = new LinkedList<>();
+	public static Collection<PlayerData> saved = new LinkedList<PlayerData>();
 	public class PlayerData {
 		public Player player;
 		public Location location;

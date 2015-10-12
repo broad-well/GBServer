@@ -53,7 +53,7 @@ public class Main extends JavaPlugin {
 		//fc.addDefault("announcements", "An announcement 1");
 		//fc.addDefault("announcements", "An announcemento 2");
 		//fc.options().copyDefaults(true);
-
+		setupConfig();
 		@SuppressWarnings("unused")
 		Protection proc = new Protection(this);
 		getCommand("spawn").setExecutor(new Spawn());
@@ -96,6 +96,7 @@ public class Main extends JavaPlugin {
 		getCommand("say").setExecutor(new Say());
 		getCommand("ignore").setExecutor(new Ignore());
 		getCommand("bacon").setExecutor(new Bacon());
+		getCommand("hat").setExecutor(new Hat());
 		getServer().getPluginManager().registerEvents(new BaconListener(), this);
 		getServer().getPluginManager().registerEvents(new Reaction(), this);
 		getServer().getPluginManager().registerEvents(new CTFListener(), this);
@@ -131,7 +132,7 @@ public class Main extends JavaPlugin {
 					}, LT.TF);
 		GameType.BL = new GameType(new Runnable() {
 			public void run() {
-				List<String> pls = new LinkedList<>();
+				List<String> pls = new LinkedList<String>();
 				for(Player pa : GameType.BL.red){
 					pls.add(pa.getName());
 					pa.teleport(BL.redTP);
@@ -178,7 +179,6 @@ public class Main extends JavaPlugin {
 		}, LT.DR);
 		GameType.CTF = new GameType(new Runnable() {
 
-			@Override
 			public void run() {
 				
 				CTF.blue.addAll(GameType.CTF.blue);
@@ -198,7 +198,6 @@ public class Main extends JavaPlugin {
 		Runner.getSheep();
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
-			@Override
 			public void run() {
 				Vector nullv = new Vector(0,0,0);
 				GameType.TF.getBlue().setVelocity(nullv);
@@ -217,11 +216,15 @@ public class Main extends JavaPlugin {
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
-			@Override
 			public void run() {
 				if(CTF.isRunning){
 					for(Player a : CTF.allPlayers()){
 						a.setFoodLevel(20);
+					}
+				}
+				if(Bacon.isRunning){
+					for(BaconPlayer bp : Bacon.players){
+						bp.getHandle().setFoodLevel(20);
 					}
 				}
 			}
@@ -329,7 +332,6 @@ public class Main extends JavaPlugin {
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 			
 			@SuppressWarnings("deprecation")
-			@Override
 			public void run() {
 				for(Player p : Bukkit.getOnlinePlayers()){
 					Block b;
@@ -410,11 +412,8 @@ public class Main extends JavaPlugin {
 	}
 	
 	public void setupConfig() {
-		if(!getConfig().contains("announcements")){
-			List<String> value = Arrays.asList("Hello defaults", "Hello HELL");
-			getConfig().addDefault("announcements", value);
-			saveConfig();
-		}
+		saveDefaultConfig();
+		saveConfig();
 	}
 }
 	

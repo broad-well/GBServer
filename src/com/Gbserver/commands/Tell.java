@@ -37,11 +37,9 @@ public class Tell implements CommandExecutor {
 				globalOutput = "";
 				concatenateMultipleSpaces();
 				Player tp = null;
-				try{
 				tp = Bukkit.getPlayer(args[0]);
-				}catch(Exception e){
-					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.ERROR, "That player cannot be found"));
-					return true;
+				if(tp == null){
+					ChatWriter.writeTo(sender, ChatWriterType.ERROR, "That player cannot be found.");
 				}
 				tp.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + player.getName() + ": " + globalOutput);
 				tp.playNote(tp.getLocation(),Instrument.PIANO,Note.natural(1, Tone.G));

@@ -11,6 +11,7 @@ import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -92,7 +93,10 @@ public class Bacon implements CommandExecutor{
                     bp.getHandle().setGameMode(GameMode.SURVIVAL);
                     bp.getHandle().getActivePotionEffects().clear();
                     bp.getHandle().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-                    bp.getHandle().setItemInHand(new ItemStack(Material.IRON_AXE));
+                    ItemStack iron = new ItemStack(Material.IRON_AXE);
+                    iron.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, -32767);
+                    iron.addUnsafeEnchantment(Enchantment.DURABILITY, 32767);
+                    bp.getHandle().setItemInHand(iron);
                 }
                 isRunning = true;
                 sender.sendMessage("Game started");

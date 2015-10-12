@@ -21,7 +21,7 @@ import com.Gbserver.variables.IgnoreList;
 import com.Gbserver.variables.LT;
 
 public class ChatFormatter implements Listener{
-    public static List<Player> setCancelled = new LinkedList<>();
+    public static List<Player> setCancelled = new LinkedList<Player>();
 
 
 	public static Map<String, Rank> Rankdata = new HashMap<String, Rank>() {{

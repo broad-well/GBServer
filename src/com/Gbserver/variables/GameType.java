@@ -143,7 +143,7 @@ public class GameType {
 				sd.setLine(ChatColor.RED + "Red: 0", 4);
 				sd.setLine(ChatColor.YELLOW + "Teaming does not count", 6);
 				sd.display();
-				mapAlterable = true;
+				mapAlterable = false;
 				break;
 			case CTF:
 				blues = (Sheep) ctfWorld.spawnEntity(ctfBlueJoin, EntityType.SHEEP);

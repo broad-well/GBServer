@@ -27,7 +27,7 @@ public class Vote implements CommandExecutor {
 	 */
 	public static List<String> options = new LinkedList<String>();
 	public static int[] votes = new int[9];
-	public static List<Player> voted = new LinkedList<>();
+	public static List<Player> voted = new LinkedList<Player>();
 	public static List<Player> players = new LinkedList<>();
 	
 	private HelpTable ht = new HelpTable("/vote <create/results/close/(your vote selection)> <option> <option> (options required with \"create\")", "/vote is used for voting functionalities.", "", "vote");

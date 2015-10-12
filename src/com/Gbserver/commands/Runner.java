@@ -57,7 +57,7 @@ public class Runner implements CommandExecutor {
 	public static Location join = new Location(world, 1012.5, 102.5, -1023.5);
 	public static Sheep joinSheep;
 	public static boolean isRunning = false;
-	public static List<Player> players = new LinkedList<>();
+	public static List<Player> players = new LinkedList<Player>();
 	@EventHandler
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("runner")) {
