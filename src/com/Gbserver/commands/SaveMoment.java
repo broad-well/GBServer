@@ -20,7 +20,7 @@ import com.Gbserver.variables.ChatWriterType;
 public class SaveMoment implements CommandExecutor{
 	
 	//TYPE
-	public static Collection<PlayerData> saved = new LinkedList<PlayerData>();
+	public static Collection<PlayerData> saved = new LinkedList<>();
 	public class PlayerData {
 		public Player player;
 		public Location location;
@@ -45,7 +45,7 @@ public class SaveMoment implements CommandExecutor{
 			location = null;
 			inventory = null;
 			health = 0;
-			this.finalize();
+			finalize();
 		}
 	}
 	
@@ -84,6 +84,7 @@ public class SaveMoment implements CommandExecutor{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						saved.remove(pd);
 						return true;
 					}
 				}

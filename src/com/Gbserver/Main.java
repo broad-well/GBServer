@@ -97,6 +97,7 @@ public class Main extends JavaPlugin {
 		getCommand("ignore").setExecutor(new Ignore());
 		getCommand("bacon").setExecutor(new Bacon());
 		getCommand("hat").setExecutor(new Hat());
+		getCommand("warp").setExecutor(new Warp());
 		getServer().getPluginManager().registerEvents(new BaconListener(), this);
 		getServer().getPluginManager().registerEvents(new Reaction(), this);
 		getServer().getPluginManager().registerEvents(new CTFListener(), this);
@@ -349,52 +350,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}, 0L, 1L);
-		/*pm.addPacketListener(
-				  new PacketAdapter(this, ListenerPriority.NORMAL, 
-				          PacketType.Play.Server.ENTITY_TELEPORT) {
-				    @Override
-				    public void onPacketSending(PacketEvent event) {
-				        // Item packets (id: 0x29)
-				    	// bat's packet id is 42.
-				        if (event.getPacketType() == 
-				                PacketType.Play.Server.ENTITY_TELEPORT) {
-				            if(event.getPacket().getIntegers().read(0) == 42){
-				            this.getPlugin().getLogger().info("Just found a minecart packet");
-				            event.setCancelled(true);
-				            }
-				        }
-				    }
-				});
-	    /*
-		 * scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-		 * 
-		 * public void run() { if(TF.isRunning){ try{ TF.isBuildtime = true;
-		 * Thread.sleep(30000); TF.isBuildtime = false; Thread.sleep(160000);
-		 * }catch(Exception e){
-		 * 
-		 * } } }
-		 * 
-		 * }, 0L, 20L); /*
-		 * getServer().getScheduler().scheduleSyncDelayedTask(this, new
-		 * Runnable() {
-		 * 
-		 * @SuppressWarnings("deprecation") public void run() { for (int a = 0;
-		 * a < Runner.players.length; a++) { Player player = Runner.players[a];
-		 * player.sendMessage("hello"); World world = player.getWorld(); if
-		 * (Runner.isRunning) { Location loc = player.getLocation();
-		 * player.sendMessage("You are at " + loc); int x = loc.getBlockX(); int
-		 * y = loc.getBlockY(); int z = loc.getBlockZ(); y--; Location newloc =
-		 * new Location(world, x, y, z); Material block; byte data; if
-		 * (newloc.getBlock().getType() != Material.AIR) { try {
-		 * Thread.sleep(130); block = newloc.getBlock().getType(); data =
-		 * newloc.getBlock().getData(); newloc.getBlock().setType(Material.AIR);
-		 * world.spawnFallingBlock(newloc, block, data); } catch (Exception e) {
-		 * e.printStackTrace(); } }
-		 * 
-		 * } } } }, 1L); // This is the delay, in ticks, until the thread is
-		 * executed, // since the main threads ticks 20 times per second, 60
-		 * ticks is // 3 seconds.
-		 */
+
 	}
 	
 	public void onDisable() {

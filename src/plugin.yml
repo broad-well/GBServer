@@ -100,3 +100,5 @@ commands:
     description: All about Bacon Brawl.
   hat:
     description: Enjoy hats!
+  warp:
+    description: Save and use waypoints.

@@ -25,8 +25,27 @@ public class Tell implements CommandExecutor {
 		if (label.equalsIgnoreCase("tell") || label.equalsIgnoreCase("t") || label.equalsIgnoreCase("msg")
 				|| label.equalsIgnoreCase("m")) {
 			if (!(sender instanceof Player)) {
-				sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-				return false;
+				if(args.length < 2){
+					ht.show(sender);
+					return true;
+				}
+				Player p;
+				if((p = Bukkit.getPlayer(args[0])) == null){
+					return true;
+				}else{
+					global = args;
+					globalOutput = "";
+					concatenateMultipleSpaces();
+					p.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Console: " + globalOutput);
+					p.playNote(p.getLocation(),Instrument.PIANO,Note.natural(1, Tone.G));
+					p.playNote(p.getLocation(),Instrument.PIANO,Note.natural(1, Tone.G));
+					p.playNote(p.getLocation(),Instrument.PIANO,Note.natural(1, Tone.G));
+					p.playNote(p.getLocation(),Instrument.PIANO,Note.natural(1, Tone.G));
+					p.playNote(p.getLocation(),Instrument.PIANO,Note.natural(1, Tone.G));
+					sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully sent message to " + p.getName() + ": " + globalOutput));
+
+				}
+				return true;
 			}
 			Player player = (Player) sender;
 			if (args.length < 2) {

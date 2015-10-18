@@ -41,7 +41,7 @@ public class ChatFormatter implements Listener{
 		OWNER,BANANA,GHOST,CAT,POTATO,GATOR,BIRD,DUCK,DOG,DEEQ,DEV;
         private static Map<Rank, String> format = new HashMap<Rank, String>() {{
             put(OWNER, ChatColor.RED + "" + ChatColor.BOLD + "Owner ");
-            put(GHOST, ChatColor.GRAY + "" + ChatColor.BOLD + "Ghost ");
+            put(GHOST, ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Ghost ");
             put(BANANA, ChatColor.YELLOW + "" + ChatColor.BOLD + "Banana ");
             put(CAT, ChatColor.BLACK + "" + ChatColor.BOLD + "Cat ");
             put(POTATO, ChatColor.GOLD + "" + ChatColor.BOLD + "Potato ");

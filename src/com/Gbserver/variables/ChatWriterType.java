@@ -14,5 +14,6 @@ public enum ChatWriterType {
 	HELP,
 	TPA,
 	HOME,
-	DEATH
+	DEATH,
+	WARP
 }
