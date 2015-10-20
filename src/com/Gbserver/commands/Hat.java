@@ -14,11 +14,11 @@ import org.bukkit.inventory.ItemStack;
  */
 public class Hat implements CommandExecutor {
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        if(Utilities.validateSender(sender)){
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (Utilities.validateSender(sender)) {
             Player p = (Player) sender;
             ItemStack is;
-            if((is = p.getItemInHand()).getType().isBlock()){
+            if ((is = p.getItemInHand()).getType().isBlock()) {
                 ItemStack[] armor = p.getInventory().getArmorContents();
                 armor[3] = is;
                 p.getInventory().setArmorContents(armor);
@@ -28,7 +28,7 @@ public class Hat implements CommandExecutor {
                 ChatWriter.writeTo(sender, ChatWriterType.CONDITION, "This item cannot be used for a hat.");
                 return true;
             }
-        }else{
+        } else {
             return false;
         }
     }

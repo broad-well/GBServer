@@ -1,4 +1,5 @@
 package com.Gbserver.commands;
+
 import org.bukkit.ChatColor;
 
 /**
@@ -15,7 +16,7 @@ public class DamageRecord {
         BaconLogs.log(false, "[DAMAGE] " + to.getHandle().getName() + " hit by " + by.getHandle().getName());
     }
 
-    public String getChatOutput(){
+    public String getChatOutput() {
         return ChatColor.DARK_AQUA + "- " + ChatColor.GREEN + this.to.getHandle().getName()
                 + ChatColor.RESET + " hit by " + ChatColor.GREEN + this.by.getHandle().getName();
     }
