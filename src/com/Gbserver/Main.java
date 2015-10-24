@@ -85,6 +85,7 @@ public class Main extends JavaPlugin {
         getCommand("bacon").setExecutor(new Bacon());
         getCommand("hat").setExecutor(new Hat());
         getCommand("warp").setExecutor(new Warp());
+        getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
         getServer().getPluginManager().registerEvents(new Reaction(), this);
         getServer().getPluginManager().registerEvents(new CTFListener(), this);
