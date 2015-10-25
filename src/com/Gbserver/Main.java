@@ -19,15 +19,18 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
     public static byte paintColor = (byte) 15;
     //For Halloween!
-    public static boolean isHalloween = false;
+    public static boolean isHalloween = isHalloweenConfig();
     public static String eventName = "Halloween Party";
 
 
@@ -85,6 +88,7 @@ public class Main extends JavaPlugin {
         getCommand("bacon").setExecutor(new Bacon());
         getCommand("hat").setExecutor(new Hat());
         getCommand("warp").setExecutor(new Warp());
+        getCommand("admin").setExecutor(new Admin());
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
         getServer().getPluginManager().registerEvents(new Reaction(), this);
@@ -354,5 +358,14 @@ public class Main extends JavaPlugin {
     public void setupConfig() {
         saveDefaultConfig();
         saveConfig();
+    }
+
+    public static boolean isHalloweenConfig(){
+        try {
+            Scanner s = new Scanner(new FileInputStream(ConfigManager.getPathInsidePluginFolder("IsItHalloween.txt").toFile()));
+            return Boolean.valueOf(s.nextLine());
+        }catch(Exception e){
+            return false;
+        }
     }
 }

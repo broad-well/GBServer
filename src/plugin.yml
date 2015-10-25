@@ -102,3 +102,7 @@ commands:
     description: Enjoy hats!
   warp:
     description: Save and use waypoints.
+  admin:
+    description: Talk to an admin.
+    usage: /admin <message>
+    aliases: [a]

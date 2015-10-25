@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.Main;
 import com.Gbserver.commands.Team;
 import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
@@ -9,14 +10,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ChatFormatter implements Listener {
     public static List<Player> setCancelled = new LinkedList<Player>();
-
+    //For fiestas.
+    public static List<String> staff = Arrays.asList("_Broadwell", "SallyGreen", "Ehcto");
 
     public static Map<String, Rank> Rankdata = new HashMap<String, Rank>() {{
         put("_Broadwell", Rank.OWNER);
@@ -105,6 +104,9 @@ public class ChatFormatter implements Listener {
     }
 
     public static String generateTag(Player player, boolean isChat) {
+        if(staff.contains(player.getName()) && Main.isHalloween){
+            return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Host ";
+        }
         String format = Rank.getPrefix(Rankdata.get(player.getName()));
         if (format == null) format = "";
         if (isChat) {

@@ -28,7 +28,7 @@ public class ConfigPlayerVault extends ConfigManager{
     }
 
     
-    public void saveData() throws IOException {
+    public void savData() throws IOException {
         //Location, Gamemode
         List<String> data = new LinkedList<>();
         {
@@ -41,9 +41,10 @@ public class ConfigPlayerVault extends ConfigManager{
             data.add(String.valueOf(loc.getYaw()));
         }
         {
-            data.add(target.getGameMode().toString());
+            this.data.remove(uuid);
+            data.add(GmToString(target.getGameMode()));
         }
-        add(uuid, null, (String[]) data.toArray());
+        add(uuid, null, data.toArray(new String[6]));
         flush();
     }
 
@@ -57,6 +58,41 @@ public class ConfigPlayerVault extends ConfigManager{
                 Double.valueOf(value.get(3)),
                 Float.valueOf(value.get(4)),
                 Float.valueOf(value.get(5)));
-        target.setGameMode(GameMode.valueOf(value.get(6)));
+        target.teleport(targetLocation);
+        target.setGameMode(GmFromString(value.get(6)));
+    }
+
+    private static final String CREATIVE = "C";
+    private static final String SURVIVAL = "S";
+    private static final String ADVENTURE = "A";
+    private static final String SPECTATOR = "P";
+    private String GmToString(GameMode gm){
+        switch(gm){
+            case CREATIVE:
+                return CREATIVE;
+            case SURVIVAL:
+                return SURVIVAL;
+            case ADVENTURE:
+                return ADVENTURE;
+            case SPECTATOR:
+                return SPECTATOR;
+            default:
+                return null;
+        }
+    }
+
+    private GameMode GmFromString(String str){
+        switch(str){
+            case CREATIVE:
+                return GameMode.CREATIVE;
+            case SURVIVAL:
+                return GameMode.SURVIVAL;
+            case ADVENTURE:
+                return GameMode.ADVENTURE;
+            case SPECTATOR:
+                return GameMode.SPECTATOR;
+            default:
+                return GameMode.CREATIVE;
+        }
     }
 }

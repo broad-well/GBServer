@@ -51,6 +51,13 @@ public class Gamemode implements CommandExecutor {
                             p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You cannot change gamemode in games!"));
                         }
                         return true;
+                    case "a":
+                        if (!isInGame) {
+                            p.setGameMode(GameMode.ADVENTURE);
+                        } else {
+                            p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You cannot change gamemode in games!"));
+                        }
+                        return true;
                 }
             } else {
                 ChatWriter.writeTo(sender, ChatWriterType.EVENT, "During " + Main.eventName + ", /gm is limited to staff. Sorry!");

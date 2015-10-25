@@ -18,7 +18,7 @@ public class StatusKeeper implements Listener{
     public void onPlayerQuit(PlayerQuitEvent pqe){
         try{
             ConfigPlayerVault cpv = new ConfigPlayerVault(pqe.getPlayer());
-            cpv.saveData();
+            cpv.savData();
             Bukkit.getLogger().info(cpv.data.toString());
         }catch(Exception e){
             e.printStackTrace();
