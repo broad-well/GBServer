@@ -47,4 +47,13 @@ public class Fonts {
             }
         };
     }
+
+    public static Font interpretPackage(String name, int[][][] Package) {
+        List<FontChar> chars = new LinkedList<>();
+        for(int i = 0; i < Font.totalChars; i++){
+            chars.add(buildFontChar(Font.ALL_CHARS[i],Package[i]));
+        }
+            return new Font(name, chars.toArray(new FontChar[1]));
+
+    }
 }
