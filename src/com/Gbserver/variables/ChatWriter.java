@@ -61,7 +61,7 @@ public class ChatWriter {
                 output += ChatColor.GOLD + "Warp> " + ChatColor.AQUA;
                 break;
             case EVENT:
-                output += ChatColor.DARK_AQUA + "Event> " + ChatColor.GRAY;
+                output += ChatColor.DARK_AQUA + "Event> " + ChatColor.GOLD;
 
         }
         output += message;
