@@ -25,7 +25,7 @@ public class Heal implements CommandExecutor {
             }
             Player p = (Player) sender;
             if (args.length > 0 || args[0].equals("draw")){
-                TextRender.render(StandardFonts.CUBE_GOTHIC, "SUM, THING", p.getLocation(), Material.STAINED_CLAY, TextRender.NORTH);
+                TextRender.render(StandardFonts.CUBE_GOTHIC, args[1].toUpperCase(), p.getLocation(), Material.STAINED_CLAY, TextRender.EAST);
                 p.sendMessage("rendered message");
                 return true;
             }

@@ -1,8 +1,11 @@
 package com.Gbserver.unicorn;
 
+import com.Gbserver.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,15 +30,25 @@ public class FontWriter {
 
     public void writeText() {
         Worker.resetCountDownLatch();
+        /*
+        |-----------|
+        |   |   |   |
+        |-----------|
+         */
         for(int[][] character : pixels){
-            workers.add(new Worker(workPen, character, penstroke, DIREKTION));
-            moveTowardsDirection(workPen, DIREKTION, character.length);
+            Worker current = new Worker(workPen.clone(), character, penstroke, DIREKTION);
+            workers.add(current);
+            while(true){
+                if(current.thisThread.isAlive()){
+                    break;
+                }
+            }
+            moveTowardsDirection(workPen, DIREKTION, character.length+1);
         }
-        while(!areAllWorkersRetired());
+
     }
 
     public void close() {
-        while(!areAllWorkersRetired());
         pixels = null;
         DIREKTION = 0;
         workPen = null;
@@ -80,6 +93,8 @@ class Worker {
     public static CountDownLatch GLOBAL_LATCH = new CountDownLatch(1);
     public static void resetCountDownLatch() { GLOBAL_LATCH = new CountDownLatch(1);}
 
+    private int addX;
+    private int addZ;
     public Thread thisThread;
     public boolean retired = false;
     public Worker(final Location startingLocation, final int[][] toDraw, final Material stroke, final int direktion){
@@ -87,15 +102,13 @@ class Worker {
         thisThread = new Thread("WORKER-" + activeWorkersCount) {
             public void run() {
                 System.out.println("Hello world from " + this.getName());
-                try {
+                /*try {
                     GLOBAL_LATCH.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     return;
-                }
+                }*/
                 System.out.println("Latch opened");
-                int addX = 0;
-                int addZ = 0;
                 switch(direktion){
                     case TextRender.NORTH:
                         //Z minus.
@@ -118,19 +131,24 @@ class Worker {
                         addZ = 0;
                         break;
                 }
-                for(int[] line : toDraw){
-                    for(int dot : line){
-                        if(dot == 1) {
-                            startingLocation.getBlock().setType(stroke);
-                        }else{
-                            startingLocation.getBlock().setType(Material.AIR);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+                    public void run() {
+                        for(int[] line : toDraw){
+                            for(int dot : line){
+                                if(dot == 1) {
+                                    startingLocation.getBlock().setType(stroke);
+                                }else{
+                                    startingLocation.getBlock().setType(Material.AIR);
+                                }
+                                startingLocation.add(addX, 0, addZ);
+                            }
+                            startingLocation.add((0-addX)*line.length, 0, (0-addZ)*line.length);
+                            startingLocation.add(0, -1, 0);
                         }
-                        startingLocation.add(addX, 0, addZ);
+                        close();
                     }
-                    startingLocation.add((0-addX)*line.length, 0, (0-addZ)*line.length);
-                    startingLocation.add(0, -1, 0);
-                }
-                close();
+                });
+
             }
         };
         if(GLOBAL_LATCH.getCount() != 1) return;

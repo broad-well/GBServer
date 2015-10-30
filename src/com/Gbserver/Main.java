@@ -89,6 +89,7 @@ public class Main extends JavaPlugin {
         getCommand("hat").setExecutor(new Hat());
         getCommand("warp").setExecutor(new Warp());
         getCommand("admin").setExecutor(new Admin());
+        getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
         getServer().getPluginManager().registerEvents(new Reaction(), this);
@@ -324,15 +325,19 @@ public class Main extends JavaPlugin {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     Block b;
-                    if (p.getItemInHand().getType().equals(Material.WOOD_SWORD)
-                            && p.getItemInHand().getItemMeta().getDisplayName().equals("Thin Brush")
-                            && p.getWorld().equals(Bukkit.getWorld("Drawing"))
-                            && p.isBlocking()) {
-                        //Do draw.
-                        if ((b = p.getTargetBlock((Set<Material>) null, 100)).getType().equals(Material.WOOL)) {
-                            b.setData(paintColor);
-                        }
+                    try {
+                        if (p.getItemInHand().getType().equals(Material.WOOD_SWORD)
+                                && p.getItemInHand().getItemMeta().getDisplayName().equals("Thin Brush")
+                                && p.getWorld().equals(Bukkit.getWorld("Drawing"))
+                                && p.isBlocking()) {
+                            //Do draw.
+                            if ((b = p.getTargetBlock((Set<Material>) null, 100)).getType().equals(Material.WOOL)) {
+                                b.setData(paintColor);
+                            }
 
+
+                        }
+                    }catch(Exception e){
 
                     }
                 }

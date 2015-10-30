@@ -33,8 +33,7 @@ public class Utilities {
         int x2 = lo.getBlockX();
         int y2 = lo.getBlockY();
         int z2 = lo.getBlockZ();
-        boolean is[] = new boolean[3];
-        return isInRange(x1, x2, test.getBlockX()) && isInRange(y1, y2, test.getBlockY()) && isInRange(z1, z2, test.getBlockZ());
+        return (isInRange(x1, x2, test.getBlockX()) && isInRange(y1, y2, test.getBlockY()) && isInRange(z1, z2, test.getBlockZ())) && test.getWorld() == hi.getWorld();
 
     }
 
