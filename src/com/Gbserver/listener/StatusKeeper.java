@@ -19,7 +19,6 @@ public class StatusKeeper implements Listener{
         try{
             ConfigPlayerVault cpv = new ConfigPlayerVault(pqe.getPlayer());
             cpv.savData();
-            Bukkit.getLogger().info(cpv.data.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -30,7 +29,6 @@ public class StatusKeeper implements Listener{
         try{
             ConfigPlayerVault cpv = new ConfigPlayerVault(pje.getPlayer());
             cpv.loadData();
-            Bukkit.getLogger().info(cpv.data.toString());
         }catch(Exception e){
             e.printStackTrace();
         }

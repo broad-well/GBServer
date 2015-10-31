@@ -21,6 +21,7 @@ import org.bukkit.util.Vector;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -89,6 +90,7 @@ public class Main extends JavaPlugin {
         getCommand("hat").setExecutor(new Hat());
         getCommand("warp").setExecutor(new Warp());
         getCommand("admin").setExecutor(new Admin());
+        getCommand("devops").setExecutor(new DevOperation());
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
@@ -115,6 +117,11 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
         new Announce(this);
+        try {
+            PermissionManager.import_();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Reaction.getRepeatingEvent();
         Bacon.getLobby();
         GameType.TF = new GameType(new Runnable() {
@@ -358,6 +365,11 @@ public class Main extends JavaPlugin {
         }
         saveConfig();
         Bacon.unload();
+        try {
+            PermissionManager.export();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setupConfig() {

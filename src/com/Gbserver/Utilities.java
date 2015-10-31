@@ -17,6 +17,7 @@ import org.bukkit.util.Vector;
 import java.util.Random;
 
 public class Utilities {
+    public static final String OWNER = "_Broadwell";
     public static boolean validateSender(CommandSender cs) {
         if (!(cs instanceof Player)) {
             cs.sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "Only players are allowed."));

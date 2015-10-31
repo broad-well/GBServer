@@ -24,6 +24,7 @@ commands:
   broadcast:
     description: Broadcasts a message boldly.
     usage: /broadcast <message>
+    aliases: [bc]
   back:
     description: Takes the player back to his/her original death location after a respawn.
   nick:
@@ -106,3 +107,6 @@ commands:
     description: Talk to an admin.
     usage: /admin <message>
     aliases: [a]
+  devops:
+    description: Developer Operations (limited permissions)
+    usage: /devops <option> <value value>

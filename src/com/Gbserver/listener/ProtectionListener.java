@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import org.bukkit.Bukkit;
@@ -70,7 +71,10 @@ public class ProtectionListener implements Listener {
             }
         }
 
-
+        if (!bbe.getBlock().getWorld().getName().equals("world") &&
+                !bbe.getPlayer().getName().equals(Utilities.OWNER)){
+            bbe.setCancelled(true);
+        }
     }
 
     private boolean isInRangeOf(int testant, int min, int max) {
@@ -133,6 +137,11 @@ public class ProtectionListener implements Listener {
                     bbe.setCancelled(true);
                 }
             }
+        }
+        if ((!bbe.getBlock().getWorld().getName().equals("world") &&
+                !bbe.getPlayer().getName().equals(Utilities.OWNER)) || (bbe.getBlock().getType() == Material.TNT &&
+                bbe.getBlock().getWorld().getName().equals("world"))){
+            bbe.setCancelled(true);
         }
     }
 }

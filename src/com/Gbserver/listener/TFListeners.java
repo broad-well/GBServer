@@ -133,7 +133,7 @@ public class TFListeners implements Listener {
 
 
             }
-            if (pme.getPlayer().getLocation().getY() < 50) {
+            if (pme.getPlayer().getLocation().getY() < 50 || pme.getPlayer().getLocation().getY() > 110) {
                 if (TF.redPlayers.contains(pme.getPlayer())) {
                     pme.getPlayer().teleport(new Location(pme.getPlayer().getWorld(), TF.RedSpawn[0], TF.RedSpawn[1], TF.RedSpawn[2]));
 

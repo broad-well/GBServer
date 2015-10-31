@@ -66,7 +66,8 @@ public class HalloweenListeners implements Listener{
     public void onBlockBreak(BlockBreakEvent bbe){
         if (Main.isHalloween) {
             if (!Utilities.isInRangeOf(
-                    HALLO_HIGH, HALLO_LOW, bbe.getPlayer().getLocation())) {
+                    HALLO_HIGH, HALLO_LOW, bbe.getPlayer().getLocation())
+                    || !bbe.getPlayer().isOp()) {
                bbe.setCancelled(true);
             }
         }
@@ -76,7 +77,8 @@ public class HalloweenListeners implements Listener{
     public void onBlockPlace(BlockPlaceEvent bbe){
         if (Main.isHalloween) {
             if (!Utilities.isInRangeOf(
-                    HALLO_HIGH, HALLO_LOW, bbe.getPlayer().getLocation())) {
+                    HALLO_HIGH, HALLO_LOW, bbe.getPlayer().getLocation())
+                    || !bbe.getPlayer().isOp()) {
                 bbe.setCancelled(true);
             }
         }

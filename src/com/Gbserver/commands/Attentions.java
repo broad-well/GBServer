@@ -5,17 +5,21 @@ import com.Gbserver.variables.ChatWriterType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 
 public class Attentions implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
         // TODO Auto-generated method stub
-        if (arg2.equalsIgnoreCase("broadcast")) {
+        if (arg0.isOp()) {
             ChatWriter.write(ChatWriterType.ANNOUNCEMENT, concat(arg3));
             return true;
+        }else{
+            ChatWriter.writeTo(arg0, ChatWriterType.CONDITION, "You are not authorized to perform this action.");
+            return true;
         }
-        return false;
     }
 
     private String concat(String[] arg) {
