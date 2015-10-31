@@ -20,7 +20,7 @@ import java.util.List;
 public class Tpa implements CommandExecutor {
 
     public static HelpTable ht = new HelpTable("/tpa <target>", "To request to teleport to a player.", "", "tpa");
-    public static List<TpaPacket> tpaList = new LinkedList<>();
+    public static TPAList tpaList = new TPAList();
     Player[] pa;
     boolean hasDone = false;
 
@@ -52,7 +52,7 @@ public class Tpa implements CommandExecutor {
                     }
                 }
                 TpaPacket tp = new TpaPacket(origin, target, label.equalsIgnoreCase("tpa"));
-                tpaList.add(tp);
+                tpaList.addPacket(tp);
                 if (label.equalsIgnoreCase("tpa")) {
                     target.sendMessage(ChatWriter.getMessage(ChatWriterType.TPA,
                             origin.getName() + " would like to teleport to you."));

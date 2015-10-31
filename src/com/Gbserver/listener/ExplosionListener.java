@@ -28,7 +28,10 @@ public class ExplosionListener implements Listener {
     public void onEntityExplode(EntityExplodeEvent el) {
         Location origin = el.getEntity().getLocation();
         World world = origin.getWorld();
-
+        if(el.getEntity().getLocation().getWorld().getName().equals("world")) {
+            el.setCancelled(true);
+            return;
+        }
         Block NearbyBlock;
         if (el.getEntityType().equals(EntityType.PRIMED_TNT)) {
             if (el.getLocation().getBlock().getType() != Material.WATER

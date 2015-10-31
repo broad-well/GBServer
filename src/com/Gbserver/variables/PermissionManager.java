@@ -1,5 +1,6 @@
 package com.Gbserver.variables;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.io.FileNotFoundException;
@@ -56,8 +57,10 @@ public class PermissionManager {
         }
     }
 
-    public static Permissions getPermission(Player p){
-        return perms.get(p.getUniqueId());
+    public static Permissions getPermission(OfflinePlayer p){
+        Permissions perm = perms.get(p.getUniqueId());
+        if(perm == null) return Permissions.GUEST;
+        return perm;
     }
 
     public static List<UUID> playersWith(Permissions perm){

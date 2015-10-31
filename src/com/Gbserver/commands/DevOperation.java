@@ -4,6 +4,7 @@ import com.Gbserver.variables.PermissionManager;
 import com.Gbserver.variables.PermissionManager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,7 +27,7 @@ public class DevOperation implements CommandExecutor{
                     if(strings.length < 3) return true;
                     Permissions perm = Permissions.valueOf(strings[2]);
                     if(perm == null) return true;
-                    Player play = Bukkit.getPlayer(strings[1]);
+                    OfflinePlayer play = Bukkit.getOfflinePlayer(strings[1]);
                     if(play == null) return true;
                     PermissionManager.perms.put(play.getUniqueId(), perm);
                     commandSender.sendMessage("Permission inserted: " + play.getName() + " -> " + perm);

@@ -139,7 +139,10 @@ public class ProtectionListener implements Listener {
             }
         }
         if ((!bbe.getBlock().getWorld().getName().equals("world") &&
-                !bbe.getPlayer().getName().equals(Utilities.OWNER)) || (bbe.getBlock().getType() == Material.TNT &&
+                !bbe.getPlayer().getName().equals(Utilities.OWNER)) || ((bbe.getBlock().getType() == Material.TNT ||
+                                                                        bbe.getBlock().getType() == Material.STATIONARY_LAVA ||
+                                                                        bbe.getBlock().getType() == Material.LAVA ||
+                                                                        bbe.getBlock().getType() == Material.LAVA_BUCKET) &&
                 bbe.getBlock().getWorld().getName().equals("world"))){
             bbe.setCancelled(true);
         }
