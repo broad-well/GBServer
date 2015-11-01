@@ -119,4 +119,7 @@ public class Utilities {
         return Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), toRun, 0L, interval);
     }
 
+    public static boolean isInGame(Player p){
+
+    }
 }
