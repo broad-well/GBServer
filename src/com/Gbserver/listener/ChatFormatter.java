@@ -10,14 +10,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class ChatFormatter implements Listener {
     public static List<Player> setCancelled = new LinkedList<Player>();
     //For fiestas.
     public static List<String> staff = Arrays.asList("_Broadwell", "SallyGreen", "Ehcto");
+    public static Path rankFile = ConfigManager.getPathInsidePluginFolder("ranks.dat");
 
-    public static Map<String, Rank> Rankdata = new HashMap<String, Rank>() {{
+    public static HashMap<UUID, Rank> rankData = new HashMap<>();
+    /*public static HashMap<String, Rank> Rankdata = new HashMap<String, Rank>() {{
         put("_Broadwell", Rank.OWNER);
         put("MarkNutt", Rank.BANANA);
         put("Ehcto", Rank.GHOST);
@@ -29,28 +35,9 @@ public class ChatFormatter implements Listener {
         put("AcidWolf", Rank.DOG);
         put("Flystal", Rank.DEEQ);
         put("spacetrain31", Rank.DEV);
-    }};
+    }};*/
 
-    enum Rank {
-        OWNER, BANANA, GHOST, CAT, POTATO, GATOR, BIRD, DUCK, DOG, DEEQ, DEV;
-        private static Map<Rank, String> format = new HashMap<Rank, String>() {{
-            put(OWNER, ChatColor.RED + "" + ChatColor.BOLD + "Owner ");
-            put(GHOST, ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Ghost ");
-            put(BANANA, ChatColor.YELLOW + "" + ChatColor.BOLD + "Banana ");
-            put(CAT, ChatColor.BLACK + "" + ChatColor.BOLD + "Cat ");
-            put(POTATO, ChatColor.GOLD + "" + ChatColor.BOLD + "Potato ");
-            put(GATOR, ChatColor.GREEN + "" + ChatColor.BOLD + "Gator ");
-            put(BIRD, ChatColor.BLUE + "" + ChatColor.BOLD + "Bird ");
-            put(DUCK, ChatColor.WHITE + "" + ChatColor.BOLD + "Bunny ");
-            put(DOG, ChatColor.AQUA + "" + ChatColor.BOLD + "Dog ");
-            put(DEEQ, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "deeq ");
-            put(DEV, ChatColor.RED + "" + ChatColor.BOLD + "Dev ");
-        }};
 
-        public static String getPrefix(Rank r) {
-            return format.get(r);
-        }
-    }
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent pce) {
@@ -107,12 +94,13 @@ public class ChatFormatter implements Listener {
         if(staff.contains(player.getName()) && Main.isHalloween){
             return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Host ";
         }
-        String format = Rank.getPrefix(Rankdata.get(player.getName()));
-        if (format == null) format = "";
+        Rank format = rankData.get(player.getUniqueId());
+        String returning = "";
+        if (format == null) return returning;
         if (isChat) {
-            return format;
+            return format.getPrefix();
         } else {
-            return format + ChatColor.RESET + player.getName();
+            return format.getPrefix() + ChatColor.RESET + player.getName();
         }
     }
 
@@ -131,6 +119,32 @@ public class ChatFormatter implements Listener {
         }
         return null;
     }
+
+    public static void $import$() throws IOException {
+        List<String> lines = new LinkedList<>();
+        Scanner scanner = new Scanner(new FileInputStream(rankFile.toFile()));
+        while(scanner.hasNextLine()){
+            lines.add(scanner.nextLine());
+        }
+        scanner.close();
+        for(String line : lines){
+            String[] data = line.split(" ");
+            //uuid^Owner,RED
+            rankData.put(UUID.fromString(data[0]),
+                    Rank.fromConfig(data[1]));
+        }
+    }
+
+    public static void $export$() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(new FileOutputStream(rankFile.toFile()));
+        for(Map.Entry<UUID, Rank> entry : rankData.entrySet()){
+            writer.println(entry.getKey().toString() + " " + entry.getValue().configOutput());
+        }
+        writer.flush();
+        writer.close();
+    }
+
+    public static Rank fromConfig(String text) {return Rank.fromConfig(text);}
 }
 
 class Chat {
@@ -168,3 +182,5 @@ class Chat {
         }
     }
 }
+
+

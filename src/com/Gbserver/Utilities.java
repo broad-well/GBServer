@@ -141,7 +141,7 @@ public class Utilities {
             TF
          */
         return BL.players.contains(p.getName()) ||
-                Bacon.players.contains(BaconPlayer.getByHandle(p)) ||
+                BaconPlayer.getByHandle(p) != null ||
                 CTF.allPlayers().contains(p) ||
                 Runner.players.contains(p) ||
                 GameType.DR.allPlayers().contains(p) ||

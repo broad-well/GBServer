@@ -1,5 +1,7 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.listener.ChatFormatter;
+import com.Gbserver.listener.Rank;
 import com.Gbserver.variables.PermissionManager;
 import com.Gbserver.variables.PermissionManager.*;
 import org.bukkit.Bukkit;
@@ -10,6 +12,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+
+import java.io.FileNotFoundException;
+import java.util.UUID;
 
 /**
  * Created by michael on 10/31/15.
@@ -32,6 +37,28 @@ public class DevOperation implements CommandExecutor{
                     PermissionManager.perms.put(play.getUniqueId(), perm);
                     commandSender.sendMessage("Permission inserted: " + play.getName() + " -> " + perm);
                     return true;
+                case "InsertRank":
+                    if(strings.length < 3) return true;
+                    ChatFormatter.rankData.put(Bukkit.getOfflinePlayer(strings[1]).getUniqueId(), ChatFormatter.fromConfig(strings[2]));
+                    try {
+                        ChatFormatter.$export$();
+                        commandSender.sendMessage("Rank inserted: " + Bukkit.getOfflinePlayer(strings[1]).getName()
+                                + ", " + ChatFormatter.rankData.get(Bukkit.getOfflinePlayer(strings[1]).getUniqueId()).getPrefix());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "ListRank":
+                    commandSender.sendMessage(ChatFormatter.rankData.toString());
+                    break;
+                case "GetUUID":
+                    if(strings.length < 2) return true;
+                    commandSender.sendMessage(Bukkit.getOfflinePlayer(strings[1]).getUniqueId().toString());
+                    return true;
+                case "GetFromName":
+                    if(strings.length < 2) return true;
+                    commandSender.sendMessage(Bukkit.getOfflinePlayer(UUID.fromString(strings[1])).getName());
+                    return true;
                 default:
                     commandSender.sendMessage("Bad option.");
                     return true;
@@ -42,6 +69,7 @@ public class DevOperation implements CommandExecutor{
                     PermissionManager.Permissions.PRIVILEGED);
             return true;
         }
+        return true;
     }
 
     public boolean isEligible(CommandSender sender) {

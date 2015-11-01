@@ -8,13 +8,7 @@ import org.bukkit.entity.Player;
     Minigames shall extend from this one.
  */
 public class Minigame {
-    public World world;
-    public String name;
-    public boolean isRunning;
-
-    public Minigame(String name, World world1){
-        isRunning = false;
-        this.name = name;
-        this.world = world1;
-    }
+    public static World world;
+    public static String name;
+    public static boolean isRunning;
 }
