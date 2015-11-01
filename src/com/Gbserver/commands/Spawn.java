@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import org.bukkit.Bukkit;
@@ -14,15 +15,9 @@ import org.bukkit.event.EventHandler;
 public class Spawn implements CommandExecutor {
     @EventHandler
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (label.equalsIgnoreCase("spawn")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player player = (Player) sender;
-            World world = Bukkit.getServer().getWorld("world");
-            Location spawn = new Location(world, 145, 119, 413);
-            player.teleport(spawn);
+            player.teleport(new Location(Bukkit.getWorld("world"), 145, 119, 413));
             player.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully teleported " + player.getName() + " to the spawn."));
             Runner.isRunning = false;
             return true;
@@ -30,5 +25,4 @@ public class Spawn implements CommandExecutor {
             return false;
         }
     }
-
 }

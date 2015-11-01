@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.Vaults;
@@ -13,11 +14,7 @@ public class Back implements CommandExecutor {
     public static boolean CommandAvailable = false;
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (label.equalsIgnoreCase("back")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player player = (Player) sender;
             if (Vaults.getVault(player.getUniqueId()).hasPrevious()) {
                 Vaults.getVault(player.getUniqueId()).toPrevious();

@@ -1,7 +1,9 @@
 package com.Gbserver;
 
+import com.Gbserver.commands.*;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.GameType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,6 +29,15 @@ public class Utilities {
         }
     }
 
+    public static boolean validateGamePlay(CommandSender p){
+        if(!(p instanceof Player)) return false;
+        if(isInGame((Player) p)){
+            ChatWriter.writeTo(p, ChatWriterType.CONDITION, "This command is not available during a game. Sorry!");
+            return false;
+        }else{
+            return true;
+        }
+    }
     public static boolean isInRangeOf(Location hi, Location lo, Location test) {
         int x1 = hi.getBlockX();
         int y1 = hi.getBlockY();
@@ -120,6 +131,20 @@ public class Utilities {
     }
 
     public static boolean isInGame(Player p){
-
+        //List:
+        /*
+            BL
+            Bacon
+            CTF
+            Runner
+            Dragons
+            TF
+         */
+        return BL.players.contains(p.getName()) ||
+                Bacon.players.contains(BaconPlayer.getByHandle(p)) ||
+                CTF.allPlayers().contains(p) ||
+                Runner.players.contains(p) ||
+                GameType.DR.allPlayers().contains(p) ||
+                TF.getAllPlayers().contains(p);
     }
 }

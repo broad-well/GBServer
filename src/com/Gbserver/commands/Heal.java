@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.unicorn.TextRender;
 import com.Gbserver.unicorn.fonts.StandardFonts;
 import com.Gbserver.variables.ChatWriter;
@@ -18,11 +19,7 @@ public class Heal implements CommandExecutor {
     public static List<Player> players = new LinkedList<Player>();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (label.equalsIgnoreCase("heal")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player p = (Player) sender;
             if (args.length > 0 || args[0].equals("draw")){
                 TextRender.render(StandardFonts.CUBE_GOTHIC, args[1].toUpperCase(), p.getLocation(), Material.STAINED_CLAY, TextRender.EAST);

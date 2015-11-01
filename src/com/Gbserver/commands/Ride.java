@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import org.bukkit.ChatColor;
@@ -17,33 +18,31 @@ public class Ride implements CommandExecutor {
     public static boolean hasPassenger = false;
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (label.equalsIgnoreCase("ride")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
-            ridingOthers = true;
-            list.add((Player) sender);
-            sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to ride on it."));
-            return true;
-        }
-        if (label.equalsIgnoreCase("rideme")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
-
-
-            if (hasPassenger) {
-                ((Player) sender).eject();
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Successfully dismounted your passenger."));
-                hasPassenger = false;
-            } else {
-                ridingOthers = false;
+        if(Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
+            if (label.equalsIgnoreCase("ride")) {
+                ridingOthers = true;
                 list.add((Player) sender);
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to make it ride on you."));
+                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to ride on it."));
+                return true;
             }
-            return true;
+            if (label.equalsIgnoreCase("rideme")) {
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
+                    return false;
+                }
+
+
+                if (hasPassenger) {
+                    ((Player) sender).eject();
+                    sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Successfully dismounted your passenger."));
+                    hasPassenger = false;
+                } else {
+                    ridingOthers = false;
+                    list.add((Player) sender);
+                    sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, ChatColor.ITALIC + "Please right click an entity to make it ride on you."));
+                }
+                return true;
+            }
         }
         return false;
     }

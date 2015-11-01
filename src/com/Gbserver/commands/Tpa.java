@@ -28,7 +28,7 @@ public class Tpa implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (label.equalsIgnoreCase("tpa") || label.equalsIgnoreCase("tphere")) {
             // Request to teleport to another player or another player to
-            if (Utilities.validateSender(sender)) {
+            if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
 
                 if (args.length == 0) {
                     ht.show(sender);

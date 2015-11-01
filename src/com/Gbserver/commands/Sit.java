@@ -1,5 +1,6 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.Chair;
 import com.Gbserver.variables.Chairs;
 import com.Gbserver.variables.ChatWriter;
@@ -19,11 +20,7 @@ public class Sit implements CommandExecutor {
     public static Bat chair;
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (label.equalsIgnoreCase("sit")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player p = (Player) sender;
             if (Chairs.getChair(p) == null) {
                 target = p.getTargetBlock((Set<Material>) null, 100);
@@ -35,6 +32,6 @@ public class Sit implements CommandExecutor {
             }
             return true;
         }
-        return false;
+        return true;
     }
 }
