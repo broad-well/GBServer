@@ -91,6 +91,7 @@ public class Main extends JavaPlugin {
         getCommand("warp").setExecutor(new Warp());
         getCommand("admin").setExecutor(new Admin());
         getCommand("devops").setExecutor(new DevOperation());
+        getCommand("group").setExecutor(new Group());
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);

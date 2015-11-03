@@ -97,11 +97,7 @@ public class ChatFormatter implements Listener {
         Rank format = rankData.get(player.getUniqueId());
         String returning = "";
         if (format == null) return returning;
-        if (isChat) {
-            return format.getPrefix();
-        } else {
-            return format.getPrefix() + ChatColor.RESET + player.getName();
-        }
+        return isChat ? format.getPrefix() : format.getPrefix() + ChatColor.RESET + player.getName();
     }
 
     //Games that support Team chatting:

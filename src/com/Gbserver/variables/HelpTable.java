@@ -17,7 +17,7 @@ public class HelpTable {
     }
 
     public void show(CommandSender cs) {
-        String[] m = new String[3];
+        String[] m = new String[4];
         m[0] = ChatColor.DARK_GRAY + "------Help for /" + command + "------";
         if (!(usage.equals(""))) {
             m[1] = ChatWriter.getMessage(ChatWriterType.HELP, "Usage: " + usage);

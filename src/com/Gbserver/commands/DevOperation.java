@@ -16,9 +16,6 @@ import org.bukkit.entity.Player;
 import java.io.FileNotFoundException;
 import java.util.UUID;
 
-/**
- * Created by michael on 10/31/15.
- */
 public class DevOperation implements CommandExecutor{
 
 
@@ -55,7 +52,7 @@ public class DevOperation implements CommandExecutor{
                     if(strings.length < 2) return true;
                     commandSender.sendMessage(Bukkit.getOfflinePlayer(strings[1]).getUniqueId().toString());
                     return true;
-                case "GetFromName":
+                case "GetName":
                     if(strings.length < 2) return true;
                     commandSender.sendMessage(Bukkit.getOfflinePlayer(UUID.fromString(strings[1])).getName());
                     return true;
@@ -73,12 +70,6 @@ public class DevOperation implements CommandExecutor{
     }
 
     public boolean isEligible(CommandSender sender) {
-        if(sender instanceof ConsoleCommandSender) return true;
-        if(!(sender instanceof Player)) return false;
-        if(PermissionManager.getPermission((Player) sender).isAbove(PermissionManager.Permissions.PRIVILEGED)){
-            return true;
-        }else{
-            return false;
-        }
+        return sender instanceof ConsoleCommandSender || sender instanceof Player && PermissionManager.getPermission((Player) sender).isAbove(Permissions.PRIVILEGED);
     }
 }

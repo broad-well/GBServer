@@ -110,3 +110,6 @@ commands:
   devops:
     description: Developer Operations (limited permissions)
     usage: /devops <option> <value value>
+  group:
+    description: Group chat (party)
+    aliases: [g]
