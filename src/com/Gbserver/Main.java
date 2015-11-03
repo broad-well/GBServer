@@ -1,8 +1,12 @@
 package com.Gbserver;
 
 import com.Gbserver.commands.*;
+import com.Gbserver.config.*;
+import com.Gbserver.gui.WhitelistGUI;
+import com.Gbserver.gui.WhitelistRemovePlayersGUI;
 import com.Gbserver.listener.*;
 import com.Gbserver.variables.*;
+import com.Gbserver.variables.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -13,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -33,10 +38,12 @@ public class Main extends JavaPlugin {
     //For Halloween!
     public static boolean isHalloween = isHalloweenConfig();
     public static String eventName = "Halloween Party";
+    private static Main p;
 
 
     @SuppressWarnings("deprecation")
     public void onEnable() {
+        p = this;
 
         PluginDescriptionFile desc = getDescription();
         Logger lg = Logger.getLogger("Minecraft");
@@ -357,6 +364,10 @@ public class Main extends JavaPlugin {
             }
         }, 0L, 1L);
 
+        //setup our other stuff
+        com.Gbserver.config.ConfigManager.getInstance().setup();
+        MessageManager.getInstance().setup();
+
     }
 
     public void onDisable() {
@@ -390,5 +401,23 @@ public class Main extends JavaPlugin {
         }catch(Exception e){
             return false;
         }
+    }
+
+    public static Main getPlugin() {
+        return p;
+    }
+
+    private void registerListener(PluginManager pluginManager) {
+
+        final WhitelistGUI whitelistGUI = new WhitelistGUI();
+        final WhitelistRemovePlayersGUI whitelistRemovePlayersGUI = new WhitelistRemovePlayersGUI();
+
+        //register gui listeners
+        pluginManager.registerEvents(whitelistGUI, this);
+        pluginManager.registerEvents(whitelistRemovePlayersGUI, this);
+    }
+
+    private void registerCommands() {
+        getCommand("wl").setExecutor(new WhitelistCommand());
     }
 }

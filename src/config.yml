@@ -1,3 +1,4 @@
+debug: false
 protection:
 # The protection method.
   number: 0

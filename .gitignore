@@ -47,3 +47,6 @@ Temporary Items
 /bin
 *.class
 *.jar
+.idea/
+GBServer.iml
+
