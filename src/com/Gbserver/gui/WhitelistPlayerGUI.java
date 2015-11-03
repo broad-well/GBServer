@@ -1,7 +1,7 @@
 package com.Gbserver.gui;
 
 
-import com.embryopvp.arenapvp.utils.WhitelistUtil;
+import com.Gbserver.utils.WhitelistUtil;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

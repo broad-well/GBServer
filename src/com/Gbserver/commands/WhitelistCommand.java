@@ -1,9 +1,9 @@
  package com.Gbserver.commands;
 
- import com.embryopvp.arenapvp.config.MessageManager;
- import com.embryopvp.arenapvp.config.MessageManager.PrefixType;
- import com.embryopvp.arenapvp.gui.WhitelistGUI;
- import com.embryopvp.arenapvp.utils.WhitelistUtil;
+ import com.Gbserver.config.MessageManager;
+ import com.Gbserver.config.MessageManager.PrefixType;
+ import com.Gbserver.gui.WhitelistGUI;
+ import com.Gbserver.utils.WhitelistUtil;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
  import org.bukkit.OfflinePlayer;

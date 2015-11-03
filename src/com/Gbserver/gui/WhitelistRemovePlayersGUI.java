@@ -1,7 +1,7 @@
 package com.Gbserver.gui;
 
 
-import com.embryopvp.arenapvp.utils.WhitelistUtil;
+import com.Gbserver.utils.WhitelistUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

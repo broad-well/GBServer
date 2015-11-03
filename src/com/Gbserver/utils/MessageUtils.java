@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-import com.embryopvp.EmbryoPVP;
+import com.Gbserver.Main;
 
 public class MessageUtils {
 
@@ -24,14 +24,14 @@ public class MessageUtils {
             try{
                 msg.replace("{$"+s+"}", vars.get(s));
             }catch(Exception e){
-                EmbryoPVP.getPlugin().getLogger().log(Level.WARNING, "Failed to replace string vars. Error on " + s);
+                Main.getPlugin().getLogger().log(Level.WARNING, "Failed to replace string vars. Error on " + s);
                 error = true;
             }
         }
         if(error){
-            EmbryoPVP.getPlugin().getLogger().log(Level.SEVERE, "Error replacing vars in message: " + msg);
-            EmbryoPVP.getPlugin().getLogger().log(Level.SEVERE, "Vars: " + vars.toString());
-            EmbryoPVP.getPlugin().getLogger().log(Level.SEVERE, "Vars Cache: " + varcache.toString());
+            Main.getPlugin().getLogger().log(Level.SEVERE, "Error replacing vars in message: " + msg);
+            Main.getPlugin().getLogger().log(Level.SEVERE, "Vars: " + vars.toString());
+            Main.getPlugin().getLogger().log(Level.SEVERE, "Vars Cache: " + varcache.toString());
         }
         return msg;
     }
@@ -46,14 +46,14 @@ public class MessageUtils {
             try{
                 msg = msg.replace("{$"+str+"}", varcache.get(str));
             }catch(Exception e){
-                EmbryoPVP.getPlugin().getLogger().log(Level.WARNING, "Failed to replace string vars. Error on " + str);
+                Main.getPlugin().getLogger().log(Level.WARNING, "Failed to replace string vars. Error on " + str);
                 error = true;
             }
         }
         if(error){
-            EmbryoPVP.getPlugin().getLogger().log(Level.SEVERE, "Error replacing vars in message: " + msg);
-            EmbryoPVP.getPlugin().getLogger().log(Level.SEVERE, "Vars: " + Arrays.toString(vars));
-            EmbryoPVP.getPlugin().getLogger().log(Level.SEVERE, "Vars Cache: " + varcache.toString());
+            Main.getPlugin().getLogger().log(Level.SEVERE, "Error replacing vars in message: " + msg);
+            Main.getPlugin().getLogger().log(Level.SEVERE, "Vars: " + Arrays.toString(vars));
+            Main.getPlugin().getLogger().log(Level.SEVERE, "Vars Cache: " + varcache.toString());
         }
 
         return msg;

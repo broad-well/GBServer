@@ -2,7 +2,8 @@ package com.Gbserver.gui;
 
 
 
-import com.embryopvp.arenapvp.utils.WhitelistUtil;
+
+import com.Gbserver.utils.WhitelistUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

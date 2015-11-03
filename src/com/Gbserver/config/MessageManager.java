@@ -3,7 +3,7 @@ package com.Gbserver.config;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import com.embryopvp.utils.MessageUtils;
+import com.Gbserver.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;

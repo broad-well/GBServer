@@ -1,8 +1,8 @@
 package com.Gbserver.utils;
 
 
-import com.embryopvp.arenapvp.config.MessageManager;
-import com.embryopvp.arenapvp.config.MessageManager.PrefixType;
+import com.Gbserver.config.MessageManager;
+import com.Gbserver.config.MessageManager.PrefixType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.OfflinePlayer;

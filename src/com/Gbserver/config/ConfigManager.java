@@ -1,7 +1,7 @@
 package com.Gbserver.config;
 
-import com.embryopvp.EmbryoPVP;
-import com.embryopvp.utils.LogUtil;
+import com.Gbserver.Main;
+import com.Gbserver.utils.LogUtil;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,7 +13,7 @@ import java.io.*;
 public class ConfigManager {
 
     private static ConfigManager instance = new ConfigManager();
-    private static Plugin p = EmbryoPVP.getPlugin();
+    private static Plugin p = Main.getPlugin();
 
     private FileConfiguration messages;
 
