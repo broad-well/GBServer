@@ -67,6 +67,7 @@ public class Warp implements CommandExecutor {
                         return true;
                     }
                     data.remove(args[1]);
+                    saveData();
                     ChatWriter.writeTo(sender, ChatWriterType.WARP, "Successfully deleted that entry.");
                 } else {
                     try {

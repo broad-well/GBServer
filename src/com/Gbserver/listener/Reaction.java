@@ -22,10 +22,10 @@ public class Reaction implements Listener {
 
 
     //Settings
-    private static int firstMax = 5000;
-    private static int firstMin = -5000;
-    private static int secondMax = 10000;
-    private static int secondMin = -10000;
+    private static final int firstMax = 1000;
+    private static final int firstMin = -1000;
+    private static final int secondMax = 2000;
+    private static final int secondMin = -2000;
 
     public static void getRepeatingEvent() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {

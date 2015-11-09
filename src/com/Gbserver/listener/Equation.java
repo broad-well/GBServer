@@ -43,7 +43,7 @@ public class Equation {
 
     public void getChatMessage() {
         String s = ChatWriter.getMessage(ChatWriterType.CHAT,
-                ChatColor.YELLOW + "REACTION: Type the answer of the following equation in chat:");
+                ChatColor.YELLOW + "REACTION: Type the answer of the following expression in chat:");
         String op = "";
         switch (operator) {
             case PLUS:
