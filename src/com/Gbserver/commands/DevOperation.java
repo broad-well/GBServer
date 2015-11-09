@@ -2,6 +2,7 @@ package com.Gbserver.commands;
 
 import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.listener.Rank;
+import com.Gbserver.variables.EnhancedMap;
 import com.Gbserver.variables.PermissionManager;
 import com.Gbserver.variables.PermissionManager.*;
 import org.bukkit.Bukkit;
@@ -31,6 +32,7 @@ public class DevOperation implements CommandExecutor{
                         "ListRank, " +
                         "DeleteRank, " +
                         "GetUUID, " +
+                        "GetRecentMessenger, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -53,7 +55,7 @@ public class DevOperation implements CommandExecutor{
                     commandSender.sendMessage("All Permissions: ");
                     for(Map.Entry<UUID, Permissions> permission : PermissionManager.perms.entrySet()){
                         commandSender.sendMessage(
-                                Bukkit.getPlayer(permission.getKey()).getName() + " -> " + permission.getValue().name()
+                                Bukkit.getOfflinePlayer(permission.getKey()).getName() + " -> " + permission.getValue().name()
                         );
                     }
                     break;
@@ -71,9 +73,11 @@ public class DevOperation implements CommandExecutor{
                 case "ListRank":
                     commandSender.sendMessage("All Ranks: ");
                     for(Map.Entry<UUID, Rank> permission : ChatFormatter.rankData.entrySet()){
-                        commandSender.sendMessage(
-                                Bukkit.getPlayer(permission.getKey()).getName() + " -> " + permission.getValue().getPrefix()
-                        );
+                        try {
+                            commandSender.sendMessage(
+                                    Bukkit.getOfflinePlayer(permission.getKey()).getName() + " -> " + permission.getValue().getPrefix()
+                            );
+                        }catch(Exception ignored){}
                     }
                     break;
                 case "DeleteRank":
@@ -84,6 +88,13 @@ public class DevOperation implements CommandExecutor{
                         commandSender.sendMessage("Rank removed from " + Bukkit.getOfflinePlayer(strings[1]).getName());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
+                    }
+                    break;
+                case "GetRecentMessenger":
+                    commandSender.sendMessage("Messaging History: ");
+                    for(EnhancedMap.Entry entry : Tell.last){
+                        commandSender.sendMessage(((CommandSender) entry.getFirst()).getName() + " <-> " +
+                                ((CommandSender) entry.getSecond()).getName());
                     }
                     break;
                 case "GetUUID":

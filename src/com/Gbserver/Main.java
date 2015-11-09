@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -48,10 +49,9 @@ public class Main extends JavaPlugin {
         @SuppressWarnings("unused")
         Protection proc = new Protection(this);
         getCommand("spawn").setExecutor(new Spawn());
-        getCommand("tell").setExecutor(new Tell());
-        getCommand("t").setExecutor(new Tell());
-        getCommand("msg").setExecutor(new Tell());
-        getCommand("m").setExecutor(new Tell());
+        CommandExecutor ce = new Tell();
+        getCommand("tell").setExecutor(ce);
+        getCommand("reply").setExecutor(ce);
         getCommand("runner").setExecutor(new Runner());
         getCommand("protection").setExecutor(new Protection(this));
         getCommand("afk").setExecutor(new Afk());

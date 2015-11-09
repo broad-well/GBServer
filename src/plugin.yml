@@ -113,3 +113,6 @@ commands:
   group:
     description: Group chat (party)
     aliases: [g]
+  reply:
+    description: Reply a person that has messaged you.
+    aliases: [r]
