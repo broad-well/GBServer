@@ -156,10 +156,10 @@ public class CTF implements CommandExecutor {
             (sciim = scissors.getItemMeta()).setDisplayName("Flag Capturer");
             scissors.setItemMeta(sciim);
         }
-        ItemStack inksac = new ItemStack(Material.INK_SACK);
+        ItemStack inksac = new ItemStack(Material.IRON_SWORD);
         {
             ItemMeta inkim;
-            (inkim = inksac.getItemMeta()).setDisplayName("Opponent Capturer");
+            (inkim = inksac.getItemMeta()).setDisplayName("PvP Sword");
             inksac.setItemMeta(inkim);
         }
 

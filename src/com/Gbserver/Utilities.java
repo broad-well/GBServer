@@ -28,7 +28,11 @@ public class Utilities {
             return true;
         }
     }
+    private static Main instance;
 
+    Utilities(Main main){
+        instance = main;
+    }
     public static boolean validateGamePlay(CommandSender p){
         if(!(p instanceof Player)) return false;
         if(isInGame((Player) p)){
@@ -60,6 +64,10 @@ public class Utilities {
             return false;
         }
         return false;
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 
     public static String concat(String[] arg) {

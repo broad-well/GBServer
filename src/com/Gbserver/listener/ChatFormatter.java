@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -141,6 +142,11 @@ public class ChatFormatter implements Listener {
     }
 
     public static Rank fromConfig(String text) {return Rank.fromConfig(text);}
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent pqe){
+
+    }
 }
 
 class Chat {

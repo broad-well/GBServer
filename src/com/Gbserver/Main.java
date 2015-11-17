@@ -46,6 +46,7 @@ public class Main extends JavaPlugin {
         //fc.addDefault("announcements", "An announcemento 2");
         //fc.options().copyDefaults(true);
         setupConfig();
+        new Utilities(this);
         @SuppressWarnings("unused")
         Protection proc = new Protection(this);
         getCommand("spawn").setExecutor(new Spawn());
@@ -92,6 +93,7 @@ public class Main extends JavaPlugin {
         getCommand("admin").setExecutor(new Admin());
         getCommand("devops").setExecutor(new DevOperation());
         getCommand("group").setExecutor(new Group());
+        getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
@@ -238,7 +240,11 @@ public class Main extends JavaPlugin {
 
 
         }, 0L, 1L);
-
+        scheduler.scheduleSyncDelayedTask(this, new Runnable() {
+            public void run() {
+                CreativeGameMode.setAll(GameMode.CREATIVE);
+            }
+        }, 10L);
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
             @SuppressWarnings("deprecation")
