@@ -16,6 +16,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Random;
 
 public class Utilities {
@@ -28,7 +32,11 @@ public class Utilities {
             return true;
         }
     }
+    private static Main instance;
 
+    Utilities(Main main){
+        instance = main;
+    }
     public static boolean validateGamePlay(CommandSender p){
         if(!(p instanceof Player)) return false;
         if(isInGame((Player) p)){
@@ -60,6 +68,10 @@ public class Utilities {
             return false;
         }
         return false;
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 
     public static String concat(String[] arg) {
@@ -146,5 +158,28 @@ public class Utilities {
                 Runner.players.contains(p) ||
                 GameType.DR.allPlayers().contains(p) ||
                 TF.getAllPlayers().contains(p);
+    }
+
+    public static String read(Path p, boolean includeNewLines) throws IOException {
+        String output = "";
+        for(String str : Files.readAllLines(p, Charset.defaultCharset())){
+            output += includeNewLines ? str + "\n" : str;
+        }
+        return output;
+    }
+
+    public static String serializeArray(Object[] array){
+        String output = "[";
+        for(Object obj : array){
+            output += obj != array[array.length-1] ? obj.toString() + ", " : obj.toString();
+        }
+        return output;
+    }
+    public static String[] deserializeArray(String serialized){
+        if(!(serialized.startsWith("[") && serialized.endsWith("]")))
+            return null; //check brackets
+        String elements = serialized.substring(1, serialized.length()-1); //get rid of brackets
+        //a, b, 3f, f3, f2, fa, fq
+        return elements.split(", ");
     }
 }

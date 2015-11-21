@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -29,16 +30,8 @@ public class CTFListener implements Listener {
         if (CTF.allPlayers().contains(pie.getPlayer()) && CTF.isRunning) {
             pie.setCancelled(true);
             // Valid.
-            // Choices: INKSACK or SHEARS
-            if (pie.getPlayer().getItemInHand().getType() == Material.INK_SACK
-                    && pie.getRightClicked() instanceof Player) {
-                // Deduct health by 20/3.
-                Player p = (Player) pie.getRightClicked();
-                if (CTF.getOriginatedTeam(p) != CTF.getLocationTeam(p)) {
-                    p.damage(20 / 3);
-                }
-                return;
-            }
+            //
+
             if (pie.getPlayer().getItemInHand().getType() == Material.SHEARS
                     && pie.getRightClicked() instanceof Sheep) {
                 // Make the flag ride on this player. On death, it teleports
@@ -58,7 +51,6 @@ public class CTFListener implements Listener {
                     pie.getPlayer().setPassenger(pie.getRightClicked());
                     pie.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.GAME,
                             "You are now carrying the flag. Cross the team boundary to win!"));
-                    return;
                 }
             }
         }
@@ -101,12 +93,23 @@ public class CTFListener implements Listener {
     }
 
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent ede) {
-        if (ede.getEntity() == CTF.blueFlag || ede.getEntity() == CTF.redFlag) {
-            ede.setCancelled(true);
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent edbee) {
+        if(!(edbee.getDamager() instanceof Player)) return;
+        Player damager = (Player) edbee.getDamager();
+        if (damager.getItemInHand().getType() == Material.IRON_SWORD
+                && edbee.getEntity() instanceof Player) {
+            // Deduct health by 20/3.
+            Player p = (Player) edbee.getEntity();
+            if (CTF.getOriginatedTeam(p) != CTF.getLocationTeam(p)) {
+                p.damage(20 / 3);
+            }
+            return;
         }
-        if (CTF.isRunning && inSafety.contains(ede.getEntity())) {
-            ede.setCancelled(true);
+        if (edbee.getEntity() == CTF.blueFlag || edbee.getEntity() == CTF.redFlag) {
+            edbee.setCancelled(true);
+        }
+        if (CTF.isRunning && inSafety.contains(edbee.getEntity())) {
+            edbee.setCancelled(true);
         }
     }
 
@@ -137,7 +140,7 @@ public class CTFListener implements Listener {
                     inSafety.add(pme.getPlayer());
                     ChatWriter.writeTo(pme.getPlayer(), ChatWriterType.GAME, "You have entered the safety circle! "
                             + ChatColor.YELLOW + "You will be killed if you don't leave the circle after 5 seconds!");
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
                         public void run() {
                             if (inSafety.contains(pme.getPlayer())) {
                                 pme.getPlayer().damage(pme.getPlayer().getHealth());

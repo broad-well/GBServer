@@ -2,6 +2,7 @@ package com.Gbserver.listener;
 
 import com.Gbserver.Main;
 import com.Gbserver.commands.Team;
+import com.Gbserver.commands.Tell;
 import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -141,6 +143,12 @@ public class ChatFormatter implements Listener {
     }
 
     public static Rank fromConfig(String text) {return Rank.fromConfig(text);}
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent pqe){
+        Tell.last.delete(pqe.getPlayer());
+        System.out.println("Deleted chat entries from this person");
+    }
 }
 
 class Chat {
