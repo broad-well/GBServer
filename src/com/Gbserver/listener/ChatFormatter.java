@@ -1,6 +1,7 @@
 package com.Gbserver.listener;
 
 import com.Gbserver.Main;
+import com.Gbserver.commands.Mail;
 import com.Gbserver.commands.Team;
 import com.Gbserver.commands.Tell;
 import com.Gbserver.variables.*;
@@ -39,55 +40,81 @@ public class ChatFormatter implements Listener {
         put("spacetrain31", Rank.DEV);
     }};*/
 
-
+    //Mail module counterpart
+    public static HashMap<Player, List<String>> activeBuffer = new HashMap<>();
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent pce) {
-        try {
-            //Team chatting first.
-            if (pce.getMessage().startsWith("@")) {
-                String message = pce.getMessage().substring(1);
-                Chat c;
-                pce.setCancelled(true);
-                if ((c = getChat(pce.getPlayer())) != null) {
-                    for (Player p : c.getPlayersInChat()) {
-                        p.sendMessage(ChatColor.BOLD + "TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
+        boolean containsit = Mail.mailWriteStatus.containsKey(pce.getPlayer());
+        if(!containsit) {
+            try {
+                //Team chatting first.
+                if (pce.getMessage().startsWith("@")) {
+                    String message = pce.getMessage().substring(1);
+                    Chat c;
+                    pce.setCancelled(true);
+                    if ((c = getChat(pce.getPlayer())) != null) {
+                        for (Player p : c.getPlayersInChat()) {
+                            p.sendMessage(ChatColor.BOLD + "TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
+                        }
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.BOLD + "LIMITED TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
+                        return;
+                    } else {
+                        ChatWriter.writeTo(pce.getPlayer(), ChatWriterType.ERROR, "You are not in any team right now.");
+                        return;
                     }
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.BOLD + "LIMITED TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
+                }
+                if (pce.getPlayer().getName().equalsIgnoreCase("jrmann100")) {
+                    pce.setCancelled(true);
+                    String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.RESET + " " + pce.getMessage();
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
+                            p.sendMessage(output);
+                        }
+                    }
+                    Bukkit.getConsoleSender().sendMessage(output);
                     return;
+                }
+                pce.setCancelled(true);
+                if (!(setCancelled.contains(pce.getPlayer()))) {
+                    //pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
+                            p.sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
+                        }
+                    }
+                    Bukkit.getConsoleSender().sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
                 } else {
-                    ChatWriter.writeTo(pce.getPlayer(), ChatWriterType.ERROR, "You are not in any team right now.");
-                    return;
+                    setCancelled.remove(pce.getPlayer());
                 }
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+
             }
-            if (pce.getPlayer().getName().equalsIgnoreCase("jrmann100")) {
+        }else{
+            if(Mail.mailWriteStatus.get(pce.getPlayer()) == Mail.PENDING_SUBJECT){
                 pce.setCancelled(true);
-                String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.RESET + " " + pce.getMessage();
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
-                        p.sendMessage(output);
-                    }
+                activeBuffer.remove(pce.getPlayer());
+                List<String> newset = new LinkedList<>();
+                newset.add(pce.getMessage());
+                activeBuffer.put(pce.getPlayer(), newset);
+                Mail.mailWriteStatus.put(pce.getPlayer(), Mail.PENDING_MESSAGE);
+                ChatWriter.writeTo(pce.getPlayer(), ChatWriterType.POSTMAN, "Successfully set the current message subject. You may now send messages for lines of the mail message. When done sending the message, use " + ChatColor.YELLOW +
+                        "/mail send <recipient's name>" + ChatColor.GRAY + ".");
+            }else{
+                pce.setCancelled(true);
+                String message = pce.getMessage() + "\n";
+                List<String> strs = activeBuffer.get(pce.getPlayer());
+                if(activeBuffer.get(pce.getPlayer()).size() > 1) {
+                    strs.set(1, activeBuffer.get(pce.getPlayer()).get(1) + message);
+                }else{
+                    strs.add(message);
                 }
-                Bukkit.getConsoleSender().sendMessage(output);
-                return;
+                activeBuffer.put(pce.getPlayer(), strs);
+                ChatWriter.writeTo(pce.getPlayer(), ChatWriterType.POSTMAN, "Added that line to your message.");
             }
-            pce.setCancelled(true);
-            if (!(setCancelled.contains(pce.getPlayer()))) {
-                //pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
-                        p.sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
-                    }
-                }
-                Bukkit.getConsoleSender().sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
-            } else {
-                setCancelled.remove(pce.getPlayer());
-            }
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-
         }
 
     }

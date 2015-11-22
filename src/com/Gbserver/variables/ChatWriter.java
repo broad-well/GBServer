@@ -62,6 +62,9 @@ public class ChatWriter {
                 break;
             case EVENT:
                 output += ChatColor.DARK_AQUA + "Event> " + ChatColor.GOLD;
+                break;
+            case POSTMAN:
+                output += "Postman> " + ChatColor.GRAY;
 
         }
         output += message;

@@ -171,7 +171,7 @@ public class Utilities {
     public static String serializeArray(Object[] array){
         String output = "[";
         for(Object obj : array){
-            output += obj != array[array.length-1] ? obj.toString() + ", " : obj.toString();
+            output += obj != array[array.length-1] ? obj.toString() + ",," : obj.toString();
         }
         return output;
     }
@@ -180,6 +180,6 @@ public class Utilities {
             return null; //check brackets
         String elements = serialized.substring(1, serialized.length()-1); //get rid of brackets
         //a, b, 3f, f3, f2, fa, fq
-        return elements.split(", ");
+        return elements.split(",,");
     }
 }

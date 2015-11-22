@@ -116,3 +116,5 @@ commands:
   reply:
     description: Reply a person that has messaged you.
     aliases: [r]
+  mail:
+    description: Send and receive mail.
