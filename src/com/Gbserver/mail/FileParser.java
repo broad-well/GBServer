@@ -1,5 +1,6 @@
 package com.Gbserver.mail;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.variables.ConfigManager;
 import org.bukkit.OfflinePlayer;
 
@@ -44,12 +45,11 @@ public class FileParser {
             }else if(line.equals("}=-")){
                 if(!in) throw new ParseException("Divider exit not inside a divider entry on line " + lines.indexOf(line), 1);
                 in = false;
+
                 messages.add(Message.parseConfigEntry(currentEntry));
             }else{
                 if(in){
                     currentEntry += line + "\n";
-                }else{
-                    if(!line.startsWith("//") || !line.isEmpty()) throw new ParseException("Unknown field outside divider entry: " + line, 1);
                 }
             }
 
@@ -66,8 +66,22 @@ public class FileParser {
         }
         return msgs;
     }
-
+    public void letMessageRead(Message msg) throws IOException, ParseException {
+        /*if(!getAllStored().contains(msg)) {
+            System.err.println("Void message! " + msg.getSender());
+            return;
+        }*/
+        List<String> lines = Files.readAllLines(MailMan.datfile, Charset.defaultCharset());
+        for(String line : lines)
+            if(line.contains(msg.getUid().toString()))
+                lines.set(lines.indexOf(line) + 1, "READ=true");
+        //Trim!
+        Files.write(MailMan.datfile, Utilities.ListToLines(lines).getBytes(), StandardOpenOption.WRITE);
+    }
     public void saveMessage(Message msg) throws IOException {
         Files.write(MailMan.datfile, msg.getConfigEntry().getBytes(), StandardOpenOption.APPEND);
+    }
+    private static boolean hasOnlySpace(String str){
+        return str.trim().length() == 0;
     }
 }

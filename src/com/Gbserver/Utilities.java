@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Random;
 
 public class Utilities {
@@ -181,5 +182,13 @@ public class Utilities {
         String elements = serialized.substring(1, serialized.length()-1); //get rid of brackets
         //a, b, 3f, f3, f2, fa, fq
         return elements.split(",,");
+    }
+
+    public static String ListToLines(List<String> list){
+        String output = "";
+        for(String str : list){
+            output += str + "\n";
+        }
+        return output;
     }
 }

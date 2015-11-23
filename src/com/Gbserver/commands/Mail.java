@@ -54,12 +54,19 @@ public class Mail implements CommandExecutor{
                         if(args.length == 2) {
                             if(isNumber(args[1])){
                                 //specific msgs
+                                if(messages.size()-1 < Integer.parseInt(args[1])){
+                                    ChatWriter.writeTo(sender, ChatWriterType.POSTMAN, "That selection is out of range.");
+                                    return true;
+                                }
                                 displayMessage(sender, lastShowedWasUnreadMsgs.contains(sender) ?
                                         man.yourUnreadMessages().get(Integer.parseInt(args[1])) : messages.get(Integer.parseInt(args[1])));
-                            }else{
+                            }else if(args[1].equals("new")){
                                 //new msgs
                                 displayMessages(sender, man.yourUnreadMessages());
                                 lastShowedWasUnreadMsgs.add((Player) sender);
+                            }else{
+                                ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Unknown option: " + args[1]);
+
                             }
                         }else {
                             //read messages
@@ -68,11 +75,22 @@ public class Mail implements CommandExecutor{
                         }
                         break;
                     case "write":
-                        mailWriteStatus.put((Player) sender, PENDING_SUBJECT);
-                        ChatWriter.writeTo(sender, ChatWriterType.POSTMAN, "You may now write the subject of the message.");
+                        if(!mailWriteStatus.containsKey(sender) || mailWriteStatus.get(sender) == NOT_PENDING) {
+                            mailWriteStatus.put((Player) sender, PENDING_SUBJECT);
+                            ChatWriter.writeTo(sender, ChatWriterType.POSTMAN, "You may now write the subject of the message.");
+                        }else{
+                            ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "You already started writing your message. To send the message, use " +
+                                    ChatColor.YELLOW + "/mail send <recipient>");
+                        }
                         break;
                     case "send":
+                        if (!ChatFormatter.activeBuffer.containsKey(sender)) {
 
+                            ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "You do not have a message buffer. To write, use " + ChatColor.YELLOW + "/mail write");
+                        }else {
+                            if(ChatFormatter.activeBuffer.get(sender).size() < 2){
+                                ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Your buffer is missing a subject and/or a body. Type your subject/body in the chat.");
+                            } else {
 
                                 List<String> msgdata = ChatFormatter.activeBuffer.get(sender);
                                 mailWriteStatus.remove((Player) sender);
@@ -80,10 +98,12 @@ public class Mail implements CommandExecutor{
                                         MailMan.getPersonalAssistant((Player) sender).deliverMessage(Bukkit.getOfflinePlayer(args[1]), msgdata.get(0), msgdata.get(1)) ?
                                                 "Succesfully sent the message to " + ChatColor.YELLOW + args[1] : "Failed to send message.");
 
-
-
+                                ChatFormatter.activeBuffer.remove((Player) sender);
+                            }
+                        }
                         return true;
                     default:
+                        sender.sendMessage(ChatColor.RED + "Unknown option: " + args[0]);
                         sender.sendMessage(ChatColor.GOLD + "Please choose a subcommand:");
                         sender.sendMessage(ChatColor.YELLOW + "/mail read");
                         sender.sendMessage(ChatColor.YELLOW + "/mail write");
@@ -119,7 +139,7 @@ public class Mail implements CommandExecutor{
         for(Message msg : msgs){
             String tell = ChatColor.GOLD.toString() + "[" + msgs.indexOf(msg) + "] " +
                     ChatColor.DARK_GRAY + msg.getSubject() + " from " + msg.getSender().getName();
-            if(!msg.isRead()) tell += ChatColor.RED.toString() + ChatColor.BOLD + "UNREAD";
+            if(!msg.isRead()) tell += ChatColor.RED.toString() + ChatColor.BOLD + " UNREAD";
             to.sendMessage(tell);
         }
         ChatWriter.writeTo(to, ChatWriterType.POSTMAN, "Use " + ChatColor.YELLOW + "/mail read <message number>" + ChatColor.GRAY + " to read a specific message.");
@@ -129,6 +149,8 @@ public class Mail implements CommandExecutor{
         to.sendMessage("");
         to.sendMessage(ChatColor.BOLD + subject.getSubject());
         to.sendMessage(subject.getMessage());
+        to.sendMessage("");
         ChatWriter.writeTo(to, ChatWriterType.POSTMAN, "Message finished");
+        subject.setRead();
     }
 }

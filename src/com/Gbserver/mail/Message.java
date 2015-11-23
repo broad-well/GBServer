@@ -4,6 +4,7 @@ import com.Gbserver.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,10 +22,22 @@ public class Message {
     private String subject;
     private String message;
     private boolean read;
+
+    public UUID getUid() {
+        return uid;
+    }
+
+    public void setUid(UUID uid) {
+
+        this.uid = uid;
+    }
+
+    private UUID uid;
     public Message(OfflinePlayer sender, OfflinePlayer receiver, Date timestamp) {
         this.sender = sender;
         this.receiver = receiver;
         this.timestamp = timestamp;
+        uid = UUID.randomUUID();
     }
     public void setMessage(String sbj, String msg){
         this.subject = sbj;
@@ -32,7 +45,22 @@ public class Message {
     }
     public void setRead() {
         read = true;
+        try {
+            FileParser.getInstance().letMessageRead(this);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+    @Override
+    public String toString(){
+        return "Message{From: " + sender.toString() +
+                ", To: " + receiver.toString() +
+                ", Time: " + sdf.format(timestamp) +
+                ", UUID: " + uid.toString() +
+                ", Subject: " + subject + "}";
+    }
+
     public String getConfigEntry() {
         return "-={\n" +
                 "---HEADER START---\n" +
@@ -40,8 +68,10 @@ public class Message {
                 "RECEIVER=" + receiver.getUniqueId() + "\n" +
                 "TIME=" + sdf.format(timestamp) + "\n" +
                 "SUBJECT=" + subject + "\n" +
+                "UUID=" + uid.toString() + "\n" +
                 "READ=" + read +
                 "\n---HEADER END---\n" +
+                message +
                 "}=-\n";
     }
     /*
@@ -91,6 +121,7 @@ public class Message {
         Date time = null;
         OfflinePlayer receiver = null;
         OfflinePlayer sender = null;
+        UUID uid = null;
         boolean read = false;
         String[] lines = entry.split("\\r?\\n");
         int header = NOT_STARTED$HEADER;
@@ -129,6 +160,10 @@ public class Message {
                         read = Boolean.valueOf(datas[1]);
                         content++;
                         break;
+                    case "UUID":
+                        uid = UUID.fromString(datas[1]);
+                        content++;
+                        break;
                     default:
                         throw new ParseException("Unknown header field: " + datas[0], 1);
                 }
@@ -137,9 +172,10 @@ public class Message {
                 message += line + "\n";
             }
         }
-        if(header != PASSED$HEADER && content < 5) throw new ParseException("Header not complete", 1);
+        if(header != PASSED$HEADER && content < 6) throw new ParseException("Header not complete", 1);
         Message output = new Message(sender, receiver, time);
         output.setMessage(subject, message);
+        output.setUid(uid);
         if(read) output.setRead();
         return output;
     }
