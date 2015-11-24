@@ -48,7 +48,7 @@ Temporary Items
 *.class
 *.jar
 
-.idea
-.settings
-jars
-Gbserver.iml
+.idea/
+.settings/
+jars/
+GBserver.iml
