@@ -47,3 +47,8 @@ Temporary Items
 /bin
 *.class
 *.jar
+
+.idea
+.settings
+jars
+Gbserver.iml
