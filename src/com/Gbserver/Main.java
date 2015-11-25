@@ -94,6 +94,7 @@ public class Main extends JavaPlugin {
         getCommand("devops").setExecutor(new DevOperation());
         getCommand("group").setExecutor(new Group());
         getCommand("mail").setExecutor(new Mail());
+        getServer().getPluginManager().registerEvents(new EventSpecials(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
