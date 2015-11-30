@@ -46,7 +46,7 @@ public class Rank {
         return fromString.get(str);
     }
     //16  values
-    static final HashMap<String, ChatColor> fromString = new HashMap<String, ChatColor>() {{
+    public static final HashMap<String, ChatColor> fromString = new HashMap<String, ChatColor>() {{
         put("black", ChatColor.BLACK);
         put("white", ChatColor.WHITE);
         put("red", ChatColor.RED);

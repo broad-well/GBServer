@@ -18,8 +18,8 @@ public class EventSpecials implements Listener{
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent pje){
         try {
-            pje.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Thanksgiving> " + ChatColor.GOLD +
-                    "Thank you for being " + randomDeed() + "! " + ChatColor.ITALIC + "~Happy Thanksgiving!");
+            pje.getPlayer().sendMessage(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "Thanksgiving> " + ChatColor.GOLD +
+                    "Thank you for being " + randomDeed() + "! " + ChatColor.RESET + ChatColor.ITALIC + "~Happy Thanksgiving!");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -118,3 +118,5 @@ commands:
     aliases: [r]
   mail:
     description: Send and receive mail.
+  ping:
+    description: Pong!

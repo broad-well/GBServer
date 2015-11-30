@@ -17,11 +17,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class Utilities {
     public static final String OWNER = "_Broadwell";
@@ -190,5 +194,31 @@ public class Utilities {
             output += str + "\n";
         }
         return output;
+    }
+
+    public static String serializeLocation(Location p){
+        return p.getWorld().getName() +
+                        "," + p.getX() + "," + p.getY() + "," + p.getZ() + "," +
+                        p.getPitch() + "," + p.getYaw();
+    }
+
+    public static Location deserializeLocation(String serialized){
+        String[] axises = serialized.split(",");
+        //aced1514-daec-worldUUID,0,100,0,-14,-13
+        if(axises.length != 6) return null;
+        return new Location(Bukkit.getWorld(axises[0]),
+                Double.valueOf(axises[1]),
+                Double.valueOf(axises[2]),
+                Double.valueOf(axises[3]),
+                Float.valueOf(axises[4]),
+                Float.valueOf(axises[5]));
+    }
+
+    public static String getStackTrace(Exception e){
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        pw.flush();
+        return sw.toString();
     }
 }

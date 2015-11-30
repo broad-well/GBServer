@@ -2,6 +2,8 @@ package com.Gbserver;
 
 import com.Gbserver.commands.*;
 import com.Gbserver.listener.*;
+import com.Gbserver.mail.FileParser;
+import com.Gbserver.mail.MailMan;
 import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -23,6 +25,7 @@ import org.bukkit.util.Vector;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -94,7 +97,8 @@ public class Main extends JavaPlugin {
         getCommand("devops").setExecutor(new DevOperation());
         getCommand("group").setExecutor(new Group());
         getCommand("mail").setExecutor(new Mail());
-        getServer().getPluginManager().registerEvents(new EventSpecials(), this);
+        getCommand("ping").setExecutor(new F());
+        //getServer().getPluginManager().registerEvents(new EventSpecials(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
@@ -121,6 +125,12 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
+        MailMan.setupMailChecker();
+        try {
+            FileParser.getInstance().updateBuffer();
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
         try {
             ChatFormatter.$import$();
         } catch (IOException e) {
@@ -378,6 +388,11 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
         saveConfig();
+        try {
+            FileParser.getInstance().saveBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Bacon.unload();
         try {
             PermissionManager.export();

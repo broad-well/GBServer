@@ -1,8 +1,11 @@
 package com.Gbserver.commands;
 
+import com.Gbserver.Utilities;
 import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.listener.Rank;
+import com.Gbserver.mail.FileParser;
 import com.Gbserver.variables.EnhancedMap;
+import com.Gbserver.variables.EnhancedPlayer;
 import com.Gbserver.variables.PermissionManager;
 import com.Gbserver.variables.PermissionManager.*;
 import org.bukkit.Bukkit;
@@ -15,6 +18,8 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,6 +38,7 @@ public class DevOperation implements CommandExecutor{
                         "DeleteRank, " +
                         "GetUUID, " +
                         "GetRecentMessenger, " +
+                        "FlushMessages, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -105,6 +111,53 @@ public class DevOperation implements CommandExecutor{
                     if(strings.length < 2) return true;
                     commandSender.sendMessage(Bukkit.getOfflinePlayer(UUID.fromString(strings[1])).getName());
                     return true;
+                case "FlushMessages":
+                    try {
+                        FileParser.getInstance().saveBuffer();
+                    } catch (IOException e) {
+                        commandSender.sendMessage(Utilities.getStackTrace(e));
+                    }
+                case "TestFeature":
+                    //devops TestFeature NewConfigs <args>
+                    if(strings.length == 1){
+                        commandSender.sendMessage("TestFeature subcommands: NewConfigs");
+                        break;
+                    }
+                    switch(strings[1]){
+                        case "NewConfigs":
+                            if(strings.length < 4) return true;
+                            EnhancedPlayer ep = null;
+                            try {
+                                ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(strings[2]));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            if(ep == null){
+                                commandSender
+                                        .sendMessage("NULLPOINTER! Consult the console.");
+                                break;
+                            }
+                            switch(strings[1]){
+                                case "permissions":
+                                    commandSender.sendMessage(ep.getPermission().toString());
+                                    break;
+                                case "ranks":
+                                    commandSender.sendMessage(ep.getRank().getPrefix());
+                                    break;
+                                case "homes":
+                                    commandSender.sendMessage(ep.getHome().toString());
+                                    break;
+                            }
+                            break;
+                        default:
+                            commandSender.sendMessage("Unknown option.");
+                    }
+
+                case "Serialize.Location":
+                    if(!(commandSender instanceof Player)) return true;
+
                 default:
                     commandSender.sendMessage("Bad option.");
                     return true;

@@ -1,6 +1,11 @@
 package com.Gbserver.mail;
 
+import com.Gbserver.Utilities;
+import com.Gbserver.variables.ChatWriter;
+import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.ConfigManager;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -15,6 +20,19 @@ public class MailMan {
     private static final FileParser fileio = FileParser.getInstance();
     public static MailMan getPersonalAssistant(Player p){
         return new MailMan(p);
+    }
+    public static void setupMailChecker() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Utilities.getInstance(), new Runnable() {
+            public void run() {
+                for(Player p : Bukkit.getOnlinePlayers()){
+                    List<Message> unread = getPersonalAssistant(p).yourUnreadMessages();
+                    if(!unread.isEmpty()){
+                        ChatWriter.writeTo(p, ChatWriterType.POSTMAN, ChatColor.ITALIC + "You have " +
+                                unread.size() + " message" + (unread.size() == 1 ? "" : "s") + ".");
+                    }
+                }
+            }
+        }, 0L, 20L*60L*10L);
     }
     //----------
     /* file format:
@@ -50,6 +68,17 @@ public class MailMan {
         List<Message> output = new LinkedList<>();
         try {
             for (Message msg : fileio.getMessagesOf(owner)) if(!msg.isRead()) output.add(msg);
+            return output;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Message> yourSentMessages() {
+        List<Message> output = new LinkedList<>();
+        try{
+            for (Message msg : FileParser.msgs) if(msg.getSender().equals(owner)) output.add(msg);
             return output;
         }catch(Exception e){
             e.printStackTrace();
