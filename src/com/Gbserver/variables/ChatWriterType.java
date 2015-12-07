@@ -17,5 +17,6 @@ public enum ChatWriterType {
     DEATH,
     WARP,
     EVENT,
-    POSTMAN
+    POSTMAN,
+    TWITCH
 }

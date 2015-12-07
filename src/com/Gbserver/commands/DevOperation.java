@@ -39,6 +39,7 @@ public class DevOperation implements CommandExecutor{
                         "GetUUID, " +
                         "GetRecentMessenger, " +
                         "FlushMessages, " +
+                        "AllEnhancedPlayersInCache, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -86,6 +87,11 @@ public class DevOperation implements CommandExecutor{
                         }catch(Exception ignored){}
                     }
                     break;
+                case "AllEnhancedPlayersInCache":
+                    for(EnhancedPlayer ep : EnhancedPlayer.cache){
+                        commandSender.sendMessage(ep.serialize());
+                    }
+                    break;
                 case "DeleteRank":
                     if(strings.length < 2) return true;
                     ChatFormatter.rankData.remove(Bukkit.getOfflinePlayer(strings[1]).getUniqueId());
@@ -128,9 +134,7 @@ public class DevOperation implements CommandExecutor{
                             if(strings.length < 4) return true;
                             EnhancedPlayer ep = null;
                             try {
-                                ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(strings[2]));
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(strings[3]));
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -139,7 +143,7 @@ public class DevOperation implements CommandExecutor{
                                         .sendMessage("NULLPOINTER! Consult the console.");
                                 break;
                             }
-                            switch(strings[1]){
+                            switch(strings[2]){
                                 case "permissions":
                                     commandSender.sendMessage(ep.getPermission().toString());
                                     break;

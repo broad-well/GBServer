@@ -17,7 +17,13 @@ public class F implements CommandExecutor {
             "pung!",
             "piong!",
             "boing!",
-            "poon!"
+            "poon!",
+            "pronk!",
+            "peng!",
+            "plang!",
+            "pong?",
+            "pong?",
+            "pong?"
     };
 
 
@@ -27,7 +33,7 @@ public class F implements CommandExecutor {
             sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "This is not Meinplex, my Friend!"));
             return true;
         }else if (label.equalsIgnoreCase("ping")){
-            sender.sendMessage(stuffs[Utilities.getRandom(0, stuffs.length - 1)]);
+            sender.sendMessage(stuffs[Utilities.getRandom(0, stuffs.length)]);
             return true;
         }
         return false;

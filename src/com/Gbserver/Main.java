@@ -50,6 +50,11 @@ public class Main extends JavaPlugin {
         //fc.options().copyDefaults(true);
         setupConfig();
         new Utilities(this);
+        try {
+            EnhancedPlayer.ConfigAgent.$import$();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         @SuppressWarnings("unused")
         Protection proc = new Protection(this);
         getCommand("spawn").setExecutor(new Spawn());
@@ -98,6 +103,7 @@ public class Main extends JavaPlugin {
         getCommand("group").setExecutor(new Group());
         getCommand("mail").setExecutor(new Mail());
         getCommand("ping").setExecutor(new F());
+        getCommand("twitch").setExecutor(new Twitch());
         //getServer().getPluginManager().registerEvents(new EventSpecials(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
@@ -383,11 +389,13 @@ public class Main extends JavaPlugin {
             GameType.BL.close();
             GameType.DR.close();
             Runner.joinSheep.remove();
+            EnhancedPlayer.ConfigAgent.$export$();
         } catch (Throwable e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         saveConfig();
+
         try {
             FileParser.getInstance().saveBuffer();
         } catch (IOException e) {

@@ -65,6 +65,10 @@ public class ChatWriter {
                 break;
             case POSTMAN:
                 output += "Postman> " + ChatColor.GRAY;
+                break;
+            case TWITCH:
+                output += ChatColor.DARK_PURPLE + "Twitch> " + ChatColor.GRAY;
+                break;
 
         }
         output += message;

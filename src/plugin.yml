@@ -120,3 +120,5 @@ commands:
     description: Send and receive mail.
   ping:
     description: Pong!
+  twitch:
+    description: Streamer utilities.

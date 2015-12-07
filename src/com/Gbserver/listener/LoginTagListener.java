@@ -9,6 +9,7 @@ import com.Gbserver.variables.IgnoreList;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -47,4 +48,5 @@ public class LoginTagListener implements Listener {
             Bacon.players.remove(BaconPlayer.getByHandle(pqe.getPlayer()));
         }
     }
+
 }
