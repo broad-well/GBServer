@@ -8,6 +8,7 @@ import com.Gbserver.variables.EnhancedMap;
 import com.Gbserver.variables.EnhancedPlayer;
 import com.Gbserver.variables.PermissionManager;
 import com.Gbserver.variables.PermissionManager.*;
+import com.Gbserver.variables.SelectorScriptParser;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -40,6 +41,7 @@ public class DevOperation implements CommandExecutor{
                         "GetRecentMessenger, " +
                         "FlushMessages, " +
                         "AllEnhancedPlayersInCache, " +
+                        "NewPlayer, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -126,7 +128,7 @@ public class DevOperation implements CommandExecutor{
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
                     if(strings.length == 1){
-                        commandSender.sendMessage("TestFeature subcommands: NewConfigs");
+                        commandSender.sendMessage("TestFeature subcommands: NewConfigs, SelectorScript");
                         break;
                     }
                     switch(strings[1]){
@@ -155,13 +157,36 @@ public class DevOperation implements CommandExecutor{
                                     break;
                             }
                             break;
+                        case "SelectorScript":
+                            if(strings.length < 3) return true;
+                            if(!strings[2].startsWith("%")){
+                                commandSender.sendMessage("Input incompatible with SelectorScript.");
+                                return true;
+                            }
+                            String build = "";
+                            for(Player i : SelectorScriptParser.instance.parse(commandSender, strings[2])){
+                                build += i.getName() + " ";
+                            }
+                            commandSender.sendMessage(build);
+                            break;
                         default:
                             commandSender.sendMessage("Unknown option.");
                     }
 
                 case "Serialize.Location":
                     if(!(commandSender instanceof Player)) return true;
-
+                    break;
+                case "NewPlayer":
+                    if(strings.length < 2) return true;
+                    EnhancedPlayer ep = new EnhancedPlayer(Bukkit.getOfflinePlayer(strings[1]));
+                    if(strings.length > 2){
+                        ep.setPermission(Permissions.valueOf(strings[2]));
+                    }
+                    if(strings.length > 3){
+                        ep.setRank(Rank.fromConfig(strings[3]));
+                    }
+                    EnhancedPlayer.cache.add(ep);
+                    break;
                 default:
                     commandSender.sendMessage("Bad option.");
                     return true;

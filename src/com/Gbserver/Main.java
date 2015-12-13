@@ -104,7 +104,8 @@ public class Main extends JavaPlugin {
         getCommand("mail").setExecutor(new Mail());
         getCommand("ping").setExecutor(new F());
         getCommand("twitch").setExecutor(new Twitch());
-        //getServer().getPluginManager().registerEvents(new EventSpecials(), this);
+        getServer().getPluginManager().registerEvents(new EventSpecials(), this);
+        getServer().getPluginManager().registerEvents(new IPCollector(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
@@ -137,6 +138,7 @@ public class Main extends JavaPlugin {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        IPCollector.inTake();
         try {
             ChatFormatter.$import$();
         } catch (IOException e) {

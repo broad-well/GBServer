@@ -79,7 +79,7 @@ public class ExplosionListener implements Listener {
 
             }
         }
-        if (el.getEntityType().equals(EntityType.CREEPER) || el.getEntityType().equals(EntityType.ENDER_DRAGON)) {
+        if (el.getEntityType().equals(EntityType.ENDER_DRAGON)) {
             if (el.getLocation().getBlock().getType() != Material.WATER
                     && el.getLocation().getBlock().getType() != Material.STATIONARY_WATER) {
                 for (int x = 0 - (RADIUS_C / 2); x < RADIUS_C / 2; x++) {

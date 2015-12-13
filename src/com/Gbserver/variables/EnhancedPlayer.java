@@ -45,18 +45,18 @@ public class EnhancedPlayer {
 
     private long duration = 0;
 
-    private EnhancedPlayer(OfflinePlayer pl) {
+    public EnhancedPlayer(OfflinePlayer pl) {
         this.pl = pl;
     }
-    private void setPermission(Permissions myPerm) {
+    public void setPermission(Permissions myPerm) {
         this.myPerm = myPerm;
     }
 
-    private void setHome(Location home) {
+    public void setHome(Location home) {
         this.home = home;
     }
 
-    private void setRank(Rank rank) {
+    public void setRank(Rank rank) {
         this.rank = rank;
     }
 
@@ -77,7 +77,7 @@ public class EnhancedPlayer {
     }
 
     public String serialize() {
-        String returning = "#" + pl.getUniqueId().toString() + "\n";
+        String returning = "#" + Identity.serializeIdentity(pl) + "\n";
         if(myPerm != null) returning += "  permission:" + myPerm.toString() + "\n";
         if(rank != null) returning += "  rank:" + rank.configOutput() + "\n";
         if(home != null) returning += "  home:" + Utilities.serializeLocation(home) + "\n";
@@ -97,7 +97,7 @@ public class EnhancedPlayer {
                 if(line.startsWith("#")){
                     if(current != null)
                         cache.add(current);
-                    current = new EnhancedPlayer(Bukkit.getOfflinePlayer(UUID.fromString(line.substring(1))));
+                    current = new EnhancedPlayer(Identity.deserializeIdentity(line.substring(1)));
                 }else if(line.contains(":") && line.startsWith("  ")){
                     if(current == null){
                         throw new ParseException("Unknown declaration out of player indentation on line " +
