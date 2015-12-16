@@ -93,6 +93,9 @@ public class Utilities {
     }
 
     public static int getRandom(int min, int max) {
+        if(min == 0 && max == 0)
+            return 0;
+
         Random rand = new Random();
 
         return rand.nextInt(max) + min;

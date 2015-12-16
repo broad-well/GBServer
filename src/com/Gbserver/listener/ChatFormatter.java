@@ -120,7 +120,7 @@ public class ChatFormatter implements Listener {
     }
 
     public static String generateTag(Player player, boolean isChat) {
-        if(staff.contains(player.getName()) && Main.isHalloween){
+        if(staff.contains(player.getName()) && Main.onEvent){
             return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Host ";
         }
         Rank format = rankData.get(player.getUniqueId());

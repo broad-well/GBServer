@@ -35,8 +35,8 @@ import java.util.logging.Logger;
 public class Main extends JavaPlugin {
     public static byte paintColor = (byte) 15;
     //For Halloween!
-    public static boolean isHalloween = isHalloweenConfig();
-    public static String eventName = "Halloween Party";
+    public static boolean onEvent = isOnEvent();
+    public static String eventName = "Christmas Event";
 
 
     @SuppressWarnings("deprecation")
@@ -104,10 +104,12 @@ public class Main extends JavaPlugin {
         getCommand("mail").setExecutor(new Mail());
         getCommand("ping").setExecutor(new F());
         getCommand("twitch").setExecutor(new Twitch());
-        getServer().getPluginManager().registerEvents(new EventSpecials(), this);
+        getCommand("selscript").setExecutor(new SelScript());
+        if(onEvent)
+            getServer().getPluginManager().registerEvents(new EventSpecials(), this);
+        getServer().getPluginManager().registerEvents(new StatOnlineTime(), this);
         getServer().getPluginManager().registerEvents(new IPCollector(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
-        getServer().getPluginManager().registerEvents(new HalloweenListeners(), this);
         getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
         getServer().getPluginManager().registerEvents(new Reaction(), this);
@@ -243,6 +245,14 @@ public class Main extends JavaPlugin {
         // getServer().getPluginManager().registerEvents(new
         // runnerListenerDepricated(), this);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        if(onEvent)
+            scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+                public void run() {
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        p.setFoodLevel(20);
+                    }
+                }
+            }, 0L, 1L);
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
             public void run() {
@@ -416,9 +426,9 @@ public class Main extends JavaPlugin {
         saveConfig();
     }
 
-    public static boolean isHalloweenConfig(){
+    public static boolean isOnEvent(){
         try {
-            Scanner s = new Scanner(new FileInputStream(ConfigManager.getPathInsidePluginFolder("IsItHalloween.txt").toFile()));
+            Scanner s = new Scanner(new FileInputStream(ConfigManager.getPathInsidePluginFolder("eventFlipFlop.txt").toFile()));
             return Boolean.valueOf(s.nextLine());
         }catch(Exception e){
             return false;

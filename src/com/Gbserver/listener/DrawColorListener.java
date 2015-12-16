@@ -40,7 +40,7 @@ public class DrawColorListener implements Listener {
         }
         if (pie.getPlayer().getItemInHand().getType().equals(Material.IRON_AXE)
                 && pie.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals("Leap Axe")) {
-            if(!Main.isHalloween) {
+            if(!Main.onEvent) {
                 if (!l.contains(pie.getPlayer())) {
                     pie.getPlayer().setVelocity(pie.getPlayer().getEyeLocation().getDirection().multiply(2));
                     pie.getPlayer().playEffect(pie.getPlayer().getLocation(), Effect.BLAZE_SHOOT, 10);

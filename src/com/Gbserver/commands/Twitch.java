@@ -12,8 +12,8 @@ import org.bukkit.command.CommandSender;
  * Created by michael on 12/6/15.
  */
 public class Twitch implements CommandExecutor{
-    String currentPlayer = "";
-    String currentUser = "";
+    public static String currentPlayer = "";
+    public static String currentUser = "";
     HelpTable ht = new HelpTable("/twitch <[twitch username] / [end] / [announce] / [who]>", "To automate stream announcements.", "", "twitch");
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -26,9 +26,13 @@ public class Twitch implements CommandExecutor{
                        ChatWriter.writeTo(sender, ChatWriterType.TWITCH, "There's nobody streaming right now. To start streaming, use " +
                                ChatColor.YELLOW + "/twitch <your twitch username>");
                    }else{
-                       ChatWriter.writeTo(sender, ChatWriterType.TWITCH, "Ended current Twitch stream: " + ChatColor.YELLOW + currentUser);
-                       currentUser = "";
-                       currentPlayer = "";
+                       if(sender.getName().equals(currentPlayer)) {
+                           ChatWriter.writeTo(sender, ChatWriterType.TWITCH, "Ended current Twitch stream: " + ChatColor.YELLOW + currentUser);
+                           currentUser = "";
+                           currentPlayer = "";
+                       }else{
+                           ChatWriter.writeTo(sender, ChatWriterType.TWITCH, "You are not the streamer, you have no privilege to end the stream.");
+                       }
                    }
                     break;
                 case "announce":

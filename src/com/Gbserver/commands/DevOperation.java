@@ -42,6 +42,7 @@ public class DevOperation implements CommandExecutor{
                         "FlushMessages, " +
                         "AllEnhancedPlayersInCache, " +
                         "NewPlayer, " +
+                        "StreamForceEnd, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -125,6 +126,12 @@ public class DevOperation implements CommandExecutor{
                     } catch (IOException e) {
                         commandSender.sendMessage(Utilities.getStackTrace(e));
                     }
+                    break;
+                case "StreamForceEnd":
+                    Twitch.currentUser = "";
+                    Twitch.currentPlayer = "";
+                    commandSender.sendMessage("Stream ended.");
+                    break;
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
                     if(strings.length == 1){

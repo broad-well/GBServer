@@ -122,3 +122,5 @@ commands:
     description: Pong!
   twitch:
     description: Streamer utilities.
+  selscript:
+    description: SelectorScript experiments.

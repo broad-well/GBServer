@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -110,5 +111,19 @@ public class EventSpecials implements Listener{
             }, 10L);
         }
 
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent pje){
+        pje.getPlayer().sendMessage(ChatColor.RED + "Santa> " + ChatColor.GOLD + "Merry Christmas, fellow " +
+                ChatColor.YELLOW + pje.getPlayer().getName() + ChatColor.GOLD + "!");
+        pje.getPlayer().sendMessage(ChatColor.GOLD + "Broadwell> " + ChatColor.AQUA +
+                "I would like to show you a few interesting commands to use during this event:");
+        pje.getPlayer().sendMessage(ChatColor.GOLD + "Broadwell> " + ChatColor.DARK_AQUA +
+                "/ping, /friend, /admin, /group, /vote, /hat, /heal, /quit");
+        pje.getPlayer().sendMessage(ChatColor.GOLD + "Broadwell> " + ChatColor.DARK_AQUA.toString() +
+                ChatColor.ITALIC + "Also take a look at my newest invention, SelectorScript! "
+                + ChatColor.YELLOW + "/selscript");
+        ChatWriter.writeTo(pje.getPlayer(), ChatWriterType.EVENT, "Your hunger is covered by us! No food required.");
     }
 }

@@ -22,7 +22,7 @@ public class Gamemode implements CommandExecutor {
                 return false;
             }
             Player p = (Player) sender;
-            if (!Main.isHalloween || sender.isOp()) {
+            if (!Main.onEvent|| sender.isOp()) {
 
                 if (args.length < 1) {
                     ht.show(sender);

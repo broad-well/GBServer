@@ -18,16 +18,16 @@ import org.bukkit.entity.Player;
 public class Admin implements CommandExecutor{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-        if(Main.isHalloween){
+        if(Main.onEvent){
             String message = Utilities.concat(args);
             for(String str : ChatFormatter.staff){
                 Player p = Bukkit.getPlayer(str);
                 if(p != null){
-                    p.sendMessage(ChatColor.LIGHT_PURPLE + sender.getName() + ": " + ChatColor.RESET + message);
+                    p.sendMessage(ChatColor.LIGHT_PURPLE + sender.getName() + " > " + ChatColor.RESET + message);
                     sender.sendMessage(ChatColor.AQUA + "Sent message to " + p.getName());
                 }
             }
-            Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + sender.getName() + ": " + ChatColor.RESET + message);
+            Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + sender.getName() + " > " + ChatColor.RESET + message);
             sender.sendMessage(ChatColor.AQUA + "Sent message to console");
             return true;
         }else{
