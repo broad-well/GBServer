@@ -1,6 +1,7 @@
 package com.Gbserver.mail;
 
 import com.Gbserver.Utilities;
+import com.Gbserver.variables.Identity;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -64,8 +65,8 @@ public class Message {
     public String getConfigEntry() {
         return "-={\n" +
                 "---HEADER START---\n" +
-                "SENDER=" + sender.getUniqueId() + "\n" +
-                "RECEIVER=" + receiver.getUniqueId() + "\n" +
+                "SENDER=" + Identity.serializeIdentity(sender) + "\n" +
+                "RECEIVER=" + Identity.serializeIdentity(receiver) + "\n" +
                 "TIME=" + sdf.format(timestamp) + "\n" +
                 "SUBJECT=" + subject + "\n" +
                 "UUID=" + uid.toString() + "\n" +
@@ -141,11 +142,11 @@ public class Message {
                 String[] datas = line.split("=");
                 switch(datas[0]){
                     case "SENDER":
-                        sender = Bukkit.getOfflinePlayer(UUID.fromString(datas[1]));
+                        sender = Identity.deserializeIdentity(datas[1]);
                         content++;
                         break;
                     case "RECEIVER":
-                        receiver = Bukkit.getOfflinePlayer(UUID.fromString(datas[1]));
+                        receiver = Identity.deserializeIdentity(datas[1]);
                         content++;
                         break;
                     case "TIME":

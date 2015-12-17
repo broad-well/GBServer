@@ -36,6 +36,7 @@ public class Main extends JavaPlugin {
     public static byte paintColor = (byte) 15;
     //For Halloween!
     public static boolean onEvent = isOnEvent();
+    public static boolean debug = true;
     public static String eventName = "Christmas Event";
 
 
@@ -272,7 +273,8 @@ public class Main extends JavaPlugin {
         }, 0L, 1L);
         scheduler.scheduleSyncDelayedTask(this, new Runnable() {
             public void run() {
-                CreativeGameMode.setAll(GameMode.CREATIVE);
+
+                CreativeGameMode.setAll(onEvent ? GameMode.SURVIVAL : GameMode.CREATIVE);
             }
         }, 10L);
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {

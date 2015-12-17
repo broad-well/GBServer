@@ -22,7 +22,7 @@ import java.util.*;
 public class ChatFormatter implements Listener {
     public static List<Player> setCancelled = new LinkedList<Player>();
     //For fiestas.
-    public static List<String> staff = Arrays.asList("_Broadwell", "SallyGreen", "Ehcto");
+    public static List<String> staff = Arrays.asList("_Broadwell", "Xrandon", "Ehcto", "Anairda");
     public static Path rankFile = ConfigManager.getPathInsidePluginFolder("ranks.dat");
 
     public static HashMap<UUID, Rank> rankData = new HashMap<>();

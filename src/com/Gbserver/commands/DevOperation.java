@@ -21,11 +21,12 @@ import org.bukkit.entity.Player;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class DevOperation implements CommandExecutor{
-
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -34,6 +35,7 @@ public class DevOperation implements CommandExecutor{
                 commandSender.sendMessage("Available Options: " +
                         "InsertPermission, " +
                         "ListPermission, " +
+                        "DeletePermission, " +
                         "InsertRank, " +
                         "ListRank, " +
                         "DeleteRank, " +
@@ -42,7 +44,10 @@ public class DevOperation implements CommandExecutor{
                         "FlushMessages, " +
                         "AllEnhancedPlayersInCache, " +
                         "NewPlayer, " +
+                        "DeletePlayer, " +
                         "StreamForceEnd, " +
+                        "EventDeop, " +
+                        "DuplicatePlayerResolve, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -68,6 +73,18 @@ public class DevOperation implements CommandExecutor{
                                 Bukkit.getOfflinePlayer(permission.getKey()).getName() + " -> " + permission.getValue().name()
                         );
                     }
+                    break;
+                case "DeletePermission":
+                    if(strings.length == 1) return true;
+                    UUID toD = null;
+                    for(UUID uid : PermissionManager.perms.keySet()){
+                        if(Bukkit.getOfflinePlayer(strings[1]).getUniqueId().equals(uid)){
+                            toD = uid;
+                            commandSender.sendMessage("Found permission to delete");
+                        }
+                    }
+                    if(toD != null)
+                        PermissionManager.perms.remove(toD);
                     break;
                 case "InsertRank":
                     if(strings.length < 3) return true;
@@ -128,9 +145,28 @@ public class DevOperation implements CommandExecutor{
                     }
                     break;
                 case "StreamForceEnd":
-                    Twitch.currentUser = "";
-                    Twitch.currentPlayer = "";
-                    commandSender.sendMessage("Stream ended.");
+                    Twitch.streamers.clear();
+                    commandSender.sendMessage("Streams ended.");
+                    break;
+                case "EventDeop":
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        if(!ChatFormatter.staff.contains(p.getName()) && p.isOp()){
+                            p.setOp(false);
+                            commandSender.sendMessage("Deopped " + p.getName());
+                        }
+                    }
+                    break;
+                case "DeletePlayer":
+                    if(strings.length == 1)return true;
+                    List<EnhancedPlayer> toDelete = new LinkedList<>();
+                    for(EnhancedPlayer ep : EnhancedPlayer.cache) {
+                        if (ep.toPlayer().getName().equals(strings[1])) {
+                            toDelete.add(ep);
+                        }
+                    }
+                    commandSender.sendMessage(toDelete.toString());
+                    EnhancedPlayer.cache.removeAll(toDelete);
+
                     break;
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
@@ -192,7 +228,28 @@ public class DevOperation implements CommandExecutor{
                     if(strings.length > 3){
                         ep.setRank(Rank.fromConfig(strings[3]));
                     }
+                    for(EnhancedPlayer epl : EnhancedPlayer.cache){
+                        if(epl.toPlayer().getName().equals(strings[1])){
+                            commandSender.sendMessage("Player already exists");
+                            return true;
+                        }
+                    }
                     EnhancedPlayer.cache.add(ep);
+                    break;
+                case "DuplicatePlayerResolve":
+                    List<String> knownPlayers = new LinkedList<>();
+                    List<EnhancedPlayer> toDel = new LinkedList<>();
+                    for(EnhancedPlayer enp : EnhancedPlayer.cache){
+                        if(knownPlayers.contains(enp.toPlayer().getName())){
+                            toDel.add(enp);
+                            commandSender.sendMessage("Found duplicate, name " + enp.toPlayer().getName());
+                        } else {
+                          knownPlayers.add(enp.toPlayer().getName());
+                        }
+
+                    }
+                    commandSender.sendMessage("Deleting duplicates");
+                    EnhancedPlayer.cache.removeAll(toDel);
                     break;
                 default:
                     commandSender.sendMessage("Bad option.");

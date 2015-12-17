@@ -7,13 +7,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class StatOnlineTime implements Listener{
-    public static HashMap<EnhancedPlayer, Long> joinMillis = new HashMap<>();
+    public static HashMap<UUID, Long> joinMillis = new HashMap<>();
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent pje){
         try {
-            joinMillis.put(EnhancedPlayer.getEnhanced(pje.getPlayer()), System.currentTimeMillis());
+            joinMillis.put(pje.getPlayer().getUniqueId(), System.currentTimeMillis());
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -25,9 +26,9 @@ public class StatOnlineTime implements Listener{
             EnhancedPlayer ep = EnhancedPlayer.getEnhanced(pqe.getPlayer());
             ep.setDuration(
                     ep.getDuration() +
-                            (System.currentTimeMillis() - joinMillis.get(ep)) / 1000
+                            (System.currentTimeMillis() - joinMillis.get(ep.toPlayer().getUniqueId())) / 1000
             );
-            joinMillis.remove(ep);
+            joinMillis.remove(ep.toPlayer().getUniqueId());
         } catch (Exception e){
             e.printStackTrace();
         }

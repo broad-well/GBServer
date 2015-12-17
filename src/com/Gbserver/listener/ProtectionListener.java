@@ -13,6 +13,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.bukkit.event.player.PlayerBucketEvent;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -75,27 +77,27 @@ public class ProtectionListener implements Listener {
         }
 
         if (!bbe.getBlock().getWorld().getName().equals("world") &&
-                !bbe.getPlayer().getName().equals(Utilities.OWNER)){
+                !bbe.getPlayer().getName().equals(Utilities.OWNER)) {
             bbe.setCancelled(true);
         }
 
         try {
-            if(EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
-                if(!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
+            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
+                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
                     bbe.setCancelled(true);
                     bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to break blocks. Required permission above GUEST");
                     return;
                 }
             }
             if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission() == null) {
-                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)){
+                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
                     bbe.setCancelled(true);
                     bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to break blocks. Required permission above GUEST");
                 }
-            }else{
+            } else {
                 if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission().getLevel() <
-                        PermissionManager.Permissions.PRIVILEGED.getLevel()){
-                    if(!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
+                        PermissionManager.Permissions.PRIVILEGED.getLevel()) {
+                    if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
                         bbe.setCancelled(true);
                         bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to break blocks. Required permission above GUEST");
                     }
@@ -169,33 +171,70 @@ public class ProtectionListener implements Listener {
         }
         if ((!bbe.getBlock().getWorld().getName().equals("world") &&
                 !bbe.getPlayer().getName().equals(Utilities.OWNER)) || ((bbe.getBlock().getType() == Material.TNT ||
-                                                                        bbe.getBlock().getType() == Material.STATIONARY_LAVA ||
-                                                                        bbe.getBlock().getType() == Material.LAVA ||
-                                                                        bbe.getBlock().getType() == Material.LAVA_BUCKET) &&
-                bbe.getBlock().getWorld().getName().equals("world"))){
+                bbe.getBlock().getType() == Material.STATIONARY_LAVA ||
+                bbe.getBlock().getType() == Material.LAVA ||
+                bbe.getBlock().getType() == Material.LAVA_BUCKET) &&
+                bbe.getBlock().getWorld().getName().equals("world"))) {
             bbe.setCancelled(true);
         }
 
         try {
-            if(EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
-                if(!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
+            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
+                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
                     bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place blocks. Required permission above GUEST");
                     bbe.setCancelled(true);
                     return;
                 }
             }
-            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission() == null){
-                if(!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
+            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission() == null) {
+                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
                     bbe.setCancelled(true);
                     bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place blocks. Required permission above GUEST");
                 }
-            }else{
+            } else {
                 if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission().getLevel() <
-                        PermissionManager.Permissions.PRIVILEGED.getLevel()){
-                    if(!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
+                        PermissionManager.Permissions.PRIVILEGED.getLevel()) {
+                    if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
                         bbe.setCancelled(true);
                         bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place blocks. Required permission above GUEST");
                     }
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @EventHandler
+    public void onPlayerBucketEmpty(PlayerBucketEmptyEvent pbe) {
+        int x = pbe.getBlockClicked().getX();
+        int y = pbe.getBlockClicked().getY() + 1;
+        int z = pbe.getBlockClicked().getZ();
+
+        //pbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
+        //pbe.setCancelled(true);
+        for (int i = 0; i < DATA.length; i++) {
+            if (isInSelection(i, x, y, z) && !isTrusted(i, pbe.getPlayer())) {
+                if (i != 0) {
+                    pbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
+                    pbe.setCancelled(true);
+                }
+            }
+        }
+
+
+        try {
+
+            if (EnhancedPlayer.getEnhanced(pbe.getPlayer()).getPermission() == null) {
+                pbe.setCancelled(true);
+                pbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place liquid. Required permission above GUEST");
+            } else {
+                if (EnhancedPlayer.getEnhanced(pbe.getPlayer()).getPermission().getLevel() <
+                        PermissionManager.Permissions.PRIVILEGED.getLevel()) {
+
+                    pbe.setCancelled(true);
+                    pbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place liquid. Required permission above GUEST");
+
                 }
             }
         } catch (ParseException e) {

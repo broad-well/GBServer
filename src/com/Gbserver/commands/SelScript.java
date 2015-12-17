@@ -34,7 +34,7 @@ public class SelScript implements CommandExecutor {
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "%_Broadwell,Dinnerbone -> the player named _Broadwell and the player named Dinnerbone (excludes those that are offline)");
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Bad example: %!random -> will always return a selection of no players, because there are only exclusive options");
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, ChatColor.GOLD + "Time to get exploring! Use " + ChatColor.YELLOW + "/selscript <your script>" + ChatColor.GOLD +
-                    "to test your SelectorScript code." + ChatColor.ITALIC + " Have fun!");
+                    " to test your SelectorScript code." + ChatColor.ITALIC + " Have fun!");
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, ChatColor.ITALIC + "Note: SelectorScript is in alpha testing. If there's a bug, use /mail to report to _Broadwell.");
             return true;
         }

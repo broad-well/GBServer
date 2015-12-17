@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.Main;
 import com.Gbserver.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -17,7 +18,7 @@ public class CreativeGameMode implements Listener{
         Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
             @Override
             public void run() {
-                pje.getPlayer().setGameMode(GameMode.CREATIVE);
+                pje.getPlayer().setGameMode(Main.onEvent ? GameMode.SURVIVAL : GameMode.CREATIVE);
             }
         }, 10L);
     }

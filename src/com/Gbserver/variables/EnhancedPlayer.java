@@ -27,7 +27,10 @@ public class EnhancedPlayer {
                 return ep;
 
         }
-        return null;
+        EnhancedPlayer New = new EnhancedPlayer(p);
+        System.out.println("Founded new EnhancedPlayer, " + p.getName());
+        cache.add(New);
+        return New;
     }
 
     private OfflinePlayer pl;

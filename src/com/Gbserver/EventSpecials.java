@@ -21,6 +21,7 @@ import java.util.TimeZone;
 
 public class EventSpecials implements Listener{
     //Currently: Christmas & New Year
+    //Use 185 for worldborder
 
 
     public static Calendar get2016() {
