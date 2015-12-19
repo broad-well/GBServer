@@ -59,9 +59,8 @@ public class Main extends JavaPlugin {
         @SuppressWarnings("unused")
         Protection proc = new Protection(this);
         getCommand("spawn").setExecutor(new Spawn());
-        CommandExecutor ce = new Tell();
-        getCommand("tell").setExecutor(ce);
-        getCommand("reply").setExecutor(ce);
+        getCommand("tell").setExecutor(new Tell());
+        getCommand("reply").setExecutor(new Reply());
         getCommand("runner").setExecutor(new Runner());
         getCommand("protection").setExecutor(new Protection(this));
         getCommand("afk").setExecutor(new Afk());

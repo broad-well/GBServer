@@ -32,6 +32,16 @@ public class EnhancedPlayer {
         cache.add(New);
         return New;
     }
+    public static boolean isPlayerIneligible(OfflinePlayer op, Permissions minimum){
+        try {
+            Permissions perm = getEnhanced(op).getPermission();
+            return perm == null || perm.getLevel() < minimum.getLevel();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return true;
+        } catch (NullPointerException ignored){ return true;}
+
+    }
 
     private OfflinePlayer pl;
     private Permissions myPerm; //default: guest
@@ -50,6 +60,7 @@ public class EnhancedPlayer {
 
     public EnhancedPlayer(OfflinePlayer pl) {
         this.pl = pl;
+        this.myPerm = Permissions.GUEST;
     }
     public void setPermission(Permissions myPerm) {
         this.myPerm = myPerm;

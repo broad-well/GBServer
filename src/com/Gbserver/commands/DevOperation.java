@@ -2,6 +2,7 @@ package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
 import com.Gbserver.listener.ChatFormatter;
+import com.Gbserver.listener.ProtectionListener;
 import com.Gbserver.listener.Rank;
 import com.Gbserver.mail.FileParser;
 import com.Gbserver.variables.EnhancedMap;
@@ -250,6 +251,15 @@ public class DevOperation implements CommandExecutor{
                     }
                     commandSender.sendMessage("Deleting duplicates");
                     EnhancedPlayer.cache.removeAll(toDel);
+                    break;
+                //Easter egg
+                case "EXEC_M3A1T":
+                    commandSender.sendMessage(ChatColor.MAGIC.toString() + ChatColor.BLUE + "All bugs achieved by " + ChatColor.YELLOW + "package_java" +
+                            ChatColor.BLUE + " with Super Cow Powers." + ChatColor.MAGIC.toString());
+                    commandSender.sendMessage(ChatColor.AQUA + "Use caution with this command.");
+                    break;
+                case "ClassModify":
+                    commandSender.sendMessage("INOP. Stop, you geek.");
                     break;
                 default:
                     commandSender.sendMessage("Bad option.");

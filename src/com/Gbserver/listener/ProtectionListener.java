@@ -13,13 +13,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ProtectionListener implements Listener {
+    public static boolean isDisabled = false;
     final int[][][] DATA = {
             {
                     {-156, 78, 228},
@@ -239,6 +244,19 @@ public class ProtectionListener implements Listener {
             }
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent pie){
+        if(pie.getPlayer().getItemInHand().getType() == Material.ARMOR_STAND ||
+                pie.getPlayer().getItemInHand().getType() == Material.MOB_SPAWNER){
+
+                if(EnhancedPlayer.isPlayerIneligible(pie.getPlayer(), PermissionManager.Permissions.PRIVILEGED)){
+                    pie.setCancelled(true);
+                    pie.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to spawn creatures. Permission not above GUEST");
+                }
+
         }
     }
 }

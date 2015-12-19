@@ -35,6 +35,7 @@ public class Tell implements CommandExecutor {
             sender.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + sender.getName() + " > CONSOLE: " + msg);
             beep(sender);
             Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + sender.getName() + " > CONSOLE: " + msg);
+            last.put(sender, Bukkit.getConsoleSender());
         }else if(Bukkit.getPlayer(args[0]) == null){
             //NullPointer, no player
             sender.sendMessage(ChatColor.RED + "Problem: Where is " + args[0] + "? I cannot find this player online.");
@@ -62,7 +63,7 @@ public class Tell implements CommandExecutor {
         return output;
     }
 
-    private void beep(CommandSender sender){
+    public static void beep(CommandSender sender){
         if(sender instanceof Player){
             Player s = (Player) sender;
             for(int i = 0; i < 5; i++)

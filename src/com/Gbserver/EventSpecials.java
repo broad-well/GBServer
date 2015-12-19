@@ -117,11 +117,11 @@ public class EventSpecials implements Listener{
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent pje){
         pje.getPlayer().sendMessage(ChatColor.RED + "Santa> " + ChatColor.GOLD + "Merry Christmas, fellow " +
-                ChatColor.YELLOW + pje.getPlayer().getName() + ChatColor.GOLD + "!");
+                ChatColor.YELLOW + pje.getPlayer().getName() + ChatColor.GOLD + "! Hoe, ho ho!");
         pje.getPlayer().sendMessage(ChatColor.GOLD + "Broadwell> " + ChatColor.AQUA +
                 "I would like to show you a few interesting commands to use during this event:");
         pje.getPlayer().sendMessage(ChatColor.GOLD + "Broadwell> " + ChatColor.DARK_AQUA +
-                "/ping, /friend, /admin, /group, /vote, /hat, /heal, /quit");
+                "/ping, /friend, /admin, /group, /vote, /hat, /heal, /ride, /quit");
         pje.getPlayer().sendMessage(ChatColor.GOLD + "Broadwell> " + ChatColor.DARK_AQUA.toString() +
                 ChatColor.ITALIC + "Also take a look at my newest invention, SelectorScript! "
                 + ChatColor.YELLOW + "/selscript");
