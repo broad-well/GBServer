@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.HelpTable;
-import com.Gbserver.variables.IgnoreList;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -19,6 +16,7 @@ public class Ignore implements CommandExecutor {
     public static HelpTable ht = new HelpTable("/ignore <player to ignore>", "To ignore a certain player's chat messages", "", "ignore");
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender)) {
             if (args.length == 0) {
                 if (IgnoreList.getIgnoreList((Player) sender).getIgnoredPlayers().size() != 0) {

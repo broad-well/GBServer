@@ -3,6 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,6 +18,7 @@ public class Mute implements CommandExecutor {
     private HelpTable ht = new HelpTable("/mute <player to mute>", "/mute is used for general muting funtionality.", "", "mute");
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("mute")) {
             if (sender instanceof Player && !(((Player) sender).getName().equals("_Broadwell"))) {
                 sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "You are not authorized to mute."));

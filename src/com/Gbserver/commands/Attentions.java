@@ -2,6 +2,7 @@ package com.Gbserver.commands;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +13,7 @@ public class Attentions implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-        // TODO Auto-generated method stub
+        if(Sandbox.check(arg0)) return true;
         if (arg0.isOp()) {
             ChatWriter.write(ChatWriterType.ANNOUNCEMENT, concat(arg3));
             return true;

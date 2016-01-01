@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatGroup;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,6 +11,7 @@ import org.bukkit.command.CommandSender;
 public class Group implements CommandExecutor{
     public static HelpTable ht = new HelpTable("/group <[yourMessage],[create],[join <target>],[leave <target>],[close],[kick <target>]>", "For Party chatting","/g","group");
     public boolean onCommand(CommandSender sender, Command cmd, String text, String[] args){
+        if(Sandbox.check(sender)) return true;
         ChatGroup group;
         //!!! Add requesting to join !!!//
         if(args.length == 0){

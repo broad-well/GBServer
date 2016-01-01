@@ -4,6 +4,7 @@ import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -32,6 +33,7 @@ public class Warp implements CommandExecutor {
     public static HashMap<String, Location> data = new HashMap<>();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender)) {
             //Get data.
             if (args.length == 0) {

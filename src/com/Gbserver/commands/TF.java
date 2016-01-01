@@ -3,6 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.Main;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import com.Gbserver.variables.ScoreDisplay;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -192,6 +193,7 @@ public class TF implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("tf")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));

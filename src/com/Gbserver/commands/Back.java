@@ -3,6 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import com.Gbserver.variables.Vaults;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,6 +16,7 @@ public class Back implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
+            if(Sandbox.check(sender)) return true;
             Player player = (Player) sender;
             if (Vaults.getVault(player.getUniqueId()).hasPrevious()) {
                 Vaults.getVault(player.getUniqueId()).toPrevious();

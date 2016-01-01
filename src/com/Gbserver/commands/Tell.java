@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.EnhancedMap;
-import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Instrument;
@@ -24,6 +21,7 @@ public class Tell implements CommandExecutor {
 
     @EventHandler
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if(args.length < 2){
             ht.show(sender);
             return true;

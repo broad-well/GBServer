@@ -3,6 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,6 +23,7 @@ public class Afk implements CommandExecutor {
     public static List<Player> afkList = new ArrayList<Player>();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("afk")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed to AFK."));

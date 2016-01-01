@@ -2,6 +2,7 @@ package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,6 +21,7 @@ public class Quit implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("quit")) {
             if (Utilities.validateSender(sender)) {
                 if (args.length == 0) {

@@ -97,8 +97,7 @@ public class Utilities {
             return 0;
 
         Random rand = new Random();
-
-        return rand.nextInt(max) + min;
+        return rand.nextInt(max - min) + min;
         // 50 is the maximum and the 1 is our minimum
     }
 

@@ -3,6 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.Main;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +17,7 @@ public class Protection implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        // TODO Auto-generated method stub
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("protection")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));

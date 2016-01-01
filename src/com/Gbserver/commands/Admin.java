@@ -5,6 +5,7 @@ import com.Gbserver.Utilities;
 import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ public class Admin implements CommandExecutor{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(Main.onEvent){
+            if(Sandbox.check(sender)) return true;
             String message = Utilities.concat(args);
             for(String str : ChatFormatter.staff){
                 Player p = Bukkit.getPlayer(str);

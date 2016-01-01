@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
 
     @SuppressWarnings("deprecation")
     public void onEnable() {
-
+        final List<Exception> errorStack = new LinkedList<>();
         PluginDescriptionFile desc = getDescription();
         Logger lg = Logger.getLogger("Minecraft");
         //final FileConfiguration fc = getConfig();
@@ -54,8 +54,10 @@ public class Main extends JavaPlugin {
         try {
             EnhancedPlayer.ConfigAgent.$import$();
         } catch (Exception e){
-            e.printStackTrace();
+            errorStack.add(e);
         }
+
+        //Register commands.
         @SuppressWarnings("unused")
         Protection proc = new Protection(this);
         getCommand("spawn").setExecutor(new Spawn());
@@ -105,6 +107,8 @@ public class Main extends JavaPlugin {
         getCommand("ping").setExecutor(new F());
         getCommand("twitch").setExecutor(new Twitch());
         getCommand("selscript").setExecutor(new SelScript());
+
+        //Register events.
         if(onEvent)
             getServer().getPluginManager().registerEvents(new EventSpecials(), this);
         getServer().getPluginManager().registerEvents(new StatOnlineTime(), this);
@@ -138,22 +142,28 @@ public class Main extends JavaPlugin {
         try {
             FileParser.getInstance().updateBuffer();
         } catch (IOException | ParseException e) {
-            e.printStackTrace();
+            errorStack.add(e);
         }
-        IPCollector.inTake();
+        try {
+            IPCollector.inTake();
+        } catch (Exception e){errorStack.add(e);}
         try {
             ChatFormatter.$import$();
         } catch (IOException e) {
-            e.printStackTrace();
+            errorStack.add(e);
         }
         new Announce(this);
         try {
             PermissionManager.import_();
         } catch (IOException e) {
-            e.printStackTrace();
+            errorStack.add(e);
         }
-        Reaction.getRepeatingEvent();
-        Bacon.getLobby();
+        try {
+            Reaction.getRepeatingEvent();
+        } catch(Exception e){errorStack.add(e);}
+        try{
+            Bacon.getLobby();
+        } catch(Exception e){errorStack.add(e);}
         GameType.TF = new GameType(new Runnable() {
             public void run() {
                 TF.bluePlayers.addAll(GameType.TF.blue);
@@ -388,38 +398,69 @@ public class Main extends JavaPlugin {
 
                         }
                     }catch(Exception e){
-
+                        errorStack.add(e);
                     }
                 }
             }
         }, 0L, 1L);
-
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                if(errorStack.isEmpty()){
+                    System.out.println("Error stack empty");
+                } else {
+                    System.out.println("---ERRORSTACK DUMP---");
+                    for (Exception e : errorStack) {
+                        e.printStackTrace();
+                    }
+                    errorStack.clear();
+                }
+            }
+        }, 5L);
     }
 
     public void onDisable() {
+        final List<Exception> errorStack = new LinkedList<>();
         try {
             GameType.TF.close();
             GameType.BL.close();
             GameType.DR.close();
             Runner.joinSheep.remove();
             EnhancedPlayer.ConfigAgent.$export$();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            errorStack.add(e);
         }
         saveConfig();
 
         try {
             FileParser.getInstance().saveBuffer();
         } catch (IOException e) {
-            e.printStackTrace();
+            errorStack.add(e);
         }
+        try{
         Bacon.unload();
+        } catch(Exception e){errorStack.add(e);}
         try {
             PermissionManager.export();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            errorStack.add(e);
         }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                if(errorStack.isEmpty()){
+                    System.out.println("Error stack empty");
+                } else {
+                    System.out.println("---ERRORSTACK DUMP---");
+                    for (Exception e : errorStack) {
+                        e.printStackTrace();
+                    }
+                    errorStack.clear();
+                }
+            }
+        }, 5L);
+
     }
 
     public void setupConfig() {

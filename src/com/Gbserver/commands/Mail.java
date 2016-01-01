@@ -8,6 +8,7 @@ import com.Gbserver.mail.Message;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -37,6 +38,7 @@ public class Mail implements CommandExecutor{
     static final int UNREAD = 2;
     static final int SENT = 3;
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+        if(Sandbox.check(sender)) return true;
         if(sender instanceof Player){
             if(args.length == 0){
                 sender.sendMessage(ChatColor.GOLD + "Please choose a subcommand:");

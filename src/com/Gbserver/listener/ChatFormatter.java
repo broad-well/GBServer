@@ -38,6 +38,7 @@ public class ChatFormatter implements Listener {
         put("AcidWolf", Rank.DOG);
         put("Flystal", Rank.DEEQ);
         put("spacetrain31", Rank.DEV);
+        6549 68 -3270
     }};*/
 
     //Mail module counterpart

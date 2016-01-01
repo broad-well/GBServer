@@ -172,12 +172,11 @@ public class GameType {
         uScore();
     }
 
-    public void close() throws Throwable {
+    public void close() {
         clear();
         blues.remove();
         reds.remove();
         packets.clear();
-        this.finalize();
     }
 
     public void join(Color c, Player subject) {

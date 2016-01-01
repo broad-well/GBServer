@@ -5,6 +5,7 @@ import com.Gbserver.Main;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,6 +17,7 @@ public class Gamemode implements CommandExecutor {
     private HelpTable ht = new HelpTable("/gm <c/s/p> (c=creative, s=survival, p=spectator)", "/gm is used to change a player's gamemode.", "", "gm");
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("gm")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));

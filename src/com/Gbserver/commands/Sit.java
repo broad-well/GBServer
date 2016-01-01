@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.Chair;
-import com.Gbserver.variables.Chairs;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.*;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -20,6 +17,7 @@ public class Sit implements CommandExecutor {
     public static Bat chair;
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player p = (Player) sender;
             if (Chairs.getChair(p) == null) {

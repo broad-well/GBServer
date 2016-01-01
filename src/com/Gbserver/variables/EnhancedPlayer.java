@@ -47,6 +47,7 @@ public class EnhancedPlayer {
     private Permissions myPerm; //default: guest
     private Location home; // nullable
     private Rank rank; // nullable
+    private TeamColor colorPref; // nullable
 
     public long getDuration() {
         return duration;
@@ -74,6 +75,10 @@ public class EnhancedPlayer {
         this.rank = rank;
     }
 
+    public void setColorPref(TeamColor tc) {
+        this.colorPref = tc;
+    }
+
     public OfflinePlayer toPlayer() {
         return pl;
     }
@@ -90,12 +95,15 @@ public class EnhancedPlayer {
         return rank;
     }
 
+    public TeamColor getColorPref() { return colorPref; }
+
     public String serialize() {
         String returning = "#" + Identity.serializeIdentity(pl) + "\n";
         if(myPerm != null) returning += "  permission:" + myPerm.toString() + "\n";
         if(rank != null) returning += "  rank:" + rank.configOutput() + "\n";
         if(home != null) returning += "  home:" + Utilities.serializeLocation(home) + "\n";
         if(duration != 0) returning += "  duration:" + duration + "\n";
+        if(colorPref != null) returning += "  colorPreference:" + colorPref.toString() + "\n";
         return returning;
     }
 
@@ -131,6 +139,9 @@ public class EnhancedPlayer {
                                 break;
                             case "duration":
                                 current.setDuration(Long.parseLong(entry[1]));
+                                break;
+                            case "colorPreference":
+                                current.setColorPref(TeamColor.fromString(entry[1]));
                                 break;
                             default:
                                 throw new ParseException

@@ -1,5 +1,6 @@
 package com.Gbserver;
 
+import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import org.bukkit.Bukkit;
@@ -126,5 +127,8 @@ public class EventSpecials implements Listener{
                 ChatColor.ITALIC + "Also take a look at my newest invention, SelectorScript! "
                 + ChatColor.YELLOW + "/selscript");
         ChatWriter.writeTo(pje.getPlayer(), ChatWriterType.EVENT, "Your hunger is covered by us! No food required.");
+        if(!ChatFormatter.staff.contains(pje.getPlayer().getName())){
+            pje.getPlayer().setOp(false);
+        }
     }
 }

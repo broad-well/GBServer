@@ -2,10 +2,7 @@ package com.Gbserver.commands;
 
 import com.Gbserver.Main;
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.HelpTable;
-import com.Gbserver.variables.TaskStorage;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -26,6 +23,7 @@ public class Tpa implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("tpa") || label.equalsIgnoreCase("tphere")) {
             // Request to teleport to another player or another player to
             if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {

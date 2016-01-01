@@ -15,6 +15,7 @@ public class Lobby implements CommandExecutor {
     private HelpTable ht = new HelpTable("/lobby [bl/tf/dr/swap] [leave/accept/deny/map]", "To quit a lobby or accept/deny a swap, or select a map for use. To join, click on a sheep.", "", "lobby");
 
     public boolean onCommand(CommandSender sender, Command comm, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("lobby") && Utilities.validateSender(sender)) {
             if (args.length < 2) {
                 ht.show(sender);

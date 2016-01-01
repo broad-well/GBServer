@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class MenuListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent ice) {
+        if(ice.getClickedInventory() == null) return;
         if (ice.getClickedInventory().getName().equals("Commands")) {
             Player p = (Player) ice.getWhoClicked();
             ice.setCancelled(true);

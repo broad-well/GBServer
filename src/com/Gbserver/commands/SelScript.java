@@ -2,6 +2,7 @@ package com.Gbserver.commands;
 
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import com.Gbserver.variables.SelectorScriptParser;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,6 +17,7 @@ public class SelScript implements CommandExecutor {
     public static SelectorScriptParser ssp = SelectorScriptParser.instance;
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if(args.length == 0){
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, ChatColor.BOLD + "Help for using SelectorScript");
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "SelectorScript is a powerful scripting language for selecting online " +

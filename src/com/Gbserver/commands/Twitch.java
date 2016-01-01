@@ -3,6 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +20,7 @@ public class Twitch implements CommandExecutor{
     HelpTable ht = new HelpTable("/twitch <[twitch username] / [end] / [announce] / [who]>", "To automate stream announcements.", "", "twitch");
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (args.length == 0) {
             ht.show(sender);
         }else{

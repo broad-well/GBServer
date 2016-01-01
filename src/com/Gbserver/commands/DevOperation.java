@@ -5,11 +5,8 @@ import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.listener.ProtectionListener;
 import com.Gbserver.listener.Rank;
 import com.Gbserver.mail.FileParser;
-import com.Gbserver.variables.EnhancedMap;
-import com.Gbserver.variables.EnhancedPlayer;
-import com.Gbserver.variables.PermissionManager;
+import com.Gbserver.variables.*;
 import com.Gbserver.variables.PermissionManager.*;
-import com.Gbserver.variables.SelectorScriptParser;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -31,6 +28,7 @@ public class DevOperation implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if(Sandbox.check(commandSender)) return true;
         if(isEligible(commandSender)){
             if(strings.length == 0) {
                 commandSender.sendMessage("Available Options: " +
@@ -49,6 +47,8 @@ public class DevOperation implements CommandExecutor{
                         "StreamForceEnd, " +
                         "EventDeop, " +
                         "DuplicatePlayerResolve, " +
+                        "SetColor, " +
+                        "FlushPlayers, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -169,6 +169,9 @@ public class DevOperation implements CommandExecutor{
                     EnhancedPlayer.cache.removeAll(toDelete);
 
                     break;
+                case "Build":
+                   ProtectionListener.isDisabled = !ProtectionListener.isDisabled;
+                    break;
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
                     if(strings.length == 1){
@@ -261,6 +264,30 @@ public class DevOperation implements CommandExecutor{
                 case "ClassModify":
                     commandSender.sendMessage("INOP. Stop, you geek.");
                     break;
+                case "SetColor":
+                    //Usage: /devops SetColor <name> <color>, minimum/maximum args length requirement is 3.
+                    if(strings.length < 3) return true;
+                    try {
+                        if(TeamColor.fromString(strings[2]) == null){
+                            commandSender.sendMessage("Invalid color.");
+                            return true;
+                        }
+                        EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(strings[1]))
+                                .setColorPref(TeamColor.fromString(strings[2]));
+                        commandSender.sendMessage("Color preference of " + strings[1] + " has been set to " +
+                                TeamColor.fromString(strings[2]).toColor() + TeamColor.fromString(strings[2]).toString());
+                    } catch (ParseException e) {
+                        commandSender.sendMessage(ChatColor.RED + "CAUGHT ERROR! *** Stack Trace attached");
+                        commandSender.sendMessage(Utilities.getStackTrace(e));
+                    }
+                    break;
+                case "FlushPlayers":
+                    try {
+                        EnhancedPlayer.ConfigAgent.$export$();
+                        commandSender.sendMessage("Success");
+                    } catch (IOException e) {
+                        commandSender.sendMessage(Utilities.getStackTrace(e));
+                    }
                 default:
                     commandSender.sendMessage("Bad option.");
                     return true;

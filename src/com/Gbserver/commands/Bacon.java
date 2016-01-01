@@ -4,6 +4,7 @@ import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.*;
@@ -33,6 +34,7 @@ public class Bacon implements CommandExecutor {
     public static HelpTable ht = new HelpTable("/bacon <stop/start/leave/stats/log>", "This command is used for Bacon Brawl.", "", "bacon");
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (args.length == 0) {
             ht.show(sender);
             return true;

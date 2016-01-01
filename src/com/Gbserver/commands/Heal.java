@@ -5,6 +5,7 @@ import com.Gbserver.unicorn.TextRender;
 import com.Gbserver.unicorn.fonts.StandardFonts;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ public class Heal implements CommandExecutor {
     public static List<Player> players = new LinkedList<Player>();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player p = (Player) sender;
             if (args.length > 0 || args[0].equals("draw")){
