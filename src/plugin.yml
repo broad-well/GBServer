@@ -124,3 +124,5 @@ commands:
     description: Streamer utilities.
   selscript:
     description: SelectorScript experiments.
+  skull:
+    description: Get a fresh skull of a player.

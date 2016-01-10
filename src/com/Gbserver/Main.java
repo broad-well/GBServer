@@ -107,6 +107,7 @@ public class Main extends JavaPlugin {
         getCommand("ping").setExecutor(new F());
         getCommand("twitch").setExecutor(new Twitch());
         getCommand("selscript").setExecutor(new SelScript());
+        getCommand("skull").setExecutor(new Skull());
 
         //Register events.
         if(onEvent)
@@ -146,6 +147,8 @@ public class Main extends JavaPlugin {
         }
         try {
             IPCollector.inTake();
+            //Here is Territory management!
+            Territory.Import();
         } catch (Exception e){errorStack.add(e);}
         try {
             ChatFormatter.$import$();
@@ -420,35 +423,40 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        final List<Exception> errorStack = new LinkedList<>();
+        List<Exception> errorStack = new LinkedList<>();
+        System.out.println("New error stack");
         try {
+            Territory.Export();
             GameType.TF.close();
             GameType.BL.close();
             GameType.DR.close();
             Runner.joinSheep.remove();
             EnhancedPlayer.ConfigAgent.$export$();
+            System.out.println("Took care of some minigames");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             errorStack.add(e);
         }
         saveConfig();
-
+        System.out.println("Saved config");
         try {
             FileParser.getInstance().saveBuffer();
+            System.out.println("Mail subsystem is a zombie");
         } catch (IOException e) {
             errorStack.add(e);
         }
         try{
         Bacon.unload();
+            //Territory is here!
+
+            System.out.println("Took care of Bacon and protection");
         } catch(Exception e){errorStack.add(e);}
         try {
             PermissionManager.export();
         } catch (FileNotFoundException e) {
             errorStack.add(e);
         }
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-            @Override
-            public void run() {
+        System.out.println("Dumping error stack now.");
                 if(errorStack.isEmpty()){
                     System.out.println("Error stack empty");
                 } else {
@@ -458,8 +466,6 @@ public class Main extends JavaPlugin {
                     }
                     errorStack.clear();
                 }
-            }
-        }, 5L);
 
     }
 

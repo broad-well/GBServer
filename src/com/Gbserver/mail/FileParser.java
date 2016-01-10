@@ -37,7 +37,7 @@ public class FileParser {
         msgs = new LinkedList<>();
         String currentEntry = "";
         for(String line : lines){
-            switch (line) {
+            switch (line.trim()) {
                 case "-={":
                     if (in)
                         throw new ParseException("Divider entry inside a divider entry on line " + lines.indexOf(line), 1);

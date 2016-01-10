@@ -162,7 +162,7 @@ public class EnhancedPlayer {
             for(EnhancedPlayer ep : cache){
                 output += ep.serialize();
             }
-            Files.write(file, output.getBytes(), StandardOpenOption.CREATE);
+            Files.write(file, output.getBytes(), StandardOpenOption.WRITE);
         }
 
     }

@@ -5,6 +5,7 @@ import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.GameType;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -215,7 +216,9 @@ public class Utilities {
                 Float.valueOf(axises[4]),
                 Float.valueOf(axises[5]));
     }
-
+    public static String wrapIn(ChatColor newcolor, String text, ChatColor original){
+        return newcolor + text + original;
+    }
     public static String getStackTrace(Exception e){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);

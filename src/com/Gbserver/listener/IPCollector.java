@@ -56,8 +56,10 @@ public class IPCollector implements Listener{
         try{
             addresses.clear();
             for(String line : Files.readAllLines(file, Charset.defaultCharset())){
-                String[] entries = line.split("<->");
-                addresses.put(Identity.deserializeIdentity(entries[0]).getUniqueId(), entries[1]);
+                if(!line.trim().isEmpty()) {
+                    String[] entries = line.split("<->");
+                    addresses.put(Identity.deserializeIdentity(entries[0]).getUniqueId(), entries[1]);
+                }
             }
             return true;
         } catch (IOException e) {

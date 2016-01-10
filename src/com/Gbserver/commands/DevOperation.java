@@ -49,6 +49,8 @@ public class DevOperation implements CommandExecutor{
                         "DuplicatePlayerResolve, " +
                         "SetColor, " +
                         "FlushPlayers, " +
+                        "ToggleInSandbox, " +
+                        "ListTerritories, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -172,6 +174,10 @@ public class DevOperation implements CommandExecutor{
                 case "Build":
                    ProtectionListener.isDisabled = !ProtectionListener.isDisabled;
                     break;
+                case "ListTerritories":
+                    for(Territory t : Territory.activeTerritories)
+                        commandSender.sendMessage(t.getName() + " - Owned by: " + ChatColor.YELLOW + Bukkit.getOfflinePlayer(t.getOwner()).getName());
+                    break;
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
                     if(strings.length == 1){
@@ -287,7 +293,22 @@ public class DevOperation implements CommandExecutor{
                         commandSender.sendMessage("Success");
                     } catch (IOException e) {
                         commandSender.sendMessage(Utilities.getStackTrace(e));
+                    }break;
+                case "ToggleInSandbox":
+                    //usage: /devops ToggleInSandbox <player name>, minimum / maximum length of 2.
+                    if(strings.length != 2){
+                        commandSender.sendMessage("Invalid args length");
+                        return true;
                     }
+                    UUID target = Bukkit.getOfflinePlayer(strings[1]).getUniqueId();
+                    if(Sandbox.contents.contains(target)){
+                        Sandbox.contents.remove(target);
+                        commandSender.sendMessage("Player removed");
+                    }else{
+                        Sandbox.contents.add(target);
+                        commandSender.sendMessage("Player added");
+                    }
+                    break;
                 default:
                     commandSender.sendMessage("Bad option.");
                     return true;

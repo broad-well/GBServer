@@ -23,11 +23,11 @@ public class Heal implements CommandExecutor {
         if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
             Player p = (Player) sender;
-            if (args.length > 0 || args[0].equals("draw")){
+            /*if (args.length > 0 || args[0].equals("draw")){
                 TextRender.render(StandardFonts.CUBE_GOTHIC, args[1].toUpperCase(), p.getLocation(), Material.STAINED_CLAY, TextRender.EAST);
                 p.sendMessage("rendered message");
                 return true;
-            }
+            }/*/
             players.add((Player) sender);
             sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND,
                     ChatColor.ITALIC + "Please click on a living entity to heal it."));

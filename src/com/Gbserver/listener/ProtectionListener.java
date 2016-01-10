@@ -2,10 +2,7 @@ package com.Gbserver.listener;
 
 import com.Gbserver.Utilities;
 import com.Gbserver.commands.TF;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.EnhancedPlayer;
-import com.Gbserver.variables.PermissionManager;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -113,6 +110,18 @@ public class ProtectionListener implements Listener {
                 e.printStackTrace();
             }
 
+        for(Territory t : Territory.activeTerritories){
+            if(t.isInside(bbe.getBlock().getLocation())
+                    && !bbe.getPlayer().getUniqueId().equals(t.getOwner())
+                    && !t.hasCollaborator(bbe.getPlayer().getUniqueId())){
+                bbe.setCancelled(true);
+                bbe.getPlayer().sendMessage("You may not break blocks here. Property belongs to " + ChatColor.YELLOW +
+                        Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
+                        ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
+                break;
+            }
+        }
+
     }
 
     private boolean isInRangeOf(int testant, int min, int max) {
@@ -211,6 +220,18 @@ public class ProtectionListener implements Listener {
                 e.printStackTrace();
             }
         }
+
+        for(Territory t : Territory.activeTerritories){
+            if(t.isInside(bbe.getBlock().getLocation())
+                    && !bbe.getPlayer().getUniqueId().equals(t.getOwner())
+                    && !t.hasCollaborator(bbe.getPlayer().getUniqueId())){
+                bbe.setCancelled(true);
+                bbe.getPlayer().sendMessage("You may not place blocks here. Property belongs to " + ChatColor.YELLOW +
+                        Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
+                        ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
+                break;
+            }
+        }
     }
 
     @EventHandler
@@ -248,6 +269,18 @@ public class ProtectionListener implements Listener {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        for(Territory t : Territory.activeTerritories){
+            if(t.isInside(pbe.getBlockClicked().getLocation())
+                    && !pbe.getPlayer().getUniqueId().equals(t.getOwner())
+                    && !t.hasCollaborator(pbe.getPlayer().getUniqueId())){
+                pbe.setCancelled(true);
+                pbe.getPlayer().sendMessage("You may not place liquids here. Property belongs to " + ChatColor.YELLOW +
+                        Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
+                        ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
+                break;
+            }
+        }
     }
 
     @EventHandler
@@ -260,6 +293,19 @@ public class ProtectionListener implements Listener {
                     pie.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to spawn creatures. Permission not above GUEST");
                 }
 
+            for(Territory t : Territory.activeTerritories){
+                if(t.isInside(pie.getClickedBlock().getLocation())
+                        && !pie.getPlayer().getUniqueId().equals(t.getOwner())
+                        && !t.hasCollaborator(pie.getPlayer().getUniqueId())){
+                    pie.setCancelled(true);
+                    pie.getPlayer().sendMessage("You may not spawn entities here. Property belongs to " + ChatColor.YELLOW +
+                            Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
+                            ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
+                    break;
+                }
+            }
         }
+
+
     }
 }
