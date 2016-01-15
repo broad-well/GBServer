@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.HelpTable;
-import com.Gbserver.variables.Sandbox;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,13 +19,12 @@ public class BL implements CommandExecutor {
     public static Collection<String> players = new LinkedList<String>();
     public static boolean isRunning = false;
     public static World world = Bukkit.getWorld("Bomb_Lobbers1");
-    public static int[][] Beach = {
-            {517, 98, 557},
-            {474, 125, 485},
-            {43, 95, -1},
-            {-2, 123, 73}
-    };
 
+    public static CubicSelection mapCanvas = new CubicSelection(
+            new Location(world, -2, 123, 73),
+            new Location(world, 43, 95, -1));
+    public static Location beachBottom = new Location(world, 517, 98, 557);
+    public static Location beachTop = new Location(world, 474, 125, 485);
     public static Location forestBottom = new Location(world, 540, 97, 487);
     public static Location forestTop = new Location(world, 574, 122, 557);
     public static Location mbBottom = new Location(world, 595, 97, 487);
@@ -93,13 +89,7 @@ public class BL implements CommandExecutor {
     }
 
     public static void removePreviousMap() {
-        for (int x = Beach[2][0]; x > Beach[3][0]; x--) {
-            for (int y = Beach[2][1]; y < Beach[3][1]; y++) {
-                for (int z = Beach[2][2]; z < Beach[3][2]; z++) {
-                    world.getBlockAt(x, y, z).setType(Material.AIR);
-                }
-            }
-        }
+        for(Block b : mapCanvas.allBlocks()) b.setType(Material.AIR);
     }
 
     @SuppressWarnings("deprecation")
@@ -109,29 +99,16 @@ public class BL implements CommandExecutor {
 		 * 2: Forest
 		 * 3: Motherboard
 		 */
-
-        int[] sample = {0, 150, 0};
+        Location newbase = new Location(world, 0, 100, 0);
 
         if (type == 1) {
-            //Tri-for
-            for (int x = Beach[0][0]; x > Beach[1][0]; x--) {
-                for (int y = Beach[0][1]; y < Beach[1][1]; y++) {
-                    for (int z = Beach[0][2]; z > Beach[1][2]; z--) {
-                        Block b = world.getBlockAt(new Location(world, x, y, z));
-                        int x1 = Beach[0][0] - x;
-                        int y1 = y;
-                        int z1 = Beach[0][2] - z;
-                        world.getBlockAt(new Location(world, x1, y1, z1)).setType(b.getType());
-                        world.getBlockAt(new Location(world, x1, y1, z1)).setData(b.getData());
-                    }
-                }
-            }
+            Utilities.copy(beachBottom, beachTop, newbase);
         }
         if (type == 2) {
-            Utilities.copy(forestBottom, forestTop, new Location(world, 0, 100, 0));
+            Utilities.copy(forestBottom, forestTop, newbase);
         }
         if (type == 3) {
-            Utilities.copy(mbBottom, mbTop, new Location(world, 0, 100, 0));
+            Utilities.copy(mbBottom, mbTop, newbase);
         }
     }
 }

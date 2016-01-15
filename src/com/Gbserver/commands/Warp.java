@@ -54,9 +54,9 @@ public class Warp implements CommandExecutor {
                         return true;
                     }
                     data.put(args[1], p.getLocation());
+                    saveData();
                     ChatWriter.writeTo(sender, ChatWriterType.WARP, "Successfully set location entry " + ChatColor.BLUE
                             + args[1] + ChatColor.AQUA + " to your current location.");
-                    saveData();
                 } else if (args[0].equalsIgnoreCase("list")) {
                     ChatWriter.writeTo(sender, ChatWriterType.WARP, "A list of all warps:");
                     for (String s : data.keySet()) {
@@ -110,8 +110,12 @@ public class Warp implements CommandExecutor {
     static void saveData() throws IOException {
         PrintWriter pw = new PrintWriter(new FileWriter(pathToConfig.toFile()));
         for (Map.Entry<String, Location> e : data.entrySet()) {
-            Location l = e.getValue();
-            pw.println(e.getKey() + "," + l.getWorld().getName() + "," + l.getX() + "," + l.getY() + "," + l.getZ());
+            try {
+                Location l = e.getValue();
+                pw.println(e.getKey() + "," + l.getWorld().getName() + "," + l.getX() + "," + l.getY() + "," + l.getZ());
+            }catch(Exception ex){
+                System.out.println("There's a problem with saving on warp key \"" + e.getKey() + "\".");
+            }
         }
         pw.flush();
         pw.close();

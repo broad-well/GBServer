@@ -64,11 +64,11 @@ public class Home implements CommandExecutor {
                 List<String> data = man.data.get(pl.getUniqueId().toString());
                 pl.teleport(new Location(
                         Bukkit.getWorld(data.get(0)),
-                        Double.valueOf(data.get(1)).doubleValue(),
-                        Double.valueOf(data.get(2)).doubleValue(),
-                        Double.valueOf(data.get(3)).doubleValue(),
-                        Float.valueOf(data.get(4)).floatValue(),
-                        Float.valueOf(data.get(5)).floatValue()));
+                        Double.valueOf(data.get(1)),
+                        Double.valueOf(data.get(2)),
+                        Double.valueOf(data.get(3)),
+                        Float.valueOf(data.get(4)),
+                        Float.valueOf(data.get(5))));
                 ChatWriter.writeTo(pl, ChatWriterType.HOME, "Teleported you to your set home.");
 
                 return true;

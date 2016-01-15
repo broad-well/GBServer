@@ -2,6 +2,8 @@ package com.Gbserver.commands;
 
 
 import com.Gbserver.Main;
+import com.Gbserver.Utilities;
+import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.HelpTable;
@@ -12,61 +14,44 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class Gamemode implements CommandExecutor {
 
     private HelpTable ht = new HelpTable("/gm <c/s/p> (c=creative, s=survival, p=spectator)", "/gm is used to change a player's gamemode.", "", "gm");
+    private static HashMap<String, GameMode> interpreter = new HashMap<String, GameMode>(){{
+        put("c", GameMode.CREATIVE);
+        put("1", GameMode.CREATIVE);
+        put("creative", GameMode.CREATIVE);
+        //---
+        put("s", GameMode.SURVIVAL);
+        put("0", GameMode.SURVIVAL);
+        put("survival", GameMode.SURVIVAL);
+        //---
+        put("a", GameMode.ADVENTURE);
+        put("2", GameMode.ADVENTURE);
+        put("adventure", GameMode.ADVENTURE);
+        //---
+        put("p", GameMode.SPECTATOR);
+        put("3", GameMode.SPECTATOR);
+        put("spectator", GameMode.SPECTATOR);
+    }};
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(Sandbox.check(sender)) return true;
-        if (label.equalsIgnoreCase("gm")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Only players are allowed."));
-                return false;
-            }
+        if(Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)){
             Player p = (Player) sender;
-            if (!Main.onEvent|| sender.isOp()) {
-
-                if (args.length < 1) {
-                    ht.show(sender);
-                    return true;
-                }
-                boolean isInGame = (BL.players.contains(p.getName())) || TF.getAllPlayers().contains(p);
-                switch (args[0]) {
-                    case "c":
-                        if (!isInGame) {
-                            p.setGameMode(GameMode.CREATIVE);
-                        } else {
-                            p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You cannot change gamemode in games!"));
-                        }
-                        return true;
-                    case "s":
-                        if (!isInGame) {
-                            p.setGameMode(GameMode.SURVIVAL);
-                        } else {
-                            p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You cannot change gamemode in games!"));
-                        }
-                        return true;
-                    case "p":
-                        if (!isInGame) {
-                            p.setGameMode(GameMode.SPECTATOR);
-                        } else {
-                            p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You cannot change gamemode in games!"));
-                        }
-                        return true;
-                    case "a":
-                        if (!isInGame) {
-                            p.setGameMode(GameMode.ADVENTURE);
-                        } else {
-                            p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You cannot change gamemode in games!"));
-                        }
-                        return true;
-                }
-            } else {
-                ChatWriter.writeTo(sender, ChatWriterType.EVENT, "During " + Main.eventName + ", /gm is limited to staff. Sorry!");
+            if (args.length < 1) {
+                ht.show(sender);
                 return true;
             }
+            if (!Main.onEvent || ChatFormatter.staff.contains(p.getName())) {
+                p.setGameMode(interpreter.get(args[0]));
+            } else {
+                ChatWriter.writeTo(sender, ChatWriterType.EVENT, "During " + Main.eventName + ", /gm is limited to staff. Sorry!");
+            }
         }
-        return false;
+        return true;
     }
 
 }

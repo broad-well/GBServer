@@ -108,6 +108,7 @@ public class Main extends JavaPlugin {
         getCommand("twitch").setExecutor(new Twitch());
         getCommand("selscript").setExecutor(new SelScript());
         getCommand("skull").setExecutor(new Skull());
+        getCommand("weather").setExecutor(new Weather());
 
         //Register events.
         if(onEvent)

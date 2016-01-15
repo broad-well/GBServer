@@ -29,8 +29,8 @@ public class CTF implements CommandExecutor {
     public static Sheep blueFlag;
     public static Location redFlagLocation = new Location(world, -36.5, 105, 89.5);
     public static Location blueFlagLocation = new Location(world, 31.5, 105, -88.5);
-    public static List<Player> red = new LinkedList<Player>();
-    public static List<Player> blue = new LinkedList<Player>();
+    public static List<Player> red = new LinkedList<>();
+    public static List<Player> blue = new LinkedList<>();
     public static Collection<Integer> tasks = new LinkedList<>();
     public static int frozenblue;
     public static int frozenred;

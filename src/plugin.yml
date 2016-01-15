@@ -126,3 +126,6 @@ commands:
     description: SelectorScript experiments.
   skull:
     description: Get a fresh skull of a player.
+  weather:
+    description: Change the weather easier.
+    aliases: [w]
