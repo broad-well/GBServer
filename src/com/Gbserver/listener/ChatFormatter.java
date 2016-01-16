@@ -124,7 +124,7 @@ public class ChatFormatter implements Listener {
         if(staff.contains(player.getName()) && Main.onEvent){
             return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Host ";
         }
-        Rank format = rankData.get(player.getUniqueId());
+        Rank format = EnhancedPlayer.getEnhanced(player).getRank();
         String returning = "";
         if (format == null) return returning;
         return isChat ? format.getPrefix() : format.getPrefix() + ChatColor.RESET + player.getName();

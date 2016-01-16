@@ -7,7 +7,11 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import com.Gbserver.variables.PermissionManager.Permissions;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -21,7 +25,7 @@ public class EnhancedPlayer {
     //static
     public static List<EnhancedPlayer> cache = new LinkedList<>();
     public static final Path file = ConfigManager.getPathInsidePluginFolder("datas.dat");
-    public static EnhancedPlayer getEnhanced(OfflinePlayer p) throws ParseException {
+    public static EnhancedPlayer getEnhanced(OfflinePlayer p) {
         for(EnhancedPlayer ep : cache){
             if(ep.toPlayer().getUniqueId().toString().equalsIgnoreCase(p.getUniqueId().toString()))
                 return ep;
@@ -36,11 +40,15 @@ public class EnhancedPlayer {
         try {
             Permissions perm = getEnhanced(op).getPermission();
             return perm == null || perm.getLevel() < minimum.getLevel();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return true;
         } catch (NullPointerException ignored){ return true;}
 
+    }
+    static EnhancedPlayer fromDump(String serializedPlayer, HashMap<String, String> dump){
+        EnhancedPlayer build = new EnhancedPlayer(Identity.deserializeIdentity(serializedPlayer));
+        if(dump.keySet().contains("Permission")) build.setPermission(Permissions.valueOf(dump.get("Permission")));
+        if(dump.keySet().contains("Rank")) build.setRank(Rank.fromConfig(dump.get("Rank")));
+        if(dump.keySet().contains("ColorPreference")) build.setColorPref(TeamColor.fromString(dump.get("ColorPreference")));
+        return build;
     }
 
     private OfflinePlayer pl;
@@ -107,62 +115,47 @@ public class EnhancedPlayer {
         return returning;
     }
 
+    public HashMap<String, String> toDump() {
+        HashMap<String, String> build = new HashMap<>();
+        if(myPerm != null) build.put("Permission", myPerm.toString());
+        if(rank != null) build.put("Rank", rank.configOutput());
+        if(colorPref != null) build.put("ColorPreference", colorPref.toString());
+        return build;
+    }
+
 
     public static class ConfigAgent {
+        private static Yaml yaml = new Yaml();
 
+        private static void setupDumperOptions(){
+            DumperOptions oD = new DumperOptions();
+            oD.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+            yaml = new Yaml(oD);
+        }
 
         public static void $import$() throws IOException, ParseException {
-            List<String> lines = Files.readAllLines(EnhancedPlayer.file, Charset.defaultCharset());
-            cache.clear();
-            EnhancedPlayer current = null;
-            for(String line : lines){
-                if(line.startsWith("#")){
-                    if(current != null)
-                        cache.add(current);
-                    current = new EnhancedPlayer(Identity.deserializeIdentity(line.substring(1)));
-                }else if(line.contains(":") && line.startsWith("  ")){
-                    if(current == null){
-                        throw new ParseException("Unknown declaration out of player indentation on line " +
-                                (lines.indexOf(line) + 1), 1);
-                    }else{
-                        String[] entry = line.trim().split(":");
-                        switch(entry[0]){
-                            case "permission":
-                                current.setPermission(Permissions.valueOf(entry[1]));
-                                break;
-                            case "rank":
-                                current.setRank(Rank.fromConfig(entry[1]));
-                                break;
-                            case "home":
-                                current.setHome
-                                        (Utilities.deserializeLocation(entry[1]));
-                                break;
-                            case "duration":
-                                current.setDuration(Long.parseLong(entry[1]));
-                                break;
-                            case "colorPreference":
-                                current.setColorPref(TeamColor.fromString(entry[1]));
-                                break;
-                            default:
-                                throw new ParseException
-                                        ("Unknown value declaration on line " + (lines.indexOf(line) + 1) + ", header " + entry[0], 1);
-                        }
-                    }
-                }else if(line.startsWith("//") || line.trim().isEmpty()){}else{
-                    throw new ParseException("Unknown field on line " + (lines.indexOf(line) + 1) + ", value \"" + line + "\"", 1);
-
+            FileReader fr = new FileReader(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
+            Object obj = yaml.load(fr);
+            fr.close();
+            if(obj instanceof HashMap){
+                cache.clear();
+                HashMap<String, HashMap<String, String>> options = (HashMap<String, HashMap<String, String>>) obj;
+                for(Map.Entry<String, HashMap<String, String>> entry : options.entrySet()){
+                    cache.add(EnhancedPlayer.fromDump(entry.getKey(), entry.getValue()));
                 }
             }
-            //Last one!
-            if(current!= null) cache.add(current);
         }
 
         public static void $export$() throws IOException {
-            String output = "";
+            setupDumperOptions();
+            HashMap<String, HashMap<String, String>> toDump = new HashMap<>();
             for(EnhancedPlayer ep : cache){
-                output += ep.serialize();
+                toDump.put(Identity.serializeIdentity(ep.toPlayer()), ep.toDump());
             }
-            Files.write(file, output.getBytes(), StandardOpenOption.WRITE);
+            FileWriter fw = new FileWriter(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
+            yaml.dump(toDump, fw);
+            fw.flush();
+            fw.close();
         }
 
     }

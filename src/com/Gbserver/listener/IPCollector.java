@@ -24,13 +24,13 @@ import java.util.UUID;
  */
 public class IPCollector implements Listener{
     public static Path file = ConfigManager.getPathInsidePluginFolder("ips.dat");
-    public static HashMap<UUID, String> addresses = new HashMap<>();
+    public static HashMap<OfflinePlayer, String> addresses = new HashMap<>();
 
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent pje){
         Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
             public void run() {
-               addresses.put(pje.getPlayer().getUniqueId(),
+               addresses.put(pje.getPlayer(),
                        pje.getPlayer().getAddress().getAddress().toString());
                 outFlush();
             }
@@ -39,12 +39,11 @@ public class IPCollector implements Listener{
 
     public static boolean outFlush() {
         try{
-            String output = "";
-            for(Map.Entry<UUID, String> entry : addresses.entrySet()){
-                output += Identity.serializeIdentity(Bukkit.getOfflinePlayer(entry.getKey())) + "<->" +
-                        entry.getValue() + "\n";
-            }
-            Files.write(file, output.getBytes(), StandardOpenOption.CREATE);
+            HashMap<String, String> converted = new HashMap<>();
+            for(Map.Entry<OfflinePlayer, String> entry : addresses.entrySet())
+                converted.put(Identity.serializeIdentity(entry.getKey()), entry.getValue());
+            //Converted and ready to use.
+            ConfigManager.entries.put("IPs", converted);
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -55,14 +54,11 @@ public class IPCollector implements Listener{
     public static boolean inTake() {
         try{
             addresses.clear();
-            for(String line : Files.readAllLines(file, Charset.defaultCharset())){
-                if(!line.trim().isEmpty()) {
-                    String[] entries = line.split("<->");
-                    addresses.put(Identity.deserializeIdentity(entries[0]).getUniqueId(), entries[1]);
-                }
+            for(Map.Entry<String, String> entry : ConfigManager.smartGet("IPs").entrySet()){
+                addresses.put(Identity.deserializeIdentity(entry.getKey()), entry.getValue());
             }
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

@@ -10,9 +10,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Sandbox {
     private static Path file = ConfigManager.getPathInsidePluginFolder("sandbox.txt");
@@ -35,20 +33,16 @@ public class Sandbox {
 
     public static void io(boolean output) throws IOException {
         if(output){
-            //Build the config string.
-            String out = "";
-            for(UUID pl : contents){
-                out += Identity.serializeIdentity(Bukkit.getOfflinePlayer(pl));
-                if(!pl.equals(contents.get(contents.size()-1))) out += "\n";
-            }
-            Files.write(file, out.getBytes(), StandardOpenOption.CREATE);
+            //No need to use the values
+            HashMap<String, String> build = new HashMap<>();
+            for(UUID uid : contents)
+                build.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(uid)), "");
+
+            ConfigManager.entries.put("Sandbox", build);
         }else{
             contents.clear();
-            for(String line : Files.readAllLines(file, Charset.defaultCharset())){
-                if(!line.isEmpty()){
-                    OfflinePlayer op = Identity.deserializeIdentity(line);
-                    if(op != null && !contents.contains(op.getUniqueId())) contents.add(op.getUniqueId());
-                }
+            for(Map.Entry<String, String> entry : ConfigManager.smartGet("Sandbox").entrySet()){
+                contents.add(Identity.deserializeIdentity(entry.getKey()).getUniqueId());
             }
         }
     }

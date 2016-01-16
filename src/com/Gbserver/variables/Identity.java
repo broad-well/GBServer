@@ -39,4 +39,5 @@ public class Identity {
         OfflinePlayer target = Bukkit.getOfflinePlayer(UUID.fromString(entries[0].split(":")[1]));
         return target.getName().equals(entries[1].split(":")[1]);
     }
+
 }

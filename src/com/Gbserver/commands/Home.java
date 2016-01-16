@@ -9,79 +9,76 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Home implements CommandExecutor {
 
-
+    public static HashMap<UUID, Location> data = new HashMap<>();
     public static HelpTable ht = new HelpTable("/home (set)", "This is used to provide home location storage.", "", "home");
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender)) {
-            ConfigManager man;
-            try {
-                man = new ConfigManager(ConfigManager.getPathInsidePluginFolder("homes.cfg"), 6);
-                Player pl = (Player) sender;
-                if (args.length == 1) {
-                    if (args[0].equalsIgnoreCase("set")) {
-                        // Set home.
-                        // Determine if it is set.
-                        if (man.data.keySet().contains(pl.getUniqueId().toString())) {
-                            ChatWriter.writeTo(sender, ChatWriterType.HOME, "We detected your home. Removing it.");
-                            man.data.remove(pl.getUniqueId().toString());
-                        }
-                        man.add(pl.getUniqueId().toString(), null,
-                                pl.getWorld().getName(),
-                                String.valueOf(pl.getLocation().getX()),
-                                String.valueOf(pl.getLocation().getY()),
-                                String.valueOf(pl.getLocation().getZ()),
-                                String.valueOf(pl.getLocation().getPitch()),
-                                String.valueOf(pl.getLocation().getYaw()));
-                        ChatWriter.writeTo(pl, ChatWriterType.HOME, "Set your home location to your current location.");
-                        //ChatWriter.writeTo(pl, ChatWriterType.HOME, "x: " + pl.getLocation().getBlockX() + ", y: "
-                        //+ pl.getLocation().getBlockY() + ", z: " + pl.getLocation().getBlockZ());
-                        return true;
-                    } else if (args[0].equalsIgnoreCase("list")) {
-                        if (pl.isOp()) {
-                            sender.sendMessage(man.data.toString());
-                        } else {
-                            ChatWriter.writeTo(sender, ChatWriterType.CONDITION, "You are not allowed to list homes.");
-                        }
-                        return true;
-                    } else {
-                        ht.show(sender);
-                        return true;
+
+            inport();
+            Player pl = (Player) sender;
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("set")) {
+                    // Set home.
+                    // Determine if it is set.
+                    if (data.keySet().contains(pl.getUniqueId())) {
+                        ChatWriter.writeTo(sender, ChatWriterType.HOME, "We detected your home. Removing it.");
+                        data.remove(pl.getUniqueId());
                     }
+                    data.put(pl.getUniqueId(), pl.getLocation());
+                    ChatWriter.writeTo(pl, ChatWriterType.HOME, "Set your home location to your current location.");
+                    //ChatWriter.writeTo(pl, ChatWriterType.HOME, "x: " + pl.getLocation().getBlockX() + ", y: "
+                    //+ pl.getLocation().getBlockY() + ", z: " + pl.getLocation().getBlockZ());
+                } else if (args[0].equalsIgnoreCase("list")) {
+                    if (EnhancedPlayer.getEnhanced(pl).getPermission().isAbove(PermissionManager.Permissions.PRIVILEGED)) {
+                        for (Map.Entry<UUID, Location> entry : data.entrySet()) {
+                            sender.sendMessage(Bukkit.getOfflinePlayer(entry.getKey()).getName() + " -> " + entry.getValue());
+                        }
+                    } else {
+                        ChatWriter.writeTo(sender, ChatWriterType.CONDITION, "You are not allowed to list homes.");
+                    }
+                } else {
+                    ht.show(sender);
                 }
-                man.readData();
+            } else {
 
-                if (!man.data.containsKey(pl.getUniqueId().toString())) {
+                if (!data.containsKey(pl.getUniqueId())) {
                     ChatWriter.writeTo(pl, ChatWriterType.HOME, "You did not set your home. To set, use /home set.");
-                    return true;
+
+                } else {
+                    pl.teleport(data.get(pl.getUniqueId()));
+                    ChatWriter.writeTo(pl, ChatWriterType.HOME, "Teleported you to your set home.");
                 }
-                List<String> data = man.data.get(pl.getUniqueId().toString());
-                pl.teleport(new Location(
-                        Bukkit.getWorld(data.get(0)),
-                        Double.valueOf(data.get(1)),
-                        Double.valueOf(data.get(2)),
-                        Double.valueOf(data.get(3)),
-                        Float.valueOf(data.get(4)),
-                        Float.valueOf(data.get(5))));
-                ChatWriter.writeTo(pl, ChatWriterType.HOME, "Teleported you to your set home.");
-
-                return true;
-            } catch (IOException e) {
-                sender.sendMessage("Error occured.");
-                return true;
             }
-
-        } else {
+            export();
             return true;
-        }
 
+
+        }
+        return true;
     }
 
+    private static void export() {
+        //Convert to savable format first.
+        HashMap<String, String> savable = new HashMap<>();
+        for (Map.Entry<UUID, Location> entry : data.entrySet())
+            savable.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(entry.getKey())), Utilities.serializeLocation(entry.getValue()));
+        ConfigManager.entries.put("Home", savable);
+    }
 
+    //1st element: UUID to String; 2nd element: Utilities serialized location
+    //Main volatile storage subsystem ID "Home"
+    private static void inport() {
+        data.clear();
+        for (Map.Entry<String, String> entry : ConfigManager.smartGet("Home").entrySet())
+            data.put(Identity.deserializeIdentity(entry.getKey()).getUniqueId(), Utilities.deserializeLocation(entry.getValue()));
+
+    }
 }

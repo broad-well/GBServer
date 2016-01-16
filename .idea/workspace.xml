@@ -10,20 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa12e9bf-e297-4436-b01e-c8351d409c70" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Countdown.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/StatusKeeper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigPlayerVault.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$1.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$2.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$3.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$4.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$5.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Protection.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Protection.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ChatFormatter.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ChatFormatter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ProtectionListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ProtectionListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GBServer.iml" afterPath="$PROJECT_DIR$/GBServer.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/Main.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Home.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Skull.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Skull.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugin.yml" afterPath="$PROJECT_DIR$/src/plugin.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/mail/MailMan.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/mail/MailMan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/mail/Message.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/mail/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" />
     </list>
     <ignored path="GBServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,32 +63,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Back.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Back.java">
+      <file leaf-file-name="ChatFormatter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+              <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Game.java">
+      <file leaf-file-name="ConfigManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Weather.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java">
+      <file leaf-file-name="SwiftDumpOptions.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DevOperation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="73" column="103" selection-start-line="73" selection-start-column="103" selection-end-line="73" selection-end-column="103" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProtectionListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="243" column="0" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Home.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Home.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mute.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="96" selection-start-line="39" selection-start-column="96" selection-end-line="39" selection-end-column="96" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,42 +143,34 @@
         <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+              <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
               <folding>
-                <marker date="1452836557000" expanded="false" signature="1299:1331" placeholder="/deprecation/" />
-                <marker date="1452836557000" expanded="false" signature="1979:2006" placeholder="/unused/" />
-                <marker date="1452836557000" expanded="false" signature="13212:13244" placeholder="/deprecation/" />
-                <marker date="1452836557000" expanded="false" signature="17329:17361" placeholder="/deprecation/" />
+                <marker date="1452963019000" expanded="false" signature="1299:1331" placeholder="/deprecation/" />
+                <marker date="1452963019000" expanded="false" signature="2261:2288" placeholder="/unused/" />
+                <marker date="1452963019000" expanded="false" signature="13413:13445" placeholder="/deprecation/" />
+                <marker date="1452963019000" expanded="false" signature="17530:17562" placeholder="/deprecation/" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Home.java">
+      <file leaf-file-name="Weather.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44615385">
-              <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
-              <folding />
+            <state vertical-scroll-proportion="0.8153846">
+              <caret line="49" column="166" selection-start-line="49" selection-start-column="166" selection-end-line="49" selection-end-column="166" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Runner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Runner.java">
+      <file leaf-file-name="Utilities.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Utilities.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/org/bukkit/entity/Player.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.3333335">
-              <caret line="228" column="9" selection-start-line="228" selection-start-column="9" selection-end-line="228" selection-end-column="9" />
+              <caret line="228" column="5" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -141,18 +197,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Game.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Group.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Ignore.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Invince.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Mail.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Menu.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Nick.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/NoFall.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Quit.java" />
@@ -168,19 +216,11 @@
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Tpa.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Twitch.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Vote.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Skull.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CubicSelection.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Heal.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Protection.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" />
@@ -188,10 +228,26 @@
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Countdown.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
         <option value="$PROJECT_DIR$/src/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/mail/Message.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/mail/MailMan.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Home.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" />
       </list>
     </option>
   </component>
@@ -453,6 +509,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="StatOnlineTime.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GBServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GBServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="listener" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="LinearAlgebraReaction.java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
@@ -629,11 +715,11 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/snakeyaml-1.9.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="onPlayerJoin&#9;PSI&#9;JAVA://com.Gbserver.listener.IPCollector#onPlayerJoin&#10;onPlayerjoin&#9;PSI&#9;JAVA://com.Gbserver.listener.CreativeGameMode#onPlayerJoin&#10;onInventoryClick&#9;PSI&#9;JAVA://com.Gbserver.listener.MenuListener#onInventoryClick&#10;onPlayerQuit&#9;PSI&#9;JAVA://com.Gbserver.listener.LoginTagListener#onPlayerQuit" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/michael/Documents/workspace/GBServer/src/com/Gbserver/listener/IPCollector.java&#10;onPlayerJoin&#9;PSI&#9;JAVA://com.Gbserver.listener.IPCollector#onPlayerJoin&#10;onPlayerjoin&#9;PSI&#9;JAVA://com.Gbserver.listener.CreativeGameMode#onPlayerJoin&#10;onInventoryClick&#9;PSI&#9;JAVA://com.Gbserver.listener.MenuListener#onInventoryClick&#10;onPlayerQuit&#9;PSI&#9;JAVA://com.Gbserver.listener.LoginTagListener#onPlayerQuit" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -1029,12 +1115,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java</url>
-          <line>130</line>
+          <line>124</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1043,242 +1129,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/SelScript.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3378119">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Sit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27639157">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Spawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21497121">
-          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12284069">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Tell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30710173">
-          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/TF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30134356">
-          <caret line="195" column="46" selection-start-line="195" selection-start-column="46" selection-end-line="195" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Tpa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39923224">
-          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/TPAList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21497121">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Twitch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36852208">
-          <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/TpaPacket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12284069">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Vote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5834933">
-          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/org/bukkit/inventory/ItemStack.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34528553">
-          <caret line="66" column="11" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/EventSpecials.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="9" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/CreativeGameMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="123" selection-start-line="42" selection-start-column="123" selection-end-line="42" selection-end-column="123" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3392#3393#0" expanded="false" />
-            <element signature="e#3439#3440#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Quit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15564202">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="57.027237">
-          <caret line="1901" column="18" selection-start-line="1901" selection-start-column="18" selection-end-line="1901" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#122414#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4846#4847#0" expanded="false" />
-            <element signature="e#4886#4887#0" expanded="false" />
-            <element signature="e#5859#5860#0" expanded="false" />
-            <element signature="e#5922#5923#0" expanded="false" />
-            <element signature="e#12931#12932#0" expanded="false" />
-            <element signature="e#12983#12984#0" expanded="false" />
-            <element signature="e#18614#18615#0" expanded="false" />
-            <element signature="e#18667#18668#0" expanded="false" />
-            <element signature="e#20560#20561#0" expanded="false" />
-            <element signature="e#20604#20605#0" expanded="false" />
-            <element signature="e#21794#21795#0" expanded="false" />
-            <element signature="e#21874#21875#0" expanded="false" />
-            <element signature="e#22493#22494#0" expanded="false" />
-            <element signature="e#22535#22536#0" expanded="false" />
-            <element signature="e#22850#22851#0" expanded="false" />
-            <element signature="e#22885#22886#0" expanded="false" />
-            <element signature="e#23141#23142#0" expanded="false" />
-            <element signature="e#23181#23182#0" expanded="false" />
-            <element signature="e#29826#29827#0" expanded="false" />
-            <element signature="e#29897#29898#0" expanded="false" />
-            <element signature="e#36782#36783#0" expanded="false" />
-            <element signature="e#36848#36849#0" expanded="false" />
-            <element signature="e#47408#47409#0" expanded="false" />
-            <element signature="e#47472#47473#0" expanded="false" />
-            <element signature="e#55768#55769#0" expanded="false" />
-            <element signature="e#55812#55813#0" expanded="false" />
-            <element signature="e#56425#56426#0" expanded="false" />
-            <element signature="e#56502#56503#0" expanded="false" />
-            <element signature="e#58524#58525#0" expanded="false" />
-            <element signature="e#58561#58562#0" expanded="false" />
-            <element signature="e#62972#62973#0" expanded="false" />
-            <element signature="e#63028#63029#0" expanded="false" />
-            <element signature="e#66593#66594#0" expanded="false" />
-            <element signature="e#66631#66632#0" expanded="false" />
-            <element signature="e#70089#70090#0" expanded="false" />
-            <element signature="e#70142#70143#0" expanded="false" />
-            <element signature="e#76845#76846#0" expanded="false" />
-            <element signature="e#76904#76905#0" expanded="false" />
-            <element signature="e#81336#81337#0" expanded="false" />
-            <element signature="e#81387#81388#0" expanded="false" />
-            <element signature="e#81771#81772#0" expanded="false" />
-            <element signature="e#81820#81821#0" expanded="false" />
-            <element signature="e#93265#93266#0" expanded="false" />
-            <element signature="e#93303#93304#0" expanded="false" />
-            <element signature="e#100216#100217#0" expanded="false" />
-            <element signature="e#100271#100272#0" expanded="false" />
-            <element signature="e#106802#106803#0" expanded="false" />
-            <element signature="e#106857#106858#0" expanded="false" />
-            <element signature="e#108993#108994#0" expanded="false" />
-            <element signature="e#109020#109021#0" expanded="false" />
-            <element signature="e#113752#113753#0" expanded="false" />
-            <element signature="e#113814#113815#0" expanded="false" />
-            <element signature="e#114321#114322#0" expanded="false" />
-            <element signature="e#114360#114361#0" expanded="false" />
-            <element signature="e#115506#115507#0" expanded="false" />
-            <element signature="e#115560#115561#0" expanded="false" />
-            <element signature="e#116474#116475#0" expanded="false" />
-            <element signature="e#116513#116514#0" expanded="false" />
-            <element signature="e#116906#116907#0" expanded="false" />
-            <element signature="e#116949#116950#0" expanded="false" />
-            <element signature="e#117784#117785#0" expanded="false" />
-            <element signature="e#117826#117827#0" expanded="false" />
-            <element signature="e#118261#118262#0" expanded="false" />
-            <element signature="e#118300#118301#0" expanded="false" />
-            <element signature="e#118742#118743#0" expanded="false" />
-            <element signature="e#118782#118783#0" expanded="false" />
-            <element signature="e#119232#119233#0" expanded="false" />
-            <element signature="e#119273#119274#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/util/UUID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33268481">
-          <caret line="190" column="23" selection-start-line="190" selection-start-column="23" selection-end-line="190" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/TextRender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20584795">
@@ -1294,27 +1144,6 @@
             <marker date="1452457444000" expanded="false" signature="39:540" placeholder="..." />
             <marker date="1452457444000" expanded="false" signature="644:652" placeholder="&lt;~&gt;" />
             <marker date="1452457444000" expanded="true" signature="750:1496" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4385965">
-          <caret line="113" column="23" selection-start-line="113" selection-start-column="23" selection-end-line="113" selection-end-column="23" />
-          <folding>
-            <marker date="1452458963000" expanded="false" signature="39:730" placeholder="..." />
-            <marker date="1452458963000" expanded="true" signature="1693:5320" placeholder="{...}" />
-            <marker date="1452458963000" expanded="true" signature="1821:1957" placeholder="//..." />
-            <marker date="1452458963000" expanded="true" signature="5385:5795" placeholder="{...}" />
-            <marker date="1452458963000" expanded="true" signature="5873:6714" placeholder="{...}" />
-            <marker date="1452458963000" expanded="true" signature="6232:6609" placeholder="//..." />
-            <marker date="1452458963000" expanded="true" signature="6786:6993" placeholder="{...}" />
-            <marker date="1452458963000" expanded="true" signature="7063:10627" placeholder="{...}" />
-            <marker date="1452458963000" expanded="true" signature="7191:7327" placeholder="//..." />
-            <marker date="1452458963000" expanded="true" signature="10711:12865" placeholder="{...}" />
-            <marker date="1452458963000" expanded="true" signature="10864:11000" placeholder="//..." />
-            <marker date="1452458963000" expanded="true" signature="12942:14163" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1336,89 +1165,6 @@
             <marker date="1452460472000" expanded="false" signature="682:688" placeholder=" }" />
             <marker date="1452460472000" expanded="true" signature="783:8385" placeholder="{...}" />
             <marker date="1452460472000" expanded="true" signature="8429:9583" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4182444">
-          <caret line="114" column="49" selection-start-line="114" selection-start-column="49" selection-end-line="114" selection-end-column="49" />
-          <folding>
-            <marker date="1452459632000" expanded="true" signature="40:407" placeholder="..." />
-            <marker date="1452459632000" expanded="true" signature="409:449" placeholder="/**...*/" />
-            <marker date="1452459632000" expanded="true" signature="831:956" placeholder="{...}" />
-            <marker date="1452459632000" expanded="false" signature="984:995" placeholder=" { " />
-            <marker date="1452459632000" expanded="false" signature="1008:1014" placeholder=" }" />
-            <marker date="1452459632000" expanded="false" signature="1056:1067" placeholder=" { " />
-            <marker date="1452459632000" expanded="false" signature="1082:1088" placeholder=" }" />
-            <marker date="1452459632000" expanded="false" signature="1117:1128" placeholder=" { " />
-            <marker date="1452459632000" expanded="false" signature="1140:1146" placeholder=" }" />
-            <marker date="1452459632000" expanded="true" signature="1200:1319" placeholder="{...}" />
-            <marker date="1452459632000" expanded="true" signature="1403:2062" placeholder="{...}" />
-            <marker date="1452459632000" expanded="false" signature="1570:1618" placeholder="(Runnable) () → {" />
-            <marker date="1452459632000" expanded="false" signature="2024:2039" placeholder="}" />
-            <marker date="1452459632000" expanded="false" signature="2108:2119" placeholder=" { " />
-            <marker date="1452459632000" expanded="false" signature="2169:2175" placeholder=" }" />
-            <marker date="1452459632000" expanded="false" signature="2224:2234" placeholder=" { " />
-            <marker date="1452459632000" expanded="false" signature="2286:2292" placeholder=" }" />
-            <marker date="1452459632000" expanded="false" signature="2338:2348" placeholder=" { " />
-            <marker date="1452459632000" expanded="false" signature="2377:2383" placeholder=" }" />
-            <marker date="1452459632000" expanded="true" signature="2466:3238" placeholder="{...}" />
-            <marker date="1452459632000" expanded="true" signature="3291:4572" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0636833">
-          <caret line="142" column="48" selection-start-line="142" selection-start-column="48" selection-end-line="142" selection-end-column="48" />
-          <folding>
-            <marker date="1452461268000" expanded="false" signature="40:490" placeholder="..." />
-            <marker date="1452461268000" expanded="true" signature="777:1132" placeholder="{...}" />
-            <marker date="1452461268000" expanded="true" signature="1216:1532" placeholder="{...}" />
-            <marker date="1452461268000" expanded="false" signature="1762:1773" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="1789:1795" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="1839:1850" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="1875:1881" placeholder=" }" />
-            <marker date="1452461268000" expanded="true" signature="1959:2029" placeholder="{...}" />
-            <marker date="1452461268000" expanded="false" signature="2079:2090" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2111:2117" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2157:2168" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2185:2191" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2227:2238" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2255:2261" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2305:2316" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2336:2342" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2379:2390" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2400:2406" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2446:2457" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2471:2477" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2508:2519" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2531:2537" placeholder=" }" />
-            <marker date="1452461268000" expanded="false" signature="2564:2575" placeholder=" { " />
-            <marker date="1452461268000" expanded="false" signature="2587:2593" placeholder=" }" />
-            <marker date="1452461268000" expanded="true" signature="2631:2652" placeholder="{...}" />
-            <marker date="1452461268000" expanded="true" signature="2684:3210" placeholder="{...}" />
-            <marker date="1452461268000" expanded="true" signature="3249:5949" placeholder="{...}" />
-            <marker date="1452461268000" expanded="true" signature="3326:5664" placeholder="{...}" />
-            <marker date="1452461268000" expanded="true" signature="5723:5942" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7435456">
-          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
-          <folding>
-            <marker date="1452655213000" expanded="false" signature="39:736" placeholder="..." />
-            <marker date="1452655213000" expanded="true" signature="738:780" placeholder="/**...*/" />
-            <marker date="1452655213000" expanded="true" signature="1249:3690" placeholder="{...}" />
-            <marker date="1452655213000" expanded="true" signature="3740:4315" placeholder="{...}" />
-            <marker date="1452655213000" expanded="true" signature="3898:4024" placeholder="//..." />
-            <marker date="1452655213000" expanded="true" signature="4363:4901" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1515,14 +1261,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.7976654">
-          <caret line="179" column="26" selection-start-line="179" selection-start-column="26" selection-end-line="179" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/F.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.24513619">
@@ -1543,14 +1281,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33268481">
-          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1579,14 +1309,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Skull.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28404668">
@@ -1603,24 +1325,259 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
+    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/org/yaml/snakeyaml/Yaml.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34528553">
+          <caret line="173" column="18" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="18" />
+          <folding>
+            <element signature="e#6041#6042#0" expanded="true" />
+            <element signature="e#6119#6120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/io/FileOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6">
+          <caret line="202" column="11" selection-start-line="202" selection-start-column="11" selection-end-line="202" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/io/FileWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.6820513">
+          <caret line="105" column="11" selection-start-line="105" selection-start-column="11" selection-end-line="105" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/org/bukkit/craftbukkit/v1_8_R3/command/ProxiedNativeCommandSender.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.062626265">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="83" column="23" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="485" column="13" selection-start-line="485" selection-start-column="13" selection-end-line="485" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <caret line="95" column="84" selection-start-line="95" selection-start-column="84" selection-end-line="95" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/lang/Boolean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="174" column="25" selection-start-line="174" selection-start-column="25" selection-end-line="174" selection-end-column="25" />
           <folding>
-            <marker date="1452836557000" expanded="false" signature="1299:1331" placeholder="/deprecation/" />
-            <marker date="1452836557000" expanded="false" signature="1979:2006" placeholder="/unused/" />
-            <marker date="1452836557000" expanded="false" signature="13212:13244" placeholder="/deprecation/" />
-            <marker date="1452836557000" expanded="false" signature="17329:17361" placeholder="/deprecation/" />
+            <element signature="e#5474#5475#0" expanded="true" />
+            <element signature="e#5517#5518#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/src.zip!/java/text/SimpleDateFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="385" column="33" selection-start-line="385" selection-start-column="33" selection-end-line="385" selection-end-column="33" />
+          <folding>
+            <element signature="e#21767#21768#0" expanded="true" />
+            <element signature="e#21839#21840#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1828793">
+          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Mail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="130" column="92" selection-start-line="130" selection-start-column="92" selection-end-line="130" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/org/yaml/snakeyaml/DumperOptions.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19712526">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/MailMan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="58" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="128" selection-start-line="24" selection-start-column="128" selection-end-line="24" selection-end-column="128" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="72" selection-start-line="41" selection-start-column="72" selection-end-line="41" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="103" selection-start-line="73" selection-start-column="103" selection-end-line="73" selection-end-column="103" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="243" column="0" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Home.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44615385">
-          <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="228" column="5" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="96" selection-start-line="39" selection-start-column="96" selection-end-line="39" selection-end-column="96" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
+          <folding>
+            <marker date="1452963019000" expanded="false" signature="1299:1331" placeholder="/deprecation/" />
+            <marker date="1452963019000" expanded="false" signature="2261:2288" placeholder="/unused/" />
+            <marker date="1452963019000" expanded="false" signature="13413:13445" placeholder="/deprecation/" />
+            <marker date="1452963019000" expanded="false" signature="17530:17562" placeholder="/deprecation/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8153846">
+          <caret line="49" column="166" selection-start-line="49" selection-start-column="166" selection-end-line="49" selection-end-column="166" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1702,7 +1659,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>java-json</last-edited>
+          <last-edited>snakeyaml-1.9</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

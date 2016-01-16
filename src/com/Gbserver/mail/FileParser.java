@@ -3,13 +3,17 @@ package com.Gbserver.mail;
 import com.Gbserver.Utilities;
 import com.Gbserver.variables.ConfigManager;
 import org.bukkit.OfflinePlayer;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,42 +34,30 @@ public class FileParser {
      */
     public static List<Message> msgs = new LinkedList<>();
     private static FileParser instance = new FileParser();
+    private Yaml amigo = new Yaml();
     public static FileParser getInstance(){return instance;}
     public void updateBuffer() throws IOException, ParseException {
-        List<String> lines = Files.readAllLines(MailMan.datfile, Charset.defaultCharset());
-        boolean in = false;
-        msgs = new LinkedList<>();
-        String currentEntry = "";
-        for(String line : lines){
-            switch (line.trim()) {
-                case "-={":
-                    if (in)
-                        throw new ParseException("Divider entry inside a divider entry on line " + lines.indexOf(line), 1);
-                    in = true;
-                    currentEntry = "";
-                    break;
-                case "}=-":
-                    if (!in)
-                        throw new ParseException("Divider exit not inside a divider entry on line " + lines.indexOf(line), 1);
-                    in = false;
-
-                    msgs.add(Message.parseConfigEntry(currentEntry));
-                    break;
-                default:
-                    if (in) {
-                        currentEntry += line + "\n";
-                    }
-                    break;
+        FileReader fr = new FileReader(MailMan.datfile.toFile());
+        Object obj = amigo.load(fr);
+        //List<HashMap<String, String>> is what we expect.
+        if(obj instanceof List){
+            msgs = new LinkedList<>();
+            List<HashMap<String, String>> casted = (List<HashMap<String, String>>) obj;
+            for(HashMap<String, String> entry : casted){
+                msgs.add(Message.parseDump(entry));
             }
-
         }
     }
 
     public void saveBuffer() throws IOException {
-        String output = "";
-        for(Message msg : msgs)
-            output += msg.getConfigEntry();
-        Files.write(MailMan.datfile, output.getBytes(), StandardOpenOption.CREATE);
+        List<HashMap<String, String>> toBuild = new LinkedList<>();
+        for(Message msg : msgs){
+            toBuild.add(msg.getYamlDump());
+        }
+        FileWriter fw = new FileWriter(MailMan.datfile.toFile());
+        amigo.dump(toBuild, fw);
+        fw.flush();
+        fw.close();
     }
 
     public List<Message> getMessagesOf(OfflinePlayer player){
@@ -97,13 +89,5 @@ public class FileParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public void saveMessage(Message msg) throws IOException {
-        Files.write(MailMan.datfile, msg.getConfigEntry().getBytes(), StandardOpenOption.APPEND);
-    }
-
-
-    private static boolean hasOnlySpace(String str){
-        return str.trim().length() == 0;
     }
 }

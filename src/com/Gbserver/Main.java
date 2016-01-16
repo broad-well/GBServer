@@ -56,6 +56,16 @@ public class Main extends JavaPlugin {
         } catch (Exception e){
             errorStack.add(e);
         }
+        //Initialize all Yaml objects tied with ConfigManager.
+
+        try {
+            ConfigManager.input();
+            StatOnlineTime.input();
+            Sandbox.io(false);
+            Mute.inport();
+        } catch (IOException e) {
+            errorStack.add(e);
+        }
 
         //Register commands.
         @SuppressWarnings("unused")
@@ -116,7 +126,6 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StatOnlineTime(), this);
         getServer().getPluginManager().registerEvents(new IPCollector(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
-        getServer().getPluginManager().registerEvents(new StatusKeeper(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
         getServer().getPluginManager().registerEvents(new Reaction(), this);
         getServer().getPluginManager().registerEvents(new CTFListener(), this);
@@ -427,6 +436,7 @@ public class Main extends JavaPlugin {
         List<Exception> errorStack = new LinkedList<>();
         System.out.println("New error stack");
         try {
+            StatOnlineTime.output();
             Territory.Export();
             GameType.TF.close();
             GameType.BL.close();
@@ -448,12 +458,18 @@ public class Main extends JavaPlugin {
         }
         try{
         Bacon.unload();
+            Sandbox.io(true);
             //Territory is here!
 
             System.out.println("Took care of Bacon and protection");
         } catch(Exception e){errorStack.add(e);}
+
+        //Export all types tied with ConfigManager.
         try {
+            Mute.export();
             PermissionManager.export();
+            //Denitialize ConfigManager
+            ConfigManager.output();
         } catch (FileNotFoundException e) {
             errorStack.add(e);
         }

@@ -6,7 +6,7 @@ import com.Gbserver.listener.ProtectionListener;
 import com.Gbserver.listener.Rank;
 import com.Gbserver.mail.FileParser;
 import com.Gbserver.variables.*;
-import com.Gbserver.variables.PermissionManager.*;
+import com.Gbserver.variables.PermissionManager.Permissions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -16,22 +16,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class DevOperation implements CommandExecutor{
+public class DevOperation implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if(Sandbox.check(commandSender)) return true;
-        if(isEligible(commandSender)){
-            if(strings.length == 0) {
-                commandSender.sendMessage("Available Options: " +
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+        if (Sandbox.check(sender)) return true;
+        if (isEligible(sender)) {
+            if (args.length == 0) {
+                sender.sendMessage("Available Options: " +
                         "InsertPermission, " +
                         "ListPermission, " +
                         "DeletePermission, " +
@@ -51,196 +49,173 @@ public class DevOperation implements CommandExecutor{
                         "FlushPlayers, " +
                         "ToggleInSandbox, " +
                         "ListTerritories, " +
+                        "FlushConfigManager, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
             }
 
-            switch(strings[0]){
+            switch (args[0]) {
                 case "InsertPermission":
-                    if(strings.length < 3) {
-
-                        return true;
-                    }
-                    Permissions perm = Permissions.valueOf(strings[2]);
-                    if(perm == null) return true;
-                    OfflinePlayer play = Bukkit.getOfflinePlayer(strings[1]);
-                    if(play == null) return true;
-                    PermissionManager.perms.put(play.getUniqueId(), perm);
-                    commandSender.sendMessage("Permission inserted: " + play.getName() + " -> " + perm);
+                    if (args.length < 3) return true;
+                    EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[1])).setPermission(Permissions.valueOf(args[2]));
+                    sender.sendMessage("Permission inserted: " + args[1] + " -> " + Permissions.valueOf(args[2]));
                     return true;
                 case "ListPermission":
-                    commandSender.sendMessage("All Permissions: ");
-                    for(Map.Entry<UUID, Permissions> permission : PermissionManager.perms.entrySet()){
-                        commandSender.sendMessage(
-                                Bukkit.getOfflinePlayer(permission.getKey()).getName() + " -> " + permission.getValue().name()
-                        );
+                    sender.sendMessage("All Permissions: ");
+                    for (EnhancedPlayer ep : EnhancedPlayer.cache) {
+                        if (ep.getPermission() != null)
+                            sender.sendMessage(ep.toPlayer().getName() + " -> " + ep.getPermission());
                     }
                     break;
                 case "DeletePermission":
-                    if(strings.length == 1) return true;
-                    UUID toD = null;
-                    for(UUID uid : PermissionManager.perms.keySet()){
-                        if(Bukkit.getOfflinePlayer(strings[1]).getUniqueId().equals(uid)){
-                            toD = uid;
-                            commandSender.sendMessage("Found permission to delete");
-                        }
+                    if (args.length == 1) return true;
+                    for (EnhancedPlayer ep : EnhancedPlayer.cache) {
+                        if (ep.toPlayer().getName().equals(args[1])) ep.setPermission(Permissions.GUEST);
+                            sender.sendMessage(ep.toPlayer().getName() + " -> " + ep.getRank().getPrefix());
                     }
-                    if(toD != null)
-                        PermissionManager.perms.remove(toD);
                     break;
                 case "InsertRank":
-                    if(strings.length < 3) return true;
-                    ChatFormatter.rankData.put(Bukkit.getOfflinePlayer(strings[1]).getUniqueId(), ChatFormatter.fromConfig(strings[2]));
-                    try {
-                        ChatFormatter.$export$();
-                        commandSender.sendMessage("Rank inserted: " + Bukkit.getOfflinePlayer(strings[1]).getName()
-                                + ", " + ChatFormatter.rankData.get(Bukkit.getOfflinePlayer(strings[1]).getUniqueId()).getPrefix());
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    if (args.length < 3) return true;
+                    EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[1])).setRank(Rank.fromConfig(args[2]));
+                    sender.sendMessage("Rank inserted: " + Bukkit.getOfflinePlayer(args[1]).getName()
+                            + ", " + ChatFormatter.rankData.get(Bukkit.getOfflinePlayer(args[1]).getUniqueId()).getPrefix());
                     break;
                 case "ListRank":
-                    commandSender.sendMessage("All Ranks: ");
-                    for(Map.Entry<UUID, Rank> permission : ChatFormatter.rankData.entrySet()){
-                        try {
-                            commandSender.sendMessage(
-                                    Bukkit.getOfflinePlayer(permission.getKey()).getName() + " -> " + permission.getValue().getPrefix()
-                            );
-                        }catch(Exception ignored){}
+                    sender.sendMessage("All Ranks: ");
+                    for (EnhancedPlayer ep : EnhancedPlayer.cache) {
+                        if (ep.getRank() != null)
+                            sender.sendMessage(ep.toPlayer().getName() + " -> " + ep.getRank().getPrefix());
                     }
                     break;
                 case "AllEnhancedPlayersInCache":
-                    for(EnhancedPlayer ep : EnhancedPlayer.cache){
-                        commandSender.sendMessage(ep.serialize());
+                    for (EnhancedPlayer ep : EnhancedPlayer.cache) {
+                        sender.sendMessage(ep.serialize());
                     }
                     break;
                 case "DeleteRank":
-                    if(strings.length < 2) return true;
-                    ChatFormatter.rankData.remove(Bukkit.getOfflinePlayer(strings[1]).getUniqueId());
-                    try {
-                        ChatFormatter.$export$();
-                        commandSender.sendMessage("Rank removed from " + Bukkit.getOfflinePlayer(strings[1]).getName());
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    if (args.length < 2) return true;
+                    EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[1])).setRank(null);
+                    sender.sendMessage("Rank removed from " + Bukkit.getOfflinePlayer(args[1]).getName());
+
                     break;
                 case "GetRecentMessenger":
-                    commandSender.sendMessage("Messaging History: ");
-                    for(EnhancedMap.Entry entry : Tell.last){
-                        commandSender.sendMessage(((CommandSender) entry.getFirst()).getName() + " <-> " +
+                    sender.sendMessage("Messaging History: ");
+                    for (EnhancedMap.Entry entry : Tell.last) {
+                        sender.sendMessage(((CommandSender) entry.getFirst()).getName() + " <-> " +
                                 ((CommandSender) entry.getSecond()).getName());
                     }
                     break;
                 case "GetUUID":
-                    if(strings.length < 2) return true;
-                    commandSender.sendMessage(Bukkit.getOfflinePlayer(strings[1]).getUniqueId().toString());
+                    if (args.length < 2) return true;
+                    sender.sendMessage(Bukkit.getOfflinePlayer(args[1]).getUniqueId().toString());
                     return true;
                 case "GetName":
-                    if(strings.length < 2) return true;
-                    commandSender.sendMessage(Bukkit.getOfflinePlayer(UUID.fromString(strings[1])).getName());
+                    if (args.length < 2) return true;
+                    sender.sendMessage(Bukkit.getOfflinePlayer(UUID.fromString(args[1])).getName());
                     return true;
                 case "FlushMessages":
                     try {
                         FileParser.getInstance().saveBuffer();
                     } catch (IOException e) {
-                        commandSender.sendMessage(Utilities.getStackTrace(e));
+                        sender.sendMessage(Utilities.getStackTrace(e));
                     }
                     break;
                 case "StreamForceEnd":
                     Twitch.streamers.clear();
-                    commandSender.sendMessage("Streams ended.");
+                    sender.sendMessage("Streams ended.");
                     break;
                 case "EventDeop":
-                    for(Player p : Bukkit.getOnlinePlayers()){
-                        if(!ChatFormatter.staff.contains(p.getName()) && p.isOp()){
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (!ChatFormatter.staff.contains(p.getName()) && p.isOp()) {
                             p.setOp(false);
-                            commandSender.sendMessage("Deopped " + p.getName());
+                            sender.sendMessage("Deopped " + p.getName());
                         }
                     }
                     break;
                 case "DeletePlayer":
-                    if(strings.length == 1)return true;
+                    if (args.length == 1) return true;
                     List<EnhancedPlayer> toDelete = new LinkedList<>();
-                    for(EnhancedPlayer ep : EnhancedPlayer.cache) {
-                        if (ep.toPlayer().getName().equals(strings[1])) {
+                    for (EnhancedPlayer ep : EnhancedPlayer.cache) {
+                        if (ep.toPlayer().getName().equals(args[1])) {
                             toDelete.add(ep);
                         }
                     }
-                    commandSender.sendMessage(toDelete.toString());
+                    sender.sendMessage(toDelete.toString());
                     EnhancedPlayer.cache.removeAll(toDelete);
 
                     break;
                 case "Build":
-                   ProtectionListener.isDisabled = !ProtectionListener.isDisabled;
+                    ProtectionListener.isDisabled = !ProtectionListener.isDisabled;
                     break;
                 case "ListTerritories":
-                    for(Territory t : Territory.activeTerritories)
-                        commandSender.sendMessage(t.getName() + " - Owned by: " + ChatColor.YELLOW + Bukkit.getOfflinePlayer(t.getOwner()).getName());
+                    for (Territory t : Territory.activeTerritories)
+                        sender.sendMessage(t.getName() + " - Owned by: " + ChatColor.YELLOW + Bukkit.getOfflinePlayer(t.getOwner()).getName());
                     break;
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
-                    if(strings.length == 1){
-                        commandSender.sendMessage("TestFeature subcommands: NewConfigs, SelectorScript");
+                    if (args.length == 1) {
+                        sender.sendMessage("TestFeature subcommands: NewConfigs, SelectorScript");
                         break;
                     }
-                    switch(strings[1]){
+                    switch (args[1]) {
                         case "NewConfigs":
-                            if(strings.length < 4) return true;
+                            if (args.length < 4) return true;
                             EnhancedPlayer ep = null;
-                            try {
-                                ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(strings[3]));
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            if(ep == null){
-                                commandSender
+                            ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[3]));
+
+                            if (ep == null) {
+                                sender
                                         .sendMessage("NULLPOINTER! Consult the console.");
                                 break;
                             }
-                            switch(strings[2]){
+                            switch (args[2]) {
                                 case "permissions":
-                                    commandSender.sendMessage(ep.getPermission().toString());
+                                    sender.sendMessage(ep.getPermission().toString());
                                     break;
                                 case "ranks":
-                                    commandSender.sendMessage(ep.getRank().getPrefix());
+                                    sender.sendMessage(ep.getRank().getPrefix());
                                     break;
                                 case "homes":
-                                    commandSender.sendMessage(ep.getHome().toString());
+                                    sender.sendMessage(ep.getHome().toString());
                                     break;
                             }
                             break;
                         case "SelectorScript":
-                            if(strings.length < 3) return true;
-                            if(!strings[2].startsWith("%")){
-                                commandSender.sendMessage("Input incompatible with SelectorScript.");
+                            if (args.length < 3) return true;
+                            if (!args[2].startsWith("%")) {
+                                sender.sendMessage("Input incompatible with SelectorScript.");
                                 return true;
                             }
                             String build = "";
-                            for(Player i : SelectorScriptParser.instance.parse(commandSender, strings[2])){
+                            for (Player i : SelectorScriptParser.instance.parse(sender, args[2])) {
                                 build += i.getName() + " ";
                             }
-                            commandSender.sendMessage(build);
+                            sender.sendMessage(build);
                             break;
                         default:
-                            commandSender.sendMessage("Unknown option.");
+                            sender.sendMessage("Unknown option.");
                     }
 
                 case "Serialize.Location":
-                    if(!(commandSender instanceof Player)) return true;
+                    if (!(sender instanceof Player)) return true;
+                    break;
+                case "FlushConfigManager":
+                    ConfigManager.output();
+                    sender.sendMessage("Complete");
                     break;
                 case "NewPlayer":
-                    if(strings.length < 2) return true;
-                    EnhancedPlayer ep = new EnhancedPlayer(Bukkit.getOfflinePlayer(strings[1]));
-                    if(strings.length > 2){
-                        ep.setPermission(Permissions.valueOf(strings[2]));
+                    if (args.length < 2) return true;
+                    EnhancedPlayer ep = new EnhancedPlayer(Bukkit.getOfflinePlayer(args[1]));
+                    if (args.length > 2) {
+                        ep.setPermission(Permissions.valueOf(args[2]));
                     }
-                    if(strings.length > 3){
-                        ep.setRank(Rank.fromConfig(strings[3]));
+                    if (args.length > 3) {
+                        ep.setRank(Rank.fromConfig(args[3]));
                     }
-                    for(EnhancedPlayer epl : EnhancedPlayer.cache){
-                        if(epl.toPlayer().getName().equals(strings[1])){
-                            commandSender.sendMessage("Player already exists");
+                    for (EnhancedPlayer epl : EnhancedPlayer.cache) {
+                        if (epl.toPlayer().getName().equals(args[1])) {
+                            sender.sendMessage("Player already exists");
                             return true;
                         }
                     }
@@ -249,73 +224,70 @@ public class DevOperation implements CommandExecutor{
                 case "DuplicatePlayerResolve":
                     List<String> knownPlayers = new LinkedList<>();
                     List<EnhancedPlayer> toDel = new LinkedList<>();
-                    for(EnhancedPlayer enp : EnhancedPlayer.cache){
-                        if(knownPlayers.contains(enp.toPlayer().getName())){
+                    for (EnhancedPlayer enp : EnhancedPlayer.cache) {
+                        if (knownPlayers.contains(enp.toPlayer().getName())) {
                             toDel.add(enp);
-                            commandSender.sendMessage("Found duplicate, name " + enp.toPlayer().getName());
+                            sender.sendMessage("Found duplicate, name " + enp.toPlayer().getName());
                         } else {
-                          knownPlayers.add(enp.toPlayer().getName());
+                            knownPlayers.add(enp.toPlayer().getName());
                         }
 
                     }
-                    commandSender.sendMessage("Deleting duplicates");
+                    sender.sendMessage("Deleting duplicates");
                     EnhancedPlayer.cache.removeAll(toDel);
                     break;
                 //Easter egg
                 case "EXEC_M3A1T":
-                    commandSender.sendMessage(ChatColor.MAGIC.toString() + ChatColor.BLUE + "All bugs achieved by " + ChatColor.YELLOW + "package_java" +
+                    sender.sendMessage(ChatColor.MAGIC.toString() + ChatColor.BLUE + "All bugs achieved by " + ChatColor.YELLOW + "package_java" +
                             ChatColor.BLUE + " with Super Cow Powers." + ChatColor.MAGIC.toString());
-                    commandSender.sendMessage(ChatColor.AQUA + "Use caution with this command.");
+                    sender.sendMessage(ChatColor.AQUA + "Use caution with this command.");
                     break;
                 case "ClassModify":
-                    commandSender.sendMessage("INOP. Stop, you geek.");
+                    sender.sendMessage("INOP. Stop, you geek.");
                     break;
                 case "SetColor":
                     //Usage: /devops SetColor <name> <color>, minimum/maximum args length requirement is 3.
-                    if(strings.length < 3) return true;
-                    try {
-                        if(TeamColor.fromString(strings[2]) == null){
-                            commandSender.sendMessage("Invalid color.");
-                            return true;
-                        }
-                        EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(strings[1]))
-                                .setColorPref(TeamColor.fromString(strings[2]));
-                        commandSender.sendMessage("Color preference of " + strings[1] + " has been set to " +
-                                TeamColor.fromString(strings[2]).toColor() + TeamColor.fromString(strings[2]).toString());
-                    } catch (ParseException e) {
-                        commandSender.sendMessage(ChatColor.RED + "CAUGHT ERROR! *** Stack Trace attached");
-                        commandSender.sendMessage(Utilities.getStackTrace(e));
+                    if (args.length < 3) return true;
+                    if (TeamColor.fromString(args[2]) == null) {
+                        sender.sendMessage("Invalid color.");
+                        return true;
                     }
+                    EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[1]))
+                            .setColorPref(TeamColor.fromString(args[2]));
+                    sender.sendMessage("Color preference of " + args[1] + " has been set to " +
+                            TeamColor.fromString(args[2]).toColor() + TeamColor.fromString(args[2]).toString());
+
                     break;
                 case "FlushPlayers":
                     try {
                         EnhancedPlayer.ConfigAgent.$export$();
-                        commandSender.sendMessage("Success");
+                        sender.sendMessage("Success");
                     } catch (IOException e) {
-                        commandSender.sendMessage(Utilities.getStackTrace(e));
-                    }break;
+                        sender.sendMessage(Utilities.getStackTrace(e));
+                    }
+                    break;
                 case "ToggleInSandbox":
                     //usage: /devops ToggleInSandbox <player name>, minimum / maximum length of 2.
-                    if(strings.length != 2){
-                        commandSender.sendMessage("Invalid args length");
+                    if (args.length != 2) {
+                        sender.sendMessage("Invalid args length");
                         return true;
                     }
-                    UUID target = Bukkit.getOfflinePlayer(strings[1]).getUniqueId();
-                    if(Sandbox.contents.contains(target)){
+                    UUID target = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+                    if (Sandbox.contents.contains(target)) {
                         Sandbox.contents.remove(target);
-                        commandSender.sendMessage("Player removed");
-                    }else{
+                        sender.sendMessage("Player removed");
+                    } else {
                         Sandbox.contents.add(target);
-                        commandSender.sendMessage("Player added");
+                        sender.sendMessage("Player added");
                     }
                     break;
                 default:
-                    commandSender.sendMessage("Bad option.");
+                    sender.sendMessage("Bad option.");
                     return true;
             }
-        }else{
-            commandSender.sendMessage(ChatColor.RED + "You are not authorized to do this operation. Your permission: " +
-                    PermissionManager.getPermission((Player) commandSender) + ", required above: "+
+        } else {
+            sender.sendMessage(ChatColor.RED + "You are not authorized to do this operation. Your permission: " +
+                    PermissionManager.getPermission((Player) sender) + ", required above: " +
                     PermissionManager.Permissions.PRIVILEGED);
             return true;
         }

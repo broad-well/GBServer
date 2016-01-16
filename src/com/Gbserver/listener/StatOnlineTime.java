@@ -1,42 +1,43 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.EnhancedPlayer;
+import com.Gbserver.variables.Identity;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.yaml.snakeyaml.Yaml;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.UUID;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class StatOnlineTime implements Listener{
+    private static final File logFile = ConfigManager.getPathInsidePluginFolder("logOnOffs.dat").toFile();
+    private static HashMap<UUID, List<LogEntry>> cache = new HashMap<>();
+    private static Yaml helper = new Yaml();
+
     //Include ownership
-    /*
-    Example of logged player login/out history:
-
-    Player{uuid:????,name:-}
-        Login at <date format>
-        Logout at xx:xx p
-        Login at xx:xx a
-        Logout at xx:xx p
-        Login at xx:xx p
-        Logout at xx:xx p
-        Login at xx:xx a
-        Logout at xx:xx a
-    End Player
-
-     */
     public class ActHistory {
         private UUID identity;
         private HashMap<Date, Date> loginTimes;
 
     }
-    public static HashMap<UUID, Long> joinMillis = new HashMap<>();
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent pje){
         try {
-            joinMillis.put(pje.getPlayer().getUniqueId(), System.currentTimeMillis());
+            //Append to List in HashMap value column.
+            List<LogEntry> previous = cache.get(pje.getPlayer().getUniqueId());
+            if(previous == null) {
+                cache.put(pje.getPlayer().getUniqueId(), new LinkedList<LogEntry>());
+                previous = cache.get(pje.getPlayer().getUniqueId());
+            }
+            previous.add(new LogEntry(true));
+            cache.put(pje.getPlayer().getUniqueId(), previous);
+            //Added
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -45,11 +46,75 @@ public class StatOnlineTime implements Listener{
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent pqe){
         try {
-            EnhancedPlayer ep = EnhancedPlayer.getEnhanced(pqe.getPlayer());
-            ep.setDuration(ep.getDuration() + ((System.currentTimeMillis() - joinMillis.get(ep.toPlayer().getUniqueId())) / 1000));
-            joinMillis.remove(ep.toPlayer().getUniqueId());
+            //Append to List in HashMap value column.
+            List<LogEntry> previous = cache.get(pqe.getPlayer().getUniqueId());
+            if(previous == null) {
+                cache.put(pqe.getPlayer().getUniqueId(), new LinkedList<LogEntry>());
+                previous = cache.get(pqe.getPlayer().getUniqueId());
+            }
+            previous.add(new LogEntry(false));
+            cache.put(pqe.getPlayer().getUniqueId(), previous);
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void output() throws IOException {
+        HashMap<String, List<HashMap<String, String>>> superObject = new HashMap<>();
+        for(Map.Entry<UUID, List<LogEntry>> entry : cache.entrySet()){
+            //For each player, build a list of HashMaps which each represent a LogEntry.
+            //Build the list!
+            List<HashMap<String, String>> logEntries = new LinkedList<>();
+            for(LogEntry le : entry.getValue()) logEntries.add(le.toDump());
+            superObject.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(entry.getKey())), logEntries);
+        }
+
+        //Write!
+        FileWriter fw = new FileWriter(logFile);
+        helper.dump(superObject, fw);
+        fw.flush();
+        fw.close();
+    }
+
+    public static void input() throws IOException {
+        FileReader fr = new FileReader(logFile);
+        Object injection = helper.load(fr);
+        fr.close();
+        if(injection instanceof HashMap){
+            cache.clear();
+            HashMap<String, List<HashMap<String, String>>> superObject = (HashMap<String, List<HashMap<String, String>>>) injection;
+            for(Map.Entry<String, List<HashMap<String, String>>> entry : superObject.entrySet()){
+                List<LogEntry> logEntries = new LinkedList<>();
+                for(HashMap<String, String> dump : entry.getValue()) logEntries.add(LogEntry.parseDump(dump));
+                cache.put(Identity.deserializeIdentity(entry.getKey()).getUniqueId(), logEntries);
+            }
+        }
+    }
+}
+class LogEntry {
+    public static final SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
+    public boolean isLogIn;
+    public Date timeframe;
+
+    public LogEntry(boolean in){
+        isLogIn = in;
+        timeframe = new Date();
+    }
+
+    public HashMap<String, String> toDump() {
+        HashMap<String, String> output = new HashMap<>();
+        output.put("LoggingIn?", Boolean.toString(isLogIn));
+        output.put("Time", parser.format(timeframe));
+        return output;
+    }
+
+    public static LogEntry parseDump(HashMap<String, String> dump){
+        LogEntry build = new LogEntry(Boolean.parseBoolean(dump.get("LoggingIn?")));
+        try {
+            build.timeframe = parser.parse(dump.get("Time"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return build;
     }
 }

@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.HelpTable;
-import com.Gbserver.variables.Sandbox;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,7 +9,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +30,7 @@ public class Warp implements CommandExecutor {
     public static Path pathToConfig = Paths.get("/home/michael/SpigotCache/plugins/Broadwell_Server_Plugin/warps.txt");
     public static HelpTable ht = new HelpTable("/warp <[set/list/remove] [locationName]>", "Used to contain Location values", "", "warp");
     public static HashMap<String, Location> data = new HashMap<>();
-
+    private static Yaml yaml = new Yaml();
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender)) {
@@ -94,31 +93,30 @@ public class Warp implements CommandExecutor {
 
     static void reloadData() throws IOException {
         data.clear();
-        List<String> lines = Files.readAllLines(pathToConfig, Charset.defaultCharset());
-        for (String s : lines) {
-            //Format: ThisLocation,world,141241.14,1451.1,1736.4
-            //a.k.a name,worldname,x,y,z; 1:name, 2:world, 3:x, 4:y, 5:z.
-            String[] array = s.split(",");
-            data.put(array[0], new Location(
-                    Bukkit.getWorld(array[1]),
-                    Double.valueOf(array[2]),
-                    Double.valueOf(array[3]),
-                    Double.valueOf(array[4])));
-        }
+        for(Map.Entry<String, String> entry : ConfigManager.smartGet("Warps").entrySet())
+            data.put(entry.getKey(), Utilities.deserializeLocation(entry.getValue()));
     }
 
-    static void saveData() throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter(pathToConfig.toFile()));
-        for (Map.Entry<String, Location> e : data.entrySet()) {
-            try {
-                Location l = e.getValue();
-                pw.println(e.getKey() + "," + l.getWorld().getName() + "," + l.getX() + "," + l.getY() + "," + l.getZ());
-            }catch(Exception ex){
-                System.out.println("There's a problem with saving on warp key \"" + e.getKey() + "\".");
-            }
-        }
-        pw.flush();
-        pw.close();
+    static void saveData() {
+        ConfigManager.entries.put("Warps", toYamlDump());
+
+    }
+
+    static HashMap<String, String> toYamlDump() {
+        /*
+        Format:
+        Name Of Warp: Utilities's serialization
+         */
+        HashMap<String, String> output = new HashMap<>();
+        for(Map.Entry<String, Location> entry : data.entrySet())
+            output.put(entry.getKey(), Utilities.serializeLocation(entry.getValue()));
+        return output;
+    }
+
+    static void importYamlDump(HashMap<String, String> dump){
+        data.clear();
+        for(Map.Entry<String, String> entry : dump.entrySet())
+            data.put(entry.getKey(), Utilities.deserializeLocation(entry.getValue()));
     }
 }
 
