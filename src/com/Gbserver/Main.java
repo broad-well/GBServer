@@ -2,7 +2,6 @@ package com.Gbserver;
 
 import com.Gbserver.commands.*;
 import com.Gbserver.listener.*;
-import com.Gbserver.mail.FileParser;
 import com.Gbserver.mail.MailMan;
 import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
@@ -10,7 +9,6 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -23,9 +21,6 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -51,21 +46,6 @@ public class Main extends JavaPlugin {
         //fc.options().copyDefaults(true);
         setupConfig();
         new Utilities(this);
-        try {
-            EnhancedPlayer.ConfigAgent.$import$();
-        } catch (Exception e){
-            errorStack.add(e);
-        }
-        //Initialize all Yaml objects tied with ConfigManager.
-
-        try {
-            ConfigManager.input();
-            StatOnlineTime.input();
-            Sandbox.io(false);
-            Mute.inport();
-        } catch (IOException e) {
-            errorStack.add(e);
-        }
 
         //Register commands.
         @SuppressWarnings("unused")
@@ -121,7 +101,7 @@ public class Main extends JavaPlugin {
         getCommand("weather").setExecutor(new Weather());
 
         //Register events.
-        if(onEvent)
+        if (onEvent)
             getServer().getPluginManager().registerEvents(new EventSpecials(), this);
         getServer().getPluginManager().registerEvents(new StatOnlineTime(), this);
         getServer().getPluginManager().registerEvents(new IPCollector(), this);
@@ -148,35 +128,22 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AfkListener(), this);
         getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
+        getServer().getPluginManager().registerEvents(new BlockData(), this);
         lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
         MailMan.setupMailChecker();
-        try {
-            FileParser.getInstance().updateBuffer();
-        } catch (IOException | ParseException e) {
-            errorStack.add(e);
-        }
-        try {
-            IPCollector.inTake();
-            //Here is Territory management!
-            Territory.Import();
-        } catch (Exception e){errorStack.add(e);}
-        try {
-            ChatFormatter.$import$();
-        } catch (IOException e) {
-            errorStack.add(e);
-        }
+
         new Announce(this);
         try {
-            PermissionManager.import_();
-        } catch (IOException e) {
+            Reaction.getRepeatingEvent();
+            ConfigLoader.load();
+        } catch (Exception e) {
             errorStack.add(e);
         }
         try {
-            Reaction.getRepeatingEvent();
-        } catch(Exception e){errorStack.add(e);}
-        try{
             Bacon.getLobby();
-        } catch(Exception e){errorStack.add(e);}
+        } catch (Exception e) {
+            errorStack.add(e);
+        }
         GameType.TF = new GameType(new Runnable() {
             public void run() {
                 TF.bluePlayers.addAll(GameType.TF.blue);
@@ -268,10 +235,10 @@ public class Main extends JavaPlugin {
         // getServer().getPluginManager().registerEvents(new
         // runnerListenerDepricated(), this);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-        if(onEvent)
+        if (onEvent)
             scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
                 public void run() {
-                    for(Player p : Bukkit.getOnlinePlayers()){
+                    for (Player p : Bukkit.getOnlinePlayers()) {
                         p.setFoodLevel(20);
                     }
                 }
@@ -393,6 +360,12 @@ public class Main extends JavaPlugin {
 
         }, 0L, 5L);
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+            public void run() {
+                ConfigLoader.unload();
+                ConfigLoader.load();
+            }
+        }, 0, 20 * 60 * 3);
+        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
             @SuppressWarnings("deprecation")
             public void run() {
@@ -410,7 +383,7 @@ public class Main extends JavaPlugin {
 
 
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         errorStack.add(e);
                     }
                 }
@@ -419,7 +392,7 @@ public class Main extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                if(errorStack.isEmpty()){
+                if (errorStack.isEmpty()) {
                     System.out.println("Error stack empty");
                 } else {
                     System.out.println("---ERRORSTACK DUMP---");
@@ -436,13 +409,10 @@ public class Main extends JavaPlugin {
         List<Exception> errorStack = new LinkedList<>();
         System.out.println("New error stack");
         try {
-            StatOnlineTime.output();
-            Territory.Export();
             GameType.TF.close();
             GameType.BL.close();
             GameType.DR.close();
             Runner.joinSheep.remove();
-            EnhancedPlayer.ConfigAgent.$export$();
             System.out.println("Took care of some minigames");
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -451,38 +421,27 @@ public class Main extends JavaPlugin {
         saveConfig();
         System.out.println("Saved config");
         try {
-            FileParser.getInstance().saveBuffer();
-            System.out.println("Mail subsystem is a zombie");
-        } catch (IOException e) {
-            errorStack.add(e);
-        }
-        try{
-        Bacon.unload();
-            Sandbox.io(true);
+            Bacon.unload();
+
             //Territory is here!
 
             System.out.println("Took care of Bacon and protection");
-        } catch(Exception e){errorStack.add(e);}
-
-        //Export all types tied with ConfigManager.
-        try {
-            Mute.export();
-            PermissionManager.export();
-            //Denitialize ConfigManager
-            ConfigManager.output();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             errorStack.add(e);
         }
+
+        //Export all types tied with ConfigManager.
+        ConfigLoader.unload();
         System.out.println("Dumping error stack now.");
-                if(errorStack.isEmpty()){
-                    System.out.println("Error stack empty");
-                } else {
-                    System.out.println("---ERRORSTACK DUMP---");
-                    for (Exception e : errorStack) {
-                        e.printStackTrace();
-                    }
-                    errorStack.clear();
-                }
+        if (errorStack.isEmpty()) {
+            System.out.println("Error stack empty");
+        } else {
+            System.out.println("---ERRORSTACK DUMP---");
+            for (Exception e : errorStack) {
+                e.printStackTrace();
+            }
+            errorStack.clear();
+        }
 
     }
 
@@ -491,11 +450,11 @@ public class Main extends JavaPlugin {
         saveConfig();
     }
 
-    public static boolean isOnEvent(){
+    public static boolean isOnEvent() {
         try {
             Scanner s = new Scanner(new FileInputStream(ConfigManager.getPathInsidePluginFolder("eventFlipFlop.txt").toFile()));
             return Boolean.valueOf(s.nextLine());
-        }catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

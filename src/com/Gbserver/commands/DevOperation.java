@@ -50,6 +50,14 @@ public class DevOperation implements CommandExecutor {
                         "ToggleInSandbox, " +
                         "ListTerritories, " +
                         "FlushConfigManager, " +
+                        "Reload, " +
+                        "InsertHome, " +
+                        "RemoveHome, " +
+                        "ReloadConfigs, " +
+                        "RandomPUIDs, " +
+                        "AlterPreferences, " +
+                        "ListPreferences, " +
+                        "ProtectWorldToggle, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -79,7 +87,7 @@ public class DevOperation implements CommandExecutor {
                     if (args.length < 3) return true;
                     EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[1])).setRank(Rank.fromConfig(args[2]));
                     sender.sendMessage("Rank inserted: " + Bukkit.getOfflinePlayer(args[1]).getName()
-                            + ", " + ChatFormatter.rankData.get(Bukkit.getOfflinePlayer(args[1]).getUniqueId()).getPrefix());
+                            + ", " + EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[1])).getRank().getPrefix());
                     break;
                 case "ListRank":
                     sender.sendMessage("All Ranks: ");
@@ -152,6 +160,14 @@ public class DevOperation implements CommandExecutor {
                     for (Territory t : Territory.activeTerritories)
                         sender.sendMessage(t.getName() + " - Owned by: " + ChatColor.YELLOW + Bukkit.getOfflinePlayer(t.getOwner()).getName());
                     break;
+                case "ProtectWorldToggle":
+                    String perm = ConfigManager.smartGet("WorldProtect").get(Bukkit.getWorld(args[1]).getUID().toString());
+                    if(perm == null) perm = "false";
+                    perm = Boolean.toString(!Boolean.parseBoolean(perm));
+                    //Apply.
+                    ConfigManager.entries.get("WorldProtect").put(Bukkit.getWorld(args[1]).getUID().toString(), perm);
+                    sender.sendMessage("Now " + (perm.equals("false") ? "not " : "") + "protecting this world.");
+                    break;
                 case "TestFeature":
                     //devops TestFeature NewConfigs <args>
                     if (args.length == 1) {
@@ -221,6 +237,19 @@ public class DevOperation implements CommandExecutor {
                     }
                     EnhancedPlayer.cache.add(ep);
                     break;
+                case "RandomPUIDs":
+                    if(args.length < 2 || !Utilities.isNumber(args[1])) return true;
+                    //Usage: /devops RandomPUIDs <word length> [amount], required 2, optional 3
+                    int repeat = 1;
+                    if(args.length == 3 && Utilities.isNumber(args[2])) repeat = Integer.parseInt(args[2]);
+                    for(int i = 0; i < repeat; i++){
+                        if(Integer.parseInt(args[1]) % 8 != 0){
+                            sender.sendMessage("Word size should be multiple of 8.");
+                            return true;
+                        }
+                        sender.sendMessage(PUID.randomPUID(Integer.parseInt(args[1])).toString());
+                    }
+                    break;
                 case "DuplicatePlayerResolve":
                     List<String> knownPlayers = new LinkedList<>();
                     List<EnhancedPlayer> toDel = new LinkedList<>();
@@ -236,6 +265,17 @@ public class DevOperation implements CommandExecutor {
                     sender.sendMessage("Deleting duplicates");
                     EnhancedPlayer.cache.removeAll(toDel);
                     break;
+                case "ListPreferences":
+                    for(Map.Entry<String, String> entry : Preferences.get().entrySet()){
+                        sender.sendMessage(entry.getKey() + " : " + entry.getValue());
+                    }
+                    break;
+                case "AlterPreferences":
+                    //Usage: /devops AlterPreferences key value
+                    if(args.length < 3) return true;
+                    Preferences.get().put(args[1], args[2]);
+                    sender.sendMessage("Altered");
+                    break;
                 //Easter egg
                 case "EXEC_M3A1T":
                     sender.sendMessage(ChatColor.MAGIC.toString() + ChatColor.BLUE + "All bugs achieved by " + ChatColor.YELLOW + "package_java" +
@@ -244,6 +284,12 @@ public class DevOperation implements CommandExecutor {
                     break;
                 case "ClassModify":
                     sender.sendMessage("INOP. Stop, you geek.");
+                    break;
+                case "ReloadConfigs":
+                    sender.sendMessage(
+                            (ConfigLoader.unload() && ConfigLoader.load()) ?
+                            "Reload configs complete" :
+                            "Error during reload, see console");
                     break;
                 case "SetColor":
                     //Usage: /devops SetColor <name> <color>, minimum/maximum args length requirement is 3.
@@ -258,6 +304,24 @@ public class DevOperation implements CommandExecutor {
                             TeamColor.fromString(args[2]).toColor() + TeamColor.fromString(args[2]).toString());
 
                     break;
+                case "InsertHome":
+                    if(args.length == 1) return true;
+                    Home.inport();
+                    //Syntax: /devops InsertHome <player name>
+                    //Sets home to current position, needs validateSender.
+                    if(Utilities.validateSender(sender)){
+                        Home.data.put(Bukkit.getOfflinePlayer(args[1]).getUniqueId(), ((Player) sender).getLocation());
+                        sender.sendMessage("Home set.");
+                    }
+                    Home.export();
+                    break;
+                case "RemoveHome":
+                    if(args.length == 1) return true;
+                    Home.inport();
+                    Home.data.remove(Bukkit.getOfflinePlayer(args[1]).getUniqueId());
+                    sender.sendMessage("Home removed.");
+                    Home.export();
+                    break;
                 case "FlushPlayers":
                     try {
                         EnhancedPlayer.ConfigAgent.$export$();
@@ -265,6 +329,21 @@ public class DevOperation implements CommandExecutor {
                     } catch (IOException e) {
                         sender.sendMessage(Utilities.getStackTrace(e));
                     }
+                    break;
+                case "Reload":
+                    if(args.length == 1) return true;
+                    int cdown;
+                    try{
+                        cdown = Integer.parseInt(args[1]);
+                    }catch(Exception e) {return true;}
+                    ChatWriter.write(ChatWriterType.ANNOUNCEMENT, "RELOADING IN " + cdown + " SECONDS");
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "save-all");
+                            ChatWriter.write(ChatWriterType.ANNOUNCEMENT, "RELOADING...");
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload");
+                        }
+                    }, 20 * cdown);
                     break;
                 case "ToggleInSandbox":
                     //usage: /devops ToggleInSandbox <player name>, minimum / maximum length of 2.
@@ -295,6 +374,6 @@ public class DevOperation implements CommandExecutor {
     }
 
     public boolean isEligible(CommandSender sender) {
-        return sender instanceof ConsoleCommandSender || sender instanceof Player && PermissionManager.getPermission((Player) sender).isAbove(Permissions.PRIVILEGED);
+        return sender instanceof ConsoleCommandSender || sender instanceof Player && EnhancedPlayer.getEnhanced((Player) sender).getPermission().isAbove(Permissions.PRIVILEGED);
     }
 }

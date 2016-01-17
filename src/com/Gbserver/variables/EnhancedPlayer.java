@@ -133,7 +133,7 @@ public class EnhancedPlayer {
             yaml = new Yaml(oD);
         }
 
-        public static void $import$() throws IOException, ParseException {
+        public static void $import$() throws IOException {
             FileReader fr = new FileReader(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
             Object obj = yaml.load(fr);
             fr.close();

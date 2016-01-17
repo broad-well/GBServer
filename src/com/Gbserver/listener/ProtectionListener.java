@@ -6,6 +6,7 @@ import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,10 +16,19 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 //Much more robust one needed!
 public class ProtectionListener implements Listener {
     public static boolean isDisabled = false;
+    public static List<Material> prohibitedMaterials = new LinkedList<Material>(){{
+        add(Material.TNT);
+        add(Material.STATIONARY_LAVA);
+        add(Material.LAVA);
+        add(Material.LAVA_BUCKET);
+    }};
     final int[][][] DATA = {
             {
                     {-156, 78, 228},
@@ -54,6 +64,7 @@ public class ProtectionListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent bbe) {
+
         int x = bbe.getBlock().getX();
         int y = bbe.getBlock().getY();
         int z = bbe.getBlock().getZ();
@@ -116,6 +127,9 @@ public class ProtectionListener implements Listener {
             }
         }
 
+
+            bbe.setCancelled(!allowChange(bbe.getBlock().getWorld()));
+
     }
 
     private boolean isInRangeOf(int testant, int min, int max) {
@@ -163,6 +177,7 @@ public class ProtectionListener implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent bbe) {
+
         int x = bbe.getBlock().getX();
         int y = bbe.getBlock().getY();
         int z = bbe.getBlock().getZ();
@@ -179,13 +194,10 @@ public class ProtectionListener implements Listener {
                 }
             }
         }
-        if ((!bbe.getBlock().getWorld().getName().equals("world") &&
-                !bbe.getPlayer().getName().equals(Utilities.OWNER)) || ((bbe.getBlock().getType() == Material.TNT ||
-                bbe.getBlock().getType() == Material.STATIONARY_LAVA ||
-                bbe.getBlock().getType() == Material.LAVA ||
-                bbe.getBlock().getType() == Material.LAVA_BUCKET) &&
-                bbe.getBlock().getWorld().getName().equals("world"))) {
+        if (!prohibitedMaterials.contains(bbe.getBlock().getType())) {
             bbe.setCancelled(!(bbe.getBlock().getWorld().getName().equals("Turf_Wars1") && TF.isBuildtime) && bbe.getBlock().getType() == Material.STAINED_CLAY);
+        }else{
+            bbe.setCancelled(true);
         }
         if (!isDisabled) {
             if (EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
@@ -223,6 +235,9 @@ public class ProtectionListener implements Listener {
                 break;
             }
         }
+
+            bbe.setCancelled(!allowChange(bbe.getBlock().getWorld()));
+
     }
 
     @EventHandler
@@ -292,6 +307,13 @@ public class ProtectionListener implements Listener {
             }
         }
 
+
+    }
+
+    private static boolean allowChange(World w) {
+        //ConfigManager entry WorldProtect
+        String work = ConfigManager.smartGet("WorldProtect").get(w.getUID().toString());
+        return work == null || work.equalsIgnoreCase("false");
 
     }
 }

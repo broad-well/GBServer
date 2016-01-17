@@ -24,8 +24,6 @@ public class ChatFormatter implements Listener {
     //For fiestas.
     public static List<String> staff = Arrays.asList("_Broadwell", "Xrandon", "Ehcto", "Anairda", "SallyGreen");
     public static Path rankFile = ConfigManager.getPathInsidePluginFolder("ranks.dat");
-
-    public static HashMap<UUID, Rank> rankData = new HashMap<>();
     /*public static HashMap<String, Rank> Rankdata = new HashMap<String, Rank>() {{
         put("_Broadwell", Rank.OWNER);
         put("MarkNutt", Rank.BANANA);
@@ -145,31 +143,6 @@ public class ChatFormatter implements Listener {
         }
         return null;
     }
-
-    public static void $import$() throws IOException {
-        List<String> lines = new LinkedList<>();
-        Scanner scanner = new Scanner(new FileInputStream(rankFile.toFile()));
-        while(scanner.hasNextLine()){
-            lines.add(scanner.nextLine());
-        }
-        scanner.close();
-        for(String line : lines){
-            String[] data = line.split(" ");
-            //uuid^Owner,RED
-            rankData.put(UUID.fromString(data[0]),
-                    Rank.fromConfig(data[1]));
-        }
-    }
-
-    public static void $export$() throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(new FileOutputStream(rankFile.toFile()));
-        for(Map.Entry<UUID, Rank> entry : rankData.entrySet()){
-            writer.println(entry.getKey().toString() + " " + entry.getValue().configOutput());
-        }
-        writer.flush();
-        writer.close();
-    }
-
     public static Rank fromConfig(String text) {return Rank.fromConfig(text);}
 
     @EventHandler

@@ -65,7 +65,7 @@ public class Home implements CommandExecutor {
         return true;
     }
 
-    private static void export() {
+    public static void export() {
         //Convert to savable format first.
         HashMap<String, String> savable = new HashMap<>();
         for (Map.Entry<UUID, Location> entry : data.entrySet())
@@ -75,7 +75,7 @@ public class Home implements CommandExecutor {
 
     //1st element: UUID to String; 2nd element: Utilities serialized location
     //Main volatile storage subsystem ID "Home"
-    private static void inport() {
+    public static void inport() {
         data.clear();
         for (Map.Entry<String, String> entry : ConfigManager.smartGet("Home").entrySet())
             data.put(Identity.deserializeIdentity(entry.getKey()).getUniqueId(), Utilities.deserializeLocation(entry.getValue()));
