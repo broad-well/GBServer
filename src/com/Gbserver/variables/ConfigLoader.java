@@ -23,6 +23,7 @@ public class ConfigLoader {
             Sandbox.io(false);
             BlockData.input();
             Mute.inport();
+            Couple.input();
             FileParser.getInstance().updateBuffer();
             IPCollector.inTake();
             Territory.Import();
@@ -43,6 +44,7 @@ public class ConfigLoader {
             Sandbox.io(true);
             BlockData.output();
             Mute.export();
+            Couple.output();
             FileParser.getInstance().saveBuffer();
             IPCollector.outFlush();
             Territory.Export();

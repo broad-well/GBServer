@@ -99,6 +99,7 @@ public class Main extends JavaPlugin {
         getCommand("selscript").setExecutor(new SelScript());
         getCommand("skull").setExecutor(new Skull());
         getCommand("weather").setExecutor(new Weather());
+        getCommand("marry").setExecutor(new Marriage());
 
         //Register events.
         if (onEvent)

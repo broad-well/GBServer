@@ -129,3 +129,5 @@ commands:
   weather:
     description: Change the weather easier.
     aliases: [w]
+  marry:
+    description: <3
