@@ -2,6 +2,9 @@ package com.Gbserver.listener;
 
 import com.Gbserver.Utilities;
 import com.Gbserver.commands.TF;
+import com.Gbserver.listener.protections.PermissionProtect;
+import com.Gbserver.listener.protections.TerritoryProtect;
+import com.Gbserver.listener.protections.WorldProtect;
 import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.bukkit.event.player.PlayerBucketEvent;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.Arrays;
@@ -22,6 +27,7 @@ import java.util.List;
 
 //Much more robust one needed!
 public class ProtectionListener implements Listener {
+    public static List<ProtectionModule> modules = Arrays.asList(new PermissionProtect(), new TerritoryProtect(), new WorldProtect());
     public static boolean isDisabled = false;
     public static List<Material> prohibitedMaterials = new LinkedList<Material>(){{
         add(Material.TNT);
@@ -29,7 +35,7 @@ public class ProtectionListener implements Listener {
         add(Material.LAVA);
         add(Material.LAVA_BUCKET);
     }};
-    final int[][][] DATA = {
+    /*final int[][][] DATA = {
             {
                     {-156, 78, 228},
                     {-130, 68, 208},
@@ -46,274 +52,95 @@ public class ProtectionListener implements Listener {
                     {-162, 71, 185},
                     {-163, 75, 175}
             }
-    };
-
-    final String[][] TRUSTED_PLAYERS = {
-            {"GoBroadwell"},
-            {"_Broadwell", "Yin_of_the_Yang", "Latios_"},
-            {""},
-            {"_Broadwell"}
-    };
-
-    final int RIGHT_UP = 0;
-    final int LEFT_DOWN = 1;
-
-    final int AXIS_X = 0;
-    final int AXIS_Y = 1;
-    final int AXIS_Z = 2;
+    };*/
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent bbe) {
-
-        int x = bbe.getBlock().getX();
-        int y = bbe.getBlock().getY();
-        int z = bbe.getBlock().getZ();
-
-        //bbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
-        //bbe.setCancelled(true);
-        for (int i = 0; i < DATA.length; i++) {
-            if (isInSelection(i, x, y, z) && !isTrusted(i, bbe.getPlayer())) {
-                if (i == 0 && bbe.getBlock().getType() == Material.SNOW_BLOCK) {
-
-                } else {
-                    bbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
-                    bbe.setCancelled(true);
-                }
-            }
-            if (bbe.getBlock().getWorld().equals(Bukkit.getServer().getWorld("Bomb_Lobbers1")) && bbe.getBlock().getType() == Material.BEDROCK) {
-                bbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
-                bbe.setCancelled(true);
+        //Protection module indexing.
+        boolean doAllow = true;
+        List<String> reasons = new LinkedList<>();
+        for(ProtectionModule module : modules){
+            if(!module.allow(bbe)){
+                doAllow = false;
+                reasons.add(module.responseName());
             }
         }
-
-        if (!bbe.getBlock().getWorld().getName().equals("world") &&
-                !bbe.getPlayer().getName().equals(Utilities.OWNER)) {
-            //Only exception: During turf, building.
-            bbe.setCancelled(!(bbe.getBlock().getWorld().getName().equals("Turf_Wars1") && TF.isBuildtime) && bbe.getBlock().getType() == Material.STAINED_CLAY);
-        }
-
-        if (EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
-            if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
-                bbe.setCancelled(true);
-                bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to break blocks. Required permission above GUEST");
-                return;
-            }
-        }
-        if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission() == null) {
-            if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
-                bbe.setCancelled(true);
-                bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to break blocks. Required permission above GUEST");
-            }
-        } else {
-            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission().getLevel() <
-                    PermissionManager.Permissions.PRIVILEGED.getLevel()) {
-                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
-                    bbe.setCancelled(true);
-                    bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to break blocks. Required permission above GUEST");
-                }
-            }
-        }
-
-
-        for (Territory t : Territory.activeTerritories) {
-            if (t.isInside(bbe.getBlock().getLocation())
-                    && !bbe.getPlayer().getUniqueId().equals(t.getOwner())
-                    && !t.hasCollaborator(bbe.getPlayer().getUniqueId())) {
-                bbe.setCancelled(true);
-                bbe.getPlayer().sendMessage("You may not break blocks here. Property belongs to " + ChatColor.YELLOW +
-                        Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
-                        ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
-                break;
-            }
-        }
-
-
-            bbe.setCancelled(!allowChange(bbe.getBlock().getWorld()));
-
-    }
-
-    private boolean isInRangeOf(int testant, int min, int max) {
-        if (min < max) {
-            if (testant >= min && testant <= max) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (min != max) {
-            if (testant <= min && testant >= max) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isInSelection(int selectionNumber, int x, int y, int z) {
-
-        if (isInRangeOf(x, DATA[selectionNumber][RIGHT_UP][AXIS_X], DATA[selectionNumber][LEFT_DOWN][AXIS_X])
-                && isInRangeOf(y, DATA[selectionNumber][RIGHT_UP][AXIS_Y], DATA[selectionNumber][LEFT_DOWN][AXIS_Y])
-                && isInRangeOf(z, DATA[selectionNumber][RIGHT_UP][AXIS_Z], DATA[selectionNumber][LEFT_DOWN][AXIS_Z])
-            //&& !isInRangeOf(x,DATA[selectionNumber][EXCLUDE_RIGHT_UP][AXIS_X],DATA[selectionNumber][EXCLUDE_LEFT_DOWN][AXIS_X])
-            //&& !isInRangeOf(y,DATA[selectionNumber][EXCLUDE_RIGHT_UP][AXIS_Y],DATA[selectionNumber][EXCLUDE_LEFT_DOWN][AXIS_Y])
-            //&& !isInRangeOf(z,DATA[selectionNumber][EXCLUDE_RIGHT_UP][AXIS_Z],DATA[selectionNumber][EXCLUDE_LEFT_DOWN][AXIS_Z])
-                ) {
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isTrusted(int selectionNumber, Player contestant) {
-        String name = contestant.getName();
-        if (Arrays.asList(TRUSTED_PLAYERS[selectionNumber]).contains(name)) {
-            return true;
-        } else {
-            return false;
+        bbe.setCancelled(!doAllow);
+        if(!doAllow){
+            bbe.getPlayer().sendMessage("Your block break was blocked for the following reason(s):");
+            bbe.getPlayer().sendMessage(reasons.toArray(new String[1]));
         }
     }
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent bbe) {
-
-        int x = bbe.getBlock().getX();
-        int y = bbe.getBlock().getY();
-        int z = bbe.getBlock().getZ();
-
-        //bbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
-        //bbe.setCancelled(true);
-        for (int i = 0; i < DATA.length; i++) {
-            if (isInSelection(i, x, y, z) && !isTrusted(i, bbe.getPlayer())) {
-                if (i == 0 && bbe.getBlock().getType() == Material.SNOW_BLOCK) {
-
-                } else {
-                    bbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
-                    bbe.setCancelled(true);
-                }
+        //Protection module indexing.
+        boolean doAllow = true;
+        List<String> reasons = new LinkedList<>();
+        for(ProtectionModule module : modules){
+            if(!module.allow(bbe)){
+                doAllow = false;
+                reasons.add(module.responseName());
             }
         }
-        if (!prohibitedMaterials.contains(bbe.getBlock().getType())) {
-            bbe.setCancelled(!(bbe.getBlock().getWorld().getName().equals("Turf_Wars1") && TF.isBuildtime) && bbe.getBlock().getType() == Material.STAINED_CLAY);
-        }else{
-            bbe.setCancelled(true);
+        bbe.setCancelled(!doAllow);
+        if(!doAllow){
+            bbe.getPlayer().sendMessage("Your block place was blocked for the following reason(s):");
+            bbe.getPlayer().sendMessage(reasons.toArray(new String[1]));
         }
-        if (!isDisabled) {
-            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()) == null) {
-                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
-                    bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place blocks. Required permission above GUEST");
-                    bbe.setCancelled(true);
-                    return;
-                }
-            }
-            if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission() == null) {
-                if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
-                    bbe.setCancelled(true);
-                    bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place blocks. Required permission above GUEST");
-                }
-            } else {
-                if (EnhancedPlayer.getEnhanced(bbe.getPlayer()).getPermission().getLevel() <
-                        PermissionManager.Permissions.PRIVILEGED.getLevel()) {
-                    if (!bbe.getBlock().getType().equals(Material.SNOW_BLOCK)) {
-                        bbe.setCancelled(true);
-                        bbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place blocks. Required permission above GUEST");
-                    }
-                }
-            }
-
-        }
-
-        for (Territory t : Territory.activeTerritories) {
-            if (t.isInside(bbe.getBlock().getLocation())
-                    && !bbe.getPlayer().getUniqueId().equals(t.getOwner())
-                    && !t.hasCollaborator(bbe.getPlayer().getUniqueId())) {
-                bbe.setCancelled(true);
-                bbe.getPlayer().sendMessage("You may not place blocks here. Property belongs to " + ChatColor.YELLOW +
-                        Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
-                        ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
-                break;
-            }
-        }
-
-            bbe.setCancelled(!allowChange(bbe.getBlock().getWorld()));
-
     }
 
     @EventHandler
     public void onPlayerBucketEmpty(PlayerBucketEmptyEvent pbe) {
-        int x = pbe.getBlockClicked().getX();
-        int y = pbe.getBlockClicked().getY() + 1;
-        int z = pbe.getBlockClicked().getZ();
-
-        //pbe.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!");
-        //pbe.setCancelled(true);
-        for (int i = 0; i < DATA.length; i++) {
-            if (isInSelection(i, x, y, z) && !isTrusted(i, pbe.getPlayer())) {
-                if (i != 0) {
-                    pbe.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, ChatColor.RED + "" + ChatColor.BOLD + "This area is protected. Sorry!"));
-                    pbe.setCancelled(true);
-                }
+        //Protection module indexing.
+        boolean doAllow = true;
+        List<String> reasons = new LinkedList<>();
+        for(ProtectionModule module : modules){
+            if(!module.allow(pbe)){
+                doAllow = false;
+                reasons.add(module.responseName());
             }
         }
-
-        if (EnhancedPlayer.getEnhanced(pbe.getPlayer()).getPermission() == null) {
-            pbe.setCancelled(true);
-            pbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place liquid. Required permission above GUEST");
-        } else {
-            if (EnhancedPlayer.getEnhanced(pbe.getPlayer()).getPermission().getLevel() <
-                    PermissionManager.Permissions.PRIVILEGED.getLevel()) {
-
-                pbe.setCancelled(true);
-                pbe.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place liquid. Required permission above GUEST");
-
-            }
-        }
-
-
-        for (Territory t : Territory.activeTerritories) {
-            if (t.isInside(pbe.getBlockClicked().getLocation())
-                    && !pbe.getPlayer().getUniqueId().equals(t.getOwner())
-                    && !t.hasCollaborator(pbe.getPlayer().getUniqueId())) {
-                pbe.setCancelled(true);
-                pbe.getPlayer().sendMessage("You may not place liquids here. Property belongs to " + ChatColor.YELLOW +
-                        Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
-                        ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
-                break;
-            }
+        pbe.setCancelled(!doAllow);
+        if(!doAllow){
+            pbe.getPlayer().sendMessage("Your bucket manipulation was blocked for the following reason(s):");
+            pbe.getPlayer().sendMessage(reasons.toArray(new String[1]));
         }
     }
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent pie) {
-        if (pie.getPlayer().getItemInHand().getType() == Material.ARMOR_STAND ||
-                pie.getPlayer().getItemInHand().getType() == Material.MOB_SPAWNER) {
-
-            if (EnhancedPlayer.isPlayerIneligible(pie.getPlayer(), PermissionManager.Permissions.PRIVILEGED)) {
-                pie.setCancelled(true);
-                pie.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to spawn creatures. Permission not above GUEST");
-            }
-
-            for (Territory t : Territory.activeTerritories) {
-                if (t.isInside(pie.getClickedBlock().getLocation())
-                        && !pie.getPlayer().getUniqueId().equals(t.getOwner())
-                        && !t.hasCollaborator(pie.getPlayer().getUniqueId())) {
-                    pie.setCancelled(true);
-                    pie.getPlayer().sendMessage("You may not spawn entities here. Property belongs to " + ChatColor.YELLOW +
-                            Bukkit.getOfflinePlayer(t.getOwner()).getName() + ChatColor.RESET +
-                            ". If you wish to obtain permission, ask the owner to include you as a collaborator.");
-                    break;
-                }
+        //Protection module indexing.
+        boolean doAllow = true;
+        List<String> reasons = new LinkedList<>();
+        for(ProtectionModule module : modules){
+            if(!module.allow(pie)){
+                doAllow = false;
+                reasons.add(module.responseName());
             }
         }
-
-
+        pie.setCancelled(!doAllow);
+        if(!doAllow){
+            pie.getPlayer().sendMessage("Your interaction was blocked for the following reason(s):");
+            pie.getPlayer().sendMessage(reasons.toArray(new String[1]));
+        }
     }
 
-    private static boolean allowChange(World w) {
-        //ConfigManager entry WorldProtect
-        String work = ConfigManager.smartGet("WorldProtect").get(w.getUID().toString());
-        return work == null || work.equalsIgnoreCase("false");
-
+    @EventHandler
+    public void onPlayerBucketFill(PlayerBucketFillEvent pbe){
+        //Protection module indexing.
+        boolean doAllow = true;
+        List<String> reasons = new LinkedList<>();
+        for(ProtectionModule module : modules){
+            if(!module.allow(pbe)){
+                doAllow = false;
+                reasons.add(module.responseName());
+            }
+        }
+        pbe.setCancelled(!doAllow);
+        if(!doAllow){
+            pbe.getPlayer().sendMessage("Your bucket manipulation was blocked for the following reason(s):");
+            pbe.getPlayer().sendMessage(reasons.toArray(new String[1]));
+        }
     }
 }

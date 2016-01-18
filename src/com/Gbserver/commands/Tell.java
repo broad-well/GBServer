@@ -33,6 +33,7 @@ public class Tell implements CommandExecutor {
             sender.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + sender.getName() + " > CONSOLE: " + msg);
             beep(sender);
             Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + sender.getName() + " > CONSOLE: " + msg);
+            last.delete(sender);
             last.put(sender, Bukkit.getConsoleSender());
         }else if(Bukkit.getPlayer(args[0]) == null){
             //NullPointer, no player
@@ -47,6 +48,7 @@ public class Tell implements CommandExecutor {
             target.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD +
                     sender.getName() + " > " + target.getName() + ": " + msg);
             beep(target);
+            last.delete(sender);
             last.put(sender, target);
         }
         return true;
