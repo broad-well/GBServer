@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.RunnableFuture;
 
 public class DevOperation implements CommandExecutor {
 
@@ -58,6 +59,8 @@ public class DevOperation implements CommandExecutor {
                         "AlterPreferences, " +
                         "ListPreferences, " +
                         "ProtectWorldToggle, " +
+                        "ScheduleExecute, " +
+                        "ListProtection, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -139,6 +142,32 @@ public class DevOperation implements CommandExecutor {
                             p.setOp(false);
                             sender.sendMessage("Deopped " + p.getName());
                         }
+                    }
+                    break;
+                case "ListProtection":
+                    for(Territory t : Territory.activeTerritories){
+                        sender.sendMessage(Protection.verbalize(t));
+                    }
+                    break;
+                case "ScheduleExecute":
+                    if(args.length < 3) {
+                        sender.sendMessage("ScheduleExecute usage: /devops ScheduleExecute <time in seconds> <command> [arguments]");
+                        sender.sendMessage("Example: /devops ScheduleExecute 120 bc 2 minutes have passed!");
+                        sender.sendMessage("The command will be executed on your behalf, so make sure you stay online!");
+                        return true;
+                    }
+                    if(!Utilities.isNumber(args[1])){
+                        sender.sendMessage("2nd argument is an invalid number, scheduling aborted.");
+                    }else{
+                        final CommandSender cs = sender;
+                        final String cmd = buildCmd(args);
+
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
+                            @Override
+                            public void run() {
+                                    Bukkit.dispatchCommand(cs, cmd);
+                            }
+                        }, 20 * Integer.parseInt(args[1]));
                     }
                     break;
                 case "DeletePlayer":
@@ -375,5 +404,15 @@ public class DevOperation implements CommandExecutor {
 
     public boolean isEligible(CommandSender sender) {
         return sender instanceof ConsoleCommandSender || sender instanceof Player && EnhancedPlayer.getEnhanced((Player) sender).getPermission().isAbove(Permissions.PRIVILEGED);
+    }
+
+    private String buildCmd(String[] fullArgs){
+        //cmd starts at /devops ScheduleExecute <seconds> <command>..., index 2
+        String output = "";
+        for(int i = 2; i < fullArgs.length; i++){
+            output += fullArgs[i];
+            if(i + 1 != fullArgs.length) output += " ";
+        }
+        return output;
     }
 }

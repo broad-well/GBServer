@@ -1,6 +1,7 @@
 package com.Gbserver.listener;
 
 import com.Gbserver.Main;
+import com.Gbserver.commands.Jail;
 import com.Gbserver.commands.Mail;
 import com.Gbserver.commands.Team;
 import com.Gbserver.commands.Tell;
@@ -20,24 +21,10 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class ChatFormatter implements Listener {
-    public static List<Player> setCancelled = new LinkedList<Player>();
+    public static List<Player> setCancelled = new LinkedList<>();
     //For fiestas.
     public static List<String> staff = Arrays.asList("_Broadwell", "Xrandon", "Ehcto", "Anairda", "SallyGreen");
     public static Path rankFile = ConfigManager.getPathInsidePluginFolder("ranks.dat");
-    /*public static HashMap<String, Rank> Rankdata = new HashMap<String, Rank>() {{
-        put("_Broadwell", Rank.OWNER);
-        put("MarkNutt", Rank.BANANA);
-        put("Ehcto", Rank.GHOST);
-        put("Anairda", Rank.CAT);
-        put("Zenithian4", Rank.POTATO);
-        put("SallyGreen", Rank.GATOR);
-        put("Elenwen", Rank.BIRD);
-        put("Mystal", Rank.DUCK);
-        put("AcidWolf", Rank.DOG);
-        put("Flystal", Rank.DEEQ);
-        put("spacetrain31", Rank.DEV);
-        6549 68 -3270
-    }};*/
 
     //Mail module counterpart
     public static HashMap<Player, List<String>> activeBuffer = new HashMap<>();

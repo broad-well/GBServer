@@ -30,7 +30,6 @@ public class F implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(Sandbox.check(sender)) return true;
         if (label.equalsIgnoreCase("f") || label.equalsIgnoreCase("friend")) {
             sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "This is not Meinplex, my Friend!"));
             return true;

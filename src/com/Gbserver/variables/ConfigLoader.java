@@ -1,5 +1,6 @@
 package com.Gbserver.variables;
 
+import com.Gbserver.commands.Jail;
 import com.Gbserver.commands.Mute;
 import com.Gbserver.commands.Warp;
 import com.Gbserver.listener.BlockData;
@@ -23,6 +24,7 @@ public class ConfigLoader {
             Sandbox.io(false);
             BlockData.input();
             Mute.inport();
+            Jail.input();
             Couple.input();
             FileParser.getInstance().updateBuffer();
             IPCollector.inTake();
@@ -44,6 +46,7 @@ public class ConfigLoader {
             Sandbox.io(true);
             BlockData.output();
             Mute.export();
+            Jail.output();
             Couple.output();
             FileParser.getInstance().saveBuffer();
             IPCollector.outFlush();

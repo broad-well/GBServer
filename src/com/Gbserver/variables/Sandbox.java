@@ -1,5 +1,6 @@
 package com.Gbserver.variables;
 
+import com.Gbserver.commands.Jail;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,7 @@ public class Sandbox {
         //Prevent errors while casting to player.
         if(sender instanceof Player){
             Player s = (Player) sender;
-            if(contents.contains(s.getUniqueId())){
+            if(contents.contains(s.getUniqueId()) || Jail.prisoners.contains(s)){
                 //In sandbox, notify player.
                 ChatWriter.writeTo(s, ChatWriterType.COMMAND, "You are currently in the sandbox, command execution cancelled.");
                 return true;

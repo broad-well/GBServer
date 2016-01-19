@@ -19,6 +19,7 @@ public class Marriage implements CommandExecutor{
         /marry create <groom> <bride>
         /marry delete <PUID>
          */
+        if(Sandbox.check(sender)) return true;
         if(args.length == 0){
             displayUsage(sender);
             return true;

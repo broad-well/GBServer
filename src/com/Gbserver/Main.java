@@ -100,6 +100,7 @@ public class Main extends JavaPlugin {
         getCommand("skull").setExecutor(new Skull());
         getCommand("weather").setExecutor(new Weather());
         getCommand("marry").setExecutor(new Marriage());
+        getCommand("jail").setExecutor(new Jail());
 
         //Register events.
         if (onEvent)
@@ -130,6 +131,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         getServer().getPluginManager().registerEvents(new BlockData(), this);
+        getServer().getPluginManager().registerEvents(new JailListener(), this);
         lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
         MailMan.setupMailChecker();
 

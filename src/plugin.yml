@@ -131,3 +131,5 @@ commands:
     aliases: [w]
   marry:
     description: <3
+  jail:
+    descipriont: Prison.

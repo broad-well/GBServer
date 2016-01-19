@@ -152,7 +152,7 @@ public class Protection implements CommandExecutor {
         return true;
     }
 
-    public String[] verbalize(Territory t){
+    public static String[] verbalize(Territory t){
         String[] output = new String[4];
         output[0] = ChatColor.AQUA + "---=== " + t.getName() + " Stats ===---";
         output[1] = ChatColor.DARK_AQUA + "Owner: " + ChatColor.YELLOW + Bukkit.getOfflinePlayer(t.getOwner()).getName();
