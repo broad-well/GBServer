@@ -48,6 +48,11 @@ public class EnhancedPlayer {
         if(dump.keySet().contains("Permission")) build.setPermission(Permissions.valueOf(dump.get("Permission")));
         if(dump.keySet().contains("Rank")) build.setRank(Rank.fromConfig(dump.get("Rank")));
         if(dump.keySet().contains("ColorPreference")) build.setColorPref(TeamColor.fromString(dump.get("ColorPreference")));
+        if(dump.keySet().contains("Contract"))
+            build.setContract(Double.parseDouble(dump.get("Contract")));
+        else
+            build.setContract(-1);
+
         return build;
     }
 
@@ -56,6 +61,7 @@ public class EnhancedPlayer {
     private Location home; // nullable
     private Rank rank; // nullable
     private TeamColor colorPref; // nullable
+    private double contract;
 
     public long getDuration() {
         return duration;
@@ -83,6 +89,11 @@ public class EnhancedPlayer {
         this.rank = rank;
     }
 
+    public void setContract(double c){
+        contract = c;
+    }
+
+    public double getContract() {return contract;}
     public void setColorPref(TeamColor tc) {
         this.colorPref = tc;
     }
@@ -120,6 +131,7 @@ public class EnhancedPlayer {
         if(myPerm != null) build.put("Permission", myPerm.toString());
         if(rank != null) build.put("Rank", rank.configOutput());
         if(colorPref != null) build.put("ColorPreference", colorPref.toString());
+        if(contract != -1) build.put("Contract", String.valueOf(contract));
         return build;
     }
 

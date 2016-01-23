@@ -11,7 +11,7 @@ public class AfkListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent pme) {
         Player pl = pme.getPlayer();
-        if (Afk.afkList.contains(pl)) {
+        if (Afk.afkList.keySet().contains(pl)) {
             Afk.doAFK(pl);
         }
     }
@@ -19,7 +19,7 @@ public class AfkListener implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent pce) {
         Player pl = pce.getPlayer();
-        if (Afk.afkList.contains(pl)) {
+        if (Afk.afkList.keySet().contains(pl)) {
             Afk.doAFK(pl);
         }
     }

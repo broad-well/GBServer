@@ -21,7 +21,7 @@ public class Heal implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(Sandbox.check(sender)) return true;
-        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender) && Survival.checkSurvival(sender)) {
             Player p = (Player) sender;
             /*if (args.length > 0 || args[0].equals("draw")){
                 TextRender.render(StandardFonts.CUBE_GOTHIC, args[1].toUpperCase(), p.getLocation(), Material.STAINED_CLAY, TextRender.EAST);

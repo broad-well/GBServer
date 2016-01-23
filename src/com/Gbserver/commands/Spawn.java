@@ -17,7 +17,7 @@ public class Spawn implements CommandExecutor {
     @EventHandler
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(Sandbox.check(sender)) return true;
-        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender)) {
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender) && Survival.checkSurvival(sender)) {
             Player player = (Player) sender;
             player.teleport(new Location(Bukkit.getWorld("world"), 145, 119, 413));
             player.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully teleported " + player.getName() + " to the spawn."));

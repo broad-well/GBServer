@@ -25,8 +25,8 @@ public class BlockData implements Listener{
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent bpe){
-        if(ConfigManager.smartGet("Preferences").get("BlockChangeLogging") != null &&
-                ConfigManager.smartGet("Preferences").get("BlockChangeLogging").equalsIgnoreCase("true")) {
+        if(ConfigManager.smartGet("Preferences").get("BlockChangeLogging").equalsIgnoreCase("true") || ConfigManager.smartGet("Newbies").keySet().contains(
+                Identity.serializeIdentity(bpe.getPlayer()))) {
             HashMap<String, String> properties = new HashMap<>();
             properties.put("Initiator", Identity.serializeIdentity(bpe.getPlayer()));
             properties.put("Timestamp", new Date().toString());
@@ -38,8 +38,8 @@ public class BlockData implements Listener{
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent bbe){
-        if(ConfigManager.smartGet("Preferences").get("BlockChangeLogging") != null &&
-                ConfigManager.smartGet("Preferences").get("BlockChangeLogging").equalsIgnoreCase("true")) {
+        if(ConfigManager.smartGet("Preferences").get("BlockChangeLogging").equalsIgnoreCase("true") || ConfigManager.smartGet("Newbies").keySet().contains(
+                Identity.serializeIdentity(bbe.getPlayer()))) {
             HashMap<String, String> properties = new HashMap<>();
             properties.put("Initiator", Identity.serializeIdentity(bbe.getPlayer()));
             properties.put("Timestamp", new Date().toString());

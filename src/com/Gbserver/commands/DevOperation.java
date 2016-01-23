@@ -59,6 +59,7 @@ public class DevOperation implements CommandExecutor {
                         "AlterPreferences, " +
                         "ListPreferences, " +
                         "ProtectWorldToggle, " +
+                        "ToggleNewbie, " +
                         "ScheduleExecute, " +
                         "ListProtection, " +
                         "GetName. " +
@@ -181,6 +182,17 @@ public class DevOperation implements CommandExecutor {
                     sender.sendMessage(toDelete.toString());
                     EnhancedPlayer.cache.removeAll(toDelete);
 
+                    break;
+                case "ToggleNewbie":
+                    if(args.length == 1) return true;
+                    String target = Identity.serializeIdentity(Bukkit.getOfflinePlayer(args[1]));
+                    if(ConfigManager.smartGet("Newbies").keySet().contains(target)){
+                        ConfigManager.entries.get("Newbies").remove(target);
+                        sender.sendMessage("Player removed from focus.");
+                    }else{
+                        ConfigManager.entries.get("Newbies").put(target, "");
+                        sender.sendMessage("Player added to focus.");
+                    }
                     break;
                 case "Build":
                     ProtectionListener.isDisabled = !ProtectionListener.isDisabled;
@@ -380,12 +392,12 @@ public class DevOperation implements CommandExecutor {
                         sender.sendMessage("Invalid args length");
                         return true;
                     }
-                    UUID target = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
-                    if (Sandbox.contents.contains(target)) {
-                        Sandbox.contents.remove(target);
+                    UUID targ = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+                    if (Sandbox.contents.contains(targ)) {
+                        Sandbox.contents.remove(targ);
                         sender.sendMessage("Player removed");
                     } else {
-                        Sandbox.contents.add(target);
+                        Sandbox.contents.add(targ);
                         sender.sendMessage("Player added");
                     }
                     break;

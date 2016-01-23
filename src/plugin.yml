@@ -1,5 +1,5 @@
 main: com.Gbserver.Main
-version: 2.42
+version: 5.47
 name: Broadwell Server Plugin
 depend: [LibsDisguises, ProtocolLib]
 
@@ -93,6 +93,7 @@ commands:
     usage: 
   home:
     description: Save your home.
+    aliases: [sethome]
   say:
     description: Disabled command.
   ignore:
@@ -109,7 +110,6 @@ commands:
     aliases: [a]
   devops:
     description: Developer Operations (limited permissions)
-    usage: /devops <option> <value value>
   group:
     description: Group chat (party)
     aliases: [g]
@@ -132,4 +132,13 @@ commands:
   marry:
     description: <3
   jail:
-    descipriont: Prison.
+    description: Prison.
+  day:
+    description: Set time to day.
+  night:
+    description: Set time to night.
+  spec:
+    description: Spectate a specified player.
+  survival:
+    description: Toggle Survival mode.
+    aliases: [surv]

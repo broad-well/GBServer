@@ -101,6 +101,10 @@ public class Main extends JavaPlugin {
         getCommand("weather").setExecutor(new Weather());
         getCommand("marry").setExecutor(new Marriage());
         getCommand("jail").setExecutor(new Jail());
+        getCommand("night").setExecutor(new Daytime());
+        getCommand("day").setExecutor(new Daytime());
+        getCommand("spec").setExecutor(new Spectate());
+        getCommand("survival").setExecutor(new Survival());
 
         //Register events.
         if (onEvent)
@@ -110,6 +114,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
         getServer().getPluginManager().registerEvents(new Reaction(), this);
+        getServer().getPluginManager().registerEvents(new SandboxListener(), this);
         getServer().getPluginManager().registerEvents(new CTFListener(), this);
         getServer().getPluginManager().registerEvents(new RunnerListener(), this);
         getServer().getPluginManager().registerEvents(new LobbyListener(), this);

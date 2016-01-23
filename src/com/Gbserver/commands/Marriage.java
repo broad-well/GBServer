@@ -37,6 +37,10 @@ public class Marriage implements CommandExecutor{
                 }
                 break;
             case "create":
+                if(Preferences.get().get("MarriageReadOnly").equals("true")){
+                    ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Marriage records are read-only right now.");
+                    return true;
+                }
                 if(args.length < 3){
                     displayUsage(sender);
                 }else{
@@ -50,6 +54,10 @@ public class Marriage implements CommandExecutor{
                 }
                 break;
             case "delete":
+                if(Preferences.get().get("MarriageReadOnly").equals("true")){
+                    ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Marriage records are read-only right now.");
+                    return true;
+                }
                 if(args.length < 2){
                     displayUsage(sender);
                 }else {

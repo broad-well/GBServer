@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Afk implements CommandExecutor {
@@ -21,7 +22,7 @@ public class Afk implements CommandExecutor {
 
     private HelpTable ht = new HelpTable("/isafk <Player to query>", "isAFK is used to query if a player has flagged AFK.", "", "isafk");
 
-    public static List<Player> afkList = new ArrayList<>();
+    public static HashMap<Player, Integer> afkList = new HashMap<>();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(Sandbox.check(sender)) return true;
@@ -36,7 +37,7 @@ public class Afk implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if(target != null) {
                     ChatWriter.writeTo(sender, ChatWriterType.COMMAND, ChatColor.GRAY + target.getName() +
-                            (afkList.contains(target) ? " is AFK." : " is not AFK."));
+                            (afkList.keySet().contains(target) ? " is AFK." : " is not AFK."));
                 }else{
                     ChatWriter.writeTo(sender, ChatWriterType.ERROR, "I cannot find this player!");
                 }
@@ -46,11 +47,24 @@ public class Afk implements CommandExecutor {
         return true;
     }
 
-    public static void doAFK(Player target) {
-        if (!afkList.contains(target)) {
-            afkList.add(target);
+    public static void doAFK(final Player target) {
+        if (!afkList.keySet().contains(target)) {
+            int id = Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable(){
+                @Override
+                public void run() {
+                    try{
+                    if(afkList.keySet().contains(target)){
+                        afkList.remove(target);
+                        target.kickPlayer("You have been AFK removed.");
+                    }
+                }catch(Exception e){}
+
+                }
+            }, 20 * 60 * 20);
+            afkList.put(target, id);
             ChatWriter.write(ChatWriterType.SERVER, target.getName() + " is now AFK.");
         } else {
+            Bukkit.getScheduler().cancelTask(afkList.get(target));
             afkList.remove(target);
             ChatWriter.write(ChatWriterType.SERVER, target.getName() + " is no longer AFK.");
         }

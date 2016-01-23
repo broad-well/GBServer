@@ -1,8 +1,7 @@
 package com.Gbserver.commands;
 
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.Sandbox;
+import com.Gbserver.Utilities;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -12,42 +11,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Collection;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 // BUGGED!
 public class SaveMoment implements CommandExecutor {
 
+    public static File file = ConfigManager.getPathInsidePluginFolder("playerdata.yml").toFile();
     //TYPE
-    public static Collection<PlayerData> saved = new LinkedList<>();
-
-    public class PlayerData {
-        public Player player;
-        public Location location;
-        public ItemStack[] inventory;
-        public ItemStack[] armor;
-        public GameMode gamemode;
-        public double health;
-
-
-        public PlayerData(Player p, Location l, ItemStack[] i, double h, ItemStack[] a, GameMode gm) {
-            player = p;
-            location = l;
-            inventory = i;
-            health = h;
-            armor = a;
-            gamemode = gm;
-            saved.add(this);
-        }
-
-        public void close() throws Throwable {
-            saved.remove(this);
-            location = null;
-            inventory = null;
-            health = 0;
-            finalize();
-        }
-    }
+    public static HashMap<String, HashMap<String, Object>> saved = new HashMap<>();
 
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -58,9 +35,8 @@ public class SaveMoment implements CommandExecutor {
                 return false;
             }
             Player p = Bukkit.getServer().getPlayer(args[0]);
-            new PlayerData(p, p.getLocation(), p.getInventory().getContents(), p.getHealth(),
-                    p.getInventory().getArmorContents(), p.getGameMode());
-            sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully saved " + p.getName() + "'s Inventory, Location, and Active Potion Effects."));
+            saved.put(p.getName(), newHashMap(p));
+            sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully saved " + p.getName() + "'s Inventory, Location, Health, Armor, and Gamemode."));
             return true;
         }
         if (label.equalsIgnoreCase("rest")) {
@@ -69,29 +45,67 @@ public class SaveMoment implements CommandExecutor {
                 return false;
             }
             Player p = Bukkit.getServer().getPlayer(args[0]);
-            for (PlayerData pd : saved) {
-                if (pd.player == p) {
-                    //this matches
-                    p.teleport(pd.location);
-                    p.getInventory().setContents(pd.inventory);
-                    p.setHealth(pd.health);
-                    p.getInventory().setArmorContents(pd.armor);
-                    p.setGameMode(pd.gamemode);
-                    sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully restored " + p.getName() + "'s Inventory, Location, and Active Potion Effects."));
-                    try {
-                        pd.close();
-                    } catch (Throwable e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    saved.remove(pd);
-                    return true;
+            if(saved.get(p.getName()) == null) {
+                p.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You never saved your conditions."));
+            }else{
+                HashMap<String, Object> cr = saved.get(p.getName());
+                Location loc = Utilities.deserializeLocation((String) cr.get("location"));
+                ItemStack[] contents = new ItemStack[((HashMap[]) cr.get("inventory")).length];
+                for(int i = 0; i < contents.length; i++){
+                    contents[i] = Utilities.deserialize(((HashMap[]) cr.get("inventory"))[i]);
                 }
+                double health = Double.parseDouble((String) cr.get("health"));
+                ItemStack[] armorContents = new ItemStack[((HashMap[]) cr.get("armor")).length];
+                for(int i = 0; i < contents.length; i++){
+                    armorContents[i] = Utilities.deserialize(((HashMap[]) cr.get("armor"))[i]);
+                }
+                GameMode gm = GameMode.valueOf((String) cr.get("gamemode"));
+                p.teleport(loc);
+                p.getInventory().setContents(contents);
+                p.setHealth(health);
+                p.getInventory().setArmorContents(armorContents);
+                p.setGameMode(gm);
+                sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully restored" + p.getName() + "'s Inventory, Location, Health, Armor, and Gamemode."));
             }
-            sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You never saved your conditions."));
 
 
         }
-        return false;
+        return true;
     }
+
+    private static HashMap<String, Object> newHashMap(Player p){
+        HashMap<String, Object> build = new HashMap<>();
+        build.put("location", Utilities.serializeLocation(p.getLocation()));
+        HashMap[] items = new HashMap[p.getInventory().getContents().length];
+        for(int i = 0; i < items.length; i++){
+            items[i] = Utilities.serialize(p.getInventory().getContents()[i]);
+        }
+        build.put("inventory", items);
+        build.put("health", String.valueOf(p.getHealth()));
+        HashMap[] armorItems = new HashMap[p.getInventory().getArmorContents().length];
+        for(int i = 0; i < armorItems.length; i++){
+            armorItems[i] = Utilities.serialize(p.getInventory().getArmorContents()[i]);
+        }
+        build.put("armor", armorItems);
+        build.put("gamemode", p.getGameMode().toString());
+        return build;
+    }
+
+    public static void output() throws IOException {
+        FileWriter fw = new FileWriter(file);
+        SwiftDumpOptions.BLOCK_STYLE().dump(saved, fw);
+        fw.flush();
+        fw.close();
+    }
+
+    public static void input() throws IOException {
+        FileReader fr = new FileReader(file);
+        Object obj = SwiftDumpOptions.BLOCK_STYLE().load(fr);
+        fr.close();
+        if(obj instanceof HashMap){
+            saved = (HashMap<String, HashMap<String, Object>>) obj;
+        }
+    }
+
+
 }

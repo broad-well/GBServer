@@ -2,6 +2,7 @@ package com.Gbserver.variables;
 
 import com.Gbserver.commands.Jail;
 import com.Gbserver.commands.Mute;
+import com.Gbserver.commands.SaveMoment;
 import com.Gbserver.commands.Warp;
 import com.Gbserver.listener.BlockData;
 import com.Gbserver.listener.ChatFormatter;
@@ -25,6 +26,7 @@ public class ConfigLoader {
             BlockData.input();
             Mute.inport();
             Jail.input();
+            SaveMoment.input();
             Couple.input();
             FileParser.getInstance().updateBuffer();
             IPCollector.inTake();
@@ -47,6 +49,7 @@ public class ConfigLoader {
             BlockData.output();
             Mute.export();
             Jail.output();
+            SaveMoment.output();
             Couple.output();
             FileParser.getInstance().saveBuffer();
             IPCollector.outFlush();

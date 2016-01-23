@@ -25,6 +25,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -233,5 +234,27 @@ public class Utilities {
             Integer.parseInt(str);
             return true;
         }catch(Exception e){return false;}
+    }
+
+    public static HashMap<String, String> serialize(ItemStack is){
+        HashMap<String, String> output = new HashMap<>();
+        output.put("material", String.valueOf(is.getType().getId()));
+        output.put("amount", String.valueOf(is.getAmount()));
+        output.put("durability", String.valueOf(is.getDurability()));
+        output.put("itemName", is.getItemMeta().getDisplayName());
+        return output;
+    }
+
+    public static ItemStack deserialize(HashMap<String, String> hm){
+        if(hm.keySet().contains("material") &&
+                hm.keySet().contains("durability")){
+            ItemStack is = new ItemStack(Material.getMaterial(Integer.parseInt(hm.get("material"))));
+            is.setAmount(Integer.parseInt(hm.get("amount")));
+            is.setDurability(Short.parseShort(hm.get("durability")));
+            ItemMeta im = is.getItemMeta();
+            im.setDisplayName(hm.get("itemName"));
+            is.setItemMeta(im);
+            return is;
+        }else return null;
     }
 }

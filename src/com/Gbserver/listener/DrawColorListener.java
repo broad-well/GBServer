@@ -42,7 +42,7 @@ public class DrawColorListener implements Listener {
                 && pie.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals("Leap Axe")) {
             if(!Main.onEvent) {
                 if (!l.contains(pie.getPlayer())) {
-                    pie.getPlayer().setVelocity(pie.getPlayer().getEyeLocation().getDirection().multiply(2));
+                    pie.getPlayer().setVelocity(pie.getPlayer().getEyeLocation().getDirection().multiply(1.8));
                     pie.getPlayer().playEffect(pie.getPlayer().getLocation(), Effect.BLAZE_SHOOT, 10);
                     l.add(pie.getPlayer());
                     Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {

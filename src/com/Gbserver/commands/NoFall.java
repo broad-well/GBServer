@@ -13,12 +13,11 @@ public class NoFall implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
         if(Sandbox.check(arg0)) return true;
-        if (arg2.equalsIgnoreCase("nofall")) {
+        if(Survival.checkSurvival(arg0)) {
             noFall = !noFall;
             arg0.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "You have toggled No falling damage: Now " + noFall));
-            return true;
         }
-        return false;
+        return true;
     }
 
 }

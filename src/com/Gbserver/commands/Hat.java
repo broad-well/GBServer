@@ -17,7 +17,7 @@ public class Hat implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(Sandbox.check(sender)) return true;
-        if (Utilities.validateSender(sender)) {
+        if (Utilities.validateSender(sender) && Utilities.validateGamePlay(sender) && Survival.checkSurvival(sender)) {
             Player p = (Player) sender;
             ItemStack is;
             if ((is = p.getItemInHand()).getType().isBlock()) {
