@@ -1,5 +1,5 @@
 main: com.Gbserver.Main
-version: 5.47
+version: 5.49
 name: Broadwell Server Plugin
 depend: [LibsDisguises, ProtocolLib]
 
@@ -142,3 +142,5 @@ commands:
   survival:
     description: Toggle Survival mode.
     aliases: [surv]
+  contractverify:
+    description: Have you read the contract yet?

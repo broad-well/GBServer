@@ -4,10 +4,7 @@ import com.Gbserver.commands.Jail;
 import com.Gbserver.commands.Mute;
 import com.Gbserver.commands.SaveMoment;
 import com.Gbserver.commands.Warp;
-import com.Gbserver.listener.BlockData;
-import com.Gbserver.listener.ChatFormatter;
-import com.Gbserver.listener.IPCollector;
-import com.Gbserver.listener.StatOnlineTime;
+import com.Gbserver.listener.*;
 import com.Gbserver.mail.FileParser;
 
 /**
@@ -27,6 +24,7 @@ public class ConfigLoader {
             Mute.inport();
             Jail.input();
             SaveMoment.input();
+            Birthday.input();
             Couple.input();
             FileParser.getInstance().updateBuffer();
             IPCollector.inTake();
@@ -50,6 +48,7 @@ public class ConfigLoader {
             Mute.export();
             Jail.output();
             SaveMoment.output();
+            Birthday.output();
             Couple.output();
             FileParser.getInstance().saveBuffer();
             IPCollector.outFlush();

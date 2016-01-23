@@ -105,6 +105,7 @@ public class Main extends JavaPlugin {
         getCommand("day").setExecutor(new Daytime());
         getCommand("spec").setExecutor(new Spectate());
         getCommand("survival").setExecutor(new Survival());
+        getCommand("contractverify").setExecutor(new ContractVerify());
 
         //Register events.
         if (onEvent)
@@ -123,6 +124,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MuteListener(), this);
         getServer().getPluginManager().registerEvents(new SitListener(), this);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
+        getServer().getPluginManager().registerEvents(new Birthday(), this);
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
         getServer().getPluginManager().registerEvents(new TFListeners(), this);
         getServer().getPluginManager().registerEvents(new HealListener(), this);

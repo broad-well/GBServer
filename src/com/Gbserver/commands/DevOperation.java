@@ -1,6 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
+import com.Gbserver.listener.Birthday;
 import com.Gbserver.listener.ChatFormatter;
 import com.Gbserver.listener.ProtectionListener;
 import com.Gbserver.listener.Rank;
@@ -17,10 +18,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.RunnableFuture;
 
 public class DevOperation implements CommandExecutor {
@@ -59,6 +57,7 @@ public class DevOperation implements CommandExecutor {
                         "AlterPreferences, " +
                         "ListPreferences, " +
                         "ProtectWorldToggle, " +
+                        "Birthday, " +
                         "ToggleNewbie, " +
                         "ScheduleExecute, " +
                         "ListProtection, " +
@@ -256,6 +255,33 @@ public class DevOperation implements CommandExecutor {
 
                 case "Serialize.Location":
                     if (!(sender instanceof Player)) return true;
+                    break;
+                case "Birthday":
+                    if(args.length == 1) return true;
+                    switch(args[1]){
+                        case "List":
+                            for(Map.Entry<String, List<Integer>> entry : Birthday.birthData.entrySet()){
+                                sender.sendMessage(Identity.deserializeIdentity(entry.getKey()).getName() + " -> M:" + (entry.getValue().get(0) + 1) +
+                                        ", DoM:" + entry.getValue().get(1));
+                            }
+                            break;
+                        case "Add":
+                            //Syntax: /devops Birthday Add <name> <month from 0> <day from 1>
+                            if(args.length != 5) return true;
+                            Birthday.birthData.put(
+                                    Identity.serializeIdentity(Bukkit.getOfflinePlayer(args[2])),
+                                    Arrays.asList(Integer.parseInt(args[3])-1, Integer.parseInt(args[4]))
+                            );
+                            sender.sendMessage("Finished");
+                            break;
+                        case "Remove":
+                            if(args.length != 3) return true;
+                            Birthday.birthData.remove(Identity.serializeIdentity(Bukkit.getOfflinePlayer(args[2])));
+                            sender.sendMessage("Finished");
+                            break;
+                        default:
+                            sender.sendMessage("What is " + args[1] + "?");
+                    }
                     break;
                 case "FlushConfigManager":
                     ConfigManager.output();

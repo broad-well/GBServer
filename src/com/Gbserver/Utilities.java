@@ -237,8 +237,9 @@ public class Utilities {
     }
 
     public static HashMap<String, String> serialize(ItemStack is){
+        if(is == null) return null;
         HashMap<String, String> output = new HashMap<>();
-        output.put("material", String.valueOf(is.getType().getId()));
+        output.put("material", String.valueOf(is.getTypeId()));
         output.put("amount", String.valueOf(is.getAmount()));
         output.put("durability", String.valueOf(is.getDurability()));
         output.put("itemName", is.getItemMeta().getDisplayName());
@@ -246,6 +247,7 @@ public class Utilities {
     }
 
     public static ItemStack deserialize(HashMap<String, String> hm){
+        if(hm == null) return null;
         if(hm.keySet().contains("material") &&
                 hm.keySet().contains("durability")){
             ItemStack is = new ItemStack(Material.getMaterial(Integer.parseInt(hm.get("material"))));
