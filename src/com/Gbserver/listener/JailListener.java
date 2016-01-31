@@ -5,8 +5,11 @@ import com.Gbserver.variables.CommandProfile;
 import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.DebugLevel;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
@@ -33,10 +36,17 @@ public class JailListener implements Listener{
             pcpe.setCancelled(true);
             pcpe.getPlayer().sendMessage(ChatColor.GOLD + "Prisoners are not allowed to perform commands.");
         }
-        dl.debugWrite("ProposedCommand: " + pcpe.getMessage() + ", algorithm-extracted label " + pcpe.getMessage().split(" ")[0].substring(1));
         if(CommandProfile.get(pcpe.getMessage().split(" ")[0].substring(1)).getProperty("enabled").equals("false")){
             pcpe.setCancelled(true);
             pcpe.getPlayer().sendMessage(ChatColor.RED + "This command has been disabled by an administrator.");
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent edee){
+        if(edee.getDamager() instanceof Player && Jail.prisoners.contains((edee.getDamager()))){
+            edee.setCancelled(true);
+            edee.getDamager().sendMessage(ChatColor.GOLD + "Prisoners are not allowed to damage entities.");
         }
     }
 
