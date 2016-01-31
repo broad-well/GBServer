@@ -22,8 +22,9 @@ public class SelScript implements CommandExecutor {
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, ChatColor.BOLD + "Help for using SelectorScript");
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "SelectorScript is a powerful scripting language for selecting online " +
                     "players in a server. It is similar to built-in player selectors like " + ChatColor.YELLOW + "@a, @e, @p, and @r" +
-                    ChatColor.GRAY + ". However, instead of \"@\", in SelectorScript you start with \"%\", e.g."  + ChatColor.ITALIC
-                            + "%all" + ChatColor.GRAY + ".");
+                    ChatColor.GRAY + ". However, instead of \"" + ChatColor.YELLOW + "@" + ChatColor.GRAY +
+                    "\", in SelectorScript you start with \"" + ChatColor.YELLOW + "%" + ChatColor.GRAY + "\", e.g."  + ChatColor.ITALIC
+                            + ChatColor.YELLOW + "%all" + ChatColor.GRAY + ".");
             ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "There are several options available." + ChatColor.YELLOW +
                     " \"all\", \"random\", \"me\", and the name of a player. " + ChatColor.GRAY +
                     "All options (except \"all\") supports \"!\" before the option, " +

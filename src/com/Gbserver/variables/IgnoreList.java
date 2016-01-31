@@ -3,50 +3,47 @@ package com.Gbserver.variables;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class IgnoreList {
-    public static List<IgnoreList> list = new LinkedList<>();
+    public static HashMap<OfflinePlayer, List<OfflinePlayer>> list = new HashMap<>();
 
-    public static IgnoreList getIgnoreList(Player p) {
-        for (IgnoreList il : list) {
-            if (il.target.equals(p)) {
-                return il;
-            }
-        }
-        return new IgnoreList(p);
+    public static List<OfflinePlayer> smartGet(OfflinePlayer p){
+        return list.get(p) == null ?
+                new LinkedList<OfflinePlayer>() :
+                list.get(p);
+    }
+
+    public static void ignore(OfflinePlayer p, OfflinePlayer origin){
+        List<OfflinePlayer> li = list.get(origin);
+        if(li == null) li = new LinkedList<>();
+        li.add(p);
+        list.put(origin, li);
+    }
+
+    public static void unignore(OfflinePlayer p, OfflinePlayer origin){
+        List<OfflinePlayer> li = list.get(origin);
+        if(li == null) li = new LinkedList<>();
+        li.remove(p);
+        list.put(origin, li);
+    }
+
+    public static boolean isIgnored(OfflinePlayer p, OfflinePlayer origin){
+        List<OfflinePlayer> li = list.get(origin);
+        if(li == null) li = new LinkedList<>();
+        return li.contains(p);
     }
     //--------------------
-
-    protected Player target;
-    private Collection<OfflinePlayer> ignored = new LinkedList<>();
-
-    public IgnoreList(Player p) {
-        target = p;
-        list.add(this);
+    public static void output() {
+        for(Map.Entry<OfflinePlayer, List<OfflinePlayer>> entry : list.entrySet()){
+            EnhancedPlayer.getEnhanced(entry.getKey()).setIgnoreList(entry.getValue());
+        }
     }
 
-    public void addIgnoredPlayer(OfflinePlayer p) {
-        ignored.add(p);
-    }
-
-    public void removeIgnoredPlayer(OfflinePlayer p) {
-        ignored.remove(p);
-    }
-
-    public Collection<OfflinePlayer> getIgnoredPlayers() {
-        return ignored;
-    }
-
-    public boolean isIgnored(OfflinePlayer p) {
-        return ignored.contains(p);
-    }
-
-    public void close() {
-        list.remove(this);
-        ignored = null;
-        target = null;
+    public static void input() {
+        list.clear();
+        for(EnhancedPlayer ep : EnhancedPlayer.cache){
+            list.put(ep.toPlayer(), ep.getIgnoreList());
+        }
     }
 }

@@ -6,6 +6,7 @@ import com.Gbserver.commands.SaveMoment;
 import com.Gbserver.commands.Warp;
 import com.Gbserver.listener.*;
 import com.Gbserver.mail.FileParser;
+import org.bukkit.command.Command;
 
 /**
  * Created by michael on 1/16/16.
@@ -23,9 +24,12 @@ public class ConfigLoader {
             BlockData.input();
             Mute.inport();
             Jail.input();
+            IgnoreList.input();
             SaveMoment.input();
-            Birthday.input();
+            BanDB.input();
             Couple.input();
+            Serializer.input();
+            CommandProfile.input();
             FileParser.getInstance().updateBuffer();
             IPCollector.inTake();
             Territory.Import();
@@ -47,9 +51,12 @@ public class ConfigLoader {
             BlockData.output();
             Mute.export();
             Jail.output();
+            IgnoreList.output();
             SaveMoment.output();
-            Birthday.output();
+            BanDB.output();
             Couple.output();
+            Serializer.output();
+            CommandProfile.output();
             FileParser.getInstance().saveBuffer();
             IPCollector.outFlush();
             Territory.Export();

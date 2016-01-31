@@ -43,7 +43,7 @@ public class ChatFormatter implements Listener {
                         for (Player p : c.getPlayersInChat()) {
                             p.sendMessage(ChatColor.BOLD + "TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
                         }
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.BOLD + "LIMITED TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.BOLD + "TEAM " + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + message);
                         return;
                     } else {
                         ChatWriter.writeTo(pce.getPlayer(), ChatWriterType.ERROR, "You are not in any team right now.");
@@ -54,7 +54,7 @@ public class ChatFormatter implements Listener {
                     pce.setCancelled(true);
                     String output = ChatColor.BLUE + "j" + ChatColor.GREEN + "r" + ChatColor.RED + "m" + ChatColor.AQUA + "a" + ChatColor.GOLD + "n" + ChatColor.DARK_PURPLE + "n" + ChatColor.YELLOW + "100" + ChatColor.RESET + " " + pce.getMessage();
                     for (Player p : Bukkit.getOnlinePlayers()) {
-                        if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
+                        if (!EnhancedPlayer.getEnhanced(pce.getPlayer()).isIgnoring(p)) {
                             p.sendMessage(output);
                         }
                     }
@@ -65,7 +65,7 @@ public class ChatFormatter implements Listener {
                 if (!(setCancelled.contains(pce.getPlayer()))) {
                     //pce.setFormat(ChatColor.DARK_GRAY + "%s " + ChatColor.RESET + "%s");
                     for (Player p : Bukkit.getOnlinePlayers()) {
-                        if (!(IgnoreList.getIgnoreList(p).isIgnored(pce.getPlayer()))) {
+                        if (!EnhancedPlayer.getEnhanced(pce.getPlayer()).isIgnoring(p)) {
                             p.sendMessage(generateTag(pce.getPlayer(), true) + ChatColor.GRAY + pce.getPlayer().getName() + " " + ChatColor.RESET + pce.getMessage());
                         }
                     }

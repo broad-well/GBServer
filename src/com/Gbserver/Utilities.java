@@ -183,6 +183,7 @@ public class Utilities {
         for(Object obj : array){
             output += obj != array[array.length-1] ? obj.toString() + ",," : obj.toString();
         }
+        output += "]";
         return output;
     }
     public static String[] deserializeArray(String serialized){
@@ -242,7 +243,6 @@ public class Utilities {
         output.put("material", String.valueOf(is.getTypeId()));
         output.put("amount", String.valueOf(is.getAmount()));
         output.put("durability", String.valueOf(is.getDurability()));
-        output.put("itemName", is.getItemMeta().getDisplayName());
         return output;
     }
 
@@ -253,9 +253,6 @@ public class Utilities {
             ItemStack is = new ItemStack(Material.getMaterial(Integer.parseInt(hm.get("material"))));
             is.setAmount(Integer.parseInt(hm.get("amount")));
             is.setDurability(Short.parseShort(hm.get("durability")));
-            ItemMeta im = is.getItemMeta();
-            im.setDisplayName(hm.get("itemName"));
-            is.setItemMeta(im);
             return is;
         }else return null;
     }

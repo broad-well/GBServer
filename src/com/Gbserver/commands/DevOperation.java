@@ -1,10 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.listener.Birthday;
-import com.Gbserver.listener.ChatFormatter;
-import com.Gbserver.listener.ProtectionListener;
-import com.Gbserver.listener.Rank;
+import com.Gbserver.listener.*;
 import com.Gbserver.mail.FileParser;
 import com.Gbserver.variables.*;
 import com.Gbserver.variables.PermissionManager.Permissions;
@@ -22,6 +19,7 @@ import java.util.*;
 import java.util.concurrent.RunnableFuture;
 
 public class DevOperation implements CommandExecutor {
+    private static final DebugLevel dl = new DebugLevel(2, "DevOps Command");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -59,8 +57,12 @@ public class DevOperation implements CommandExecutor {
                         "ProtectWorldToggle, " +
                         "Birthday, " +
                         "ToggleNewbie, " +
+                        "CommandProfiler, " +
                         "ScheduleExecute, " +
                         "ListProtection, " +
+                        "Uptime, " +
+                        "Serialize, " +
+                        "ConfigManagerOperation, " +
                         "GetName. " +
                         "Case sensitive.");
                 return true;
@@ -193,12 +195,59 @@ public class DevOperation implements CommandExecutor {
                         sender.sendMessage("Player added to focus.");
                     }
                     break;
+                case "ToggleCommandEnabled":
+                    break;
                 case "Build":
                     ProtectionListener.isDisabled = !ProtectionListener.isDisabled;
                     break;
                 case "ListTerritories":
                     for (Territory t : Territory.activeTerritories)
                         sender.sendMessage(t.getName() + " - Owned by: " + ChatColor.YELLOW + Bukkit.getOfflinePlayer(t.getOwner()).getName());
+                    break;
+                case "CommandProfiler":
+                    //Usage: /devops CommandProfiler <cmdLabel> <enabled/?> <value>
+                    if(args.length < 4) return true;
+                    dl.debugWrite("Command profile change: " + "Label: " + args[1] + ", Key: " + args[2] + ", ProposedValue: " + args[3]);
+                    if(!CommandProfile.data.containsKey(args[1])) CommandProfile.data.put(args[1], new HashMap<String, String>());
+                    CommandProfile.data.get(args[1]).put(args[2], args[3]);
+                    sender.sendMessage("Changed");
+                    break;
+                case "ConfigManagerOperation":
+                    /*Usage: /devops ConfigManagerOperation Put <key> <insideKey> <insideValue>
+                    /devops ConfigManagerOperation List <key>
+                    /devops ConfigManagerOperation Get <key> <insideKey>
+                     */
+                    if(args.length < 3) break;
+                    switch(args[1]){
+                        case "Put":
+                            if(args.length < 5) return true;
+                            dl.debugWrite("ConfigManager insert in progress: Category: " +
+                                    args[2] + ", Key: " + args[3] + ", Value: " + args[4] );
+                            ConfigManager.smartGet(args[2]); //Make sure it exists.
+                            ConfigManager.entries.get(args[2]).put(args[3], args[4]);
+                            dl.debugWrite("ConfigManager insert complete");
+                            sender.sendMessage("Inserted");
+                            break;
+                        case "List":
+                            //args[2] is category
+                            for(Map.Entry<String, String> entry : ConfigManager.smartGet(args[2]).entrySet()){
+                                sender.sendMessage(entry.getKey() + " : " + entry.getValue());
+                            }
+                            break;
+                        case "Get":
+                            if(args.length < 4) return true;
+                            sender.sendMessage(ConfigManager.smartGet(args[2]).get(args[3]));
+                            break;
+                        case "Remove":
+                            if(args.length < 4) return true;
+                            dl.debugWrite("ConfigManager removal in progress: Category " + args[2] + ", Key " + args[3]);
+                            ConfigManager.smartGet(args[2]).remove(args[3]);
+                            dl.debugWrite("ConfigManager removal complete");
+                            sender.sendMessage("Removed");
+                        default:
+                            sender.sendMessage("Bad Option: " + args[1]);
+                            break;
+                    }
                     break;
                 case "ProtectWorldToggle":
                     String perm = ConfigManager.smartGet("WorldProtect").get(Bukkit.getWorld(args[1]).getUID().toString());
@@ -217,8 +266,7 @@ public class DevOperation implements CommandExecutor {
                     switch (args[1]) {
                         case "NewConfigs":
                             if (args.length < 4) return true;
-                            EnhancedPlayer ep = null;
-                            ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[3]));
+                            EnhancedPlayer ep = EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[3]));
 
                             if (ep == null) {
                                 sender
@@ -253,30 +301,61 @@ public class DevOperation implements CommandExecutor {
                             sender.sendMessage("Unknown option.");
                     }
 
-                case "Serialize.Location":
-                    if (!(sender instanceof Player)) return true;
+                case "Serialize":
+                    sender.sendMessage(Serializer.serialize(Bukkit.getWorld("world").getSpawnLocation()));
+                    break;
+                case "Uptime":
+                    if(args.length != 2) return true;
+                    long lastLogin = 0;
+                    long sumTime = 0;
+                    List<String> responseStack = new LinkedList<>();
+                    boolean loggedIn = false;
+                    for(StatOnlineTime.LogEntry entry : StatOnlineTime.cache.get(Bukkit.getOfflinePlayer(args[1]).getUniqueId())){
+                        if(entry.isLogIn == !loggedIn){ //If IsCompatible
+                            if(entry.isLogIn){
+                                lastLogin = entry.timeframe.getTime();
+                                if(loggedIn){
+                                    responseStack.add("Server bad operation. Skipping current LogEntry.");
+                                    continue;
+                                }
+                                loggedIn = true;
+                            }else{
+                                sumTime += (entry.timeframe.getTime() - lastLogin) / 1000;
+                                responseStack.add("Successfully added " + ((entry.timeframe.getTime() - lastLogin) / 1000) + " seconds to the sumTime stack, date " +
+                                        StatOnlineTime.LogEntry.parser.format(entry.timeframe));
+                                loggedIn = false;
+                            }
+                        }else{
+                            responseStack.add("Unmatched login/logout found. This is likely because of a faulty save. Time " +
+                                    StatOnlineTime.LogEntry.parser.format(entry.timeframe));
+                        }
+                    }
+                    if(Preferences.get().get("Debug").equals("true")) {
+                        sender.sendMessage(ChatColor.AQUA + "Calculation finished. Debug logs below");
+                        sender.sendMessage(responseStack.toArray(new String[1]));
+                    }
+                    sender.sendMessage(args[1] + " has been online for " + sumTime + " seconds.");
                     break;
                 case "Birthday":
                     if(args.length == 1) return true;
                     switch(args[1]){
                         case "List":
-                            for(Map.Entry<String, List<Integer>> entry : Birthday.birthData.entrySet()){
-                                sender.sendMessage(Identity.deserializeIdentity(entry.getKey()).getName() + " -> M:" + (entry.getValue().get(0) + 1) +
-                                        ", DoM:" + entry.getValue().get(1));
+                            for(EnhancedPlayer ep : EnhancedPlayer.cache){
+                                if(ep.getBirthday() != null){
+                                    sender.sendMessage(ep.toPlayer().getName() + " : " + (ep.getBirthday()[0] + 1) + "-" + ep.getBirthday()[1]);
+                                }
                             }
                             break;
                         case "Add":
                             //Syntax: /devops Birthday Add <name> <month from 0> <day from 1>
                             if(args.length != 5) return true;
-                            Birthday.birthData.put(
-                                    Identity.serializeIdentity(Bukkit.getOfflinePlayer(args[2])),
-                                    Arrays.asList(Integer.parseInt(args[3])-1, Integer.parseInt(args[4]))
-                            );
+                            EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[2])).setBirthday
+                                    (Integer.parseInt(args[3])-1, Integer.parseInt(args[4]));
                             sender.sendMessage("Finished");
                             break;
                         case "Remove":
                             if(args.length != 3) return true;
-                            Birthday.birthData.remove(Identity.serializeIdentity(Bukkit.getOfflinePlayer(args[2])));
+                            EnhancedPlayer.getEnhanced(Bukkit.getOfflinePlayer(args[2])).setBirthday(null);
                             sender.sendMessage("Finished");
                             break;
                         default:

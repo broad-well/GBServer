@@ -20,7 +20,6 @@ public class LoginTagListener implements Listener {
         pje.getPlayer().setCustomName(ChatFormatter.generateTag(pje.getPlayer(), false));
         pje.getPlayer().setCustomNameVisible(true);
         pje.getPlayer().setPlayerListName(ChatFormatter.generateTag(pje.getPlayer(), false));
-        new IgnoreList(pje.getPlayer());
     }
 
     @EventHandler
@@ -43,7 +42,6 @@ public class LoginTagListener implements Listener {
             return;
         }
         pqe.setQuitMessage(ChatWriter.getMessage(ChatWriterType.QUIT, pqe.getPlayer().getName() + " has left."));
-        IgnoreList.getIgnoreList(pqe.getPlayer()).close();
         if (Bacon.hasPlayer(pqe.getPlayer())) {
             Bacon.players.remove(BaconPlayer.getByHandle(pqe.getPlayer()));
         }

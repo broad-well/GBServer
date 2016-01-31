@@ -106,10 +106,14 @@ public class Main extends JavaPlugin {
         getCommand("spec").setExecutor(new Spectate());
         getCommand("survival").setExecutor(new Survival());
         getCommand("contractverify").setExecutor(new ContractVerify());
+        getCommand("uptime").setExecutor(new Uptime());
 
         //Register events.
         if (onEvent)
             getServer().getPluginManager().registerEvents(new EventSpecials(), this);
+
+        getServer().getPluginManager().registerEvents(new JailListener(), this);
+        getServer().getPluginManager().registerEvents(new BanDB(), this);
         getServer().getPluginManager().registerEvents(new StatOnlineTime(), this);
         getServer().getPluginManager().registerEvents(new IPCollector(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
@@ -138,7 +142,6 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         getServer().getPluginManager().registerEvents(new BlockData(), this);
-        getServer().getPluginManager().registerEvents(new JailListener(), this);
         lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
         MailMan.setupMailChecker();
 

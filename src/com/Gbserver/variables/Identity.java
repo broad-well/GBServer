@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Identity {
     // Player{uuid:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX,name:XXXXXXXX}
     public static String serializeIdentity(OfflinePlayer p){
-        return "Player{uuid:" + p.getUniqueId() + ",name:" + p.getName() + "}";
+        return p == null ? "" : "Player{uuid:" + p.getUniqueId() + ",name:" + p.getName() + "}";
     }
 
     public static OfflinePlayer deserializeIdentity(String serialized){

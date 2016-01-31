@@ -212,7 +212,7 @@ public class TFListeners implements Listener {
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent phe) {
         if (TF.isRunning && phe.getEntity() instanceof Arrow
-                && TF.getAllPlayers().contains(((Player) phe.getEntity().getShooter()))) {
+                && TF.getAllPlayers().contains((phe.getEntity().getShooter()))) {
             Arrow a = (Arrow) phe.getEntity();
             Location l = a.getLocation();
             Vector v = a.getVelocity().normalize();

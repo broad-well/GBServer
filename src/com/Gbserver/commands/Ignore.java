@@ -19,9 +19,9 @@ public class Ignore implements CommandExecutor {
         if(Sandbox.check(sender)) return true;
         if (Utilities.validateSender(sender)) {
             if (args.length == 0) {
-                if (IgnoreList.getIgnoreList((Player) sender).getIgnoredPlayers().size() != 0) {
+                if (!EnhancedPlayer.getEnhanced((Player) sender).getIgnoreList().isEmpty()) {
                     ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "A list of players ignored by you:");
-                    for (OfflinePlayer op : IgnoreList.getIgnoreList((Player) sender).getIgnoredPlayers()) {
+                    for (OfflinePlayer op : EnhancedPlayer.getEnhanced((Player) sender).getIgnoreList()) {
                         ChatWriter.writeTo(sender, ChatWriterType.COMMAND, op.getName());
                     }
                 } else {
@@ -31,16 +31,16 @@ public class Ignore implements CommandExecutor {
             }
             OfflinePlayer p;
             p = Bukkit.getOfflinePlayer(args[0]);
-            if (p == null || IgnoreList.getIgnoreList((Player) sender) == null) {
+            if (p == null) {
                 ChatWriter.writeTo(sender, ChatWriterType.ERROR, "Null error. Either the player does not exist, or please rejoin.");
                 return true;
             }
-            IgnoreList il = IgnoreList.getIgnoreList((Player) sender);
-            if (il.isIgnored(p)) {
-                il.removeIgnoredPlayer(p);
+            EnhancedPlayer ep = EnhancedPlayer.getEnhanced((Player) sender);
+            if (ep.isIgnoring(p)) {
+                ep.getIgnoreList().remove(p);
                 ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "You have un-ignored " + ChatColor.YELLOW + p.getName() + "'s " + ChatColor.GRAY + "chat messages.");
             } else {
-                il.addIgnoredPlayer(p);
+                ep.getIgnoreList().add(p);
                 ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "You have begun to ignore " + ChatColor.YELLOW + p.getName() + "'s " + ChatColor.GRAY + "chat messages.");
             }
             return true;

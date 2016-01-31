@@ -17,15 +17,37 @@ import java.util.*;
 
 public class StatOnlineTime implements Listener{
     private static final File logFile = ConfigManager.getPathInsidePluginFolder("logOnOffs.dat").toFile();
-    private static HashMap<UUID, List<LogEntry>> cache = new HashMap<>();
+    public static HashMap<UUID, List<LogEntry>> cache = new HashMap<>();
     private static Yaml helper = new Yaml();
 
-    //Include ownership
-    public class ActHistory {
-        private UUID identity;
-        private HashMap<Date, Date> loginTimes;
+    public static class LogEntry {
+        public static final SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
+        public boolean isLogIn;
+        public Date timeframe;
 
+        public LogEntry(boolean in){
+            isLogIn = in;
+            timeframe = new Date();
+        }
+
+        public HashMap<String, String> toDump() {
+            HashMap<String, String> output = new HashMap<>();
+            output.put("LoggingIn?", Boolean.toString(isLogIn));
+            output.put("Time", parser.format(timeframe));
+            return output;
+        }
+
+        public static LogEntry parseDump(HashMap<String, String> dump){
+            LogEntry build = new LogEntry(Boolean.parseBoolean(dump.get("LoggingIn?")));
+            try {
+                build.timeframe = parser.parse(dump.get("Time"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return build;
+        }
     }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent pje){
         try {
@@ -91,30 +113,4 @@ public class StatOnlineTime implements Listener{
         }
     }
 }
-class LogEntry {
-    public static final SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
-    public boolean isLogIn;
-    public Date timeframe;
 
-    public LogEntry(boolean in){
-        isLogIn = in;
-        timeframe = new Date();
-    }
-
-    public HashMap<String, String> toDump() {
-        HashMap<String, String> output = new HashMap<>();
-        output.put("LoggingIn?", Boolean.toString(isLogIn));
-        output.put("Time", parser.format(timeframe));
-        return output;
-    }
-
-    public static LogEntry parseDump(HashMap<String, String> dump){
-        LogEntry build = new LogEntry(Boolean.parseBoolean(dump.get("LoggingIn?")));
-        try {
-            build.timeframe = parser.parse(dump.get("Time"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return build;
-    }
-}

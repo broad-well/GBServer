@@ -1,6 +1,7 @@
 package com.Gbserver.listener;
 
 import com.Gbserver.variables.ConfigManager;
+import com.Gbserver.variables.EnhancedPlayer;
 import com.Gbserver.variables.Identity;
 import com.Gbserver.variables.SwiftDumpOptions;
 import org.bukkit.ChatColor;
@@ -28,29 +29,14 @@ public class Birthday implements Listener{
     public static List<OfflinePlayer> whosBirthday() {
         //Nullable
         List<OfflinePlayer> returning = new LinkedList<>();
-        for(Map.Entry<String, List<Integer>> me : birthData.entrySet()){
-            if(me.getValue().get(MONTH) == Calendar.getInstance().get(Calendar.MONTH) &&
-                    me.getValue().get(DAY) == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
-                returning.add(Identity.deserializeIdentity(me.getKey()));
+        for(EnhancedPlayer ep : EnhancedPlayer.cache){
+            if(ep.getBirthday() != null){
+                if(ep.getBirthday()[MONTH] == Calendar.getInstance().get(Calendar.MONTH) &&
+                        ep.getBirthday()[DAY] == Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                    returning.add(ep.toPlayer());
             }
         }
         return returning;
-    }
-
-    public static void input() throws IOException {
-        FileReader fr = new FileReader(ConfigManager.getPathInsidePluginFolder("birthData.yml").toFile());
-        Object obj = new Yaml().load(fr);
-        fr.close();
-        if(obj instanceof HashMap){
-            birthData = (HashMap<String, List<Integer>>) obj;
-        }
-    }
-
-    public static void output() throws IOException {
-        FileWriter fw = new FileWriter(ConfigManager.getPathInsidePluginFolder("birthData.yml").toFile());
-        new Yaml().dump(birthData, fw);
-        fw.flush();
-        fw.close();
     }
 
     //Actual listeners

@@ -144,3 +144,5 @@ commands:
     aliases: [surv]
   contractverify:
     description: Have you read the contract yet?
+  uptime:
+    description: Calculates your uptime.

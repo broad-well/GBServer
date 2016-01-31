@@ -36,13 +36,6 @@ public class EnhancedPlayer {
         cache.add(New);
         return New;
     }
-    public static boolean isPlayerIneligible(OfflinePlayer op, Permissions minimum){
-        try {
-            Permissions perm = getEnhanced(op).getPermission();
-            return perm == null || perm.getLevel() < minimum.getLevel();
-        } catch (NullPointerException ignored){ return true;}
-
-    }
     static EnhancedPlayer fromDump(String serializedPlayer, HashMap<String, String> dump){
         EnhancedPlayer build = new EnhancedPlayer(Identity.deserializeIdentity(serializedPlayer));
         if(dump.keySet().contains("Permission")) build.setPermission(Permissions.valueOf(dump.get("Permission")));
@@ -52,7 +45,17 @@ public class EnhancedPlayer {
             build.setContract(Double.parseDouble(dump.get("Contract")));
         else
             build.setContract(-1);
-
+        if(dump.keySet().contains("Birthday")) build.setBirthday(
+                Integer.valueOf(dump.get("Birthday").split(",")[0]),
+                Integer.valueOf(dump.get("Birthday").split(",")[1])); //12,26
+        if(dump.keySet().contains("IgnoreList")) {
+            for (String str : (ArrayList<String>) new Yaml().load(dump.get("IgnoreList"))) {
+                if (Preferences.get().get("Debug").equals("true")) {
+                    System.out.println("EnhancedPlayerParser: " + str);
+                }
+                build.addIgnored(Identity.deserializeIdentity(str));
+            }
+        }
         return build;
     }
 
@@ -61,7 +64,9 @@ public class EnhancedPlayer {
     private Location home; // nullable
     private Rank rank; // nullable
     private TeamColor colorPref; // nullable
-    private double contract;
+    private Integer[] birthday; // nullable
+    private List<OfflinePlayer> ignored = new LinkedList<>(); // blank only, not nullable
+    private double contract = -1;
 
     public long getDuration() {
         return duration;
@@ -93,6 +98,16 @@ public class EnhancedPlayer {
         contract = c;
     }
 
+    public void addIgnored(OfflinePlayer op) { ignored.add(op); }
+
+    public boolean isIgnoring(OfflinePlayer op) { return ignored.contains(op); }
+
+    public Integer[] getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Integer... i) {birthday = i;}
+
     public double getContract() {return contract;}
     public void setColorPref(TeamColor tc) {
         this.colorPref = tc;
@@ -116,6 +131,13 @@ public class EnhancedPlayer {
 
     public TeamColor getColorPref() { return colorPref; }
 
+    public void setIgnoreList(List<OfflinePlayer> list){
+        if(list == null) return;
+        ignored = list;
+    }
+
+    public List<OfflinePlayer> getIgnoreList() {return ignored;}
+
     public String serialize() {
         String returning = "#" + Identity.serializeIdentity(pl) + "\n";
         if(myPerm != null) returning += "  permission:" + myPerm.toString() + "\n";
@@ -132,6 +154,12 @@ public class EnhancedPlayer {
         if(rank != null) build.put("Rank", rank.configOutput());
         if(colorPref != null) build.put("ColorPreference", colorPref.toString());
         if(contract != -1) build.put("Contract", String.valueOf(contract));
+        if(birthday != null) build.put("Birthday", String.valueOf(birthday[0]) + "," + String.valueOf(birthday[1]));
+        String[] ilbuild = new String[ignored.size()];
+        for(OfflinePlayer op : ignored){
+            ilbuild[ignored.indexOf(op)] = Identity.serializeIdentity(op);
+        }
+        build.put("IgnoreList", new Yaml().dump(ilbuild));
         return build;
     }
 
