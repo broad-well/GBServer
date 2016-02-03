@@ -72,13 +72,14 @@ public class ChatFormatter implements Listener {
         //Parse
         if(chatPacket.get("enabled").equals("true")) {
             dl.debugWrite("Received for writing: chat msg hash " + chatPacket);
-            String msg = String.format("%s " + ChatColor.GRAY + "%s" + ChatColor.RESET + " %s",
+            String msg = String.format("%s" + ChatColor.GRAY + "%s" + ChatColor.RESET + " %s",
                     generateTag(pce.getPlayer(), true),
                     chatPacket.get("sender"),
                     chatPacket.get("msg"));
             for (Player recipient : listStrPl((List<String>) helper.load(chatPacket.get("recipients")))) {
                 recipient.sendMessage(msg);
             }
+            Bukkit.getConsoleSender().sendMessage(msg);
         }
         /*boolean containsit = Mail.mailWriteStatus.containsKey(pce.getPlayer());
         if(!containsit) {

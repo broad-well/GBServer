@@ -94,6 +94,7 @@ public class Main extends JavaPlugin {
         getCommand("devops").setExecutor(new DevOperation());
         getCommand("group").setExecutor(new Group());
         getCommand("mail").setExecutor(new Mail());
+        getCommand("snake").setExecutor(new Snake());
         getCommand("ping").setExecutor(new F());
         getCommand("twitch").setExecutor(new Twitch());
         getCommand("selscript").setExecutor(new SelScript());

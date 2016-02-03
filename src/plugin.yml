@@ -146,3 +146,5 @@ commands:
     description: Have you read the contract yet?
   uptime:
     description: Calculates your uptime.
+  snake:
+    description: A better snake.
