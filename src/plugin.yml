@@ -1,5 +1,5 @@
 main: com.Gbserver.Main
-version: 5.49
+version: 5.52
 name: Broadwell Server Plugin
 depend: [LibsDisguises, ProtocolLib]
 

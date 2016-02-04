@@ -1,10 +1,11 @@
 package com.Gbserver.listener;
 
 import com.Gbserver.Main;
-import com.Gbserver.commands.Team;
 import com.Gbserver.commands.Tell;
 import com.Gbserver.listener.chatmodules.*;
-import com.Gbserver.variables.*;
+import com.Gbserver.variables.ConfigManager;
+import com.Gbserver.variables.DebugLevel;
+import com.Gbserver.variables.EnhancedPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,11 +15,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ChatFormatter implements Listener {
     public static List<Player> setCancelled = new LinkedList<>();
@@ -32,6 +33,7 @@ public class ChatFormatter implements Listener {
         add(new ChatTeam());
         add(new ChatMute());
         add(new ChatIgnore());
+        add(new ChatBlock());
     }};
 
     //Mail module counterpart

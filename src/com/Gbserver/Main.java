@@ -143,7 +143,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         getServer().getPluginManager().registerEvents(new BlockData(), this);
-        lg.info(desc.getName() + " has been enabled. DDDDDDDDDDDDDDDDDDD");
+        lg.info(desc.getName() + " has been enabled.");
         MailMan.setupMailChecker();
 
         new Announce(this);

@@ -6,16 +6,28 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
+import java.util.Collection;
+import java.util.List;
+
 public class ScoreDisplay {
     private Scoreboard sb;
     private Objective obj;
     private String[] displays = {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "};
     private String name;
+    private Collection<? extends Player> target;
 
     public ScoreDisplay(String d) {
         sb = Bukkit.getScoreboardManager().getNewScoreboard();
         obj = sb.registerNewObjective(d, "dummy");
         name = d;
+        display();
+    }
+
+    public ScoreDisplay(String d, List<Player> target){
+        sb = Bukkit.getScoreboardManager().getNewScoreboard();
+        obj = sb.registerNewObjective(d, "dummy");
+        name = d;
+        this.target = target;
         display();
     }
 
@@ -41,7 +53,7 @@ public class ScoreDisplay {
 
     void display() {
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        for (Player p : Bukkit.getOnlinePlayers()) {
+        for (Player p : (target == null ? Bukkit.getOnlinePlayers() : target)) {
             p.setScoreboard(sb);
         }
     }

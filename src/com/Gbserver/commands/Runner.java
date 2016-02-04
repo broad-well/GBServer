@@ -77,7 +77,7 @@ public class Runner implements CommandExecutor {
                                 p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
                             }
                         }
-                    });
+                    }, "Runner game starting");
                     for (Player p : players) {
                         p.teleport(new Location(world, 0, 202, 0));
                     }

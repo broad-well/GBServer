@@ -3,7 +3,9 @@ package com.Gbserver.variables;
 import com.Gbserver.Utilities;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.yaml.snakeyaml.Yaml;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +31,13 @@ public class CubicSelection {
         return Utilities.isInRangeOf(high, low, input);
     }
 
+    public String serialize() {
+        HashMap<String, HashMap<String, String>> output = new HashMap<>();
+        output.put("high", Utilities.mapLocation(high));
+        output.put("low", Utilities.mapLocation(low));
+        return new Yaml().dump(output);
+    }
+
     public List<Block> allBlocks() {
         List<Block> build = new LinkedList<>();
         //Generate for loop.
@@ -46,6 +55,17 @@ public class CubicSelection {
             }
         }
         return build;
+    }
+
+    /* Static Content ahead */
+
+    public static CubicSelection deserialize(String serialized){
+        Object obj = new Yaml().load(serialized);
+        if(obj instanceof HashMap){
+            HashMap<String, HashMap<String, String>> map = (HashMap<String, HashMap<String, String>>) obj;
+            return new CubicSelection(Utilities.locationMap(map.get("high")),
+                    Utilities.locationMap(map.get("low")));
+        }else return null;
     }
 
 }

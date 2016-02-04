@@ -10,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.command.ProxiedNativeCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,11 +23,7 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class Utilities {
     public static final String OWNER = "_Broadwell";
@@ -221,6 +216,30 @@ public class Utilities {
     }
     public static String wrapIn(ChatColor newcolor, String text, ChatColor original){
         return newcolor + text + original;
+    }
+
+    public static HashMap<String, String> mapLocation(final Location l){
+        return new HashMap<String, String>(){{
+            put("world", l.getWorld().getUID().toString());
+            put("x", String.valueOf(l.getX()));
+            put("y", String.valueOf(l.getY()));
+            put("z", String.valueOf(l.getZ()));
+            put("yaw", String.valueOf(l.getYaw()));
+            put("pitch", String.valueOf(l.getPitch()));
+        }};
+    }
+
+    public static Location locationMap(HashMap<String, String> hm){
+        //Check the hashmap.
+        for(String requiredEntry : Arrays.asList("x", "y", "z", "yaw", "pitch"))
+            if(!hm.containsKey(requiredEntry)) return null;
+        return new Location(
+                Bukkit.getWorld(UUID.fromString(hm.get("world"))),
+                Double.valueOf(hm.get("x")),
+                Double.valueOf(hm.get("y")),
+                Double.valueOf(hm.get("z")),
+                Float.valueOf(hm.get("yaw")),
+                Float.valueOf(hm.get("pitch")));
     }
     public static String getStackTrace(Exception e){
         StringWriter sw = new StringWriter();
