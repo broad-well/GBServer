@@ -67,22 +67,27 @@ public class MGUtils {
             mg.setRunlevel(1);
             return false;
         }
-        //Launch threads.
-        mg.getStartProcedure().run();
-        for (final Runnable run : mg.getThreads()) {
-            dl.debugWrite(mg.getIdentifier() + ": New Runnable submitted to ExecutorService: " + run.toString());
-            repeatingThreadPool.add(Utilities.scheduleRepeat(new Runnable() {
-                @Override
-                public void run() {
-                    run.run();
-                }
-            }, 1L));
+        //Teleportation
+        for (int i = 0; i < mg.getPlayers().size(); i++) {
+            mg.getPlayers().get(i).teleport(mg.getSpawnpoints().get(i));
         }
         //Secondary countdown
         startCd = 10;
         tasknum = Utilities.scheduleRepeat(new Runnable() {
             public void run() {
                 if (startCd == 0) {
+                    //Launch threads.
+                    mg.getStartProcedure().run();
+                    for (final Runnable run : mg.getThreads()) {
+                        dl.debugWrite(mg.getIdentifier() + ": New Runnable scheduled and added to " +
+                                "repeatingThreadPool: " + run.toString());
+                        repeatingThreadPool.add(Utilities.scheduleRepeat(new Runnable() {
+                            @Override
+                            public void run() {
+                                run.run();
+                            }
+                        }, 1L));
+                    }
                     Bukkit.getScheduler().cancelTask(tasknum);
                 } else {
                     for (Player p : mg.getPlayers()) {
@@ -217,14 +222,14 @@ public class MGUtils {
         }
         dl.debugWrite(5, "Runlevel of " + mg.getIdentifier() + " has been set to 4");
         mg.setRunlevel(4);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        for (Player p : allParticipants()) {
-            p.teleport(mg.getWorld().getSpawnLocation());
-        }
+        Bukkit.getScheduler().runTaskLater(Utilities.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                for (Player p : allParticipants()) {
+                    p.teleport(mg.getWorld().getSpawnLocation());
+                }
+            }
+        }, 20 * 3);
         mg.getPlayers().clear();
         dl.debugWrite(5, "Runlevel of " + mg.getIdentifier() + " has been set to 1");
         mg.setRunlevel(1);
@@ -284,7 +289,7 @@ public class MGUtils {
         if (mg instanceof StandaloneMG) {
             List<Player> current = mg.getPlayers();
             current.remove(p);
-            ((StandaloneMG) mg).setPlayers(current);
+            mg.setPlayers(current);
         } else {
             for (List<Player> team : ((TeamedMG) mg).getTeamConfig().values()) {
                 team.remove(p);
@@ -304,7 +309,7 @@ public class MGUtils {
                 sender.sendMessage(ChatColor.DARK_AQUA + "Runlevel of " + mg.getIdentifier() + ": " + mg.getRunlevel());
                 return true;
             case "leave":
-                if (mg.getRunlevel() != 1) {
+                if (mg.getRunlevel() > 2) {
                     sender.sendMessage("The current status of this game is not applicable to leave.");
                     return false;
                 }
@@ -316,7 +321,7 @@ public class MGUtils {
                 refreshLobbyScoreboard();
                 return true;
             case "join":
-                if (mg.getRunlevel() != 1) {
+                if (mg.getRunlevel() > 2) {
                     sender.sendMessage("The current status of this game is not applicable to join.");
                     return false;
                 }
@@ -324,10 +329,14 @@ public class MGUtils {
                     sender.sendMessage("Must be a player to execute this subcommand.");
                     return false;
                 }
+                if (mg.getPlayers().size() >= mg.getMaxPlayers()) {
+                    sender.sendMessage("Sorry, the game is full.");
+                    return false;
+                }
                 if (mg instanceof StandaloneMG) {
                     List<Player> current = mg.getPlayers();
                     current.add((Player) sender);
-                    ((StandaloneMG) mg).setPlayers(current);
+                    mg.setPlayers(current);
                     sender.sendMessage(ChatColor.YELLOW + "You have been added to this game.");
                 } else {
                     TeamColor selected = getVacantTeam();
@@ -339,7 +348,7 @@ public class MGUtils {
                 return true;
             case "list":
                 if (mg instanceof StandaloneMG) {
-                    for (Player p : ((StandaloneMG) mg).getPlayers()) {
+                    for (Player p : mg.getPlayers()) {
                         sender.sendMessage(p.getDisplayName());
                     }
                 } else {
@@ -352,6 +361,10 @@ public class MGUtils {
                 }
                 return true;
             case "selectMap":
+                if (!mg.getMaps().containsKey(input[1])) {
+                    sender.sendMessage("This map does not exist.");
+                    return false;
+                }
                 selectedMap = input[1];
                 return true;
             default:

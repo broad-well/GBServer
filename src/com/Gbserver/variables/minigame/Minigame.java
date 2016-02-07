@@ -2,6 +2,7 @@ package com.Gbserver.variables.minigame;
 
 
 import com.Gbserver.variables.CubicSelection;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -49,4 +50,6 @@ public interface Minigame {
     void setRunlevel(int level);
 
     void setPlayers(List<Player> s);
+
+    List<Location> getSpawnpoints(); //This has to be more or equal to the size of max players.
 }

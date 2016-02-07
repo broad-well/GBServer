@@ -361,7 +361,7 @@ public class Main extends JavaPlugin {
                 ConfigLoader.unload();
                 ConfigLoader.load();
             }
-        }, 0, 20 * 60 * 15);
+        }, 0, 20 * 60 * 25);
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
             @SuppressWarnings("deprecation")

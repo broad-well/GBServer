@@ -21,10 +21,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Runner implements CommandExecutor, StandaloneMG {
     public World world = Bukkit.getWorld("Runner1");
@@ -46,7 +43,6 @@ public class Runner implements CommandExecutor, StandaloneMG {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-                p.teleport(new Location(world, 0, 202, 0));
             }
         }
     };
@@ -161,6 +157,32 @@ public class Runner implements CommandExecutor, StandaloneMG {
     @Override
     public void setPlayers(List<Player> s) {
         players = s;
+    }
+
+    @Override
+    public List<Location> getSpawnpoints() {
+        return Arrays.asList(
+                new Location(world, 3, 99, 3),
+                new Location(world, 7, 99, 3),
+                new Location(world, 12, 99, 3),
+                new Location(world, 17, 99, 3),
+                new Location(world, 22, 99, 3),
+                new Location(world, 27, 99, 3),
+                new Location(world, 32, 99, 3),
+                new Location(world, 37, 99, 3),
+                new Location(world, 42, 99, 3),
+                new Location(world, 47, 99, 3),
+                new Location(world, 3, 99, 38),
+                new Location(world, 7, 99, 38),
+                new Location(world, 12, 99, 38),
+                new Location(world, 17, 99, 38),
+                new Location(world, 22, 99, 38),
+                new Location(world, 27, 99, 38),
+                new Location(world, 32, 99, 38),
+                new Location(world, 37, 99, 38),
+                new Location(world, 42, 99, 38),
+                new Location(world, 47, 99, 38)
+        );
     }
 
     //MINIGAME HEADER FINISHED
