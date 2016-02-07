@@ -4,10 +4,11 @@ import com.Gbserver.Utilities;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.Sandbox;
+import com.Gbserver.variables.minigame.Games;
+import com.Gbserver.variables.minigame.MGUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,8 +24,8 @@ public class Spawn implements CommandExecutor {
             player.teleport(new Location(Bukkit.getWorld("world"), 145, 119, 413));
             player.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Successfully teleported " + ChatColor.YELLOW + player.getName() +
                     ChatColor.GRAY + " to the spawn."));
-            if(Runner.players.contains(sender) && Runner.isRunning){
-                Runner.players.remove(sender);
+            if (MGUtils.utilAccess.get(Games.RUNNER).mg.getPlayers().contains(sender)) {
+                MGUtils.utilAccess.get(Games.RUNNER).eliminate((Player) sender);
             }
         }
         return true;

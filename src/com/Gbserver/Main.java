@@ -4,6 +4,8 @@ import com.Gbserver.commands.*;
 import com.Gbserver.listener.*;
 import com.Gbserver.mail.MailMan;
 import com.Gbserver.variables.*;
+import com.Gbserver.variables.minigame.Games;
+import com.Gbserver.variables.minigame.MGUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -46,6 +48,11 @@ public class Main extends JavaPlugin {
         //fc.options().copyDefaults(true);
         setupConfig();
         new Utilities(this);
+        try {
+            ConfigLoader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //Register commands.
         @SuppressWarnings("unused")
@@ -122,7 +129,6 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Reaction(), this);
         getServer().getPluginManager().registerEvents(new SandboxListener(), this);
         getServer().getPluginManager().registerEvents(new CTFListener(), this);
-        getServer().getPluginManager().registerEvents(new RunnerListener(), this);
         getServer().getPluginManager().registerEvents(new LobbyListener(), this);
         getServer().getPluginManager().registerEvents(new DrawColorListener(), this);
         getServer().getPluginManager().registerEvents(new InvinceListener(), this);
@@ -145,7 +151,10 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockData(), this);
         lg.info(desc.getName() + " has been enabled.");
         MailMan.setupMailChecker();
-
+        //Setup all minigames using MGUtils.
+        for (Games g : Games.values()) {
+            MGUtils.utilAccess.get(g).initialize();
+        }
         new Announce(this);
         try {
             Reaction.getRepeatingEvent();
@@ -230,7 +239,6 @@ public class Main extends JavaPlugin {
             }
 
         }, LT.CTF);
-        Runner.getSheep();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
 
             public void run() {
@@ -338,31 +346,6 @@ public class Main extends JavaPlugin {
 
         }, 0L, 10L);
 
-
-        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-
-            public void run() {
-                if (Runner.isRunning) {
-                    // RED = 14
-                    for (Player p : Runner.players) {
-                        Block b = p.getLocation().subtract(0, 1, 0).getBlock();
-                        if (b.getData() != (byte) 14 && b.getType() == Material.STAINED_CLAY) {
-
-                            b.setData((byte) 14);
-                            final TaskStorage ts = new TaskStorage(b);
-                            Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(Main.class), new Runnable() {
-                                public void run() {
-                                    ((Block) ts.getStorage()).setType(Material.AIR);
-                                    ((Block) ts.getStorage()).getLocation().getWorld().spawnFallingBlock(((Block) ts.getStorage()).getLocation(), Material.STAINED_CLAY, (byte) 14);
-                                }
-                            }, 20L);
-                        }
-                        p.setFoodLevel(20);
-                    }
-                }
-            }
-        }, 0L, 1L);
-
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 
             public void run() {
@@ -426,7 +409,6 @@ public class Main extends JavaPlugin {
             GameType.TF.close();
             GameType.BL.close();
             GameType.DR.close();
-            Runner.joinSheep.remove();
             System.out.println("Took care of some minigames");
         } catch (Exception e) {
             // TODO Auto-generated catch block

@@ -1,9 +1,14 @@
 package com.Gbserver;
 
-import com.Gbserver.commands.*;
+import com.Gbserver.commands.BL;
+import com.Gbserver.commands.BaconPlayer;
+import com.Gbserver.commands.CTF;
+import com.Gbserver.commands.TF;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.GameType;
+import com.Gbserver.variables.minigame.Games;
+import com.Gbserver.variables.minigame.MGUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -160,7 +165,7 @@ public class Utilities {
         return BL.players.contains(p.getName()) ||
                 BaconPlayer.getByHandle(p) != null ||
                 CTF.allPlayers().contains(p) ||
-                Runner.players.contains(p) ||
+                MGUtils.utilAccess.get(Games.RUNNER).mg.getPlayers().contains(p) ||
                 GameType.DR.allPlayers().contains(p) ||
                 TF.getAllPlayers().contains(p);
     }
@@ -274,5 +279,9 @@ public class Utilities {
             is.setDurability(Short.parseShort(hm.get("durability")));
             return is;
         }else return null;
+    }
+
+    public static Object randomElement(List list) {
+        return list.get(Utilities.getRandom(0, list.size()));
     }
 }
