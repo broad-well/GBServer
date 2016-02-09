@@ -1,10 +1,7 @@
 package com.Gbserver.variables.minigame;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.DebugLevel;
-import com.Gbserver.variables.SafeLinkedList;
-import com.Gbserver.variables.ScoreDisplay;
-import com.Gbserver.variables.TeamColor;
+import com.Gbserver.variables.*;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,6 +39,7 @@ public class MGUtils {
             } else {
                 encountered.add(p);
             }
+            onPlayerContentModification();
         }
         for (Integer i : toDelete) {
             encountered.remove(i.intValue());
@@ -102,20 +100,6 @@ public class MGUtils {
         return true;
 
     }
-
-    /*
-    Scoreboard format:
-    [bold color italic][game name]
-
-    [bold color]Players
-    [count]/[max]
-
-    [bold color]Map
-    [mapName]
-
-    [bold color]Seconds Till Start
-    [countdown]
-     */
 
     /**
      * To be called during <code>onEnable()</code>.
@@ -231,6 +215,7 @@ public class MGUtils {
             }
         }, 20 * 3);
         mg.getPlayers().clear();
+        mg.getSpectators().clear();
         dl.debugWrite(5, "Runlevel of " + mg.getIdentifier() + " has been set to 1");
         mg.setRunlevel(1);
         return true;
@@ -282,10 +267,39 @@ public class MGUtils {
         p.setGameMode(GameMode.SPECTATOR);
         p.teleport(p.getLocation().add(0, 100, 0));
         p.sendMessage(ChatColor.BLUE + "Game> " + ChatColor.GRAY + "You have been eliminated.");
+        mg.getSpectators().add(p);
+        for (Player play : allParticipants()) {
+            ChatWriter.writeTo(play, ChatWriterType.GAME, ChatColor.YELLOW + p.getName() +
+                    ChatColor.GRAY + " has been eliminated.");
+        }
+        onPlayerContentModification();
         return true;
     }
 
+    public boolean abandon(OfflinePlayer p) {
+        removePlayer(p.getPlayer());
+        if (mg.getSpectators().contains(p.getPlayer())) mg.getSpectators().remove(p.getPlayer());
+        assert !allParticipants().contains(p.getPlayer()); //Make sure we don't enrage the GC!
+        for (Player pl : mg.getPlayers()) {
+            ChatWriter.writeTo(pl, ChatWriterType.GAME, ChatColor.YELLOW + p.getName() + " has abandoned the game.");
+        }
+        onPlayerContentModification();
+        return true;
+    }
+
+    private void broadcast(String msg, boolean includeSpectators) {
+        for (Player player : mg.getPlayers()) {
+            player.sendMessage(msg);
+        }
+        if (includeSpectators) {
+            for (Player spec : mg.getSpectators()) {
+                spec.sendMessage(msg);
+            }
+        }
+    }
+
     private void removePlayer(Player p) {
+        if (p == null) return;
         if (mg instanceof StandaloneMG) {
             List<Player> current = mg.getPlayers();
             current.remove(p);
@@ -295,6 +309,7 @@ public class MGUtils {
                 team.remove(p);
             }
         }
+        //All methods that contain this function should use onPlayerContentModification().
     }
 
     public boolean interpret(String[] input, CommandSender sender) {
@@ -319,6 +334,7 @@ public class MGUtils {
                 }
                 removePlayer((Player) sender);
                 refreshLobbyScoreboard();
+                //RunLevel is not 3, so it does not really matter. *NOT CALLING onPlayerContentModification().*
                 return true;
             case "join":
                 if (mg.getRunlevel() > 2) {
@@ -400,6 +416,12 @@ public class MGUtils {
 
     public boolean isEligible(Player p) { //For listeners
         return mg.getPlayers().contains(p) && mg.getRunlevel() == 3;
+    }
+
+    private void onPlayerContentModification() {
+        if (unitsLeft() == 1) {
+            stop(false);
+        }
     }
 
 }
