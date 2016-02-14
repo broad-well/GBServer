@@ -11,9 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Tpa implements CommandExecutor {
 
     public static HelpTable ht = new HelpTable("/tpa <target>", "To request to teleport to a player.", "", "tpa");

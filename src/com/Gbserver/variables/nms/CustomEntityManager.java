@@ -2,7 +2,6 @@ package com.Gbserver.variables.nms;
 
 import net.minecraft.server.v1_8_R3.EntityInsentient;
 import net.minecraft.server.v1_8_R3.EntitySheep;
-import net.minecraft.server.v1_8_R3.EntityTypes;
 import org.bukkit.entity.EntityType;
 
 /**
@@ -19,9 +18,9 @@ public enum CustomEntityManager {
     private Class<? extends EntityInsentient> nmsClass;
     private Class<? extends EntityInsentient> customClass;
 
-    private CustomEntityManager(String name, int id, EntityType et,
-                                Class<? extends EntityInsentient> nmsClass,
-                                Class<? extends EntityInsentient> customClass){
+    CustomEntityManager(String name, int id, EntityType et,
+                        Class<? extends EntityInsentient> nmsClass,
+                        Class<? extends EntityInsentient> customClass) {
         this.name = name;
         this.id = id;
         this.et = et;

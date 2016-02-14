@@ -1,7 +1,9 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.*;
+import com.Gbserver.variables.Chair;
+import com.Gbserver.variables.Chairs;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;

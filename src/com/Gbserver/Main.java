@@ -126,7 +126,6 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new IPCollector(), this);
         getServer().getPluginManager().registerEvents(new CreativeGameMode(), this);
         getServer().getPluginManager().registerEvents(new BaconListener(), this);
-        getServer().getPluginManager().registerEvents(new Reaction(), this);
         getServer().getPluginManager().registerEvents(new SandboxListener(), this);
         getServer().getPluginManager().registerEvents(new CTFListener(), this);
         getServer().getPluginManager().registerEvents(new LobbyListener(), this);
@@ -149,6 +148,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProtectionListener(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         getServer().getPluginManager().registerEvents(new BlockData(), this);
+        getServer().getPluginManager().registerEvents(new MGListener(), this);
         lg.info(desc.getName() + " has been enabled.");
         MailMan.setupMailChecker();
         //Setup all minigames using MGUtils.

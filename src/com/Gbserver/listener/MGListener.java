@@ -22,8 +22,8 @@ public class MGListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent pqe) {
         for (MGUtils mgu : MGUtils.utilAccess.values()) {
-            if (mgu.mg.getPlayers().contains(pqe.getPlayer()) && mgu.mg.getRunlevel() == 3 /* Is running */) {
-                mgu.eliminate(pqe.getPlayer());
+            if (mgu.mg.getPlayers().contains(pqe.getPlayer())) {
+                mgu.abandon(pqe.getPlayer());
             }
 
         }

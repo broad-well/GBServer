@@ -4,7 +4,6 @@ import com.Gbserver.Utilities;
 import com.Gbserver.listener.StatOnlineTime;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
-import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.Preferences;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

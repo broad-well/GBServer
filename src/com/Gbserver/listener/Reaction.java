@@ -6,16 +6,15 @@ import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
-public class Reaction implements Listener {
+public class Reaction implements ChatModule {
 
     //Subclass "Equation"
     public static List<Equation> equations = new LinkedList<>();
@@ -84,32 +83,39 @@ public class Reaction implements Listener {
     private static Equation currentEquation;
     private static boolean pending = false;
 
-    @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent apce) {
+    public String handleChat(String msg, Player player) {
         if (pending) {
             long ans = 0;
             try {
-                ans = Long.parseLong(apce.getMessage());
+                ans = Long.parseLong(msg);
             } catch (Exception e) {
-                return;
+                return "true";
             }
             if (ans == currentEquation.calculate()) {
                 //Got it correct!
-                apce.setCancelled(true);
-                apce.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "Congratulations! You got it right!"));
-                ChatWriter.write(ChatWriterType.CHAT, ChatColor.YELLOW + "REACTION: " + apce.getPlayer().getName() + " got the answer! The answer is " + ans);
+                player.sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "Congratulations! You got it right!"));
+                ChatWriter.write(ChatWriterType.CHAT, ChatColor.YELLOW + "REACTION: " + player.getName() + " got the answer! The answer is " + ans);
                 currentEquation.close();
                 currentEquation = null;
                 pending = false;
-                ChatFormatter.setCancelled.add(apce.getPlayer());
-                return;
+                return "false";
 
             } else {
-                apce.setCancelled(true);
-                apce.getPlayer().sendMessage(ChatWriter.getMessage(ChatWriterType.CHAT, "I don't think that is the right answer. Try again!"));
-                ChatFormatter.setCancelled.add(apce.getPlayer());
-                return;
+                ChatWriter.writeTo(player, ChatWriterType.CHAT, "I don't think that is the right answer. Try again!");
+                return "false";
             }
         }
+        return "true";
+    }
+
+    @Override
+    public String getName() {
+        return "MathReaction Interpreter";
+    }
+
+    @Override
+    public HashMap<String, String> passThru(HashMap<String, String> hs) {
+        hs.put("enabled", handleChat(hs.get("msg"), Bukkit.getPlayer(hs.get("sender"))));
+        return hs;
     }
 }

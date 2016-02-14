@@ -2,12 +2,9 @@ package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
 import com.Gbserver.variables.nms.SnakeTail;
-import net.minecraft.server.v1_8_R3.World;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Player;
 
 /**

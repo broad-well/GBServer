@@ -1,19 +1,17 @@
 package com.Gbserver.commands;
 
-import com.Gbserver.Utilities;
-import com.Gbserver.variables.*;
+import com.Gbserver.variables.EnhancedMap;
+import com.Gbserver.variables.HelpTable;
+import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
-import org.bukkit.Note.Tone;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-
-import java.util.HashMap;
 
 public class Tell implements CommandExecutor {
     public static EnhancedMap<CommandSender> last = new EnhancedMap<>();

@@ -4,7 +4,6 @@ import com.Gbserver.listener.ProtectionModule;
 import com.Gbserver.variables.ConfigManager;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 

@@ -35,7 +35,7 @@ public class DisguiseAPI {
         } else if (disguiseType.isMob()) {
             disguise = new MobDisguise(disguiseType);
         } else {
-            disguise = new PlayerDisguise(((Player) entity).getName());
+            disguise = new PlayerDisguise(entity.getName());
         }
         FlagWatcher watcher = disguise.getWatcher();
         if (entity instanceof LivingEntity) {
@@ -93,14 +93,14 @@ public class DisguiseAPI {
                                             if (!(toCast.isInstance(value))) {
                                                 if (toCast == float.class) {
                                                     if (value instanceof Float) {
-                                                        value = ((Float) value);
+                                                        value = value;
                                                     } else {
                                                         double d = (Double) value;
                                                         value = (float) d;
                                                     }
                                                 } else if (toCast == double.class) {
                                                     if (value instanceof Double) {
-                                                        value = ((Double) value);
+                                                        value = value;
                                                     } else {
                                                         float d = (Float) value;
                                                         value = (double) d;

@@ -1,7 +1,6 @@
 package com.Gbserver.listener;
 
 import com.Gbserver.variables.ConfigManager;
-import com.Gbserver.variables.EnhancedPlayer;
 import com.Gbserver.variables.Identity;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -10,7 +9,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;

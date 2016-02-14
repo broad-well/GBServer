@@ -1,21 +1,16 @@
 package com.Gbserver.listener;
 
-import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.EnhancedPlayer;
-import com.Gbserver.variables.Identity;
-import com.Gbserver.variables.SwiftDumpOptions;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by michael on 1/22/16.

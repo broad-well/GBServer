@@ -26,11 +26,7 @@ public class Vault {
     }
 
     public boolean hasPrevious() {
-        if (previous == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return previous != null;
     }
 
     public void setRawData(Object[] data) {
@@ -38,11 +34,7 @@ public class Vault {
     }
 
     public boolean hasRawData() {
-        if (data == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return data != null;
     }
 
     public Object[] getRawData() {

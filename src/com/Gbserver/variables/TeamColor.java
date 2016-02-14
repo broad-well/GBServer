@@ -2,8 +2,6 @@ package com.Gbserver.variables;
 
 import org.bukkit.ChatColor;
 
-import java.awt.*;
-
 /**
  * Created by michael on 10/31/15.
  */

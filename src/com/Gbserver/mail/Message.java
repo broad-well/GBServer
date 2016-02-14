@@ -1,14 +1,10 @@
 package com.Gbserver.mail;
 
-import com.Gbserver.Utilities;
 import com.Gbserver.variables.Identity;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;

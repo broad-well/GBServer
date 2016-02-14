@@ -2,16 +2,15 @@ package com.Gbserver.variables;
 
 import com.Gbserver.commands.Jail;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.UUID;
 
 public class Sandbox {
     private static Path file = ConfigManager.getPathInsidePluginFolder("sandbox.txt");

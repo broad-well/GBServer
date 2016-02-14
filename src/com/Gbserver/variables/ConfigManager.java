@@ -2,12 +2,11 @@ package com.Gbserver.variables;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * A ConfigManager for those who needs config.

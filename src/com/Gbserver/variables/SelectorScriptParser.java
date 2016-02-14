@@ -45,7 +45,7 @@ public class SelectorScriptParser {
                     break;
                 case "me":
                     if(sender instanceof Player) {
-                        if (!output.contains((Player) sender)) {
+                        if (!output.contains(sender)) {
                             output.add((Player) sender);
                         }
                     }
@@ -58,8 +58,8 @@ public class SelectorScriptParser {
                     break;
                 case "!me":
                     if(sender instanceof Player) {
-                        if (output.contains((Player) sender)) {
-                            output.remove((Player) sender);
+                        if (output.contains(sender)) {
+                            output.remove(sender);
                         }
                     }
                     break;

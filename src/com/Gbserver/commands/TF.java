@@ -221,11 +221,7 @@ public class TF implements CommandExecutor {
                     sender.sendMessage(ChatWriter.getMessage(ChatWriterType.CONDITION, "Game Started."));
                 }
                 if (args[0].equalsIgnoreCase("toggle")) {
-                    if (isBuildtime) {
-                        isBuildtime = false;
-                    } else {
-                        isBuildtime = true;
-                    }
+                    isBuildtime = !isBuildtime;
                     sender.sendMessage(isBuildtime + "");
                 }
                 if (args[0].equalsIgnoreCase("stop")) {

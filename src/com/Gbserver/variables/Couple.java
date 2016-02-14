@@ -8,7 +8,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Couple {
     public static File file = ConfigManager.getPathInsidePluginFolder("marriages.dat").toFile();

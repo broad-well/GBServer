@@ -78,7 +78,7 @@ public class TFListeners implements Listener {
                     break;
                 case 8:
                     if (ice.getWhoClicked() instanceof Player) {
-                        ((Player) ice.getWhoClicked()).closeInventory();
+                        ice.getWhoClicked().closeInventory();
                     }
                     break;
             }
@@ -115,11 +115,7 @@ public class TFListeners implements Listener {
     public void onPlayerMove(PlayerMoveEvent pme) {
         if (TF.isRunning && TF.getAllPlayers().contains(pme.getPlayer())) {
             boolean isRed;
-            if (TF.redPlayers.contains(pme.getPlayer())) {
-                isRed = true;
-            } else {
-                isRed = false;
-            }
+            isRed = TF.redPlayers.contains(pme.getPlayer());
             if (!isValid(pme.getPlayer().getLocation(), isRed)) {
                 Vector v = new Vector(-10, 5, 0);
                 if (isRed) {
@@ -167,7 +163,7 @@ public class TFListeners implements Listener {
     public void dmg(EntityDamageEvent ede) {
         if (TF.isRunning) {
             if (ede.getEntity() instanceof Player) {
-                if (TF.getAllPlayers().contains(((Player) ede.getEntity()))) {
+                if (TF.getAllPlayers().contains(ede.getEntity())) {
                     if (!(ede.getCause().equals(DamageCause.PROJECTILE))) {
                         ede.setCancelled(true);
                     } else {
@@ -202,10 +198,7 @@ public class TFListeners implements Listener {
         if (isRed && l.getBlock().getData() == TF.BLUE_CLAY && l.getBlock().getType() == Material.STAINED_CLAY) {
             return false;
         }
-        if (!isRed && l.getBlock().getData() == TF.RED_CLAY && l.getBlock().getType() == Material.STAINED_CLAY) {
-            return false;
-        }
-        return true;
+        return !(!isRed && l.getBlock().getData() == TF.RED_CLAY && l.getBlock().getType() == Material.STAINED_CLAY);
 
     }
 

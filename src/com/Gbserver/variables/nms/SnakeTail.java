@@ -1,11 +1,10 @@
 package com.Gbserver.variables.nms;
 
 import net.minecraft.server.v1_8_R3.*;
-import net.minecraft.server.v1_8_R3.World;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftLivingEntity;
-import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import java.util.List;

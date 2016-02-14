@@ -32,7 +32,7 @@ public class NickListener implements Listener {
                 }
             } else {
                 if (edbee.getRightClicked() instanceof Player) {
-                    PlayerDisguise pd = new PlayerDisguise(Nick.arg, ((Player) edbee.getRightClicked()).getName());
+                    PlayerDisguise pd = new PlayerDisguise(Nick.arg, edbee.getRightClicked().getName());
 
                     DisguiseAPI.disguiseEntity(target, pd);
                     DisguiseAPI.setViewDisguiseToggled(target, false);

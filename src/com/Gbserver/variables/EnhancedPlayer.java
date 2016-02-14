@@ -2,22 +2,16 @@ package com.Gbserver.variables;
 
 import com.Gbserver.Utilities;
 import com.Gbserver.listener.Rank;
-import org.bukkit.Bukkit;
+import com.Gbserver.variables.PermissionManager.Permissions;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
-import com.Gbserver.variables.PermissionManager.Permissions;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.text.ParseException;
 import java.util.*;
 
 public class EnhancedPlayer {

@@ -212,12 +212,13 @@ public class MGUtils {
                 for (Player p : allParticipants()) {
                     p.teleport(mg.getWorld().getSpawnLocation());
                 }
+                mg.getPlayers().clear();
+                mg.getSpectators().clear();
+                dl.debugWrite(5, "Runlevel of " + mg.getIdentifier() + " has been set to 1");
+                mg.setRunlevel(1);
             }
         }, 20 * 3);
-        mg.getPlayers().clear();
-        mg.getSpectators().clear();
-        dl.debugWrite(5, "Runlevel of " + mg.getIdentifier() + " has been set to 1");
-        mg.setRunlevel(1);
+
         return true;
     }
 
@@ -263,7 +264,8 @@ public class MGUtils {
             return false;
         }
         removePlayer(p);
-        p.setHealth(p.getHealth() - 1);
+        if (p.getHealth() > 0)
+            p.setHealth(p.getHealth() - 1);
         p.setGameMode(GameMode.SPECTATOR);
         p.teleport(p.getLocation().add(0, 100, 0));
         p.sendMessage(ChatColor.BLUE + "Game> " + ChatColor.GRAY + "You have been eliminated.");
@@ -281,7 +283,8 @@ public class MGUtils {
         if (mg.getSpectators().contains(p.getPlayer())) mg.getSpectators().remove(p.getPlayer());
         assert !allParticipants().contains(p.getPlayer()); //Make sure we don't enrage the GC!
         for (Player pl : mg.getPlayers()) {
-            ChatWriter.writeTo(pl, ChatWriterType.GAME, ChatColor.YELLOW + p.getName() + " has abandoned the game.");
+            ChatWriter.writeTo(pl, ChatWriterType.GAME, ChatColor.YELLOW + p.getName() +
+                    ChatColor.GRAY + " has abandoned the game.");
         }
         onPlayerContentModification();
         return true;

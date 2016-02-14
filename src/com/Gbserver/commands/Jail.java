@@ -1,6 +1,9 @@
 package com.Gbserver.commands;
 
-import com.Gbserver.variables.*;
+import com.Gbserver.variables.ConfigManager;
+import com.Gbserver.variables.EnhancedPlayer;
+import com.Gbserver.variables.Identity;
+import com.Gbserver.variables.PermissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

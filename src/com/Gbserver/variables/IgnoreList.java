@@ -1,9 +1,11 @@
 package com.Gbserver.variables;
 
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class IgnoreList {
     public static HashMap<OfflinePlayer, List<OfflinePlayer>> list = new HashMap<>();
