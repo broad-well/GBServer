@@ -17,11 +17,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-// BUGGED!
 public class SaveMoment implements CommandExecutor {
 
     public static File file = ConfigManager.getPathInsidePluginFolder("playerdata.yml").toFile();
-    //TYPE
     public static HashMap<String, HashMap<String, Object>> saved = new HashMap<>();
 
 
@@ -89,21 +87,24 @@ public class SaveMoment implements CommandExecutor {
         return build;
     }
 
-    public static void output() throws IOException {
-        FileWriter fw = new FileWriter(file);
-        SwiftDumpOptions.BLOCK_STYLE().dump(saved, fw);
-        fw.flush();
-        fw.close();
-    }
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
 
-    public static void input() throws IOException {
-        FileReader fr = new FileReader(file);
-        Object obj = SwiftDumpOptions.BLOCK_STYLE().load(fr);
-        fr.close();
-        if(obj instanceof HashMap){
-            saved = (HashMap<String, HashMap<String, Object>>) obj;
+        public void unload() throws IOException {
+            FileWriter fw = new FileWriter(file);
+            SwiftDumpOptions.BLOCK_STYLE().dump(saved, fw);
+            fw.flush();
+            fw.close();
         }
-    }
+
+        public void load() throws IOException {
+            FileReader fr = new FileReader(file);
+            Object obj = SwiftDumpOptions.BLOCK_STYLE().load(fr);
+            fr.close();
+            if (obj instanceof HashMap) {
+                saved = (HashMap<String, HashMap<String, Object>>) obj;
+            }
+        }
+    };
 
 
 }

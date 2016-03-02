@@ -9,8 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Lobby implements CommandExecutor {
-    private int beginTaskID;
-    private int countdown;
 
     private HelpTable ht = new HelpTable("/lobby [bl/tf/dr/swap] [leave/accept/deny/map]", "To quit a lobby or accept/deny a swap, or select a map for use. To join, click on a sheep.", "", "lobby");
 
@@ -126,7 +124,6 @@ public class Lobby implements CommandExecutor {
                                     try {
                                         sp.close();
                                     } catch (Throwable e) {
-                                        // TODO Auto-generated catch block
                                         e.printStackTrace();
                                     }
 
@@ -144,7 +141,6 @@ public class Lobby implements CommandExecutor {
                                     try {
                                         sp.close();
                                     } catch (Throwable e) {
-                                        // TODO Auto-generated catch block
                                         e.printStackTrace();
                                     }
                                     break;

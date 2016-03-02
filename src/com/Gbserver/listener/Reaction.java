@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class Reaction implements ChatModule {
 
@@ -47,13 +46,6 @@ public class Reaction implements ChatModule {
                             }
                         }
                     }, 1200L);
-                } else {
-                    Bukkit.getLogger().log(Level.INFO, "Tried to get reaction, no players");
-                    Equation e = getEquation();
-                    Bukkit.getLogger().log(Level.INFO, "" + e.left + " " + e.operator + " " + e.right);
-                    Bukkit.getLogger().log(Level.INFO, String.valueOf(e.calculate()));
-                    e.close();
-                    e = null;
                 }
             }
         }, 0L, 18000L);

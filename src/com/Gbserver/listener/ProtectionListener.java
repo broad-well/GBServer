@@ -3,6 +3,9 @@ package com.Gbserver.listener;
 import com.Gbserver.listener.protections.PermissionProtect;
 import com.Gbserver.listener.protections.TerritoryProtect;
 import com.Gbserver.listener.protections.WorldProtect;
+import com.Gbserver.variables.ConfigLoader;
+import com.Gbserver.variables.ConfigManager;
+import com.Gbserver.variables.DebugLevel;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,33 +20,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 //Much more robust one needed!
-public class ProtectionListener implements Listener {
-    public static List<ProtectionModule> modules = Arrays.asList(new PermissionProtect(), new TerritoryProtect(), new WorldProtect());
+public class ProtectionListener implements Listener, ConfigLoader.ConfigUser {
+    public static List<ProtectionModule> modules = Arrays.asList(
+            new PermissionProtect(), new TerritoryProtect(), new WorldProtect());
     public static boolean isDisabled = false;
-    public static List<Material> prohibitedMaterials = new LinkedList<Material>(){{
-        add(Material.TNT);
-        add(Material.STATIONARY_LAVA);
-        add(Material.LAVA);
-        add(Material.LAVA_BUCKET);
-    }};
-    /*final int[][][] DATA = {
-            {
-                    {-156, 78, 228},
-                    {-130, 68, 208},
-            },
-            {
-                    {72, 65, 365},
-                    {-26, 254, 277},
-            },
-            {
-                    {165, 101, 433},
-                    {124, 145, 392},
-            },
-            {
-                    {-162, 71, 185},
-                    {-163, 75, 175}
-            }
-    };*/
+    private static DebugLevel dl = new DebugLevel(2, "Protection");
+    public static List<Material> prohibitedMaterials = new LinkedList<>();
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent bbe) {
@@ -132,6 +114,27 @@ public class ProtectionListener implements Listener {
         if(!doAllow){
             pbe.getPlayer().sendMessage("Your bucket manipulation was blocked for the following reason(s):");
             pbe.getPlayer().sendMessage(reasons.toArray(new String[1]));
+        }
+    }
+
+    @Override
+    public void load() {
+        prohibitedMaterials.clear();
+        for (String entry : ConfigManager.smartGet("ProhibitedMaterials").keySet()) {
+            if (prohibitedMaterials.contains(Material.valueOf(entry))) {
+                dl.debugWrite("ERROR: Duplicate PROHIBITED materials found! " + entry);
+            } else {
+                prohibitedMaterials.add(Material.valueOf(entry));
+                dl.debugWrite(4, "ProtectionConfMan: Adding entry " + entry + " into variable");
+            }
+        }
+    }
+
+    @Override
+    public void unload() {
+        for (Material mat : prohibitedMaterials) {
+            dl.debugWrite(4, "ProtectionConfMan: Dumping entry " + mat.name() + " into ConfigManager");
+            ConfigManager.smartGet("ProhibitedMaterials").put(mat.name(), "");
         }
     }
 }

@@ -411,7 +411,6 @@ public class Main extends JavaPlugin {
             GameType.DR.close();
             System.out.println("Took care of some minigames");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             errorStack.add(e);
         }
         saveConfig();

@@ -13,10 +13,10 @@ import java.util.HashMap;
  */
 public class ConfigManager {
     private static Path mainFile = getPathInsidePluginFolder("volatile.dat");
-    public static HashMap<String, HashMap<String, String>> entries = new HashMap<>();
+    public static volatile HashMap<String, HashMap<String, String>> entries = new HashMap<>();
     private static Yaml confHelper = SwiftDumpOptions.BLOCK_STYLE();
 
-    public static HashMap<String, String> smartGet(String label){
+    public static synchronized HashMap<String, String> smartGet(String label) {
         HashMap<String, String> output = entries.get(label);
         if(output == null){
             System.out.println("Founding new entry: " + label);

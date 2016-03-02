@@ -1,9 +1,6 @@
 package com.Gbserver.commands;
 
-import com.Gbserver.variables.ConfigManager;
-import com.Gbserver.variables.EnhancedPlayer;
-import com.Gbserver.variables.Identity;
-import com.Gbserver.variables.PermissionManager;
+import com.Gbserver.variables.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -86,20 +83,23 @@ public class Jail implements CommandExecutor {
                 EnhancedPlayer.getEnhanced((Player) sender).getPermission().isAbove(PermissionManager.Permissions.DEVELOPER);
     }
 
-    public static void output(){
-        HashMap<String, String> build = new HashMap<>();
-        for(OfflinePlayer op : prisoners){
-            build.put(Identity.serializeIdentity(op), "");
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+        public void unload() {
+            HashMap<String, String> build = new HashMap<>();
+            for (OfflinePlayer op : prisoners) {
+                build.put(Identity.serializeIdentity(op), "");
+            }
+            ConfigManager.entries.put("Prisoners", build);
         }
-        ConfigManager.entries.put("Prisoners", build);
-    }
 
-    public static void input(){
-        prisoners.clear();
-        HashMap<String, String> data = ConfigManager.smartGet("Prisoners");
-        for(String str : data.keySet()){
-            prisoners.add(Identity.deserializeIdentity(str));
+        public void load() {
+            prisoners.clear();
+            HashMap<String, String> data = ConfigManager.smartGet("Prisoners");
+            for (String str : data.keySet()) {
+                prisoners.add(Identity.deserializeIdentity(str));
+            }
         }
-    }
+    };
+
 
 }

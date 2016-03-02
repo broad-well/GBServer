@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.variables.ConfigLoader;
 import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.Identity;
 import org.bukkit.Bukkit;
@@ -83,36 +84,40 @@ public class StatOnlineTime implements Listener{
         }
     }
 
-    public static void output() throws IOException {
-        HashMap<String, List<HashMap<String, String>>> superObject = new HashMap<>();
-        for(Map.Entry<UUID, List<LogEntry>> entry : cache.entrySet()){
-            //For each player, build a list of HashMaps which each represent a LogEntry.
-            //Build the list!
-            List<HashMap<String, String>> logEntries = new LinkedList<>();
-            for(LogEntry le : entry.getValue()) logEntries.add(le.toDump());
-            superObject.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(entry.getKey())), logEntries);
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+        public void unload() throws IOException {
+            HashMap<String, List<HashMap<String, String>>> superObject = new HashMap<>();
+            for (Map.Entry<UUID, List<LogEntry>> entry : cache.entrySet()) {
+                //For each player, build a list of HashMaps which each represent a LogEntry.
+                //Build the list!
+                List<HashMap<String, String>> logEntries = new LinkedList<>();
+                for (LogEntry le : entry.getValue()) logEntries.add(le.toDump());
+                superObject.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(entry.getKey())), logEntries);
+            }
+
+            //Write!
+            FileWriter fw = new FileWriter(logFile);
+            helper.dump(superObject, fw);
+            fw.flush();
+            fw.close();
         }
 
-        //Write!
-        FileWriter fw = new FileWriter(logFile);
-        helper.dump(superObject, fw);
-        fw.flush();
-        fw.close();
-    }
-
-    public static void input() throws IOException {
-        FileReader fr = new FileReader(logFile);
-        Object injection = helper.load(fr);
-        fr.close();
-        if(injection instanceof HashMap){
-            cache.clear();
-            HashMap<String, List<HashMap<String, String>>> superObject = (HashMap<String, List<HashMap<String, String>>>) injection;
-            for(Map.Entry<String, List<HashMap<String, String>>> entry : superObject.entrySet()){
-                List<LogEntry> logEntries = new LinkedList<>();
-                for(HashMap<String, String> dump : entry.getValue()) logEntries.add(LogEntry.parseDump(dump));
-                cache.put(Identity.deserializeIdentity(entry.getKey()).getUniqueId(), logEntries);
+        public void load() throws IOException {
+            FileReader fr = new FileReader(logFile);
+            Object injection = helper.load(fr);
+            fr.close();
+            if (injection instanceof HashMap) {
+                cache.clear();
+                HashMap<String, List<HashMap<String, String>>> superObject = (HashMap<String, List<HashMap<String, String>>>) injection;
+                for (Map.Entry<String, List<HashMap<String, String>>> entry : superObject.entrySet()) {
+                    List<LogEntry> logEntries = new LinkedList<>();
+                    for (HashMap<String, String> dump : entry.getValue()) logEntries.add(LogEntry.parseDump(dump));
+                    cache.put(Identity.deserializeIdentity(entry.getKey()).getUniqueId(), logEntries);
+                }
             }
         }
-    }
+    };
+
+
 }
 

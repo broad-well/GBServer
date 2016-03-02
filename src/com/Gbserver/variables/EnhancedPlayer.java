@@ -10,7 +10,6 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -167,30 +166,44 @@ public class EnhancedPlayer {
             yaml = new Yaml(oD);
         }
 
-        public static void $import$() throws IOException {
-            FileReader fr = new FileReader(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
-            Object obj = yaml.load(fr);
-            fr.close();
-            if(obj instanceof HashMap){
-                cache.clear();
-                HashMap<String, HashMap<String, String>> options = (HashMap<String, HashMap<String, String>>) obj;
-                for(Map.Entry<String, HashMap<String, String>> entry : options.entrySet()){
-                    cache.add(EnhancedPlayer.fromDump(entry.getKey(), entry.getValue()));
+        public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+
+
+            public void load() {
+                try {
+                    FileReader fr = new FileReader(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
+                    Object obj = yaml.load(fr);
+                    fr.close();
+                    if (obj instanceof HashMap) {
+                        cache.clear();
+                        HashMap<String, HashMap<String, String>> options = (HashMap<String, HashMap<String, String>>) obj;
+                        for (Map.Entry<String, HashMap<String, String>> entry : options.entrySet()) {
+                            cache.add(EnhancedPlayer.fromDump(entry.getKey(), entry.getValue()));
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("EnhancedPlayer: ConfigAgent: Error: Exception during file seek!");
+                    e.printStackTrace();
                 }
             }
-        }
 
-        public static void $export$() throws IOException {
-            setupDumperOptions();
-            HashMap<String, HashMap<String, String>> toDump = new HashMap<>();
-            for(EnhancedPlayer ep : cache){
-                toDump.put(Identity.serializeIdentity(ep.toPlayer()), ep.toDump());
+            public void unload() {
+                try {
+                    setupDumperOptions();
+                    HashMap<String, HashMap<String, String>> toDump = new HashMap<>();
+                    for (EnhancedPlayer ep : cache) {
+                        toDump.put(Identity.serializeIdentity(ep.toPlayer()), ep.toDump());
+                    }
+                    FileWriter fw = new FileWriter(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
+                    yaml.dump(toDump, fw);
+                    fw.flush();
+                    fw.close();
+                } catch (Exception e) {
+                    System.out.println("EnhancedPlayer: ConfigAgent: Error: Exception during file seek!");
+                    e.printStackTrace();
+                }
             }
-            FileWriter fw = new FileWriter(ConfigManager.getPathInsidePluginFolder("data.dat").toFile());
-            yaml.dump(toDump, fw);
-            fw.flush();
-            fw.close();
-        }
+        };
 
     }
 

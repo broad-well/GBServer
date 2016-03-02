@@ -1,6 +1,7 @@
 package com.Gbserver.mail;
 
 import com.Gbserver.Utilities;
+import com.Gbserver.variables.ConfigLoader;
 import org.bukkit.OfflinePlayer;
 import org.yaml.snakeyaml.Yaml;
 
@@ -32,31 +33,35 @@ public class FileParser {
      */
     public static List<Message> msgs = new LinkedList<>();
     private static FileParser instance = new FileParser();
-    private Yaml amigo = new Yaml();
+    private static Yaml amigo = new Yaml();
     public static FileParser getInstance(){return instance;}
-    public void updateBuffer() throws IOException, ParseException {
-        FileReader fr = new FileReader(MailMan.datfile.toFile());
-        Object obj = amigo.load(fr);
-        //List<HashMap<String, String>> is what we expect.
-        if(obj instanceof List){
-            msgs = new LinkedList<>();
-            List<HashMap<String, String>> casted = (List<HashMap<String, String>>) obj;
-            for(HashMap<String, String> entry : casted){
-                msgs.add(Message.parseDump(entry));
+
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+
+        public void load() throws IOException, ParseException {
+            FileReader fr = new FileReader(MailMan.datfile.toFile());
+            Object obj = amigo.load(fr);
+            //List<HashMap<String, String>> is what we expect.
+            if (obj instanceof List) {
+                msgs = new LinkedList<>();
+                List<HashMap<String, String>> casted = (List<HashMap<String, String>>) obj;
+                for (HashMap<String, String> entry : casted) {
+                    msgs.add(Message.parseDump(entry));
+                }
             }
         }
-    }
 
-    public void saveBuffer() throws IOException {
-        List<HashMap<String, String>> toBuild = new LinkedList<>();
-        for(Message msg : msgs){
-            toBuild.add(msg.getYamlDump());
+        public void unload() throws IOException {
+            List<HashMap<String, String>> toBuild = new LinkedList<>();
+            for (Message msg : msgs) {
+                toBuild.add(msg.getYamlDump());
+            }
+            FileWriter fw = new FileWriter(MailMan.datfile.toFile());
+            amigo.dump(toBuild, fw);
+            fw.flush();
+            fw.close();
         }
-        FileWriter fw = new FileWriter(MailMan.datfile.toFile());
-        amigo.dump(toBuild, fw);
-        fw.flush();
-        fw.close();
-    }
+    };
 
     public List<Message> getMessagesOf(OfflinePlayer player){
         List<Message> output = new LinkedList<>();

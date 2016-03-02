@@ -1,6 +1,7 @@
 package com.Gbserver.variables;
 
 
+import com.Gbserver.variables.ConfigLoader.ConfigUser;
 import org.yaml.snakeyaml.Yaml;
 
 import java.util.HashMap;
@@ -23,23 +24,27 @@ public class CommandProfile {
         return cp;
     }
 
-    public static void output() {
-        dl.debugWrite("Attempting to output Command Profiler data");
-        ConfigManager.smartGet("CommandProfile");
-        for(Map.Entry<String, HashMap<String, String>> entry : data.entrySet()){
-            ConfigManager.entries.get("CommandProfile").put(entry.getKey(), helper.dump(entry.getValue()));
+    public static final ConfigUser configUser = new ConfigUser() {
+        public void unload() {
+            dl.debugWrite("Attempting to output Command Profiler data");
+            ConfigManager.smartGet("CommandProfile");
+            for (Map.Entry<String, HashMap<String, String>> entry : data.entrySet()) {
+                ConfigManager.entries.get("CommandProfile").put(entry.getKey(), helper.dump(entry.getValue()));
+            }
+            dl.debugWrite("Command Profiler data output finished.");
         }
-        dl.debugWrite("Command Profiler data output finished.");
-    }
 
-    public static void input() {
-        dl.debugWrite("Attempting to input Command Profiler data");
-        data.clear();
-        for(Map.Entry<String, String> entry : ConfigManager.smartGet("CommandProfile").entrySet()){
-            data.put(entry.getKey(), (HashMap<String, String>) helper.load(entry.getValue()));
+        public void load() {
+            dl.debugWrite("Attempting to input Command Profiler data");
+            data.clear();
+            for (Map.Entry<String, String> entry : ConfigManager.smartGet("CommandProfile").entrySet()) {
+                data.put(entry.getKey(), (HashMap<String, String>) helper.load(entry.getValue()));
+            }
+            dl.debugWrite("Command Profiler data input finished.");
         }
-        dl.debugWrite("Command Profiler data input finished.");
-    }
+    };
+
+
 
     private String label;
 

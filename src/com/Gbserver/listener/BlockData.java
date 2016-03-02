@@ -1,5 +1,6 @@
 package com.Gbserver.listener;
 
+import com.Gbserver.variables.ConfigLoader;
 import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.Identity;
 import com.Gbserver.variables.SwiftDumpOptions;
@@ -52,21 +53,24 @@ public class BlockData implements Listener{
         }
     }
 
-    public static void output() throws IOException {
-        FileWriter fw = new FileWriter(file);
-        helper.dump(data, fw);
-        fw.flush();
-        fw.close();
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+        public void unload() throws IOException {
+            FileWriter fw = new FileWriter(file);
+            helper.dump(data, fw);
+            fw.flush();
+            fw.close();
 
-    }
+        }
 
-    public static void input() throws IOException {
-        FileReader fr = new FileReader(file);
-        Object read = helper.load(fr);
-        fr.close();
-        if(read instanceof HashMap)
-            data = (HashMap<String, List<HashMap<String, String>>>) read;
-    }
+        public void load() throws IOException {
+            FileReader fr = new FileReader(file);
+            Object read = helper.load(fr);
+            fr.close();
+            if (read instanceof HashMap)
+                data = (HashMap<String, List<HashMap<String, String>>>) read;
+        }
+    };
+
 
     private static List<HashMap<String, String>> smartGet(String loc){
         List<HashMap<String, String>> mnp = data.get(loc);

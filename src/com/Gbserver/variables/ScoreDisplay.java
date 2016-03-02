@@ -14,7 +14,7 @@ public class ScoreDisplay {
     private Objective obj;
     private String[] displays = {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "};
     private String name;
-    private Collection<? extends Player> target;
+    public Collection<? extends Player> target;
 
     public ScoreDisplay(String d) {
         sb = Bukkit.getScoreboardManager().getNewScoreboard();

@@ -47,24 +47,26 @@ public class Serializer {
         }
     }
 
-    public static void output() {
-        dl.debugWrite("Extracting custom serializer configuration...");
-        for(Map.Entry<String, HashMap<String, String>> entry : customSerialize.entrySet()){
-            dl.debugWrite(4, "Encountered entry in serializer configuration: " + entry.getKey() + " -> " + entry.getValue());
-            ConfigManager.entries.get("Serializer").put(entry.getKey(), SwiftDumpOptions.BLOCK_STYLE().dump(entry.getValue()));
-        }
-        dl.debugWrite("Serializer configuration extraction complete.");
-    }
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
 
-    public static void input() {
-        dl.debugWrite("Reading custom serializer configuration... Clearing cache.");
-        customSerialize.clear();
-        for(Map.Entry<String, String> entry : ConfigManager.smartGet("Serializer").entrySet()){
-            dl.debugWrite(4, "Encountered entry in ConfigManager data: " + entry.getKey() + " -> " + entry.getValue());
-            customSerialize.put(entry.getKey(), (HashMap<String, String>) SwiftDumpOptions.BLOCK_STYLE().load(entry.getValue()));
+        public void unload() {
+            dl.debugWrite("Extracting custom serializer configuration...");
+            for (Map.Entry<String, HashMap<String, String>> entry : customSerialize.entrySet()) {
+                dl.debugWrite(4, "Encountered entry in serializer configuration: " + entry.getKey() + " -> " + entry.getValue());
+                ConfigManager.entries.get("Serializer").put(entry.getKey(), SwiftDumpOptions.BLOCK_STYLE().dump(entry.getValue()));
+            }
+            dl.debugWrite("Serializer configuration extraction complete.");
         }
-        dl.debugWrite("Serializer configuration read complete.");
-    }
 
+        public void load() {
+            dl.debugWrite("Reading custom serializer configuration... Clearing cache.");
+            customSerialize.clear();
+            for (Map.Entry<String, String> entry : ConfigManager.smartGet("Serializer").entrySet()) {
+                dl.debugWrite(4, "Encountered entry in ConfigManager data: " + entry.getKey() + " -> " + entry.getValue());
+                customSerialize.put(entry.getKey(), (HashMap<String, String>) SwiftDumpOptions.BLOCK_STYLE().load(entry.getValue()));
+            }
+            dl.debugWrite("Serializer configuration read complete.");
+        }
+    };
 
 }

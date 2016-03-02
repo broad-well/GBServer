@@ -1,6 +1,7 @@
 package com.Gbserver.listener;
 
 import com.Gbserver.Utilities;
+import com.Gbserver.variables.ConfigLoader;
 import com.Gbserver.variables.ConfigManager;
 import com.Gbserver.variables.Identity;
 import org.bukkit.Bukkit;
@@ -21,40 +22,33 @@ public class IPCollector implements Listener{
     public static HashMap<OfflinePlayer, String> addresses = new HashMap<>();
 
     @EventHandler
-    public void onPlayerJoin(final PlayerJoinEvent pje){
+    public void onPlayerJoin(final PlayerJoinEvent pje) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
             public void run() {
-               addresses.put(pje.getPlayer(),
-                       pje.getPlayer().getAddress().getAddress().toString());
-                outFlush();
+                addresses.put(pje.getPlayer(),
+                        pje.getPlayer().getAddress().getAddress().toString());
+                configUser.unload();
             }
         }, 10L);
     }
 
-    public static boolean outFlush() {
-        try{
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+
+
+        public void unload() {
             HashMap<String, String> converted = new HashMap<>();
-            for(Map.Entry<OfflinePlayer, String> entry : addresses.entrySet())
+            for (Map.Entry<OfflinePlayer, String> entry : addresses.entrySet())
                 converted.put(Identity.serializeIdentity(entry.getKey()), entry.getValue());
             //Converted and ready to use.
             ConfigManager.entries.put("IPs", converted);
-            return true;
-        }catch(Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
 
-    public static boolean inTake() {
-        try{
+        }
+
+        public void load() {
             addresses.clear();
-            for(Map.Entry<String, String> entry : ConfigManager.smartGet("IPs").entrySet()){
+            for (Map.Entry<String, String> entry : ConfigManager.smartGet("IPs").entrySet()) {
                 addresses.put(Identity.deserializeIdentity(entry.getKey()), entry.getValue());
             }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
-    }
+    };
 }

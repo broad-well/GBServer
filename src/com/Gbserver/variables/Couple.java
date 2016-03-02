@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+Part of <3 Package
+ */
 public class Couple {
     public static File file = ConfigManager.getPathInsidePluginFolder("marriages.dat").toFile();
     private static Yaml helper = SwiftDumpOptions.BLOCK_STYLE();
@@ -56,19 +59,22 @@ public class Couple {
         return selected != null && data.remove(selected);
     }
 
-    public static void output() throws IOException {
-        FileWriter fw = new FileWriter(file);
-        helper.dump(data, fw);
-        fw.flush();
-        fw.close();
-    }
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
 
-    public static void input() throws IOException {
-        FileReader fr = new FileReader(file);
-        Object obj = helper.load(fr);
-        fr.close();
-        if(obj instanceof List){
-            data = (List<HashMap<String, String>>) obj;
+        public void unload() throws IOException {
+            FileWriter fw = new FileWriter(file);
+            helper.dump(data, fw);
+            fw.flush();
+            fw.close();
         }
-    }
+
+        public void load() throws IOException {
+            FileReader fr = new FileReader(file);
+            Object obj = helper.load(fr);
+            fr.close();
+            if (obj instanceof List) {
+                data = (List<HashMap<String, String>>) obj;
+            }
+        }
+    };
 }

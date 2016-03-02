@@ -8,35 +8,52 @@ import com.Gbserver.listener.IPCollector;
 import com.Gbserver.listener.StatOnlineTime;
 import com.Gbserver.mail.FileParser;
 
-/**
- * Created by michael on 1/16/16.
- */
+import java.util.Arrays;
+import java.util.List;
+
 public class ConfigLoader {
-    private static final String PREFIX = "[ConfigLoader] ";
+    public static List<ConfigUser> userList = Arrays.asList(
+            EnhancedPlayer.ConfigAgent.configUser,
+            StatOnlineTime.configUser,
+            Sandbox.configUser,
+            BlockData.configUser,
+            Mute.configUser,
+            Jail.configUser,
+            IgnoreList.configUser,
+            SaveMoment.configUser,
+            BanDB.configUser,
+            Couple.configUser,
+            Serializer.configUser,
+            CommandProfile.configUser,
+            FileParser.configUser,
+            IPCollector.configUser,
+            Territory.configUser
+    );
+
+    public interface ConfigUser {
+        void load() throws Exception;
+
+        void unload() throws Exception;
+    }
+
+    private static final DebugLevel dl = new DebugLevel(2, "ConfigLoader");
     public static boolean load() {
 
         try {
-            System.out.println(PREFIX + "Loading (importing)...");
+            dl.debugWrite("Loading (importing)...");
             ConfigManager.input(); //Fixed Position
-            EnhancedPlayer.ConfigAgent.$import$();
-            StatOnlineTime.input();
-            Sandbox.io(false);
-            BlockData.input();
-            Mute.inport();
-            Jail.input();
-            IgnoreList.input();
-            SaveMoment.input();
-            BanDB.input();
-            Couple.input();
-            Serializer.input();
-            CommandProfile.input();
-            FileParser.getInstance().updateBuffer();
-            IPCollector.inTake();
-            Territory.Import();
-            System.out.println(PREFIX + "Loading finished with no errors.");
+            for (ConfigUser cu : userList) {
+                try {
+                    cu.load();
+                } catch (Exception e) {
+                    dl.debugWrite(0, "Error during load of " + cu.toString() + "! Stack trace follows.");
+                    e.printStackTrace();
+                }
+            }
+            dl.debugWrite("Loading finished with no errors.");
             return true;
         }catch(Exception e){
-            System.out.println(PREFIX + "Error during load! Stack trace follows.");
+            dl.debugWrite(0, "Error! Stack trace follows.");
             e.printStackTrace();
             return false;
         }
@@ -44,27 +61,20 @@ public class ConfigLoader {
 
     public static boolean unload() {
         try {
-            System.out.println(PREFIX + "Unloading (exporting)...");
-            EnhancedPlayer.ConfigAgent.$export$();
-            StatOnlineTime.output();
-            Sandbox.io(true);
-            BlockData.output();
-            Mute.export();
-            Jail.output();
-            IgnoreList.output();
-            SaveMoment.output();
-            BanDB.output();
-            Couple.output();
-            Serializer.output();
-            CommandProfile.output();
-            FileParser.getInstance().saveBuffer();
-            IPCollector.outFlush();
-            Territory.Export();
+            dl.debugWrite("Unloading (exporting)...");
+            for (ConfigUser cu : userList) {
+                try {
+                    cu.unload();
+                } catch (Exception e) {
+                    dl.debugWrite(0, "Error during unload of " + cu.toString() + "! Stack trace follows.");
+                    e.printStackTrace();
+                }
+            }
             ConfigManager.output(); //Fixed Position
-            System.out.println(PREFIX + "Unloading finished with no errors.");
+            dl.debugWrite("Unloading finished with no errors.");
             return true;
         }catch(Exception e){
-            System.out.println(PREFIX + "Error during unload! Stack trace follows.");
+            dl.debugWrite(0, "Error! Stack trace follows.");
             e.printStackTrace();
             return false;
         }

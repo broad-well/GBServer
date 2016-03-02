@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -31,19 +30,21 @@ public class Sandbox {
         }
     }
 
-    public static void io(boolean output) throws IOException {
-        if(output){
-            //No need to use the values
-            HashMap<String, String> build = new HashMap<>();
-            for(UUID uid : contents)
-                build.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(uid)), "");
-
-            ConfigManager.entries.put("Sandbox", build);
-        }else{
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+        public void load() {
             contents.clear();
             for(Map.Entry<String, String> entry : ConfigManager.smartGet("Sandbox").entrySet()){
                 contents.add(Identity.deserializeIdentity(entry.getKey()).getUniqueId());
             }
         }
-    }
+
+        public void unload() {
+            HashMap<String, String> build = new HashMap<>();
+            for (UUID uid : contents)
+                build.put(Identity.serializeIdentity(Bukkit.getOfflinePlayer(uid)), "");
+
+            ConfigManager.entries.put("Sandbox", build);
+        }
+    };
+
 }

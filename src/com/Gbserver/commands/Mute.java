@@ -42,18 +42,21 @@ public class Mute implements CommandExecutor {
             return true;
     }
 
-    public static void inport() {
-        list.clear();
-        for(Map.Entry<String, String> entry : ConfigManager.smartGet("Mute").entrySet()){
-            list.add(Identity.deserializeIdentity(entry.getKey()));
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+        public void load() {
+            list.clear();
+            for (Map.Entry<String, String> entry : ConfigManager.smartGet("Mute").entrySet()) {
+                list.add(Identity.deserializeIdentity(entry.getKey()));
+            }
         }
-    }
 
-    public static void export() {
-        HashMap<String, String> build = new HashMap<>();
-        for(OfflinePlayer op : list){
-            build.put(Identity.serializeIdentity(op), "");
+        public void unload() {
+            HashMap<String, String> build = new HashMap<>();
+            for (OfflinePlayer op : list) {
+                build.put(Identity.serializeIdentity(op), "");
+            }
+            ConfigManager.entries.put("Mute", build);
         }
-        ConfigManager.entries.put("Mute", build);
-    }
+    };
+
 }

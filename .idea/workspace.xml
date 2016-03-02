@@ -9,233 +9,54 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa12e9bf-e297-4436-b01e-c8351d409c70" name="Default" comment="OS Merge">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$1.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$2.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$3.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$4.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$5.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main.class" />
+    <list default="true" id="aa12e9bf-e297-4436-b01e-c8351d409c70" name="Default" comment="ConfigLoader Interface, Misc">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/CmdListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/JoinGame.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/TPAList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/TpaPacket.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigWriter.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Afk.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Afk.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Attentions.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Attentions.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/BL.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/BL.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Back.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Back.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Gamemode.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Gamemode.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Heal.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Heal.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Menu.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Nick.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Nick.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Protection.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Protection.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Ride.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Ride.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Runner.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Runner.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/SaveMoment.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/SaveMoment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Spawn.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Spawn.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF$1.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Tell.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Tell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/AfkListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/AfkListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/BLListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/BLListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/BackListeners.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/BackListeners.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ChatFormatter.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ChatFormatter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ExplosionListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ExplosionListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/HealListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/HealListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/LoginTagListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/LoginTagListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/MenuListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/MenuListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/NickListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/NickListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ProtectionListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ProtectionListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/RideListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/RideListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/SnakeListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/SnakeListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/TFListeners.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/TFListeners.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/menuLibrary/Menu.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/menuLibrary/Menu.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vault.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vault.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vaults.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vaults.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jars/LibsDisguises.jar" afterPath="$PROJECT_DIR$/jars/LibsDisguises.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jars/spigot.jar" afterPath="$PROJECT_DIR$/jars/spigot.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="$PROJECT_DIR$/.gitattributes" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/Serverpack.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Serverpack.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/michael.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/michael.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.project" afterPath="$PROJECT_DIR$/.project" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GBServer.iml" afterPath="$PROJECT_DIR$/GBServer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/EventSpecials.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/EventSpecials.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/Main.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/BaconPlayer.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/BaconPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/ContractVerify.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/ContractVerify.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/DamageRecord.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/DamageRecord.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Daytime.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Daytime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Game.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Group.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Group.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Heal.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Heal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Home.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Ignore.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Ignore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Invince.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Invince.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/InvinceListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/InvinceListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Jail.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Jail.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby2.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Mail.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Mail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Marriage.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Marriage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Menu.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Menu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/MuteListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/MuteListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Nick.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Nick.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/NoFall.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/NoFall.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Protection.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Protection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Quit.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Quit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Reply.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Reply.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Ride.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Ride.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Runner.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Runner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/SaveMoment.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/SaveMoment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Say.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Say.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/SelScript.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/SelScript.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Sit.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Sit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Skull.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Skull.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Snake.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Snake.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Spawn.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Spawn.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Spectate.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Spectate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Survival.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Survival.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/TF.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/TF.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/TPAList.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/TPAList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Team.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Tell.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Tell.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Tpa.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Tpa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/TpaPacket.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/TpaPacket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Twitch.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Twitch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Uptime.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Uptime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Vote.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Vote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Warp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Weather.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/AfkListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/AfkListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/Announce.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Announce.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/BLListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/BLListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/BackListeners.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/BackListeners.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/BaconListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/BaconListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/Birthday.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Birthday.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/CTFListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/CTFListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ChatModule.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ChatModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/CreativeGameMode.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/CreativeGameMode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/DrawColorListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/DrawColorListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/Equation.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Equation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ExplosionListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ExplosionListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/HealListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/HealListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/JailListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/JailListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/JoinListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/JoinListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/LinearAlgebraReaction.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/LinearAlgebraReaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/LobbyListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/LobbyListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/LoginTagListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/LoginTagListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/MGListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/MGListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/MenuListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/MenuListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/NickListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/NickListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionModule.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/Rank.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Rank.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/Reaction.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Reaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/RideListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/RideListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/SandboxListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/SandboxListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/SitListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/SitListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/SnakeListener.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/SnakeListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/TFListeners.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/TFListeners.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatIgnore.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatIgnore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMail.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMute.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMute.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatTeam.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatTeam.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/protections/PermissionProtect.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/protections/PermissionProtect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/protections/TerritoryProtect.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/protections/TerritoryProtect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/protections/WorldProtect.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/protections/WorldProtect.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/mail/MailMan.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/mail/MailMan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/mail/Message.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/mail/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/menuLibrary/Item.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/menuLibrary/Item.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/menuLibrary/Menu.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/menuLibrary/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/unicorn/Font.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/unicorn/Font.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/unicorn/FontChar.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/unicorn/FontChar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/unicorn/Fonts.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/unicorn/Fonts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/unicorn/TextRender.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/unicorn/TextRender.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/BanDB.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/BanDB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Chair.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Chair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Chairs.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Chairs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatGroup.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatGroup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriterType.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriterType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigWriter.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Couple.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Couple.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/CubicSelection.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/CubicSelection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedMap.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedMap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/GameType.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/GameType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Groups.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Groups.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/HelpTable.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/HelpTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/LT.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/LT.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Minigame.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Minigame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Minigames.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Minigames.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/MinigamesHub.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/MinigamesHub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/PUID.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/PUID.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Preferences.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Preferences.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ReactionMath.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ReactionMath.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/SafeLinkedList.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/SafeLinkedList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/SelectorScriptParser.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/SelectorScriptParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/TaskStorage.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/TaskStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/TeamColor.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/TeamColor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/TeamedMinigame.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/TeamedMinigame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Vaults.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Vaults.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/WarpLocation.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/WarpLocation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Games.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Games.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/MGUtils.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/MGUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Minigame.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Minigame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/StandaloneMG.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/StandaloneMG.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/TeamedMG.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/TeamedMG.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/nms/CustomEntityManager.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/nms/CustomEntityManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/nms/ReflectUtils.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/nms/ReflectUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/nms/SnakeTail.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/nms/SnakeTail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/broaderator/ServerDetector/Executable.java" afterPath="$PROJECT_DIR$/src/com/broaderator/ServerDetector/Executable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.yml" afterPath="$PROJECT_DIR$/src/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/libraryaddict/disguise/DisguiseAPI.java" afterPath="$PROJECT_DIR$/src/me/libraryaddict/disguise/DisguiseAPI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugin.yml" afterPath="$PROJECT_DIR$/src/plugin.yml" />
     </list>
     <ignored path="GBServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -257,83 +78,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MGUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/MGUtils.java">
+      <file leaf-file-name="IgnoreList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="286" column="20" selection-start-line="286" selection-start-column="20" selection-end-line="286" selection-end-column="20" />
-              <folding>
-                <element signature="e#3189#3190#0" expanded="false" />
-                <element signature="e#3262#3263#0" expanded="false" />
-                <element signature="e#17375#17376#0" expanded="false" />
-                <element signature="e#17466#17467#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/BL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-              <folding>
-                <element signature="e#3772#3773#0" expanded="false" />
-                <element signature="e#3848#3849#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChatFormatter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Reaction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/Reaction.java">
+      <file leaf-file-name="CmdListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/CmdListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="121" column="18" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
+              <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
               <folding>
-                <element signature="imports" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BLListener.java">
+      <file leaf-file-name="Jail.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Jail.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChatBlock.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32642487">
-              <caret line="23" column="90" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
+              <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MGListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/MGListener.java">
+      <file leaf-file-name="StandardFonts.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+              <caret line="409" column="30" selection-start-line="409" selection-start-column="30" selection-end-line="409" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -343,17 +124,27 @@
         <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="127" column="81" selection-start-line="127" selection-start-column="81" selection-end-line="127" selection-end-column="81" />
+              <caret line="149" column="64" selection-start-line="149" selection-start-column="64" selection-end-line="149" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Countdown.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java">
+      <file leaf-file-name="BlockData.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24705882">
+              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChatFormatter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+              <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
@@ -361,14 +152,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SyncAbstractionLayer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java">
+      <file leaf-file-name="Lobby.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+              <caret line="142" column="59" selection-start-line="142" selection-start-column="59" selection-end-line="142" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextRender.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/TextRender.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -400,31 +199,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Home.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/SandboxListener.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/AfkListener.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/ContractVerify.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/SelScript.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/Birthday.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/BanDB.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/TFListeners.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/LoginTagListener.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Identity.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Uptime.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Ignore.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/JailListener.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ChatModule.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMail.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ChatTeam.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMute.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatIgnore.java" />
@@ -433,11 +207,7 @@
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/nms/SnakeTail.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/nms/CustomEntityManager.java" />
         <option value="$PROJECT_DIR$/src/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/SafeLinkedList.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Games.java" />
@@ -449,8 +219,37 @@
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Runner.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/MGListener.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/MGUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/TpaPacket.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Tpa.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/JoinGame.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/Reaction.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Jail.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/SaveMoment.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/BanDB.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Couple.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/CmdListener.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java" />
       </list>
     </option>
   </component>
@@ -462,10 +261,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1375" />
-    <option name="height" value="904" />
+    <option name="width" value="1440" />
+    <option name="height" value="875" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -681,6 +478,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="unicorn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GBServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GBServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="listener" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -712,6 +539,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="protections" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GBServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GBServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="listener" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hiddencmds" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -851,8 +708,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -860,8 +717,8 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="setCancelled&#9;PSI&#9;JAVA://com.Gbserver.listener.ChatFormatter#setCancelled&#10;onPlayerJoin&#9;PSI&#9;JAVA://com.Gbserver.listener.IPCollector#onPlayerJoin&#10;onPlayerjoin&#9;PSI&#9;JAVA://com.Gbserver.listener.CreativeGameMode#onPlayerJoin&#10;onInventoryClick&#9;PSI&#9;JAVA://com.Gbserver.listener.MenuListener#onInventoryClick&#10;onPlayerQuit&#9;PSI&#9;JAVA://com.Gbserver.listener.LoginTagListener#onPlayerQuit" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="SearchEverywhereHistoryKey" value="TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow&#10;setCancelled&#9;PSI&#9;JAVA://com.Gbserver.listener.ChatFormatter#setCancelled&#10;onPlayerJoin&#9;PSI&#9;JAVA://com.Gbserver.listener.IPCollector#onPlayerJoin&#10;onPlayerjoin&#9;PSI&#9;JAVA://com.Gbserver.listener.CreativeGameMode#onPlayerJoin&#10;onInventoryClick&#9;PSI&#9;JAVA://com.Gbserver.listener.MenuListener#onInventoryClick&#10;onPlayerQuit&#9;PSI&#9;JAVA://com.Gbserver.listener.LoginTagListener#onPlayerQuit" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -1167,36 +1024,51 @@
       <option name="project" value="LOCAL" />
       <updated>1454992482912</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="OS Merge">
+      <created>1455478409682</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1455478409682</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1375" height="904" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279703" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279703" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32793018" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3179551" sideWeight="0.50536096" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780612" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31760204" sideWeight="0.49463904" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494639" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24145454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3180693" sideWeight="0.50536096" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24097222" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294271" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279703" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3180693" sideWeight="0.49463904" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294271" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1215,13 +1087,13 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31875" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498265" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24160114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294271" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294271" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1243,7 +1115,8 @@
     <MESSAGE value="MinigameBase Alpha" />
     <MESSAGE value="MinigameBase Autostop" />
     <MESSAGE value="OS Merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="OS Merge" />
+    <MESSAGE value="ConfigLoader Interface, Misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="ConfigLoader Interface, Misc" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1252,48 +1125,54 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>62</line>
+          <line>61</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>66</line>
+          <line>65</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>70</line>
+          <line>69</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>74</line>
+          <line>73</line>
           <properties />
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>137</line>
+          <line>136</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>142</line>
+          <line>141</line>
           <properties />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java</url>
-          <line>144</line>
+          <line>143</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/com/Gbserver/commands/BL.java</url>
+          <line>31</line>
+          <properties field="blueTP" class="com.Gbserver.commands.BL" />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1302,319 +1181,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Ignore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18461539">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/LibsDisguises.jar!/me/libraryaddict/disguise/disguisetypes/AnimalColor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/JailListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#516#517#0" expanded="false" />
-            <element signature="e#564#565#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatTeam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatMute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="135" selection-start-line="22" selection-start-column="135" selection-end-line="22" selection-end-column="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/net/minecraft/server/v1_8_R3/EntityInsentient.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9043827">
-          <caret line="68" column="34" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/net/minecraft/server/v1_8_R3/GenericAttributes.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12749004">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/net/minecraft/server/v1_8_R3/EntityAgeable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8486056">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/net/minecraft/server/v1_8_R3/EntityAnimal.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12749004">
-          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/net/minecraft/server/v1_8_R3/EntitySheep.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12749004">
-          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/nms/CustomEntityManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7315508">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Snake.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/nms/SnakeTail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30695188">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/nms/ReflectUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatIgnore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/SwiftDumpOptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24646984">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/TF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="258" column="23" selection-start-line="258" selection-start-column="23" selection-end-line="258" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/SafeLinkedList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CubicSelection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16431323">
-          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/TeamColor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/GameType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Spawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Games.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding>
-            <element signature="e#168#169#0" expanded="true" />
-            <element signature="e#202#203#0" expanded="true" />
-            <element signature="e#234#235#0" expanded="true" />
-            <element signature="e#262#263#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="163" column="83" selection-start-line="163" selection-start-column="83" selection-end-line="163" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="34" selection-start-line="153" selection-start-column="34" selection-end-line="153" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/TeamedMG.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/LobbyListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="55" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/StandaloneMG.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Groups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Minigame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="53" column="81" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1622,68 +1192,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-          <folding>
-            <element signature="e#1301#1776#0" expanded="true" />
-            <element signature="e#1775#1776#0" expanded="true" />
-            <element signature="e#1954#3034#0" expanded="true" />
-            <element signature="e#2455#2922#0" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#3033#3034#0" expanded="true" />
-            <element signature="e#3349#3350#0" expanded="true" />
-            <element signature="e#3377#3378#0" expanded="true" />
-            <element signature="e#3431#3432#0" expanded="true" />
-            <element signature="e#3459#3460#0" expanded="true" />
-            <element signature="e#3510#3511#0" expanded="true" />
-            <element signature="e#3543#3544#0" expanded="true" />
-            <element signature="e#3600#3601#0" expanded="true" />
-            <element signature="e#3637#3638#0" expanded="true" />
-            <element signature="e#3693#3694#0" expanded="true" />
-            <element signature="e#3729#3730#0" expanded="true" />
-            <element signature="e#3785#3786#0" expanded="true" />
-            <element signature="e#3815#3816#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#3905#3906#0" expanded="true" />
-            <element signature="e#3975#3976#0" expanded="true" />
-            <element signature="e#4002#4003#0" expanded="true" />
-            <element signature="e#4050#4051#0" expanded="true" />
-            <element signature="e#4075#4076#0" expanded="true" />
-            <element signature="e#4121#4122#0" expanded="true" />
-            <element signature="e#4152#4153#0" expanded="true" />
-            <element signature="e#4199#4200#0" expanded="true" />
-            <element signature="e#4230#4231#0" expanded="true" />
-            <element signature="e#4277#4278#0" expanded="true" />
-            <element signature="e#4305#4306#0" expanded="true" />
-            <element signature="e#4359#4360#0" expanded="true" />
-            <element signature="e#4389#4390#0" expanded="true" />
-            <element signature="e#4445#4446#0" expanded="true" />
-            <element signature="e#4477#4478#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#4564#4565#0" expanded="true" />
-            <element signature="e#6227#6228#0" expanded="true" />
-            <element signature="e#6268#6269#0" expanded="true" />
-            <element signature="e#7114#7246#0" expanded="true" />
-            <element signature="e#7245#7246#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BLListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Vaults.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33202356">
+          <caret line="272" column="28" selection-start-line="272" selection-start-column="28" selection-end-line="272" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1697,24 +1227,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/MGUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="286" column="20" selection-start-line="286" selection-start-column="20" selection-end-line="286" selection-end-column="20" />
-          <folding>
-            <element signature="e#3189#3190#0" expanded="false" />
-            <element signature="e#3262#3263#0" expanded="false" />
-            <element signature="e#17375#17376#0" expanded="false" />
-            <element signature="e#17466#17467#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.8626943">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BLListener.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/Games.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.373057">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/TeamedMG.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1865285">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Countdown.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Tell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09486166">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Tpa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.4901185">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1722,27 +1272,235 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="e#3772#3773#0" expanded="false" />
-            <element signature="e#3848#3849#0" expanded="false" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/SelScript.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56916994">
+          <caret line="24" column="54" selection-start-line="24" selection-start-column="54" selection-end-line="24" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/SyncAbstractionLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ReactionMath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/Reaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="121" column="18" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
+          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3938#3939#0" expanded="false" />
+            <element signature="e#3987#3988#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/lang/Boolean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1897234">
+          <caret line="206" column="45" selection-start-line="206" selection-start-column="45" selection-end-line="206" selection-end-column="45" />
+          <folding>
+            <element signature="e#4974#4975#0" expanded="false" />
+            <element signature="e#5024#5025#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/SelectorScriptParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="27" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/SafeLinkedList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="127" column="81" selection-start-line="127" selection-start-column="81" selection-end-line="127" selection-end-column="81" />
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#148#149#0" expanded="false" />
+            <element signature="e#171#172#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1015#1016#0" expanded="false" />
+            <element signature="e#1040#1041#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/JoinGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="9" selection-start-line="138" selection-start-column="9" selection-end-line="138" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="26" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#516#517#0" expanded="false" />
+            <element signature="e#542#543#0" expanded="false" />
+            <element signature="e#2122#2123#0" expanded="false" />
+            <element signature="e#2152#2153#0" expanded="false" />
+            <element signature="e#2192#2193#0" expanded="false" />
+            <element signature="e#2221#2222#0" expanded="false" />
+            <element signature="e#2263#2264#0" expanded="false" />
+            <element signature="e#2294#2295#0" expanded="false" />
+            <element signature="e#2328#2329#0" expanded="false" />
+            <element signature="e#2360#2361#0" expanded="false" />
+            <element signature="e#2394#2395#0" expanded="false" />
+            <element signature="e#2424#2425#0" expanded="false" />
+            <element signature="e#2455#2456#0" expanded="false" />
+            <element signature="e#2482#2483#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/Fonts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5928854">
+          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/FontWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.25498">
+          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5808383">
+          <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.50898206">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Mute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.6167665">
+          <caret line="58" column="6" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/TextRender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/SaveMoment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.233533">
+          <caret line="105" column="6" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="142" column="59" selection-start-line="142" selection-start-column="59" selection-end-line="142" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/BanDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.1197605">
+          <caret line="72" column="6" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Couple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.251497">
+          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.251497">
+          <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1750,15 +1508,107 @@
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28742516">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/chatmodules/ChatBlock.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32642487">
-          <caret line="23" column="90" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
+        <state vertical-scroll-proportion="-0.9700599">
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="409" column="30" selection-start-line="409" selection-start-column="30" selection-end-line="409" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/IPCollector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Jail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10778443">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.770459">
+          <caret line="206" column="10" selection-start-line="206" selection-start-column="10" selection-end-line="206" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1497006">
+          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/CmdListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="149" column="64" selection-start-line="149" selection-start-column="64" selection-end-line="149" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24705882">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
           <folding />
         </state>
       </provider>

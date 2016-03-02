@@ -17,12 +17,12 @@ public class DebugLevel {
     }
     public void debugWrite(String text){
         if(isApplicable(level)){
-            System.out.println("[DEBUG:" + name + "] " + text);
+            System.out.printf("%s: %s\n", name, text);
         }
     }
     public void debugWrite(int level, String text){
         if(isApplicable(level)){
-            System.out.println("[DEBUG:" + name + "] " + text);
+            System.out.printf("%s: %s\n", name, text);
         }
     }
 }

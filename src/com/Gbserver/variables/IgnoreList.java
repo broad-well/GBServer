@@ -36,16 +36,20 @@ public class IgnoreList {
         return li.contains(p);
     }
     //--------------------
-    public static void output() {
-        for(Map.Entry<OfflinePlayer, List<OfflinePlayer>> entry : list.entrySet()){
-            EnhancedPlayer.getEnhanced(entry.getKey()).setIgnoreList(entry.getValue());
-        }
-    }
 
-    public static void input() {
-        list.clear();
-        for(EnhancedPlayer ep : EnhancedPlayer.cache){
-            list.put(ep.toPlayer(), ep.getIgnoreList());
+    public static final ConfigLoader.ConfigUser configUser = new ConfigLoader.ConfigUser() {
+
+        public void unload() {
+            for (Map.Entry<OfflinePlayer, List<OfflinePlayer>> entry : list.entrySet()) {
+                EnhancedPlayer.getEnhanced(entry.getKey()).setIgnoreList(entry.getValue());
+            }
         }
-    }
+
+        public void load() {
+            list.clear();
+            for (EnhancedPlayer ep : EnhancedPlayer.cache) {
+                list.put(ep.toPlayer(), ep.getIgnoreList());
+            }
+        }
+    };
 }
