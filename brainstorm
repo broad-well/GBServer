@@ -1,0 +1,18 @@
+- Survey Map Object -
+
+    UUID : <random uuid>
+Question : Should we upgrade to Minecraft 1.9?
+ Options : [YES,NO,IDK]
+Answered : 
+	Player{uuid:xxxx,name:XxXxxXxX} : YES
+	Player{uuid:xzxz,name:xXxXXxXx} : IDK
+
+- Survey listener function pipeline description - (logged in player is ‘pL_’)
+
+initialize new List<Map> as Unanswereds
+foreach MapObject in SurveyQuestions {
+	if MapObject[Answered] NOT has pL_.toExpr() {
+		add MapObject to Unanswereds
+	}
+
+//TODO: Not done!
