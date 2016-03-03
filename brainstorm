@@ -9,10 +9,18 @@ Answered :
 
 - Survey listener function pipeline description - (logged in player is ‘pL_’)
 
-initialize new List<Map> as Unanswereds
-foreach MapObject in SurveyQuestions {
-	if MapObject[Answered] NOT has pL_.toExpr() {
-		add MapObject to Unanswereds
+if executePercentage(20) {
+	initialize new List<Map> as Unanswereds
+	foreach MapObject in SurveyQuestions {
+		if MapObject[Answered] NOT contains key pL_.toExpression() {
+			add MapObject to Unanswereds
+		}
 	}
-
-//TODO: Not done!
+	if Unanswereds is empty {
+		return
+	}else{
+		initialize Utils.randomElement(Unanswereds) as selectedQuestion
+		pL_.sendMessage(selectedQuestion.ask())
+		pL_.setParameter("PendingSurveyQuestion", selectedQuestion.getUUID())
+	}
+}
