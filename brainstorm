@@ -1,0 +1,26 @@
+- Survey Map Object -
+
+    UUID : <random uuid>
+Question : Should we upgrade to Minecraft 1.9?
+ Options : [YES,NO,IDK]
+Answered : 
+	Player{uuid:xxxx,name:XxXxxXxX} : YES
+	Player{uuid:xzxz,name:xXxXXxXx} : IDK
+
+- Survey listener function pipeline description - (logged in player is ‘pL_’)
+
+if executePercentage(20) {
+	initialize new List<Map> as Unanswereds
+	foreach MapObject in SurveyQuestions {
+		if MapObject[Answered] NOT contains key pL_.toExpression() {
+			add MapObject to Unanswereds
+		}
+	}
+	if Unanswereds is empty {
+		return
+	}else{
+		initialize Utils.randomElement(Unanswereds) as selectedQuestion
+		pL_.sendMessage(selectedQuestion.ask())
+		pL_.setParameter("PendingSurveyQuestion", selectedQuestion.getUUID())
+	}
+}
