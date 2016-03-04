@@ -33,8 +33,8 @@ public class CubicSelection {
 
     public String serialize() {
         HashMap<String, HashMap<String, String>> output = new HashMap<>();
-        output.put("high", Utilities.mapLocation(high));
-        output.put("low", Utilities.mapLocation(low));
+        output.put("high", Utilities.toMap(high));
+        output.put("low", Utilities.toMap(low));
         return new Yaml().dump(output);
     }
 
@@ -63,8 +63,8 @@ public class CubicSelection {
         Object obj = new Yaml().load(serialized);
         if(obj instanceof HashMap){
             HashMap<String, HashMap<String, String>> map = (HashMap<String, HashMap<String, String>>) obj;
-            return new CubicSelection(Utilities.locationMap(map.get("high")),
-                    Utilities.locationMap(map.get("low")));
+            return new CubicSelection((Location) Utilities.toObject(map.get("high"), Location.class),
+                    (Location) Utilities.toObject(map.get("low"), Location.class));
         }else return null;
     }
 

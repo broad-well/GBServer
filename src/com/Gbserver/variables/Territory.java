@@ -56,8 +56,9 @@ public class Territory extends CubicSelection {
                 collabs.remove(visitor);
                 if (Bukkit.getPlayer(visitor) != null)
                     Bukkit.getPlayer(visitor).sendMessage
-                            (ChatColor.DARK_AQUA + "Your temporary access to " + Utilities.wrapIn
-                                    (ChatColor.YELLOW, Bukkit.getOfflinePlayer(owner).getName(), ChatColor.DARK_AQUA) + "'s home has expired.");
+                            (ChatColor.DARK_AQUA + "Your temporary access to " + ChatColor.YELLOW
+                                    + Bukkit.getOfflinePlayer(owner).getName() + ChatColor.DARK_AQUA
+                                    + "'s home has expired.");
 
             }
         }, durationTicks);

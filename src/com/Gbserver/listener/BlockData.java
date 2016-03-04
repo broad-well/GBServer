@@ -19,9 +19,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by michael on 1/16/16.
- */
+
 public class BlockData implements Listener{
     public static File file = ConfigManager.getPathInsidePluginFolder("blockData.dat").toFile();
     public static HashMap<String, List<HashMap<String, String>>> data = new HashMap<>();

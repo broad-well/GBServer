@@ -47,7 +47,7 @@ public class Main extends JavaPlugin {
         //fc.addDefault("announcements", "An announcemento 2");
         //fc.options().copyDefaults(true);
         setupConfig();
-        new Utilities(this);
+        Utilities.instance = this;
         try {
             ConfigLoader.load();
         } catch (Exception e) {

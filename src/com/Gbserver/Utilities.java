@@ -7,10 +7,10 @@ import com.Gbserver.commands.TF;
 import com.Gbserver.variables.ChatWriter;
 import com.Gbserver.variables.ChatWriterType;
 import com.Gbserver.variables.GameType;
+import com.Gbserver.variables.SwiftDumpOptions;
 import com.Gbserver.variables.minigame.Games;
 import com.Gbserver.variables.minigame.MGUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,6 +32,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Utilities {
+    private static Yaml helper = SwiftDumpOptions.BLOCK_STYLE();
     public static final String OWNER = "_Broadwell";
     public static boolean validateSender(CommandSender cs) {
         if (!(cs instanceof Player)) {
@@ -40,11 +42,9 @@ public class Utilities {
             return true;
         }
     }
-    private static Main instance;
 
-    Utilities(Main main){
-        instance = main;
-    }
+    public static Main instance;
+
     public static boolean validateGamePlay(CommandSender p){
         if(!(p instanceof Player)) return false;
         if(isInGame((Player) p)){
@@ -79,6 +79,7 @@ public class Utilities {
     }
 
     public static Main getInstance() {
+        assert instance != null;
         return instance;
     }
 
@@ -101,12 +102,9 @@ public class Utilities {
 
         Random rand = new Random();
         return rand.nextInt(max - min) + min;
-        // 50 is the maximum and the 1 is our minimum
     }
 
     public static void copy(Location originBottom, Location originTop, Location targetBottom) {
-        //Say originBottom is 10, 50, 40;
-        //    originTop is -20, 70, 70.
         int xrelation = originBottom.getBlockX() - targetBottom.getBlockX();
         int zrelation = originBottom.getBlockZ() - targetBottom.getBlockZ();
         for (int x = originBottom.getBlockX(); x - originTop.getBlockX() != 0;
@@ -219,33 +217,8 @@ public class Utilities {
                 Float.valueOf(axises[4]),
                 Float.valueOf(axises[5]));
     }
-    public static String wrapIn(ChatColor newcolor, String text, ChatColor original){
-        return newcolor + text + original;
-    }
 
-    public static HashMap<String, String> mapLocation(final Location l){
-        return new HashMap<String, String>(){{
-            put("world", l.getWorld().getUID().toString());
-            put("x", String.valueOf(l.getX()));
-            put("y", String.valueOf(l.getY()));
-            put("z", String.valueOf(l.getZ()));
-            put("yaw", String.valueOf(l.getYaw()));
-            put("pitch", String.valueOf(l.getPitch()));
-        }};
-    }
 
-    public static Location locationMap(HashMap<String, String> hm){
-        //Check the hashmap.
-        for(String requiredEntry : Arrays.asList("x", "y", "z", "yaw", "pitch"))
-            if(!hm.containsKey(requiredEntry)) return null;
-        return new Location(
-                Bukkit.getWorld(UUID.fromString(hm.get("world"))),
-                Double.valueOf(hm.get("x")),
-                Double.valueOf(hm.get("y")),
-                Double.valueOf(hm.get("z")),
-                Float.valueOf(hm.get("yaw")),
-                Float.valueOf(hm.get("pitch")));
-    }
     public static String getStackTrace(Exception e){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
@@ -261,24 +234,49 @@ public class Utilities {
         }catch(Exception e){return false;}
     }
 
-    public static HashMap<String, String> serialize(ItemStack is){
-        if(is == null) return null;
-        HashMap<String, String> output = new HashMap<>();
-        output.put("material", String.valueOf(is.getTypeId()));
-        output.put("amount", String.valueOf(is.getAmount()));
-        output.put("durability", String.valueOf(is.getDurability()));
-        return output;
+
+    public static HashMap<String, String> toMap(Object target) {
+        if (target instanceof ItemStack) {
+            ItemStack is = (ItemStack) target;
+            HashMap<String, String> output = new HashMap<>();
+            output.put("material", String.valueOf(is.getTypeId()));
+            output.put("amount", String.valueOf(is.getAmount()));
+            output.put("durability", String.valueOf(is.getDurability()));
+            return output;
+        } else if (target instanceof Location) {
+            final Location l = (Location) target;
+            return new HashMap<String, String>() {{
+                put("world", l.getWorld().getUID().toString());
+                put("x", String.valueOf(l.getX()));
+                put("y", String.valueOf(l.getY()));
+                put("z", String.valueOf(l.getZ()));
+                put("yaw", String.valueOf(l.getYaw()));
+                put("pitch", String.valueOf(l.getPitch()));
+            }};
+        } else throw new UnsupportedOperationException(target.getClass().getName() + " is not supported by toMap().");
     }
 
-    public static ItemStack deserialize(HashMap<String, String> hm){
-        if(hm == null) return null;
-        if(hm.keySet().contains("material") &&
-                hm.keySet().contains("durability")){
-            ItemStack is = new ItemStack(Material.getMaterial(Integer.parseInt(hm.get("material"))));
-            is.setAmount(Integer.parseInt(hm.get("amount")));
-            is.setDurability(Short.parseShort(hm.get("durability")));
-            return is;
-        }else return null;
+    public static Object toObject(HashMap<String, String> map, Class<?> targetClass) {
+        if (targetClass.getSimpleName().equals("ItemStack")) {
+            if (map == null) return null;
+            if (map.keySet().contains("material") &&
+                    map.keySet().contains("durability")) {
+                ItemStack is = new ItemStack(Material.getMaterial(Integer.parseInt(map.get("material"))));
+                is.setAmount(Integer.parseInt(map.get("amount")));
+                is.setDurability(Short.parseShort(map.get("durability")));
+                return is;
+            } else return null;
+        } else if (targetClass.getSimpleName().equals("Location")) {
+            for (String requiredEntry : Arrays.asList("x", "y", "z", "yaw", "pitch"))
+                assert map.containsKey(requiredEntry);
+            return new Location(
+                    Bukkit.getWorld(UUID.fromString(map.get("world"))),
+                    Double.valueOf(map.get("x")),
+                    Double.valueOf(map.get("y")),
+                    Double.valueOf(map.get("z")),
+                    Float.valueOf(map.get("yaw")),
+                    Float.valueOf(map.get("pitch")));
+        } else throw new UnsupportedOperationException(targetClass.getName() + " is not supported by toObject().");
     }
 
     public static Object randomElement(List list) {

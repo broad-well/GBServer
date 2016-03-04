@@ -16,7 +16,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
 import java.util.*;
 
 public class DevOperation implements CommandExecutor {
@@ -130,8 +129,8 @@ public class DevOperation implements CommandExecutor {
                     return true;
                 case "FlushMessages":
                     try {
-                        FileParser.getInstance().saveBuffer();
-                    } catch (IOException e) {
+                        FileParser.configUser.unload();
+                    } catch (Exception e) {
                         sender.sendMessage(Utilities.getStackTrace(e));
                     }
                     break;
@@ -471,9 +470,9 @@ public class DevOperation implements CommandExecutor {
                     break;
                 case "FlushPlayers":
                     try {
-                        EnhancedPlayer.ConfigAgent.$export$();
+                        EnhancedPlayer.ConfigAgent.configUser.unload();
                         sender.sendMessage("Success");
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         sender.sendMessage(Utilities.getStackTrace(e));
                     }
                     break;

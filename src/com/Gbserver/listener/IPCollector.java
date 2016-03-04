@@ -27,7 +27,11 @@ public class IPCollector implements Listener{
             public void run() {
                 addresses.put(pje.getPlayer(),
                         pje.getPlayer().getAddress().getAddress().toString());
-                configUser.unload();
+                try {
+                    configUser.unload();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }, 10L);
     }

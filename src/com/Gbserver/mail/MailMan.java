@@ -58,7 +58,7 @@ public class MailMan {
         build.setMessage(subject, message);
         try {
             FileParser.msgs.add(build);
-            fileio.saveBuffer();
+            FileParser.configUser.unload();
             return true;
         }catch(Exception e){
             e.printStackTrace();

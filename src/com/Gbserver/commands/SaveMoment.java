@@ -48,12 +48,12 @@ public class SaveMoment implements CommandExecutor {
                 Location loc = Utilities.deserializeLocation((String) cr.get("location"));
                 ItemStack[] contents = new ItemStack[((HashMap[]) cr.get("inventory")).length];
                 for(int i = 0; i < contents.length; i++){
-                    contents[i] = Utilities.deserialize(((HashMap[]) cr.get("inventory"))[i]);
+                    contents[i] = (ItemStack) Utilities.toObject(((HashMap[]) cr.get("inventory"))[i], ItemStack.class);
                 }
                 double health = Double.parseDouble((String) cr.get("health"));
                 ItemStack[] armorContents = new ItemStack[((HashMap[]) cr.get("armor")).length];
                 for(int i = 0; i < contents.length; i++){
-                    armorContents[i] = Utilities.deserialize(((HashMap[]) cr.get("armor"))[i]);
+                    armorContents[i] = (ItemStack) Utilities.toObject(((HashMap[]) cr.get("armor"))[i], ItemStack.class);
                 }
                 GameMode gm = GameMode.valueOf((String) cr.get("gamemode"));
                 p.teleport(loc);
@@ -74,13 +74,13 @@ public class SaveMoment implements CommandExecutor {
         build.put("location", Utilities.serializeLocation(p.getLocation()));
         HashMap[] items = new HashMap[p.getInventory().getContents().length];
         for(int i = 0; i < items.length; i++){
-            items[i] = Utilities.serialize(p.getInventory().getContents()[i]);
+            items[i] = Utilities.toMap(p.getInventory().getContents()[i]);
         }
         build.put("inventory", items);
         build.put("health", String.valueOf(p.getHealth()));
         HashMap[] armorItems = new HashMap[p.getInventory().getArmorContents().length];
         for(int i = 0; i < armorItems.length; i++){
-            armorItems[i] = Utilities.serialize(p.getInventory().getArmorContents()[i]);
+            armorItems[i] = Utilities.toMap(p.getInventory().getArmorContents()[i]);
         }
         build.put("armor", armorItems);
         build.put("gamemode", p.getGameMode().toString());
