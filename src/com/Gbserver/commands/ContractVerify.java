@@ -1,8 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.EnhancedPlayer;
 import com.Gbserver.variables.PUID;
 import org.bukkit.ChatColor;
@@ -19,9 +18,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by michael on 1/20/16.
- */
 public class ContractVerify implements CommandExecutor {
     private static List<PuidEntry> entries = new LinkedList<>();
 
@@ -73,7 +69,7 @@ public class ContractVerify implements CommandExecutor {
                 }
             }else if(pV == currentVersion){
                 //Up to date
-                ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "You don't need to read the player contract again.");
+                sender.sendMessage(CPrefix.Prf.COMMAND + "You don't need to read the player contract again.");
             }else{
                 //Not up to date
                 download();

@@ -6,6 +6,7 @@ import com.Gbserver.commands.SaveMoment;
 import com.Gbserver.listener.BlockData;
 import com.Gbserver.listener.IPCollector;
 import com.Gbserver.listener.StatOnlineTime;
+import com.Gbserver.listener.Survey;
 import com.Gbserver.mail.FileParser;
 
 import java.util.Arrays;
@@ -27,7 +28,8 @@ public class ConfigLoader {
             CommandProfile.configUser,
             FileParser.configUser,
             IPCollector.configUser,
-            Territory.configUser
+            Territory.configUser,
+            Survey.configUser
     );
 
     public interface ConfigUser {

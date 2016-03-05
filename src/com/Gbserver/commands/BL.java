@@ -68,7 +68,8 @@ public class BL implements CommandExecutor {
                     for (int i = 1; i < args.length; i++) {
                         Player p = Bukkit.getServer().getPlayer(args[i]);
                         players.add(p.getName());
-                        sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully added " + p.getName() + " to BL players list."));
+                        sender.sendMessage(CPrefix.Prf.COMMAND + "Successfully added " +
+                                Sh.pc("yellow") + p.getName() + Sh.pc("gray") + " to the BL players list.");
                     }
                     return true;
                 case "start":
@@ -76,12 +77,12 @@ public class BL implements CommandExecutor {
                     for (Object p : players.toArray()) {
                         Player pl = Bukkit.getServer().getPlayer((String) p);
                     }
-                    sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully started the game."));
+                    sender.sendMessage(CPrefix.Prf.COMMAND + "Successfully started the game.");
                     return true;
                 case "reset":
                     isRunning = false;
                     players.clear();
-                    sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "Successfully reset the game."));
+                    sender.sendMessage(CPrefix.Prf.COMMAND + "Successfully reset the game.");
                     return true;
             }
         }

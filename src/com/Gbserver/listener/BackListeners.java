@@ -12,6 +12,6 @@ public class BackListeners implements Listener {
     public void onPlayerDeath(PlayerDeathEvent pde) {
         Player target = pde.getEntity();
         Vault v = Vaults.getVault(target.getUniqueId());
-        v.setPrevious(target.getLocation());
+        v.previous = target.getLocation();
     }
 }

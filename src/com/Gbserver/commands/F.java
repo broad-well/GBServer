@@ -1,8 +1,8 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
+import com.Gbserver.variables.Sh;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,7 +30,8 @@ public class F implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("f") || label.equalsIgnoreCase("friend")) {
-            sender.sendMessage(ChatWriter.getMessage(ChatWriterType.COMMAND, "This is not Meinplex, my Friend!"));
+            sender.sendMessage(CPrefix.Prf.COMMAND + "This is not " + Sh.pc("italic") + "Meinplex" + Sh.pc("reset")
+                    + Sh.pc("gray") + "my Friend!");
             return true;
         }else if (label.equalsIgnoreCase("ping")){
             sender.sendMessage(stuffs[Utilities.getRandom(0, stuffs.length)]);

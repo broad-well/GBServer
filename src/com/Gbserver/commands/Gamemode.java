@@ -4,8 +4,7 @@ package com.Gbserver.commands;
 import com.Gbserver.Main;
 import com.Gbserver.Utilities;
 import com.Gbserver.listener.ChatFormatter;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.HelpTable;
 import com.Gbserver.variables.Sandbox;
 import org.bukkit.GameMode;
@@ -48,7 +47,7 @@ public class Gamemode implements CommandExecutor {
             if (!Main.onEvent || ChatFormatter.staff.contains(p.getName())) {
                 p.setGameMode(interpreter.get(args[0]));
             } else {
-                ChatWriter.writeTo(sender, ChatWriterType.EVENT, "During " + Main.eventName + ", /gm is limited to staff. Sorry!");
+                sender.sendMessage(CPrefix.Prf.EVENT + "During " + Main.eventName + ", /gm is limited to staff. Sorry!");
             }
         }
         return true;

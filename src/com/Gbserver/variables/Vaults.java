@@ -10,14 +10,11 @@ public class Vaults {
     public static List<Vault> vaults = new LinkedList<Vault>();
 
     public static Vault getVault(UUID uuid) {
-        Object[] v = vaults.toArray();
-        for (Object vaul : v) {
-            Vault vault = (Vault) vaul;
-            if (vault.getUUID().equals(uuid)) {
+        for (Vault vault : vaults)
+            if (vault.uuid.equals(uuid))
                 return vault;
-            }
-        }
-        Vault va = new Vault(Bukkit.getPlayer(uuid));
+
+        Vault va = new Vault(Bukkit.getOfflinePlayer(uuid));
         vaults.add(va);
         return va;
     }

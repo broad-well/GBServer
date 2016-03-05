@@ -282,4 +282,8 @@ public class Utilities {
     public static Object randomElement(List list) {
         return list.get(Utilities.getRandom(0, list.size()));
     }
+
+    public static boolean genPossibility(int percentage) {
+        return getRandom(1, 101) <= percentage;
+    }
 }

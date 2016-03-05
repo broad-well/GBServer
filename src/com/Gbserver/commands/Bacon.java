@@ -1,8 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.HelpTable;
 import com.Gbserver.variables.Sandbox;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -52,12 +51,12 @@ public class Bacon implements CommandExecutor {
                     //Show hit times
                     Player target;
                     if ((target = Bukkit.getPlayer(args[1])) == null) {
-                        ChatWriter.writeTo(sender, ChatWriterType.ERROR, "That player cannot be found.");
+                        sender.sendMessage(CPrefix.Prf.ERROR + "That player cannot be found.");
                         return true;
                     }
                     BaconPlayer bp;
                     if ((bp = BaconPlayer.getByHandle(target)) == null) {
-                        ChatWriter.writeTo(sender, ChatWriterType.ERROR, "That player is not in this game.");
+                        sender.sendMessage(CPrefix.Prf.ERROR + "That player is not in this game.");
                         return true;
                     }
                     sender.sendMessage("-----" + target.getName() + " damages-----");
@@ -115,17 +114,17 @@ public class Bacon implements CommandExecutor {
                     Player p = (Player) sender;
                     if (hasPlayer(p)) {
                         players.remove(BaconPlayer.getByHandle(p));
-                        ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Removed you from the Bacon Brawl game.");
+                        sender.sendMessage(CPrefix.Prf.COMMAND + "Removed you from the Bacon Brawl game.");
                         Bacon.log.add(ChatColor.BOLD + "[LEAVE] " + p.getName());
                     } else {
-                        ChatWriter.writeTo(sender, ChatWriterType.ERROR, "You are not in the game.");
+                        sender.sendMessage(CPrefix.Prf.ERROR + "You are not in the game.");
                     }
                     return true;
                 } else {
                     return false;
                 }
             default:
-                ChatWriter.writeTo(sender, ChatWriterType.COMMAND, "Unknown option: " + args[0]);
+                sender.sendMessage(CPrefix.Prf.COMMAND + "Unknown option: " + args[0]);
                 ht.show(sender);
                 return false;
         }

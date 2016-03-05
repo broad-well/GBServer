@@ -4,6 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+/**
+ * This class has been replaced by CPrefix and Prf.
+ *
+ * @deprecated
+ */
+@Deprecated
 public class ChatWriter {
 
 

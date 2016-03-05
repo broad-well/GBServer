@@ -482,11 +482,11 @@ public class DevOperation implements CommandExecutor {
                     try{
                         cdown = Integer.parseInt(args[1]);
                     }catch(Exception e) {return true;}
-                    ChatWriter.write(ChatWriterType.ANNOUNCEMENT, "RELOADING IN " + cdown + " SECONDS");
+                    Bukkit.broadcastMessage(CPrefix.Prf.ANNOUNCEMENT + "RELOADING IN " + cdown + " SECONDS");
                     Bukkit.getScheduler().scheduleSyncDelayedTask(Utilities.getInstance(), new Runnable() {
                         public void run() {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "save-all");
-                            ChatWriter.write(ChatWriterType.ANNOUNCEMENT, "RELOADING...");
+                            Bukkit.broadcastMessage(CPrefix.Prf.ANNOUNCEMENT + "RELOADING...");
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload");
                         }
                     }, 20 * cdown);

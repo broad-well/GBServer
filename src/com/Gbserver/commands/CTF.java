@@ -1,8 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.HelpTable;
 import com.Gbserver.variables.Sandbox;
 import org.bukkit.*;
@@ -58,7 +57,7 @@ public class CTF implements CommandExecutor {
                     break;
                 case "stop":
                     stopGame();
-                    ChatWriter.writeTo(sender, ChatWriterType.GAME, "Successfully stopped the CTF game.");
+                    sender.sendMessage(CPrefix.Prf.GAME + "Successfully stopped the CTF game.");
                     break;
                 case "stats":
                     //Statistics here.

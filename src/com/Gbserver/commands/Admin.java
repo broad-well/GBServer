@@ -3,8 +3,7 @@ package com.Gbserver.commands;
 import com.Gbserver.Main;
 import com.Gbserver.Utilities;
 import com.Gbserver.listener.ChatFormatter;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,7 +32,7 @@ public class Admin implements CommandExecutor{
             sender.sendMessage(ChatColor.AQUA + "Sent message to console");
             return true;
         }else{
-            ChatWriter.writeTo(sender, ChatWriterType.CONDITION, "Event is not in progress. Sorry!");
+            sender.sendMessage(CPrefix.Prf.EVENT + "Event is not in progress. Sorry!");
             return true;
         }
     }

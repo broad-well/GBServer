@@ -1,17 +1,14 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.Sandbox;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-/**
- * Created by michael on 12/22/15.
- */
+
 public class Game implements CommandExecutor{
     private static final String[] subcommands = {
             ChatColor.GOLD + "Available subcommands:",
@@ -36,7 +33,7 @@ public class Game implements CommandExecutor{
                         break;
                     }
                     if(Games.valueOf(args[1]) == null){
-                        ChatWriter.writeTo(sender, ChatWriterType.ERROR, "Game not found for input " + ChatColor.YELLOW + args[1]);
+                        sender.sendMessage(CPrefix.Prf.ERROR + "Game not found for input " + ChatColor.YELLOW + args[1]);
                         break;
                     }
                     //Check if the player is globally in any game. TBI
@@ -53,7 +50,7 @@ public class Game implements CommandExecutor{
                     break;
             }
         }catch(Exception e){
-            ChatWriter.writeTo(sender, ChatWriterType.ERROR, "An error occured during command execution. Stack trace follows");
+            sender.sendMessage(CPrefix.Prf.ERROR + "An error occured during command execution. Stack trace follows");
             sender.sendMessage(Utilities.getStackTrace(e));
         }
         return true;

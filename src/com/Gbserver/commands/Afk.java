@@ -1,8 +1,7 @@
 package com.Gbserver.commands;
 
 import com.Gbserver.Utilities;
-import com.Gbserver.variables.ChatWriter;
-import com.Gbserver.variables.ChatWriterType;
+import com.Gbserver.variables.CPrefix;
 import com.Gbserver.variables.HelpTable;
 import com.Gbserver.variables.Sandbox;
 import org.bukkit.Bukkit;
@@ -34,10 +33,10 @@ public class Afk implements CommandExecutor {
                 }
                 Player target = Bukkit.getPlayer(args[0]);
                 if(target != null) {
-                    ChatWriter.writeTo(sender, ChatWriterType.COMMAND, ChatColor.GRAY + target.getName() +
+                    sender.sendMessage(CPrefix.Prf.COMMAND.toString() + ChatColor.GRAY + target.getName() +
                             (afkList.keySet().contains(target) ? " is AFK." : " is not AFK."));
                 }else{
-                    ChatWriter.writeTo(sender, ChatWriterType.ERROR, "I cannot find this player!");
+                    sender.sendMessage(CPrefix.Prf.ERROR + "Player not found online.");
                 }
 
             }
@@ -60,11 +59,11 @@ public class Afk implements CommandExecutor {
                 }
             }, 20 * 60 * 20);
             afkList.put(target, id);
-            ChatWriter.write(ChatWriterType.SERVER, target.getName() + " is now AFK.");
+            Bukkit.broadcastMessage(CPrefix.Prf.SERVER + target.getName() + " is now AFK.");
         } else {
             Bukkit.getScheduler().cancelTask(afkList.get(target));
             afkList.remove(target);
-            ChatWriter.write(ChatWriterType.SERVER, target.getName() + " is no longer AFK.");
+            Bukkit.broadcastMessage(CPrefix.Prf.SERVER + target.getName() + " is no longer AFK.");
         }
     }
 }
