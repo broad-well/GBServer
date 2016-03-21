@@ -506,6 +506,14 @@ public class DevOperation implements CommandExecutor {
                         sender.sendMessage("Player added");
                     }
                     break;
+                case "SurveyQuestion":
+                    /*
+                    Options: New <question>, Modify <question puid> <key> <value>, Get <puid>, Remove <question puid>
+                    To add a new question:
+                    /devops SurveyQuestion New What do you like to do?
+                    /devops SurveyQuestion Modify <provided puid> Options ['YES', 'NO']
+                     */
+
                 default:
                     sender.sendMessage("Bad option.");
                     return true;

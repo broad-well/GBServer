@@ -9,61 +9,35 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa12e9bf-e297-4436-b01e-c8351d409c70" name="Default" comment="Utilities toMap">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Survey.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Mappable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Sh.java" />
+    <list default="true" id="aa12e9bf-e297-4436-b01e-c8351d409c70" name="Default" comment="Cw Deprecation, Mappable, Survey&#10;Changes in this commit:&#10;- Deprecation of ChatWriter&#10;- Rewrite of Vault&#10;- Shortcut class: Sh&#10;- Map conversion-compatible interface: Mappable&#10;- New ChatPrefix system: CPrefix&#10;- Survey system (Untested)">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/CmdPermControl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/PlayerPP.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$1.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$2.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$3.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$4.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main$5.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/Main.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Afk.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Afk.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Attentions.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Attentions.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/BL.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/BL.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Back.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Back.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Gamemode.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Gamemode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Menu.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Protection.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Protection.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Ride.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Ride.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/SaveMoment.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/SaveMoment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/Spawn.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/Spawn.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF$1.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/commands/TF.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/BLListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/BLListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/BackListeners.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/BackListeners.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ChatFormatter.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ChatFormatter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ExplosionListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ExplosionListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/LoginTagListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/LoginTagListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/MenuListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/MenuListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/ProtectionListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/ProtectionListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/RideListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/RideListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/SnakeListener.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/SnakeListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/listener/TFListeners.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/listener/TFListeners.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/menuLibrary/Menu.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/menuLibrary/Menu.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vault.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vault.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vaults.class" afterPath="$PROJECT_DIR$/bin/com/Gbserver/variables/Vaults.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/Main.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/ContractVerify.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/ContractVerify.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Game.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Group.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Group.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/BackListeners.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/BackListeners.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriterType.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriterType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/listener/Survey.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/listener/Survey.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/Vaults.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/Vaults.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java" afterPath="$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugin.yml" afterPath="$PROJECT_DIR$/src/plugin.yml" />
     </list>
     <ignored path="GBServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,21 +59,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Group.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Group.java">
+      <file leaf-file-name="EnhancedPlayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="59" selection-start-line="83" selection-start-column="59" selection-end-line="83" selection-end-column="59" />
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Hat.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java">
+      <file leaf-file-name="Attentions.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <caret line="23" column="103" selection-start-line="23" selection-start-column="103" selection-end-line="23" selection-end-column="103" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,11 +81,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatWriter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java">
+      <file leaf-file-name="PlayerPP.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/PlayerPP.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2816#2817#0" expanded="true" />
+                <element signature="e#2844#2845#0" expanded="true" />
+                <element signature="e#2888#2889#0" expanded="true" />
+                <element signature="e#2932#2933#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CPrefix.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Admin.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,51 +119,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Heal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Heal.java">
+      <file leaf-file-name="Afk.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Survey.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/Survey.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.8461539">
-              <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.52820516">
+              <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1607#1608#0" expanded="true" />
-                <element signature="e#1642#1643#0" expanded="true" />
-                <element signature="e#1678#1679#0" expanded="true" />
-                <element signature="e#1714#1715#0" expanded="true" />
-                <element signature="e#1758#1759#0" expanded="true" />
-                <element signature="e#1796#1797#0" expanded="true" />
-                <element signature="e#1866#1867#0" expanded="true" />
-                <element signature="e#1906#1907#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Back.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Back.java">
+      <file leaf-file-name="PermissionManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+              <caret line="65" column="72" selection-start-line="65" selection-start-column="72" selection-end-line="65" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BackListeners.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BackListeners.java">
+      <file leaf-file-name="PermissionProtect.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/protections/PermissionProtect.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+              <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -173,7 +155,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+              <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -206,11 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ScoreDisplay.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ProtectionListener.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Lobby.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Sandbox.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/StatOnlineTime.java" />
@@ -222,10 +199,8 @@
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/CmdListener.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CubicSelection.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/SaveMoment.java" />
@@ -234,29 +209,36 @@
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Mappable.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriterType.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/Utilities.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Bacon.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Sh.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/BL.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/ContractVerify.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/CTF.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Game.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Gamemode.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Group.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWrier.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java" />
-        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Back.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/BackListeners.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Vaults.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java" />
+        <option value="$PROJECT_DIR$/src/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java" />
         <option value="$PROJECT_DIR$/src/com/Gbserver/listener/Survey.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/F.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/listener/CmdPermControl.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/PlayerPP.java" />
+        <option value="$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java" />
       </list>
     </option>
   </component>
@@ -338,9 +320,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -759,6 +738,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -766,8 +748,8 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow&#10;setCancelled&#9;PSI&#9;JAVA://com.Gbserver.listener.ChatFormatter#setCancelled&#10;onPlayerJoin&#9;PSI&#9;JAVA://com.Gbserver.listener.IPCollector#onPlayerJoin&#10;onPlayerjoin&#9;PSI&#9;JAVA://com.Gbserver.listener.CreativeGameMode#onPlayerJoin&#10;onInventoryClick&#9;PSI&#9;JAVA://com.Gbserver.listener.MenuListener#onInventoryClick&#10;onPlayerQuit&#9;PSI&#9;JAVA://com.Gbserver.listener.LoginTagListener#onPlayerQuit" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="SearchEverywhereHistoryKey" value="GUEST&#9;PSI&#9;JAVA://com.Gbserver.variables.PermissionManager.Permissions#GUEST&#10;onCommandPreprocess&#9;PSI&#9;JAVA://com.Gbserver.listener.SandboxListener#onPlayerCommandPreprocess&#10;TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow&#10;setCancelled&#9;PSI&#9;JAVA://com.Gbserver.listener.ChatFormatter#setCancelled&#10;onPlayerJoin&#9;PSI&#9;JAVA://com.Gbserver.listener.IPCollector#onPlayerJoin&#10;onPlayerjoin&#9;PSI&#9;JAVA://com.Gbserver.listener.CreativeGameMode#onPlayerJoin&#10;onInventoryClick&#9;PSI&#9;JAVA://com.Gbserver.listener.MenuListener#onInventoryClick&#10;onPlayerQuit&#9;PSI&#9;JAVA://com.Gbserver.listener.LoginTagListener#onPlayerQuit" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -1091,7 +1073,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457072175335</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Cw Deprecation, Mappable, Survey&#10;Changes in this commit:&#10;- Deprecation of ChatWriter&#10;- Rewrite of Vault&#10;- Shortcut class: Sh&#10;- Map conversion-compatible interface: Mappable&#10;- New ChatPrefix system: CPrefix&#10;- Survey system (Untested)">
+      <created>1457194722689</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1457194722689</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1109,7 +1097,6 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31683168" sideWeight="0.49463904" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3179551" sideWeight="0.50536096" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1117,18 +1104,19 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279703" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24071428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32673267" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494639" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31683168" sideWeight="0.49463904" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294271" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32673267" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1178,7 +1166,8 @@
     <MESSAGE value="OS Merge" />
     <MESSAGE value="ConfigLoader Interface, Misc" />
     <MESSAGE value="Utilities toMap" />
-    <option name="LAST_COMMIT_MESSAGE" value="Utilities toMap" />
+    <MESSAGE value="Cw Deprecation, Mappable, Survey&#10;Changes in this commit:&#10;- Deprecation of ChatWriter&#10;- Rewrite of Vault&#10;- Shortcut class: Sh&#10;- Map conversion-compatible interface: Mappable&#10;- New ChatPrefix system: CPrefix&#10;- Survey system (Untested)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cw Deprecation, Mappable, Survey&#10;Changes in this commit:&#10;- Deprecation of ChatWriter&#10;- Rewrite of Vault&#10;- Shortcut class: Sh&#10;- Map conversion-compatible interface: Mappable&#10;- New ChatPrefix system: CPrefix&#10;- Survey system (Untested)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1243,126 +1232,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Couple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.251497">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Serializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.251497">
-          <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/ChatFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28742516">
-          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/mail/FileParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9700599">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.770459">
-          <caret line="206" column="10" selection-start-line="206" selection-start-column="10" selection-end-line="206" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/IgnoreList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/BlockData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4048843">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4562984">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/unicorn/fonts/StandardFonts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5372751">
-          <caret line="409" column="30" selection-start-line="409" selection-start-column="30" selection-end-line="409" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Jail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3303342">
-          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/hiddencmds/CmdListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/spigot.jar!/org/bukkit/Location.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11984021">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CubicSelection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5171756">
-          <caret line="66" column="31" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Territory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/SaveMoment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.917939">
@@ -1376,8 +1245,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="40" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
           <folding>
-            <element signature="e#853#1213#0" expanded="true" />
-            <element signature="e#1212#1213#0" expanded="true" />
+            <element signature="e#853#1213#0" expanded="false" />
+            <element signature="e#1212#1213#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1386,7 +1255,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1394,7 +1262,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1411,8 +1278,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
           <folding>
-            <element signature="e#10569#10570#0" expanded="true" />
-            <element signature="e#10623#10624#0" expanded="true" />
+            <element signature="e#10611#10612#0" expanded="false" />
+            <element signature="e#10665#10666#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1421,39 +1288,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.0">
           <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31976745">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0872093">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14534883">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0872093">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1478,7 +1312,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="127" column="57" selection-start-line="127" selection-start-column="57" selection-end-line="127" selection-end-column="57" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1488,8 +1322,8 @@
         <state vertical-scroll-proportion="0.31976745">
           <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
           <folding>
-            <element signature="e#351#352#0" expanded="true" />
-            <element signature="e#427#428#0" expanded="true" />
+            <element signature="e#359#360#0" expanded="false" />
+            <element signature="e#435#436#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1499,7 +1333,7 @@
         <state vertical-scroll-proportion="0.41860464">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1517,7 +1351,7 @@
         <state vertical-scroll-proportion="1.744186">
           <caret line="60" column="58" selection-start-line="60" selection-start-column="58" selection-end-line="60" selection-end-column="58" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1538,19 +1372,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="488" column="95" selection-start-line="488" selection-start-column="95" selection-end-line="488" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre/lib/rt.jar!/javax/lang/model/type/TypeKind.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1559,16 +1384,8 @@
         <state vertical-scroll-proportion="0.29069766">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/F.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1577,7 +1394,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="50" column="45" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1593,19 +1410,17 @@
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Hat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ChatWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1623,17 +1438,9 @@
         <state vertical-scroll-proportion="0.20348836">
           <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
           <folding>
-            <element signature="e#148#149#0" expanded="true" />
-            <element signature="e#171#172#0" expanded="true" />
+            <element signature="e#148#149#0" expanded="false" />
+            <element signature="e#171#172#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1656,36 +1463,223 @@
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Back.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding>
+            <element signature="e#177#178#0" expanded="false" />
+            <element signature="e#237#238#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/DebugLevel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <element signature="e#443#444#0" expanded="false" />
+            <element signature="e#482#483#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.9721115">
+          <caret line="151" column="33" selection-start-line="151" selection-start-column="33" selection-end-line="151" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="50" selection-start-line="44" selection-start-column="50" selection-end-line="44" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/Vault.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23255815">
-          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-          <folding>
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/PUID.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/Survey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8461539">
-          <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="10" selection-start-line="86" selection-start-column="10" selection-end-line="86" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
-            <element signature="e#1642#1643#0" expanded="true" />
-            <element signature="e#1678#1679#0" expanded="true" />
-            <element signature="e#1714#1715#0" expanded="true" />
-            <element signature="e#1758#1759#0" expanded="true" />
-            <element signature="e#1796#1797#0" expanded="true" />
-            <element signature="e#1866#1867#0" expanded="true" />
-            <element signature="e#1906#1907#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/SandboxListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/DevOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.259259">
+          <caret line="211" column="31" selection-start-line="211" selection-start-column="31" selection-end-line="211" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CommandProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/F.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/CmdPermControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/minigame/MGUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12403101">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/EnhancedPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Attentions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="103" selection-start-line="23" selection-start-column="103" selection-end-line="23" selection-end-column="103" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/PlayerPP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2816#2817#0" expanded="true" />
+            <element signature="e#2844#2845#0" expanded="true" />
+            <element signature="e#2888#2889#0" expanded="true" />
+            <element signature="e#2932#2933#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Admin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/PermissionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="72" selection-start-line="65" selection-start-column="72" selection-end-line="65" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/listener/protections/PermissionProtect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/ConfigLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="235" column="18" selection-start-line="235" selection-start-column="18" selection-end-line="235" selection-end-column="18" />
+          <folding>
+            <element signature="e#10180#10181#0" expanded="true" />
+            <element signature="e#10263#10264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/variables/CPrefix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Gbserver/commands/Afk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52820516">
+          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

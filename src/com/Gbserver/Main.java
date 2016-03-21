@@ -39,13 +39,10 @@ public class Main extends JavaPlugin {
 
     @SuppressWarnings("deprecation")
     public void onEnable() {
+        ConfigLoader.load();
         final List<Exception> errorStack = new LinkedList<>();
         PluginDescriptionFile desc = getDescription();
         Logger lg = Logger.getLogger("Minecraft");
-        //final FileConfiguration fc = getConfig();
-        //fc.addDefault("announcements", "An announcement 1");
-        //fc.addDefault("announcements", "An announcemento 2");
-        //fc.options().copyDefaults(true);
         setupConfig();
         Utilities.instance = this;
         try {
@@ -115,12 +112,14 @@ public class Main extends JavaPlugin {
         getCommand("survival").setExecutor(new Survival());
         getCommand("contractverify").setExecutor(new ContractVerify());
         getCommand("uptime").setExecutor(new Uptime());
+        getCommand("answer").setExecutor(new Survey());
 
         //Register events.
         if (onEvent)
             getServer().getPluginManager().registerEvents(new EventSpecials(), this);
 
         getServer().getPluginManager().registerEvents(new JailListener(), this);
+        getServer().getPluginManager().registerEvents(new Survey(), this);
         getServer().getPluginManager().registerEvents(new BanDB(), this);
         getServer().getPluginManager().registerEvents(new StatOnlineTime(), this);
         getServer().getPluginManager().registerEvents(new IPCollector(), this);
@@ -158,7 +157,7 @@ public class Main extends JavaPlugin {
         new Announce(this);
         try {
             Reaction.getRepeatingEvent();
-            ConfigLoader.load();
+
         } catch (Exception e) {
             errorStack.add(e);
         }

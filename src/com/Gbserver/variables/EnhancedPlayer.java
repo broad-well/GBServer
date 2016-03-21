@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.nio.file.Path;
 import java.util.*;
 
+@Deprecated
 public class EnhancedPlayer {
 
     //static

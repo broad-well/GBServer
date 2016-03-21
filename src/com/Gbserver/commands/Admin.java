@@ -12,9 +12,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- * Created by michael on 10/25/15.
- */
 public class Admin implements CommandExecutor{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){

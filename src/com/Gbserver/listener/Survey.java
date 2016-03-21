@@ -99,7 +99,8 @@ public class Survey implements Listener, CommandExecutor {
                 pje.getPlayer().sendMessage(ChatColor.GOLD + option);
             }
             pje.getPlayer().sendMessage(prefix + Sh.pc("italic") + "Use " + Sh.pc("yellow") + "/answer <your choice>" +
-                    Sh.pc("gold") + "to answer.");
+                    Sh.pc("gold") + " to answer.");
+            Vaults.getVault(pje.getPlayer().getUniqueId()).properties.put("survey-pending", lucky);
         }
     }
 

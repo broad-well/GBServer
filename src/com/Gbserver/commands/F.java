@@ -31,7 +31,7 @@ public class F implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("f") || label.equalsIgnoreCase("friend")) {
             sender.sendMessage(CPrefix.Prf.COMMAND + "This is not " + Sh.pc("italic") + "Meinplex" + Sh.pc("reset")
-                    + Sh.pc("gray") + "my Friend!");
+                    + Sh.pc("gray") + " my Friend!");
             return true;
         }else if (label.equalsIgnoreCase("ping")){
             sender.sendMessage(stuffs[Utilities.getRandom(0, stuffs.length)]);

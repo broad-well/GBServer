@@ -148,3 +148,5 @@ commands:
     description: Calculates your uptime.
   snake:
     description: A better snake.
+  answer:
+    description: Answer a survey.

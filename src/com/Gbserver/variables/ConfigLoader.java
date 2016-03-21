@@ -29,7 +29,9 @@ public class ConfigLoader {
             FileParser.configUser,
             IPCollector.configUser,
             Territory.configUser,
-            Survey.configUser
+            Survey.configUser,
+            PermissionManager.configUser,
+            PlayerPP.configUser
     );
 
     public interface ConfigUser {
@@ -42,10 +44,11 @@ public class ConfigLoader {
     public static boolean load() {
 
         try {
-            dl.debugWrite("Loading (importing)...");
             ConfigManager.input(); //Fixed Position
+            dl.debugWrite("Loading (importing)...");
             for (ConfigUser cu : userList) {
                 try {
+                    dl.debugWrite(5, "Loading ConfigUser " + cu.toString());
                     cu.load();
                 } catch (Exception e) {
                     dl.debugWrite(0, "Error during load of " + cu.toString() + "! Stack trace follows.");
@@ -66,6 +69,7 @@ public class ConfigLoader {
             dl.debugWrite("Unloading (exporting)...");
             for (ConfigUser cu : userList) {
                 try {
+                    dl.debugWrite(5, "Unloading ConfigUser " + cu.toString());
                     cu.unload();
                 } catch (Exception e) {
                     dl.debugWrite(0, "Error during unload of " + cu.toString() + "! Stack trace follows.");

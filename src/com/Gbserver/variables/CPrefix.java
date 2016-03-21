@@ -8,15 +8,15 @@ import java.util.HashMap;
 
 public class CPrefix implements Mappable {
     public static class Prf {
-        public static final CPrefix ANNOUNCEMENT = new CPrefix("Announcement", null, ChatColor.YELLOW);
+        public static final CPrefix ANNOUNCEMENT = new CPrefix("Announcement", 0, ChatColor.YELLOW);
         public static final CPrefix ERROR = new CPrefix("Error", ChatColor.RED);
         public static final CPrefix GAME = new CPrefix("Game");
         public static final CPrefix CONDITION = new CPrefix("Condition");
         public static final CPrefix CHAT = new CPrefix("Command");
-        public static final CPrefix SERVER = new CPrefix("Server", null, ChatColor.YELLOW);
+        public static final CPrefix SERVER = new CPrefix("Server", 0, ChatColor.YELLOW);
         public static final CPrefix COMMAND = new CPrefix("Command");
         //public static final CPrefix JOIN = new CPrefix("Join", ChatColor.DARK_AQUA);
-        public static final CPrefix EVENT = new CPrefix("Event", null, ChatColor.YELLOW);
+        public static final CPrefix EVENT = new CPrefix("Event", 0, ChatColor.YELLOW);
     }
 
     final ChatColor DEFAULT_TAGCOLOR = ChatColor.BLUE;
@@ -35,7 +35,7 @@ public class CPrefix implements Mappable {
         tagColor = tagcolor;
     }
 
-    public CPrefix(String tag, Object Null, ChatColor txtcolor) {
+    public CPrefix(String tag, Integer Null, ChatColor txtcolor) {
         prefix = tag;
         txtColor = txtcolor;
     }
